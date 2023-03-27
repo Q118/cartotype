@@ -21,6 +21,7 @@ type ShoppingCartContext = {
     removeFromCart: (id: number) => void;
     cartQuantity: number;
     cartItems: CartItem[];
+    isOpen: boolean;
 };
 
 // make it contain the values of the type this way
@@ -91,9 +92,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             cartQuantity,
             openCart,
             closeCart,
+            isOpen
         }}>
             {children}
-            <ShoppingCart isOpen={isOpen} />
         </ShoppingCartContext.Provider>
     );
 }

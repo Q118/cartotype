@@ -1,6 +1,7 @@
 import storeItems from '../data/items.json';
 import { Col, Row } from 'react-bootstrap';
 import { StoreItem } from '../components/StoreItem';
+import { ShoppingCart } from '../components/ShoppingCart';
 
 function Store() {
     return (
@@ -15,6 +16,7 @@ function Store() {
                     </Col>
                 ))}
             </Row>
+            <ShoppingCart />
         </>
     );
 }
