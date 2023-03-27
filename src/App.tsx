@@ -5,12 +5,14 @@ import { Home } from './pages/Home';
 import { Store } from './pages/Store';
 import { About } from './pages/About';
 import { Navbar } from './components/Navbar';
+import { ShoppingCartProvider } from './context/ShoppingCartContext';
+
 
 function App() {
     // const [count, setCount] = useState(0)
 
     return (
-        <>
+        <ShoppingCartProvider>
             <Container className="mb-4">
                 <Navbar />
                 <Routes>
@@ -19,7 +21,7 @@ function App() {
                     <Route path="/about" element={<About />} />
                 </Routes>
             </Container>
-        </>
+        </ShoppingCartProvider>
     )
 }
 
