@@ -23,7 +23,7 @@ export function ShoppingCart() {
                         <CartItem key={item.id} {...item} />
                     ))}
                     <div className="ms-auto fw-bold fs-5">
-                        Total{" "}
+                        Total:{" "}
                         {formatCurrency(
                             cartItems.reduce((total, cartItem) => {
                                 const item = storeItems.find(i => i.id === cartItem.id)
