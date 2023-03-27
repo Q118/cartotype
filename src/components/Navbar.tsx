@@ -1,10 +1,14 @@
 import { Container, Nav, Navbar as NavbarBS, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { GiShoppingCart } from 'react-icons/gi';
+import { useShoppingCart } from '../context/ShoppingCartContext';
 
 
 
 export function Navbar() {
+
+    const { openCart, cartQuantity } = useShoppingCart();
+
     return (
         <NavbarBS sticky='top' className='bg-secondary shadow-sm mb-3'>
             <Container>
@@ -19,35 +23,38 @@ export function Navbar() {
                         About
                     </Nav.Link>
                 </Nav>
-                <Button
-                    variant="outline-light"
-                    className="rounded-circle"
-                    style={{
-                        width: "3rem",
-                        height: "3rem",
-                        padding: "0.3rem",
-                        position: "relative",
-                    }}>
-                    <GiShoppingCart style={{
-                        width: "2.5rem",
-                        height: "2.5rem",
-                        color: "inherit",
-                    }} />
-                    <div
-                        className='rounded-circle bg-danger d-flex justify-content-center align-items-center'
+                {cartQuantity > 0 && (
+                    <Button
+                        onClick={openCart}
+                        variant="outline-light"
+                        className="rounded-circle"
                         style={{
-                            color: "white",
-                            width: "1.5rem",
-                            height: "1.5rem",
-                            position: "absolute",
-                            bottom: "0",
-                            right: "0",
-                            transform: "translate(25%, 25%)",
-                        }}
-                    >
-                        3
-                    </div>
-                </Button>
+                            width: "3rem",
+                            height: "3rem",
+                            padding: "0.3rem",
+                            position: "relative",
+                        }}>
+                        <GiShoppingCart style={{
+                            width: "2.5rem",
+                            height: "2.5rem",
+                            color: "inherit",
+                        }} />
+                        <div
+                            className='rounded-circle bg-danger d-flex justify-content-center align-items-center'
+                            style={{
+                                color: "white",
+                                width: "1.5rem",
+                                height: "1.5rem",
+                                position: "absolute",
+                                bottom: "0",
+                                right: "0",
+                                transform: "translate(25%, 25%)",
+                            }}
+                        >
+                            {cartQuantity}
+                        </div>
+                    </Button>
+                )}
             </Container>
 
         </NavbarBS>

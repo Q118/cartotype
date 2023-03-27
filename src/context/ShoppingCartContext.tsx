@@ -12,10 +12,14 @@ type CartItem = {
 
 
 type ShoppingCartContext = {
+    openCart: () => void;
+    closeCart: () => void;
     getItemQuantity: (id: number) => number;
     increaseCartQuantity: (id: number) => void;
     decreaseCartQuantity: (id: number) => void;
     removeFromCart: (id: number) => void;
+    cartQuantity: number;
+    cartItems: CartItem[];
 };
 
 // make it contain the values of the type this way
@@ -26,15 +30,18 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-
-
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
+    // this calculates the total quantity of items in the cart
+    const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
+
+    const openCart = () => setIsOpen(true);
+    const closeCart = () => setIsOpen(false);
 
     function getItemQuantity(id: number) {
         // if the find, return the quantity, otherwise return 0
         return cartItems.find((item) => item.id === id)?.quantity || 0;
     }
-
     function increaseCartQuantity(id: number) {
         setCartItems((currentItems) => {
             if (currentItems.find((item) => item.id === id) == null) {
@@ -51,7 +58,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             }
         })
     }
-
     function decreaseCartQuantity(id: number) {
         setCartItems((currentItems) => {
             if (currentItems.find((item) => item.id === id)?.quantity === 1) {
@@ -68,7 +74,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             }
         })
     }
-
     function removeFromCart(id: number) {
         setCartItems((currentItems) => {
             return currentItems.filter((item) => item.id !== id);
@@ -81,6 +86,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             increaseCartQuantity,
             decreaseCartQuantity,
             removeFromCart,
+            cartItems,
+            cartQuantity,
+            openCart,
+            closeCart,
         }}>
             {children}
         </ShoppingCartContext.Provider>
