@@ -1,10 +1,25 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import { Home } from './pages/Home';
+import { Store } from './pages/Store';
+import { About } from './pages/About';
+import { Navbar } from './components/Navbar';
 
 function App() {
-    const [count, setCount] = useState(0)
+    // const [count, setCount] = useState(0)
 
     return (
-        <h1>Hi</h1>
+        <>
+            <Container className="mb-4">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/store" element={<Store />} />
+                    <Route path="/about" element={<About />} />
+                </Routes>
+            </Container>
+        </>
     )
 }
 
