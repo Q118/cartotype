@@ -35,10 +35,10 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
                     height="200px"
                     style={{ objectFit: 'cover' }}
                 />
-                <Card.Body className='d-flex flex-column bg-secondary text-light'>
+                <Card.Body className='d-flex flex-column bg-secondary text-white'>
                     <Card.Title className={TITLE_CLASSES}>
                         <span className='fs-2'>{name}</span>
-                        <span className='ms-2'>{formatCurrency(price)}</span>
+                        <span className='ms-2 h6'>{formatCurrency(price)}</span>
                     </Card.Title>
                     {/* mt-auto to fill all aviailable  space */}
                     <div className='mt-auto'>
