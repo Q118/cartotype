@@ -22,5 +22,35 @@
         "name": "Car",
         "price": 14000,
         "imgUrl": "/imgs/car.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Phone",
+        "price": 499,
+        "imgUrl": "/imgs/Phone.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Shirt",
+        "price": 19.99,
+        "imgUrl": "/imgs/shirt.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Shoes",
+        "price": 49.99,
+        "imgUrl": "/imgs/shoes.jfif"
+    },
+    {
+        "id": 8,
+        "name": "Socks",
+        "price": 9.99,
+        "imgUrl": "/imgs/socks.jfif"
+    },
+    {
+        "id": 9,
+        "name": "Watch",
+        "price": 99.99,
+        "imgUrl": "/imgs/watch.jfif"
     }
 ]
