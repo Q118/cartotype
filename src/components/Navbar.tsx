@@ -31,6 +31,7 @@ export function Navbar() {
                 <ThemeToggler />
                 {cartQuantity > 0 && (
                     <Button
+                        id={currentTheme === 'dark' ? 'darkCart' : 'lightCart'}
                         onClick={openCart}
                         variant="outline-light"
                         className="rounded-circle"
@@ -40,11 +41,13 @@ export function Navbar() {
                             padding: "0.3rem",
                             position: "relative",
                         }}>
-                        <GiShoppingCart style={{
-                            width: "2.5rem",
-                            height: "2.5rem",
-                            color: "inherit",
-                        }} />
+                        <GiShoppingCart
+                            style={{
+                                width: "2.5rem",
+                                height: "2.5rem",
+                                color: 'inherit'
+                                // color: `${currentTheme === 'dark' ? 'white' : 'black'}`,
+                            }} />
                         <div
                             className='rounded-circle bg-danger d-flex justify-content-center align-items-center'
                             style={{
