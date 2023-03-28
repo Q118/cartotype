@@ -74,7 +74,6 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
                             </div>
                         )}
                     </div>
-
                 </Card.Body>
             </Card>
         </>
