@@ -7,6 +7,7 @@ import { About } from './pages/About';
 import { Navbar } from './components/Navbar';
 import { Notes } from './pages/Notes';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
+import { ShoppingCart } from './components/ShoppingCart';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/notes" element={<Notes />} />
                 </Routes>
+                <ShoppingCart />
             </Container>
         </ShoppingCartProvider>
     )
