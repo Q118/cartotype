@@ -18,7 +18,7 @@ export function CartItem({ id, quantity }: CartItemProps) {
         <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
             <img
                 src={item.imgUrl}
-                style={{ width: "125px", height: "75px", objectFit: "cover" }}
+                style={{ width: "125px", height: "75px", objectFit: "cover", border: "2px solid #ccc", borderRadius: "5px" }}
             />
             {/* push everything to the far right w me-auto */}
             <div className="me-auto">
