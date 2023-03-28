@@ -2,10 +2,13 @@ import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import { formatCurrency } from '../utilities/formatCurrency';
 import { useShoppingCart } from '../context/ShoppingCartContext';
+import { useTheme } from '../context/ThemeContext';
+
 
 const TITLE_CLASSES: string = 'd-flex justify-content-between align-items-baseline mb-4';
 const INNER_BTN_CLASSES: string = 'd-flex align-items-center flex-column';
 const BTN_WRAPPER_CLASSES: string = 'd-flex align-items-center justify-content-center';
+const CARD_CLASSES: string = 'd-flex flex-column ';
 
 type StoreItemProps = {
     id: number;
@@ -21,21 +24,31 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
         decreaseCartQuantity,
         removeFromCart
     } = useShoppingCart();
-
+    const { currentTheme } = useTheme();
 
 
     const quantity: number = getItemQuantity(id);
 
+    const currentThemeClasses: string = currentTheme === 'dark' ? 'bg-secondary text-white' : 'bg-white text-dark';
+
+
+
+
     return (
         <>
-            <Card className='h-100'>
+            <Card className='h-100' style={{
+                border: `1px solid ${currentTheme === 'dark' ? '#ccc' : 'black'}`,
+            }}>
                 <Card.Img
                     variant="top"
                     src={imgUrl}
                     height="200px"
                     style={{ objectFit: 'cover' }}
                 />
-                <Card.Body className='d-flex flex-column bg-secondary text-white'>
+                <Card.Body
+                    className={`d-flex flex-column ${currentThemeClasses}}`}
+                >
+                    {/* <Card.Body className='d-flex flex-column bg-secondary text-white'> */}
                     <Card.Title className={TITLE_CLASSES}>
                         <span className='fs-2'>{name}</span>
                         <span className='ms-2 h6'>{formatCurrency(price)}</span>

@@ -1,5 +1,6 @@
 import { Offcanvas, Stack } from "react-bootstrap";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import { useTheme } from "../context/ThemeContext";
 import { CartItem } from "./CartItem";
 // import { useShoppingCart } from "../context/ShoppingCartContext";
 import { formatCurrency } from "../utilities/formatCurrency";
@@ -11,9 +12,15 @@ import storeItems from "../data/items.json";
 export function ShoppingCart() {
 
     const { closeCart, cartItems, isOpen } = useShoppingCart();
+    const { currentTheme } = useTheme();
 
     return (
-        <Offcanvas show={isOpen} onHide={closeCart} placement="end" className="bg-dark text-light">
+        <Offcanvas
+            show={isOpen}
+            onHide={closeCart}
+            placement="end"
+            className={currentTheme === "dark" ? 'bg-dark text-light' : 'bg-light text-dark'}
+        >
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
             </Offcanvas.Header>

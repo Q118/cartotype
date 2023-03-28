@@ -2,15 +2,17 @@ import { Container, Nav, Navbar as NavbarBS, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { GiShoppingCart } from 'react-icons/gi';
 import { useShoppingCart } from '../context/ShoppingCartContext';
-
+import { useTheme } from '../context/ThemeContext';
+import { ThemeToggler } from './ThemeToggler';
 
 
 export function Navbar() {
 
     const { openCart, cartQuantity } = useShoppingCart();
+    const { currentTheme } = useTheme();
 
     return (
-        <NavbarBS sticky='top' className='bg-secondary shadow-sm mb-3'>
+        <NavbarBS sticky='top' className={`bg-${currentTheme === 'dark' ? 'secondary' : 'white'} shadow-sm mb-3`}>
             <Container>
                 <Nav className='me-auto'>
                     <Nav.Link as={NavLink} to="/">
@@ -26,6 +28,7 @@ export function Navbar() {
                         Notes
                     </Nav.Link>
                 </Nav>
+                <ThemeToggler />
                 {cartQuantity > 0 && (
                     <Button
                         onClick={openCart}
