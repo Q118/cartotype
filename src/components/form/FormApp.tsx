@@ -8,7 +8,7 @@ import { DetailForm } from './DetailForm';
 import { InputSearchForm } from './InputSearchForm';
 import { getPhotosForSelection } from "../../api/axios";
 // TODO: put all the useQuery stuff into its own hooks file
-import { ResultItem } from '../../types';
+import { ResultItem, StorePrice } from '../../types';
 
 // TODO update all the individual forms to use what INputSearch is doing
 
@@ -20,7 +20,7 @@ type FormData = {
     inputSearch: string;
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
-    price: number;
+    price: StorePrice;
     storeTitle: string;
     isDataLoading: boolean;
 }
@@ -40,7 +40,7 @@ const INITIAL_DATA: FormData = {
     inputSearch: '',
     selectOptions: [],
     selectedItem: null,
-    price: 0,
+    price: { dollars: 0, cents: 0 },
     storeTitle: '',
     isDataLoading: false,
 }

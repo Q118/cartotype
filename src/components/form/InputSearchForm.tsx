@@ -2,9 +2,6 @@ import { FormWrapper } from "./FormWrapper";
 import { ResultItem } from '../../types';
 
 type SearchFormData = {
-    // firstName: string
-    // lastName: string
-    // age: string
     inputSearch: string;
 }
 
@@ -16,9 +13,6 @@ type SearchFormProps = SearchFormData & {
 
 
 export function InputSearchForm({
-    // firstName,
-    // lastName,
-    // age,
     inputSearch,
     updateFields,
 }: SearchFormProps) {

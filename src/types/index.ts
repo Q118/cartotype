@@ -9,3 +9,8 @@ export type ResultItem = {
     imgUrl: string;
     downloadLocation: string;
 }
+
+export type StorePrice = {
+    dollars: number;
+    cents: number;
+}
