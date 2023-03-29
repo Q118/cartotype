@@ -1,7 +1,10 @@
+import { FormEvent } from 'react';
 import Container from 'react-bootstrap/Container';
 import { useTheme } from '../../context/ThemeContext';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
-
+import { SelectForm } from './SelectForm';
+import { DetailForm } from './DetailForm';
+import { InputSearchForm } from './InputSearchForm';
 
 export function FormApp() {
     const { currentTheme } = useTheme();
@@ -16,11 +19,15 @@ export function FormApp() {
         next,
         back,
     } = useMultistepForm([
-        <div>1</div>,
-        <div>2</div>,
-        <div>3</div>,
+        <InputSearchForm />,
+        <SelectForm />,
+        <DetailForm />,
     ]);
 
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault();
+        next();
+    }
 
     return (
         <Container
@@ -29,10 +36,10 @@ export function FormApp() {
                 borderRadius: '5px',
                 padding: '1rem',
                 position: "relative",
-                // maxWidth: "max-content",
+                maxWidth: "max-content",
             }}
         >
-            <form>
+            <form onSubmit={handleSubmit}>
                 {/* top corner position of step display */}
                 <div style={{
                     position: 'absolute',
@@ -52,7 +59,7 @@ export function FormApp() {
                     }}
                 >
                     {!isFirstStep && <button type="button" onClick={back}>Back</button>}
-                    <button type="button" onClick={next}>
+                    <button type="submit">
                         {isLastStep ? "Finish" : "Next"}
                     </button>
                 </div>
