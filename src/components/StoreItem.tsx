@@ -11,7 +11,7 @@ const BTN_WRAPPER_CLASSES: string = 'd-flex align-items-center justify-content-c
 const CARD_CLASSES: string = 'd-flex flex-column ';
 
 type StoreItemProps = {
-    id: number;
+    id: string;
     name: string;
     price: number;
     imgUrl: string;

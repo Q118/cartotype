@@ -72,7 +72,7 @@ export function FormApp() {
             updateFields={updateFields}
         />,
         <DetailForm  {...data}
-        // updateFields={updateFields}
+            updateFields={updateFields}
         />,
     ]);
 

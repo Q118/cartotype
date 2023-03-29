@@ -10,8 +10,11 @@ import { TooltipWrapper } from '../../utilities/TooltipWrapper';
 import { ResultItem } from '../../types';
 import { SelectItem } from './SelectItem';
 import { useTheme } from '../../context/ThemeContext';
+// TODO: apply theme styling throughout
 
 // TODO: modulate this file.
+
+// ! now just apply the same stuff to the last step of the form
 
 type SelectFormData = {
     selectOptions: ResultItem[];
@@ -25,8 +28,7 @@ type SelectFormProps = SelectFormData & {
     updateFields: (fields: Partial<SelectFormData>) => void
 }
 
-// TODO : give each card an little check box to select it
-// TODO: apply theme styling throughout
+// // TODO : give each card an little check box to select it
 // // TODO: tooltop over the refresh button
 
 
@@ -40,8 +42,7 @@ export function SelectForm({
 }: SelectFormProps) {
 
     const { currentTheme } = useTheme();
-    // console.log(isDataLoading);
-    // const cardRef = useRef<HTMLDivElement>(null);
+
 
     function handleRefreshData() {
         refreshData().then((res: any) => {
@@ -54,7 +55,6 @@ export function SelectForm({
 
     function handleCardSelection(e: any) {
         e.preventDefault();
-        // console.log(e.target.id);
         if (selectedItem == null) {
             // first time selecting a card
             updateFields({ selectedItem: findSelection(selectOptions, e.target.id) });
@@ -71,9 +71,7 @@ export function SelectForm({
     function findSelection(list: ResultItem[], id: string) {
         for (let x = 0, max = list.length; x < max; x++) {
             let selectOption = list[x];
-            if (selectOption.id === id) {
-                return selectOption;
-            }
+            if (selectOption.id === id) return selectOption;
         }
     }
 
