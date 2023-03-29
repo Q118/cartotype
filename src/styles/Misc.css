@@ -16,6 +16,11 @@
     border-color: #000000;
 }
 
+.selected-card {
+    /* color: pink; */
+    border: 4px solid greenyellow !important;
+}
+
 /*
 #dark-tooltip {
     background-color: #000000;

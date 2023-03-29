@@ -1,17 +1,24 @@
-// import { FormWrapper } from "./FormWrapper";
-// import { useState } from 'react';
-import { TooltipWrapper } from '../../utilities/TooltipWrapper';
+import { QueryObserverResult } from '@tanstack/react-query';
 import { FiRefreshCcw } from 'react-icons/fi';
-import { ResultItem } from '../../types';
 import Row from 'react-bootstrap/Row';
-import { SelectItem } from '../SelectItem';
+import { Spinner } from 'react-bootstrap';
+import { GrSelect } from 'react-icons/gr';
+import { MdLibraryAddCheck } from 'react-icons/md';
+// import { useRef } from 'react';
+
+import { TooltipWrapper } from '../../utilities/TooltipWrapper';
+import { ResultItem } from '../../types';
+import { SelectItem } from './SelectItem';
 import { useTheme } from '../../context/ThemeContext';
+
+// TODO: modulate this file.
 
 type SelectFormData = {
     selectOptions: ResultItem[];
+    selectedItem: ResultItem | null;
     inputSearch: string;
     isDataLoading: boolean;
-    refreshData: () => Promise<ResultItem[]>;
+    refreshData: () => Promise<QueryObserverResult<unknown, unknown>>;
 };
 
 type SelectFormProps = SelectFormData & {
@@ -20,7 +27,7 @@ type SelectFormProps = SelectFormData & {
 
 // TODO : give each card an little check box to select it
 // TODO: apply theme styling throughout
-// TODO: tooltop over the refresh button
+// // TODO: tooltop over the refresh button
 
 
 export function SelectForm({
@@ -28,11 +35,13 @@ export function SelectForm({
     inputSearch,
     isDataLoading,
     refreshData,
+    selectedItem,
     updateFields,
 }: SelectFormProps) {
 
     const { currentTheme } = useTheme();
     // console.log(isDataLoading);
+    // const cardRef = useRef<HTMLDivElement>(null);
 
     function handleRefreshData() {
         refreshData().then((res: any) => {
@@ -43,18 +52,42 @@ export function SelectForm({
         refreshData();
     }
 
+    function handleCardSelection(e: any) {
+        e.preventDefault();
+        // console.log(e.target.id);
+        if (selectedItem == null) {
+            // first time selecting a card
+            updateFields({ selectedItem: findSelection(selectOptions, e.target.id) });
+        } else {
+            // we have a selected card already
+            if (selectedItem.id === e.target.id) {
+                updateFields({ selectedItem: null });
+            } else {
+                updateFields({ selectedItem: findSelection(selectOptions, e.target.id) });
+            }
+        }
+    }
+
+    function findSelection(list: ResultItem[], id: string) {
+        for (let x = 0, max = list.length; x < max; x++) {
+            let selectOption = list[x];
+            if (selectOption.id === id) {
+                return selectOption;
+            }
+        }
+    }
+
+
     return (
-        // <FormWrapper title="Select an Item">
         <>
-            {/* TODO implement a spinnger or something that signals loading */}
             {isDataLoading === true ? (
                 <div>
+                    <Spinner animation="grow" variant="success" />
                     <p>Loading...</p>
+                    <Spinner animation="grow" variant="success" />
                 </div>
             ) : (
                 <>
-                    {/* <button onClick={handleRefreshData}> */}
-                    {/* <FiRefreshCcw /> */}
                     <TooltipWrapper
                         placement='right'
                         overlayTitle='Refresh to get new results!'
@@ -62,30 +95,30 @@ export function SelectForm({
                             <FiRefreshCcw />
                         </button>}
                     />
-                    {/* </button> */}
-                    {/*! they can go back if they want to do a new search.. thats intuitive enough
-                    .. bc we are using logic like to hold those selecctItems...
-                    */}
                     <h2 style={{
                         textAlign: "center",
                         margin: "0px 0px 2rem"
-                    }}>Select a Card to Display "{inputSearch}" </h2>
+                    }}>
+                        Select a Card to Display "{inputSearch}"
+                    </h2>
                     <Row md={2} xs={1} lg={3} className="g-3">
                         {selectOptions?.map((item: ResultItem) => {
-                            // TODO add click event for selected
+                            // TODO add click event for selected                                                
                             return (
                                 <SelectItem
                                     key={item.id}
+                                    identifier={item.id}
                                     currentTheme={currentTheme}
                                     imgUrl={item.imgUrl}
                                     description={item.description}
+                                    handleOnSelect={handleCardSelection}
+                                    identifierSelected={selectedItem?.id || null}
                                 />
                             )
                         }) || 'no results to display'}
                     </Row>
                 </>
             )}
-
         </>
     )
 }

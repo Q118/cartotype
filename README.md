@@ -9,7 +9,8 @@
 4.	reducing effect dependencies, 
 5.	use reducer to extract state logic into
 6.	querying a series of state updates (aka batch updates)
-7. Multi-step forms
+7. Multi-step forms with state management
+8. Forwarding refs
 
 Aim is to keep components “pure” without overcomplicating modularization.
 

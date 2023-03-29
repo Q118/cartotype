@@ -11,7 +11,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { useTheme } from '../context/ThemeContext';
 import { getPhotosForSelection } from "../api/axios";
-import { SelectItem } from './SelectItem';
+import { SelectItem } from './form/SelectItem';
 import { ResultItem } from '../types';
 
 

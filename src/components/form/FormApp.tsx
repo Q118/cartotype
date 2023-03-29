@@ -13,14 +13,16 @@ import { ResultItem } from '../../types';
 // TODO update all the individual forms to use what INputSearch is doing
 
 
+// TODO : NEED TO handle the case where user enters a search term that returns no results..
+// ! right now its throwing errors...
+
 type FormData = {
     inputSearch: string;
     selectOptions: ResultItem[];
-    selectedItem: ResultItem | {};
+    selectedItem: ResultItem | null;
     price: number;
     storeTitle: string;
-    isDataLoading: boolean; // ? not sure if this is needed
-    // loadingState: boolean; // TODO use this
+    isDataLoading: boolean;
 }
 
 // firstName: string;
@@ -37,7 +39,7 @@ type FormData = {
 const INITIAL_DATA: FormData = {
     inputSearch: '',
     selectOptions: [],
-    selectedItem: {},
+    selectedItem: null,
     price: 0,
     storeTitle: '',
     isDataLoading: false,
@@ -89,9 +91,16 @@ export function FormApp() {
                 // return next();
             });
         }
-        if (!isLastStep) return next();
-        if (isLastStep) alert('all done!');
-        //TODO set in to the Storedata instead of alert
+        if (!isLastStep) {
+            if (!isFirstStep) { // its the second step
+                if (data.selectedItem === null) {
+                    alert('select an item to continue');
+                    return;
+                }
+            }
+            return next();
+        }
+        if (isLastStep) alert('all done!'); //TODO set in to the Storedata instead of alert
     }
 
     return (
@@ -126,7 +135,7 @@ export function FormApp() {
                     {!isFirstStep && <button type="button" onClick={back}>Back</button>}
                     <button type="submit">
                         {isLastStep ? "Finish" : isFirstStep ? "Search" : "Next"}
-                    </button> 
+                    </button>
                 </div>
             </form>
         </Container>
