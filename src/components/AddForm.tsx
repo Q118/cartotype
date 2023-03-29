@@ -78,7 +78,7 @@ export function AddForm() {
                 </Button>
             </InputGroup>
             {/* TODO implement a spinnger or something that signals loading */}
-            {isLoading === true && (
+            {isFetching === true && (
                 <div>
                     <p>Loading...</p>
                 </div>

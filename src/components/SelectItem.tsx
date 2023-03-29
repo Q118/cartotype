@@ -6,6 +6,9 @@ type SelectItemProps = {
     description: string;
 }
 
+// !!! PU HERE... fix the button visual then keep building the form steps
+// * then put the notes part in
+
 export function SelectItem({ currentTheme, imgUrl, description }: SelectItemProps) {
     
     const currentThemeClasses: string = currentTheme === 'dark' ? 'bg-secondary text-white' : 'bg-white text-dark';
@@ -25,10 +28,8 @@ export function SelectItem({ currentTheme, imgUrl, description }: SelectItemProp
                     />
                     <Card.Body className={`d-flex flex-column ${currentThemeClasses}}`}>
                         <Card.Title>{description}</Card.Title>
-                
                         <Button>select</Button>
                     </Card.Body>
-                    
                 </Card>
             </Col>
         </>
