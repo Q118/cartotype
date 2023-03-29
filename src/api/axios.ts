@@ -26,14 +26,14 @@ type PhotoItem = {
  */
 async function getPhotosForSelection(searchTerm: string = 'dog') {
     return axios
-        .get(`${BASE_URL}/photos/random/?query=${searchTerm}&count=3`, { headers: { Authorization: AUTH_HEADER } })
+        .get(`${BASE_URL}/photos/random/?query=${searchTerm}&count=6`, { headers: { Authorization: AUTH_HEADER } })
         .then((response) => {
             let photos: PhotoItem[] = [];
             response.data.forEach((item: any) => {
                 let description = item.description !== null ? item.description : item.alt_description || 'no description';
                 let photo = {
                     id: item.id,
-                    description: item.description || item.alt_description,
+                    description: description,
                     imgUrl: item.urls.regular,
                     downloadLocation: item.links.download_location,
                 };

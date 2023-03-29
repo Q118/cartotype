@@ -1,49 +1,38 @@
 import { FormWrapper } from "./FormWrapper";
+import { ResultItem } from '../../types';
 
-type UserData = {
-    firstName: string
-    lastName: string
-    age: string
+type SearchFormData = {
+    // firstName: string
+    // lastName: string
+    // age: string
+    inputSearch: string;
 }
 
-type UserFormProps = UserData & {
-    updateFields: (fields: Partial<UserData>) => void
+type SearchFormProps = SearchFormData & {
+    // ! this allows for aton of flexibility (in combo with how its setup in FormApp)
+    // i.e. we can pass in any number of fields and get them updated without having to pass in all of them
+    updateFields: (fields: Partial<SearchFormData>) => void
 }
 
 
-// export function InputSearchForm({
-//     firstName,
-//     lastName,
-//     age,
-//     updateFields,
-// }: UserFormProps) {
-export function InputSearchForm() {
+export function InputSearchForm({
+    // firstName,
+    // lastName,
+    // age,
+    inputSearch,
+    updateFields,
+}: SearchFormProps) {
     return (
-        <FormWrapper title="User Details">
-            <label>First Name</label>
+        <FormWrapper title="Add New Store Item">
+            <label>Search Term: </label>
             <input
                 autoFocus
                 required
                 type="text"
-                // value={firstName}
-                // onChange={e => updateFields({ firstName: e.target.value })}
-            />
-            <label>Last Name</label>
-            <input
-                required
-                type="text"
-                // value={lastName}
-                // onChange={e => updateFields({ lastName: e.target.value })}
-            />
-            <label>Age</label>
-            <input
-                required
-                min={1}
-                type="number"
-                // value={age}
-                // onChange={e => updateFields({ age: e.target.value })}
+                value={inputSearch}
+                // !! tthis
+                onChange={e => updateFields({ inputSearch: e.target.value })}
             />
         </FormWrapper>
-
     )
 }

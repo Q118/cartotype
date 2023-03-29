@@ -1,6 +1,9 @@
 /**
  * This component is used to wrap the form fields and the submit button
  * for consistency in styling.
+ * and we pass in the title as a prop
+ * what about querying, handle in here or in FormApp?
+ * 
  */
 
 import { ReactNode } from "react";

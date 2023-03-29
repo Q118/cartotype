@@ -1,15 +1,59 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import Container from 'react-bootstrap/Container';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { useTheme } from '../../context/ThemeContext';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
 import { InputSearchForm } from './InputSearchForm';
+import { getPhotosForSelection } from "../../api/axios";
+// TODO: put all the useQuery stuff into its own hooks file
+import { ResultItem } from '../../types';
+
+// TODO update all the individual forms to use what INputSearch is doing
+
+
+type FormData = {
+    inputSearch: string;
+    selectOptions: ResultItem[];
+    selectedItem: ResultItem | {};
+    price: number;
+    storeTitle: string;
+    isDataLoading: boolean; // ? not sure if this is needed
+    // loadingState: boolean; // TODO use this
+}
+
+// firstName: string;
+// lastName: string;
+// age: string;
+// street: string;
+// city: string;
+// state: string;
+// zip: string;
+// email: string;
+// password: string;
+
+
+const INITIAL_DATA: FormData = {
+    inputSearch: '',
+    selectOptions: [],
+    selectedItem: {},
+    price: 0,
+    storeTitle: '',
+    isDataLoading: false,
+}
+
 
 export function FormApp() {
-    const { currentTheme } = useTheme();
+    const [data, setData] = useState(INITIAL_DATA);
 
-    // const steps = []; // gives us access to the steps
+    const { data: resultData, isLoading, error, refetch, isFetching: isDataLoading }: UseQueryResult = useQuery({
+        queryKey: [`photo-request-${data.inputSearch}`],
+        queryFn: () => getPhotosForSelection(data.inputSearch),
+        enabled: false,
+    });
+
+    const { currentTheme } = useTheme();
     const {
         steps,
         currentStepIndex,
@@ -19,14 +63,35 @@ export function FormApp() {
         next,
         back,
     } = useMultistepForm([
-        <InputSearchForm />,
-        <SelectForm />,
-        <DetailForm />,
+        <InputSearchForm {...data} updateFields={updateFields} />,
+        <SelectForm {...data}
+            isDataLoading={isDataLoading}
+            refreshData={() => refetch()}
+            updateFields={updateFields}
+        />,
+        <DetailForm  {...data}
+        // updateFields={updateFields}
+        />,
     ]);
+
+
+    function updateFields(fields: Partial<FormData>) {
+        // override all teh old info with the new info
+        setData(prev => ({ ...prev, ...fields }));
+    }
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        next();
+        if (isFirstStep) { // then its the search one
+            refetch().then((res: any) => {
+                console.log(res);
+                updateFields({ selectOptions: res.data });
+                // return next();
+            });
+        }
+        if (!isLastStep) return next();
+        if (isLastStep) alert('all done!');
+        //TODO set in to the Storedata instead of alert
     }
 
     return (
@@ -60,8 +125,8 @@ export function FormApp() {
                 >
                     {!isFirstStep && <button type="button" onClick={back}>Back</button>}
                     <button type="submit">
-                        {isLastStep ? "Finish" : "Next"}
-                    </button>
+                        {isLastStep ? "Finish" : isFirstStep ? "Search" : "Next"}
+                    </button> 
                 </div>
             </form>
         </Container>

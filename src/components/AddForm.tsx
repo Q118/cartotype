@@ -12,13 +12,16 @@ import { useQuery } from '@tanstack/react-query';
 import { useTheme } from '../context/ThemeContext';
 import { getPhotosForSelection } from "../api/axios";
 import { SelectItem } from './SelectItem';
+import { ResultItem } from '../types';
 
-type ResultItem = {
-    id: string;
-    description: string;
-    imgUrl: string;
-    downloadLocation: string;
-}
+
+
+// type ResultItem = {
+//     id: string;
+//     description: string;
+//     imgUrl: string;
+//     downloadLocation: string;
+// }
 
 
 export function AddForm() {

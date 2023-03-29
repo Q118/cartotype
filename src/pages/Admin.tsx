@@ -22,6 +22,8 @@ export function Admin() {
 
 
     const { currentTheme } = useTheme();
+// TODO on the tabs, put  the overlay over those tabs
+
 
     const renderOverlayColumn = (type: string, title: string) => {
         const overlayTitle = type === 'add' ? 'add a new item to the shop' : 'edit the current items in the shop';

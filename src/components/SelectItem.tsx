@@ -21,13 +21,14 @@ export function SelectItem({ currentTheme, imgUrl, description }: SelectItemProp
                     border: `1px solid ${currentTheme === 'dark' ? '#ccc' : 'black'}`,
                 }}>
                     <Card.Img
+                        title={description}
                         variant="top"
                         src={imgUrl}
                         height="200px"
                         style={{ objectFit: 'cover' }}
                     />
                     <Card.Body className={`d-flex flex-column ${currentThemeClasses}}`}>
-                        <Card.Title>{description}</Card.Title>
+                        {/* <Card.Title>{description}</Card.Title> */}
                         <Button>select</Button>
                     </Card.Body>
                 </Card>
