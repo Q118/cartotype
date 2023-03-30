@@ -6,7 +6,7 @@ import { formatCurrency } from '../utilities/formatCurrency';
 
 
 type CartItemProps = {
-    id: number;
+    id: string;
     quantity: number;
 };
 

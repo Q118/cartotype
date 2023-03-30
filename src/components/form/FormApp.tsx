@@ -1,6 +1,10 @@
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { v4 as uuidv4 } from 'uuid';
+
+
 import { useTheme } from '../../context/ThemeContext';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { SelectForm } from './SelectForm';
@@ -9,7 +13,7 @@ import { InputSearchForm } from './InputSearchForm';
 import { getPhotosForSelection } from "../../api/axios";
 import { ResultItem, StorePrice } from '../../types';
 import { StepTrack } from './StepTrack';
-
+import { addToStore } from '../../utilities/store';
 
 // ? TODO: put all the useQuery stuff into its own hooks file
 
@@ -39,7 +43,7 @@ const INITIAL_DATA: FormData = {
 
 export function FormApp() {
     const [data, setData] = useState(INITIAL_DATA);
-
+    const navigate = useNavigate();
     const { data: resultData, isLoading, error, refetch, isFetching: isDataLoading }: UseQueryResult = useQuery({
         queryKey: [`photo-request-${data.inputSearch}`],
         queryFn: () => getPhotosForSelection(data.inputSearch),
@@ -83,7 +87,7 @@ export function FormApp() {
             });
         }
         if (!isLastStep) {
-            if (!isFirstStep) { // its the second step
+            if (!isFirstStep) { // its the second step (at least in this case)
                 if (data.selectedItem === null) {
                     alert('select an item to continue');
                     return;
@@ -91,7 +95,20 @@ export function FormApp() {
             }
             return next();
         }
-        if (isLastStep) alert('all done!'); //TODO set in to the Storedata instead of alert
+        if (isLastStep) {
+            addToStore({
+                id: uuidv4(),
+                name: data.storeTitle,
+                price: +`${data.price.dollars}.${data.price.cents}`,
+                imgUrl: "i still need to make this logic lol"
+            }).then(() => {
+                navigate('/store');
+                // TODO naviagate themn to like a confirmation page/success page>..
+                // * send it like ... const { state } = useLocation();
+            }).catch((err) => {
+                alert(`something went wrong: ${err}`)
+            })
+        }
     }
 
     return (

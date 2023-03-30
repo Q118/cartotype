@@ -14,3 +14,10 @@ export type StorePrice = {
     dollars: number;
     cents: number;
 }
+
+export type StoreItem = {
+    id: string;
+    name: string;
+    price: number;
+    imgUrl: string;
+};
