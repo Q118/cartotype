@@ -4,8 +4,6 @@ import { StoreItem } from "../StoreItem";
 import { StorePrice } from "../../types";
 // TODO apply styling and themeing throughopu all of the form
 
-
-
 type DetailFormData = {
     selectedItem: ResultItem | null;
     inputSearch: string;
@@ -30,7 +28,7 @@ export function DetailForm({
     }
 
     return (
-        <FormWrapper title="Enter Details for Store">
+        <FormWrapper title="Edit Details for Store">
             <label>Price: </label>
             <div className="mb-3 input-group">
                 <span className="input-group-text">$</span>
@@ -39,12 +37,14 @@ export function DetailForm({
                     type="number"
                     className="form-control"
                     required
+                    value={price.dollars}
                     onChange={e => updateFields({ price: { ...price, dollars: +e.target.value } })}
                 />
                 <span className="input-group-text">.</span>
                 <input
                     placeholder="00"
                     type="number"
+                    value={price.cents}
                     // not required; let them leave it at 0 if they want
                     className="form-control"
                     style={{
@@ -56,8 +56,6 @@ export function DetailForm({
             <label>Official Title: </label>
             <input
                 type="text"
-                //? not require this one but maybe we should...
-                // required
                 className="form-control"
                 placeholder={inputSearch}
                 value={storeTitle}

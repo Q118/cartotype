@@ -24,7 +24,7 @@ type PhotoItem = {
  * @param searchTerm {string}
  * @returns array of photo objects
  */
-async function getPhotosForSelection(searchTerm: string = 'dog') {
+async function getPhotosForSelection(searchTerm: string = '') {
     return axios
         .get(`${BASE_URL}/photos/random/?query=${searchTerm}&count=6`, { headers: { Authorization: AUTH_HEADER } })
         .then((response) => {
@@ -43,8 +43,10 @@ async function getPhotosForSelection(searchTerm: string = 'dog') {
             return photos;
         })
         .catch((error: Error) => {
-            throw new Error(error.message);
-            // console.log(error.message);
+            // throw new Error(error.message);
+            console.log('error in getPhotosForSelection: ')
+            console.log(error.message);
+            return [];
         });
 }
 

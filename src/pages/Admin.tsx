@@ -2,13 +2,11 @@
  * Admin page
  * 
  * add items to the database store
+ * or
+ * edit items in the database store
  */
 import { useState } from 'react';
-// import { AddForm } from "../components/AddForm";
-// ! gonna use other one for now while setting up
 import { FormApp } from "../components/form/FormApp";
-
-
 import { EditForm } from "../components/EditForm";
 import { useTheme } from "../context/ThemeContext";
 import { Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
@@ -42,7 +40,6 @@ export function Admin() {
         )
     };
 
-    // !! PU here remove the options once an option is madde...
 
     return (
         <>

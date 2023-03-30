@@ -7,14 +7,15 @@ import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
 import { InputSearchForm } from './InputSearchForm';
 import { getPhotosForSelection } from "../../api/axios";
-// TODO: put all the useQuery stuff into its own hooks file
 import { ResultItem, StorePrice } from '../../types';
+import { StepTrack } from './StepTrack';
 
-// TODO update all the individual forms to use what INputSearch is doing
 
+// ? TODO: put all the useQuery stuff into its own hooks file
 
-// TODO : NEED TO handle the case where user enters a search term that returns no results..
-// ! right now its throwing errors...
+// TODO: handle the very last STEP... add the item to the database
+// TODO: apply theme styling throughout Form Parts
+
 
 type FormData = {
     inputSearch: string;
@@ -24,16 +25,6 @@ type FormData = {
     storeTitle: string;
     isDataLoading: boolean;
 }
-
-// firstName: string;
-// lastName: string;
-// age: string;
-// street: string;
-// city: string;
-// state: string;
-// zip: string;
-// email: string;
-// password: string;
 
 
 const INITIAL_DATA: FormData = {
@@ -66,19 +57,21 @@ export function FormApp() {
         back,
     } = useMultistepForm([
         <InputSearchForm {...data} updateFields={updateFields} />,
-        <SelectForm {...data}
+        <SelectForm
+            {...data}
             isDataLoading={isDataLoading}
             refreshData={() => refetch()}
             updateFields={updateFields}
         />,
-        <DetailForm  {...data}
+        <DetailForm
+            {...data}
             updateFields={updateFields}
         />,
     ]);
 
 
     function updateFields(fields: Partial<FormData>) {
-        // override all teh old info with the new info
+        //* override all the old info with the new info
         setData(prev => ({ ...prev, ...fields }));
     }
 
@@ -86,9 +79,7 @@ export function FormApp() {
         e.preventDefault();
         if (isFirstStep) { // then its the search one
             refetch().then((res: any) => {
-                console.log(res);
                 updateFields({ selectOptions: res.data });
-                // return next();
             });
         }
         if (!isLastStep) {
@@ -114,29 +105,14 @@ export function FormApp() {
             }}
         >
             <form onSubmit={handleSubmit}>
-                {/* top corner position of step display */}
-                <div style={{
-                    position: 'absolute',
-                    top: '.5rem',
-                    right: '.5rem'
-                }}>
-                    {currentStepIndex + 1} / {steps.length}
-                </div>
-                {step}
-                <div
-                    style={{
-                        marginTop: "1rem",
-                        // this will get our buttons to the far right side
-                        display: "flex",
-                        gap: ".5rem",
-                        justifyContent: "flex-end",
-                    }}
-                >
-                    {!isFirstStep && <button type="button" onClick={back}>Back</button>}
-                    <button type="submit">
-                        {isLastStep ? "Finish" : isFirstStep ? "Search" : "Next"}
-                    </button>
-                </div>
+                <StepTrack
+                    stepLength={steps.length}
+                    currentStepIndex={currentStepIndex}
+                    step={step}
+                    isFirstStep={isFirstStep}
+                    isLastStep={isLastStep}
+                    back={back}
+                />
             </form>
         </Container>
     )
