@@ -14,6 +14,8 @@ import { getPhotosForSelection } from "../../api/upsplash";
 import { ResultItem, StorePrice } from '../../types';
 import { StepTrack } from './StepTrack';
 import { addToStore } from '../../utilities/store';
+import { addStoreItem } from '../../api/dataStore';
+
 
 // ? TODO: put all the useQuery stuff into its own hooks file
 
@@ -98,7 +100,7 @@ export function FormApp() {
             return next();
         }
         if (isLastStep) {
-            addToStore({
+            addStoreItem({
                 id: uuidv4(),
                 name: data.storeTitle,
                 price: +`${data.price.dollars}.${data.price.cents}`,

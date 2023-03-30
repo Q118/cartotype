@@ -1,6 +1,6 @@
 // import storeItems from '../data/items.json';
 // we need to change this to a query
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getStoreItems } from '../api/dataStore';
 import Spinner from 'react-bootstrap/Spinner';
 import { Col, Row } from 'react-bootstrap';
@@ -10,7 +10,7 @@ import { StoreItem as StoreItemType } from '../types';
 
 function Store() {
 
-    // TODO: come back and useQuery and set up lazy continuous loading...
+    // TODO: come back and useQuery and set up lazy continuous loading.../paginationSituation
     const { data: storeItems, isLoading, error, refetch, isFetching }: any = useQuery({
         queryKey: [`get-all-store-items`],
         queryFn: () => getStoreItems(),
@@ -19,9 +19,8 @@ function Store() {
 
     return (
         <>
-            {/* {error && <p>Error: {error}</p>} */}
             <h1>Store</h1>
-
+            {error && <p>Error: {error.message}</p>}
             {(isLoading || isFetching) ? (
                 <div>
                     <Spinner animation="grow" variant="success" />
@@ -37,7 +36,6 @@ function Store() {
                     ))}
                 </Row>
             )}
-            {/* <ShoppingCart /> */}
         </>
     );
 }

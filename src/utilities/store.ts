@@ -1,5 +1,6 @@
 /** 
  * @description - crud operations on store items
+ * TODO delete this entire file
 */
 import fs from 'fs';
 import { StoreItem } from '../types';
