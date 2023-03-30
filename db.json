@@ -1,0 +1,58 @@
+{
+    "storeItems": [
+        {
+            "id": "0001",
+            "name": "Book",
+            "price": 10.99,
+            "imgUrl": "/imgs/book.jpg"
+        },
+        {
+            "id": "0002",
+            "name": "Computer",
+            "price": 1199,
+            "imgUrl": "/imgs/computer.jpg"
+        },
+        {
+            "id": "0003",
+            "name": "Banana",
+            "price": 1.05,
+            "imgUrl": "/imgs/banana.jpg"
+        },
+        {
+            "id": "0004",
+            "name": "Car",
+            "price": 14000,
+            "imgUrl": "/imgs/car.jpg"
+        },
+        {
+            "id": "0005",
+            "name": "Phone",
+            "price": 499,
+            "imgUrl": "/imgs/Phone.jpg"
+        },
+        {
+            "id": "0006",
+            "name": "Shirt",
+            "price": 19.99,
+            "imgUrl": "/imgs/shirt.jpg"
+        },
+        {
+            "id": "0007",
+            "name": "Shoes",
+            "price": 49.99,
+            "imgUrl": "/imgs/shoes.jfif"
+        },
+        {
+            "id": "0008",
+            "name": "Socks",
+            "price": 9.99,
+            "imgUrl": "/imgs/socks.jfif"
+        },
+        {
+            "id": "0009",
+            "name": "Watch",
+            "price": 99.99,
+            "imgUrl": "/imgs/watch.jfif"
+        }
+    ]
+}

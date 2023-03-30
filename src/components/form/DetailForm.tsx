@@ -9,6 +9,7 @@ type DetailFormData = {
     inputSearch: string;
     price: StorePrice;
     storeTitle: string;
+    // imgUrl: string;
 }
 
 type DetailFormProps = DetailFormData & {
@@ -20,7 +21,7 @@ export function DetailForm({
     inputSearch,
     price,
     storeTitle,
-    updateFields
+    updateFields,
 }: DetailFormProps) {
 
     function consolidateStorePrice({ dollars, cents }: StorePrice): number {

@@ -5,10 +5,6 @@ const BASE_URL = 'https://api.unsplash.com';
 
 const AUTH_HEADER = `Client-ID ${config.UPSPLASH_ACCESS_KEY}`;
 
-// TODO create custom hook for the useing and then put into components like done in other apps
-
-// * download location...
-// do something with the image URLs, like embedding it in a hypothetical post
 // $('img.post').attr('src', firstPhoto['urls']['regular']);
 
 type PhotoItem = {
