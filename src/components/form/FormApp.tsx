@@ -10,7 +10,7 @@ import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
 import { InputSearchForm } from './InputSearchForm';
-import { getPhotosForSelection } from "../../api/axios";
+import { getPhotosForSelection } from "../../api/upsplash";
 import { ResultItem, StorePrice } from '../../types';
 import { StepTrack } from './StepTrack';
 import { addToStore } from '../../utilities/store';
@@ -28,6 +28,7 @@ type FormData = {
     price: StorePrice;
     storeTitle: string;
     isDataLoading: boolean;
+    // imgUrl: string;
 }
 
 
@@ -38,6 +39,7 @@ const INITIAL_DATA: FormData = {
     price: { dollars: 0, cents: 0 },
     storeTitle: '',
     isDataLoading: false,
+    // imgUrl: '',
 }
 
 
@@ -100,7 +102,7 @@ export function FormApp() {
                 id: uuidv4(),
                 name: data.storeTitle,
                 price: +`${data.price.dollars}.${data.price.cents}`,
-                imgUrl: "i still need to make this logic lol"
+                imgUrl: data.selectedItem?.imgUrl || '',
             }).then(() => {
                 navigate('/store');
                 // TODO naviagate themn to like a confirmation page/success page>..
