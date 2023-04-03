@@ -3,7 +3,8 @@ import { ResultItem } from '../../types';
 import { StoreItem } from "../StoreItem";
 import { StorePrice } from "../../types";
 import { Col, Row } from "react-bootstrap";
-// TODO apply styling and themeing throughopu all of the form
+import { useTheme } from "../../context/ThemeContext";
+// // TODO apply styling and themeing throughopu all of the form
 
 type DetailFormData = {
     selectedItem: ResultItem | null;
@@ -25,6 +26,9 @@ export function DetailForm({
     updateFields,
 }: DetailFormProps) {
 
+    const { currentTheme } = useTheme();
+
+
     function consolidateStorePrice({ dollars, cents }: StorePrice): number {
         return +(dollars + (cents / 100));
     }
@@ -33,19 +37,21 @@ export function DetailForm({
         <FormWrapper title="Edit Details for Store">
             <label>Price: </label>
             <div className="mb-3 input-group">
-                <span className="input-group-text">$</span>
+            <span className={`input-group-text bg-${currentTheme === 'dark' ? 'secondary' : 'light'} text-${currentTheme === 'dark' ? 'light' : 'dark'}`}>$</span>
                 <input
                     placeholder="0"
                     type="number"
+                    id={`input-${currentTheme}`}
                     className="form-control"
                     required
                     value={price.dollars}
                     onChange={e => updateFields({ price: { ...price, dollars: +e.target.value } })}
                 />
-                <span className="input-group-text">.</span>
+                <span className={`input-group-text bg-${currentTheme === 'dark' ? 'secondary' : 'light'} text-${currentTheme === 'dark' ? 'light' : 'dark'}`}>.</span>
                 <input
                     placeholder="00"
                     type="number"
+                    id={`input-${currentTheme}`}
                     value={price.cents}
                     // not required; let them leave it at 0 if they want
                     className="form-control"
@@ -59,6 +65,7 @@ export function DetailForm({
             <input
                 type="text"
                 className="form-control"
+                id={`input-${currentTheme}`}
                 placeholder={inputSearch}
                 value={storeTitle}
                 onChange={e => updateFields({ storeTitle: e.target.value })}

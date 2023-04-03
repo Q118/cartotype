@@ -2,8 +2,11 @@
 import { useEffect, useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { MdLibraryAddCheck } from 'react-icons/md';
-import { TbPhotoCheck, TbPhotoPlus } from 'react-icons/tb';
+// import { TbPhotoCheck, TbPhotoPlus } from 'react-icons/tb';
 import { GrSelect } from 'react-icons/gr';
+import { AiOutlineSelect } from 'react-icons/ai';
+// import { useTheme } from '../../context/ThemeContext';
+
 
 type SelectItemProps = {
     identifier: string;
@@ -26,7 +29,6 @@ export function SelectItem({
 }: SelectItemProps) {
 
     const [isSelected, setIsSelected] = useState(false);
-
     useEffect(() => {
         if (identifierSelected === identifier) {
             setIsSelected(true);
@@ -63,9 +65,13 @@ export function SelectItem({
                             gap: ".5rem",
                             justifyContent: "flex-end",
                         }}>
-                            <button onClick={handleOnSelect} id={identifier}>
-                                {!isSelected ? (<><GrSelect /> Select</>) : <MdLibraryAddCheck />}
-                            </button>
+                            <Button
+                                variant={`outline-${currentTheme === 'dark' ? 'light' : 'dark'}`}
+                                onClick={handleOnSelect}
+                                id={identifier}
+                            >
+                                {!isSelected ? (<><AiOutlineSelect /> Select</>) : <MdLibraryAddCheck />}
+                            </Button>
                         </div>
                     </Card.Body>
                 </Card>

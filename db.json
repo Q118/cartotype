@@ -77,6 +77,12 @@
       "name": "",
       "price": 0,
       "imgUrl": "https://images.unsplash.com/photo-1555181019-c8170b1430c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTc0NjE&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "cd7684d1-0266-45d2-854f-c15d0ebe0bd0",
+      "name": "Green Beetle",
+      "price": 32,
+      "imgUrl": "https://images.unsplash.com/photo-1581859680484-a9fb0180a858?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NjIxNzc&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ]
 }

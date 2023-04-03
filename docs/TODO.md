@@ -11,7 +11,7 @@
 
 
 - the final details part of form Steps: 
-    - have that card be more of a thumbnail size AND 
+    <!-- // have that card be more of a thumbnail size AND  -->
     <!-- // HAVE that add button but disabled -->
     - add confirmation on last step that the user wants to add the item with those details, to the store
 

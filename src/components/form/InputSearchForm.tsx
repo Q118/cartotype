@@ -1,5 +1,6 @@
 import { FormWrapper } from "./FormWrapper";
-import { ResultItem } from '../../types';
+// import { ResultItem } from '../../types';
+import { useTheme } from "../../context/ThemeContext";
 
 type SearchFormData = {
     inputSearch: string;
@@ -16,6 +17,10 @@ export function InputSearchForm({
     inputSearch,
     updateFields,
 }: SearchFormProps) {
+
+    const { currentTheme } = useTheme();
+
+
     return (
         <FormWrapper title="Add New Store Item">
             <label>Search Term: </label>
@@ -24,6 +29,7 @@ export function InputSearchForm({
                 required
                 type="text"
                 value={inputSearch}
+                id={`input-${currentTheme}`}
                 // !! tthis
                 onChange={e => updateFields({ inputSearch: e.target.value })}
             />
