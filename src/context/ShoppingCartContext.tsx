@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useContext, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { StoreItem } from '../types';
 
 
 type ShoppingCartProviderProps = {
@@ -22,6 +23,8 @@ type ShoppingCartContext = {
     cartQuantity: number;
     cartItems: CartItem[];
     isOpen: boolean;
+    globalStoreItems: any;
+    setGlobalStoreItems: any;
 };
 
 // make it contain the values of the type this way
@@ -39,6 +42,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         "shopping-cart",
         []
     );
+
+    const [globalStoreItems, setGlobalStoreItems] = useState<StoreItem[]>([]);
 
     // this calculates the total quantity of items in the cart
     const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
@@ -98,7 +103,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             cartQuantity,
             openCart,
             closeCart,
-            isOpen
+            isOpen,
+            globalStoreItems,
+            setGlobalStoreItems
         }}>
             {children}
         </ShoppingCartContext.Provider>

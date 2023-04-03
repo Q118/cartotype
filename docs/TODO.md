@@ -1,4 +1,5 @@
 <!-- ! first:: fix whats happenign with the Actual shooping cart:: 1-its displaying more then what is in there and 2- getting itt to display teh new items from db in the sideCart -->
+<!-- ** a lot of logic will need to be made bc like it WAS expecting that json list and now i need to UPDATE THROUGHOUT to have it use the db! -->
 
 - make the loading appear until the photos are fully rendered SO THAT the user doesnt see those ugly blank squares.
 

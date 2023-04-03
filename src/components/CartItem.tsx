@@ -1,7 +1,11 @@
+// import { useQuery } from '@tanstack/react-query';
 import { Button, Stack } from 'react-bootstrap';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 import { useTheme } from '../context/ThemeContext';
-import storeItems from '../data/items.json';
+// import storeItems from '../data/items.json';
+// import { getStoreItems } from '../api/dataStore';
+// ! we dont want to have to re-fetch the store items every time we add to the cart...
+// so lets save it in the global on teh first call...
 import { formatCurrency } from '../utilities/formatCurrency';
 
 
@@ -10,10 +14,16 @@ type CartItemProps = {
     quantity: number;
 };
 
+
+
 export function CartItem({ id, quantity }: CartItemProps) {
+
+    const { globalStoreItems: storeItems } = useShoppingCart();
     const { removeFromCart } = useShoppingCart();
     const { currentTheme } = useTheme();
-    const item = storeItems.find((item) => item.id === id);
+
+
+    const item = storeItems.find((item: { id: string; }) => item.id === id);
     if (item == null) return (<></>);
 
     return (

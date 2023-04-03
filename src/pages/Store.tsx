@@ -1,14 +1,16 @@
-// import storeItems from '../data/items.json';
-// we need to change this to a query
+import { useEffect } from 'react';
+import { useShoppingCart } from '../context/ShoppingCartContext';
 import { useQuery } from '@tanstack/react-query';
 import { getStoreItems } from '../api/dataStore';
 import Spinner from 'react-bootstrap/Spinner';
 import { Col, Row } from 'react-bootstrap';
 import { StoreItem } from '../components/StoreItem';
 import { StoreItem as StoreItemType } from '../types';
-// import { ShoppingCart } from '../components/ShoppingCart';
+
 
 function Store() {
+
+    const { setGlobalStoreItems } = useShoppingCart();
 
     // TODO: come back and useQuery and set up lazy continuous loading.../paginationSituation
     const { data: storeItems, isLoading, error, refetch, isFetching }: any = useQuery({
@@ -16,6 +18,12 @@ function Store() {
         queryFn: () => getStoreItems(),
         enabled: true,
     });
+
+    useEffect(() => {
+        if (storeItems) {
+            setGlobalStoreItems(storeItems);
+        }
+    }, [storeItems]);
 
     return (
         <>

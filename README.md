@@ -17,5 +17,6 @@ Aim is to keep components “pure” without overcomplicating modularization.
 
 ## Run the app locally
     - go to the root directory
-    - npm install
-    - npm run dev
+    - `npm install`
+    - `npm run dev` in one terminal
+    - `npm run db` in another terminal    

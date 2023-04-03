@@ -6,7 +6,7 @@ const BASE_URL = 'http://localhost:3001';
 
 
 
-async function getStoreItems() {
+function getStoreItems() {
     return axios
         .get(`${BASE_URL}/storeItems`)
         .then((response) => {
