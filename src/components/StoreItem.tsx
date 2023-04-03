@@ -8,16 +8,17 @@ import { useTheme } from '../context/ThemeContext';
 const TITLE_CLASSES: string = 'd-flex justify-content-between align-items-baseline mb-4';
 const INNER_BTN_CLASSES: string = 'd-flex align-items-center flex-column';
 const BTN_WRAPPER_CLASSES: string = 'd-flex align-items-center justify-content-center';
-const CARD_CLASSES: string = 'd-flex flex-column ';
+// const CARD_CLASSES: string = 'd-flex flex-column ';
 
 type StoreItemProps = {
     id: string;
     name: string;
     price: number;
     imgUrl: string;
+    isPreview: boolean;
 };
 
-export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
+export function StoreItem({ id, name, price, imgUrl, isPreview = false }: StoreItemProps) {
     const {
         getItemQuantity,
         increaseCartQuantity,
@@ -36,7 +37,7 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
 
     return (
         <>
-            <Card className='h-100' style={{
+            <Card className={`h-100 ${isPreview}-preview`} style={{
                 border: `1px solid ${currentTheme === 'dark' ? '#ccc' : 'black'}`,
             }}>
                 <Card.Img
@@ -44,6 +45,7 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
                     src={imgUrl}
                     height="200px"
                     style={{ objectFit: 'cover' }}
+                    // title='' TODO
                 />
                 <Card.Body
                     className={`d-flex flex-column ${currentThemeClasses}}`}
@@ -56,7 +58,7 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
                     {/* mt-auto to fill all aviailable  space */}
                     <div className='mt-auto'>
                         {quantity === 0 ? (
-                            <Button className='w-100' onClick={() => increaseCartQuantity(id)}>
+                            <Button className='w-100' onClick={() => increaseCartQuantity(id)} disabled={isPreview}>
                                 + Add To Cart
                             </Button>
                         ) : (

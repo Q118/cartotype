@@ -2,6 +2,7 @@ import { FormWrapper } from "./FormWrapper";
 import { ResultItem } from '../../types';
 import { StoreItem } from "../StoreItem";
 import { StorePrice } from "../../types";
+import { Col, Row } from "react-bootstrap";
 // TODO apply styling and themeing throughopu all of the form
 
 type DetailFormData = {
@@ -61,15 +62,26 @@ export function DetailForm({
                 placeholder={inputSearch}
                 value={storeTitle}
                 onChange={e => updateFields({ storeTitle: e.target.value })}
+                maxLength={20}
             />
+            {/* <span>
+            <small>20 character limit</small>
+            </span> */}
             <h6>Preview:</h6>
             {/* TODO: make the preview be a little smaller or let user resize */}
-            <StoreItem
-                name={storeTitle || inputSearch}
-                price={consolidateStorePrice(price)}
-                imgUrl={selectedItem?.imgUrl || ''}
-                id={selectedItem?.id || ''}
-            />
+            <Row>
+                <Col style={{
+                    maxWidth: '250px',
+                }}>
+                    <StoreItem
+                        name={storeTitle || inputSearch}
+                        price={consolidateStorePrice(price)}
+                        imgUrl={selectedItem?.imgUrl || ''}
+                        id={selectedItem?.id || ''}
+                        isPreview={true}
+                    />
+                </Col>
+            </Row>
         </FormWrapper>
     )
 }

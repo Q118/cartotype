@@ -59,6 +59,24 @@
       "name": "sHeL",
       "price": 7.15,
       "imgUrl": "https://images.unsplash.com/photo-1614330316074-769a15d75d01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODAyMTgwNzM&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "e9e1efad-0f2f-43a3-a35f-255fc6a1b9ca",
+      "name": "Pickle Sandwich",
+      "price": 7.63,
+      "imgUrl": "https://images.unsplash.com/photo-1541833000669-8dbe1bfb574a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTQ4MDg&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "96f0b358-ae38-43f4-9295-59be9c4a91a3",
+      "name": "Gnome",
+      "price": 0,
+      "imgUrl": "https://images.unsplash.com/photo-1512209840695-c9b154d2a2aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTQ4OTQ&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "a37c6981-0436-41bb-b1f8-fb320226bd7e",
+      "name": "",
+      "price": 0,
+      "imgUrl": "https://images.unsplash.com/photo-1555181019-c8170b1430c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTc0NjE&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ]
 }

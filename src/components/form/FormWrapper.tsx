@@ -11,6 +11,7 @@ import { ReactNode } from "react";
 type FormWrapperProps = {
     title: string
     children: ReactNode
+    // helpText?: string
 }
 
 export function FormWrapper({ title, children }: FormWrapperProps) {
