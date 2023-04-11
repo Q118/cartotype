@@ -8,6 +8,8 @@ export type ResultItem = {
     description: string;
     imgUrl: string;
     downloadLocation: string;
+    displayName: string;
+    name: string;
 }
 
 export type StorePrice = {

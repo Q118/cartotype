@@ -5,10 +5,12 @@
 - set up pagination in the store and/or lazy loading
     like the scroll event triggers more querying
 
-- EditForm will list all the current items with a stack and just thumbnail images..
+<!--! Work on this next.. and start the linkedIn course yaaa -->
+- EditForm will list all the current items with a <Stack> and just thumbnail images..
     - option to edit each param, or delete the item
 
-
+<!-- TODO: add all the credidatiopn needed -->
+the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others]
 
 - the final details part of form Steps: 
     <!-- // have that card be more of a thumbnail size AND  -->

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { MdLibraryAddCheck } from 'react-icons/md';
 // import { TbPhotoCheck, TbPhotoPlus } from 'react-icons/tb';
-import { GrSelect } from 'react-icons/gr';
+// import { GrSelect } from 'react-icons/gr';
 import { AiOutlineSelect } from 'react-icons/ai';
 // import { useTheme } from '../../context/ThemeContext';
 
@@ -13,9 +13,14 @@ type SelectItemProps = {
     currentTheme: string;
     imgUrl: string;
     description: string;
+    creditorName: string;
+    creditorDisplayName: string;
     handleOnSelect: (e: any) => void;
     identifierSelected: string | null;
 }
+
+const UNSPLASH_URL: string = 'https://unsplash.com/?utm_source=cartotype&utm_medium=referral';
+const CREDITOR_URL = (username: string) => `https://unsplash.com/@${username}?utm_source=cartotype&utm_medium=referral`;
 
 // * NEXT TODO then put the notes part in
 
@@ -24,6 +29,8 @@ export function SelectItem({
     currentTheme,
     imgUrl,
     description,
+    creditorName,
+    creditorDisplayName,
     handleOnSelect,
     identifierSelected
 }: SelectItemProps) {
@@ -43,13 +50,9 @@ export function SelectItem({
     return (
         <>
             <Col>
-                <Card
-                    id={`${identifier}-card`}
+                <Card id={`${identifier}-card`}
                     className={`h-100 ${isSelected ? 'selected-card' : ''}`}
-                    style={{
-                        border: `1px solid ${currentTheme === 'dark' ? '#ccc' : 'black'}`,
-                    }}
-                >
+                    style={{ border: `1px solid ${currentTheme === 'dark' ? '#ccc' : 'black'}` }}>
                     <Card.Img
                         title={description}
                         variant="top"
@@ -57,10 +60,18 @@ export function SelectItem({
                         height="200px"
                         style={{ objectFit: 'cover' }}
                     />
-                    <Card.Body className={`d-flex flex-column ${currentThemeClasses}}`}>
+                    <span className={`credit-text credit-text-${currentTheme}`}>
+                        Photo by&nbsp;
+                        <a href={CREDITOR_URL(creditorDisplayName)} target="_blank" rel="noreferrer">
+                            {creditorDisplayName}
+                        </a> on
+                        <a href={UNSPLASH_URL} target="_blank" rel="noreferrer">
+                            Unsplash
+                        </a>
+                    </span>
+                    <Card.Body className={`d-flex flex-column ${currentThemeClasses}`}>
                         <div style={{
                             marginTop: "1rem",
-                            // this will get our buttons to the far right side
                             display: "flex",
                             gap: ".5rem",
                             justifyContent: "flex-end",

@@ -22,6 +22,20 @@
 }
 
 
+.credit-text {
+    padding: 2px;
+    /* font-style: italic; */
+}
+
+.credit-text-dark {
+    color: #ffffff !important;
+    background-color: var(--bs-dark) !important;
+}
+
+.credit-text-light {
+    color: #000000 !important;
+    background-color: var(--bs-light) !important;
+}
 
 /* Form shtuff */
 #input-dark {
@@ -40,6 +54,13 @@
     border: 1px solid #ffffff;
 } */
 
+/* ! this will get our buttons to the far right side
+.stick-right {
+    margin-top: 1rem;
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end,
+} */
 
 /*
 #dark-tooltip {

@@ -12,6 +12,8 @@ type PhotoItem = {
     description: string;
     imgUrl: string;
     downloadLocation: string;
+    name: string;
+    displayName: string;
     // download_location: string;
 }
 
@@ -27,12 +29,15 @@ async function getPhotosForSelection(searchTerm: string = '') {
             let photos: PhotoItem[] = [];
             response.data.forEach((item: any) => {
                 let description = item.description !== null ? item.description : item.alt_description || 'no description';
-                let photo = {
+                let photo: PhotoItem = {
                     id: item.id,
                     description: description,
                     imgUrl: item.urls.regular,
                     downloadLocation: item.links.download_location,
+                    name: item.user.name || item.user.username,
+                    displayName: item.user.username
                 };
+                // let photo = {...item, description: description}
                 photos.push(photo);
             });
             // return response.data

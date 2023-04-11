@@ -8,6 +8,7 @@ export function Notes() {
                 Notes
             </h1>
 
+IN PROGRESS - COMING SOON
         </>
     );
 }

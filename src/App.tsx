@@ -5,7 +5,6 @@ import { Home } from './pages/Home';
 import { Store } from './pages/Store';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-// import { About } from './pages/About';
 import { Navbar } from './components/Navbar';
 import { Notes } from './pages/Notes';
 import { Admin } from './pages/Admin';
