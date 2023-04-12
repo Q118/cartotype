@@ -4,6 +4,8 @@
 
 ### Tools intentionally used for groking
 1.	custom hooks
+    a. `useMultiStepForm`
+    b. `useLocalStorage`
 2.	context API, 
 3.	advanced TypeScript, 
 4.	reducing effect dependencies, 

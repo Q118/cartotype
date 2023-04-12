@@ -18,7 +18,6 @@ type EditFormData = {
     selectedItem: ResultItem | null;
     /** new price set by user */
     price: StorePrice;
-    // displayPrice: number | null;
     /** storeTitle aka the new title user may choose */
     storeTitle: string;
     isDataLoading: boolean;

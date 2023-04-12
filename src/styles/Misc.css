@@ -52,12 +52,10 @@
 #input-dark {
     background-color: #000000;
     color: #ffffff;
-    border: 1px solid #ffffff;
 }
-#inpur-light {
+#input-light {
     background-color: #ffffff;
     color: #000000;
-    border: 1px solid #000000;
 }
 /* .dark-selectBtn {
     background-color: #000000;
