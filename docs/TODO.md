@@ -2,22 +2,27 @@
 
 - in admin and Store: make the loading appear until the photos are fully rendered SO THAT the user doesnt see those ugly blank squares.
 
-- set up pagination in the store and/or lazy loading
-    like the scroll event triggers more querying
+
 
 <!--! Work on this next.. and start the linkedIn course yaaa -->
 - Implement the Notes page using Kyles video as starting point
-<!-- // - EditForm will list all the current items with a <Stack> and just thumbnail images.. -->
-    <!-- // option to edit each param, or delete the item -->
-
-<!-- // add all the credidatiopn needed -->
 the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others]
 
 
-- add search, filtering and sorting
+- add search, filtering and sorting, pagination for both admin and store...
+    - like the scroll event triggers more querying
+
+    
+<!-- TODO have a flash notification message thing at top corner to alert users of things happening but not blocking the ui -->
+
 
 - the final details part of form Steps: 
     <!-- // have that card be more of a thumbnail size AND  -->
     <!-- // HAVE that add button but disabled -->
     <!--// TODO add confirmation on last step that the user wants to add the item with those details, to the store -->
     <!-- // maybe do that with like a third step of the form and include the PreviewConfirm component -->
+
+
+<!-- // - EditForm will list all the current items with a <Stack> and just thumbnail images.. -->
+    <!-- // option to edit each param, or delete the item -->
+<!-- // add all the credidatiopn needed -->

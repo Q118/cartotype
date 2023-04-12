@@ -13,14 +13,8 @@ import { InputSearchForm } from './InputSearchForm';
 import { getPhotosForSelection } from "../../api/upsplash";
 import { ResultItem, StorePrice } from '../../types';
 import { StepTrack } from './StepTrack';
-// import { addToStore } from '../../utilities/store';
 import { addStoreItem } from '../../api/dataStore';
 import { PreviewConfirm } from './PreviewConfirm';
-
-// // TODO: put all the useQuery stuff into its own hooks file
-
-// // handle the very last STEP... add the item to the database
-// TODO: apply theme styling throughout Form Parts includin the nav buttons!
 
 
 type FormData = {
@@ -30,8 +24,6 @@ type FormData = {
     price: StorePrice;
     storeTitle: string;
     isDataLoading: boolean;
-    // displayPrice: number | null;
-    // imgUrl: string;
 }
 
 
@@ -42,8 +34,6 @@ const INITIAL_DATA: FormData = {
     price: { dollars: 0, cents: 0 },
     storeTitle: '',
     isDataLoading: false,
-    // displayPrice: null,
-    // imgUrl: '',
 }
 
 
@@ -67,20 +57,12 @@ export function FormApp() {
         back,
     } = useMultistepForm([
         <InputSearchForm {...data} updateFields={updateFields} />,
-        <SelectForm
-            {...data}
-            isDataLoading={isDataLoading}
+        <SelectForm {...data} isDataLoading={isDataLoading}
             refreshData={() => refetch()}
             updateFields={updateFields}
         />,
-        <DetailForm
-            {...data}
-            updateFields={updateFields}
-        />,
-        <PreviewConfirm
-            {...data}
-            updateFields={updateFields}
-        />,
+        <DetailForm {...data} updateFields={updateFields} />,
+        <PreviewConfirm {...data} updateFields={updateFields} />,
     ]);
 
 
@@ -103,6 +85,7 @@ export function FormApp() {
                     return;
                 }
             }
+            // any other step in between the first and last
             return next();
         }
         if (isLastStep) {

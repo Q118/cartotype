@@ -1,5 +1,3 @@
-// TODO: use a similar approach to the FormApp component to create an EditForm component
-// it will allow user to update/delete items in the db
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
@@ -14,7 +12,6 @@ import { StepTrack } from './StepTrack';
 import { PreviewConfirm } from './PreviewConfirm';
 import { consolidateStorePrice } from '../../utilities/formatCurrency';
 
-// ! return here make sure the update is working the price number is all funky
 
 type EditFormData = {
     selectOptions: ResultItem[];
@@ -101,7 +98,6 @@ export function EditForm() {
             }).catch((err) => {
                 alert(`something went wrong: ${err}`);
             })
-            // TODO have a flash notification message thing at top corner to alert users of things happening but not blocking the ui
         }
     }
 
