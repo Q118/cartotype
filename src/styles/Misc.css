@@ -37,6 +37,17 @@
     background-color: var(--bs-light) !important;
 }
 
+
+.style-link {
+    color: inherit !important;
+    font-weight: bolder !important;
+    font-size: larger !important;
+    border: 1px dashed !important;
+    padding: 3px !important;
+    border-radius: 5px !important;
+}
+
+
 /* Form shtuff */
 #input-dark {
     background-color: #000000;

@@ -13,7 +13,7 @@ type SelectItemProps = {
     currentTheme: string;
     imgUrl: string;
     description: string;
-    creditorName: string;
+    // creditorName: string;
     creditorDisplayName: string;
     handleOnSelect: (e: any) => void;
     identifierSelected: string | null;
@@ -29,7 +29,7 @@ export function SelectItem({
     currentTheme,
     imgUrl,
     description,
-    creditorName,
+    // creditorName,
     creditorDisplayName,
     handleOnSelect,
     identifierSelected

@@ -9,11 +9,11 @@
 - EditForm will list all the current items with a <Stack> and just thumbnail images..
     - option to edit each param, or delete the item
 
-<!-- TODO: add all the credidatiopn needed -->
+<!-- // add all the credidatiopn needed -->
 the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others]
 
 - the final details part of form Steps: 
     <!-- // have that card be more of a thumbnail size AND  -->
     <!-- // HAVE that add button but disabled -->
-    - add confirmation on last step that the user wants to add the item with those details, to the store
+    <!-- TODO add confirmation on last step that the user wants to add the item with those details, to the store -->
 

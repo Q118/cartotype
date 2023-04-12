@@ -13,14 +13,14 @@ import { InputSearchForm } from './InputSearchForm';
 import { getPhotosForSelection } from "../../api/upsplash";
 import { ResultItem, StorePrice } from '../../types';
 import { StepTrack } from './StepTrack';
-import { addToStore } from '../../utilities/store';
+// import { addToStore } from '../../utilities/store';
 import { addStoreItem } from '../../api/dataStore';
 
 
-// ? TODO: put all the useQuery stuff into its own hooks file
+// // TODO: put all the useQuery stuff into its own hooks file
 
-// TODO: handle the very last STEP... add the item to the database
-// TODO: apply theme styling throughout Form Parts
+// // handle the very last STEP... add the item to the database
+// TODO: apply theme styling throughout Form Parts includin the nav buttons!
 
 
 type FormData = {

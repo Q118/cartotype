@@ -105,7 +105,7 @@ export function SelectForm({
                                     currentTheme={currentTheme}
                                     imgUrl={item.imgUrl}
                                     description={item.description}
-                                    creditorName={item.name}
+                                    // creditorName={item.name}
                                     creditorDisplayName={item.displayName}
                                     handleOnSelect={handleCardSelection}
                                     identifierSelected={selectedItem?.id || null}

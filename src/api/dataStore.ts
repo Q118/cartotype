@@ -46,8 +46,23 @@ async function addStoreItem(item: StoreItem) {
         });
 }
 
+async function updateStoreItem(item: StoreItem) {
+    return axios
+        .put(`${BASE_URL}/storeItems/${item.id}`, item)
+        .then((response) => {
+            console.log('updated item in data store');
+            return response.data;
+        })
+        .catch((error: Error) => {
+            console.log('error in updateStoreItem: ');
+            console.log(error.message);
+            return {};
+        });
+}
+
 export {
     getStoreItems,
     getStoreItem,
     addStoreItem,
+    updateStoreItem,
 }
