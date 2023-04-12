@@ -1,9 +1,9 @@
 import { FormWrapper } from "./FormWrapper";
-import { ResultItem } from '../../types';
+import { ResultItem, StorePrice } from '../../types';
 import { StoreItem } from "../StoreItem";
-import { StorePrice } from "../../types";
 import { Col, Row } from "react-bootstrap";
 import { useTheme } from "../../context/ThemeContext";
+import { FormEvent } from "react";
 // // TODO apply styling and themeing throughopu all of the form
 
 type DetailFormData = {
@@ -11,6 +11,7 @@ type DetailFormData = {
     inputSearch?: string;
     price: StorePrice;
     storeTitle: string;
+    // displayPrice: number | null;
     // imgUrl: string;
 }
 
@@ -28,11 +29,13 @@ export function DetailForm({
 
     const { currentTheme } = useTheme();
 
-    console.log('price in DetailForm:', price);
+    // console.log('price in DetailForm:', price);
 
     function consolidateStorePrice({ dollars, cents }: StorePrice): number {
         return +(dollars + (cents / 100));
     }
+
+
 
     return (
         <FormWrapper title="Edit Details for Store">
@@ -57,7 +60,10 @@ export function DetailForm({
                     //! not required; let them leave it at 0 if they want
                     className="form-control"
                     style={{ maxWidth: '4rem' }}
-                    onChange={e => updateFields({ price: { ...price, cents: +e.target.value } })}
+                    onChange={(e) => updateFields({price: { ...price, cents: +e.target.value }})}
+                    max={99}
+                    min={0}
+                    // onInput={(e) => setTwoNumberDecimal(e)}
                 />
             </div>
             <label>Official Title: </label>
@@ -81,6 +87,7 @@ export function DetailForm({
                 }}>
                     <StoreItem
                         name={storeTitle || inputSearch}
+                        // price={+`${price.dollars}.${price.cents}`}
                         price={consolidateStorePrice(price)}
                         imgUrl={selectedItem?.imgUrl || ''}
                         id={selectedItem?.id || ''}

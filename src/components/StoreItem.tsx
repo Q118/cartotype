@@ -39,6 +39,7 @@ export function StoreItem({ id, name, price, imgUrl, isPreview = false }: StoreI
         <>
             <Card className={`h-100 ${isPreview}-preview`} style={{
                 border: `1px solid ${currentTheme === 'dark' ? '#ccc' : 'black'}`,
+                minWidth: 'fit-content'
             }}>
                 <Card.Img
                     variant="top"

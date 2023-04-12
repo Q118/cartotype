@@ -7,26 +7,20 @@ import { updateStoreItem, getStoreItems } from '../api/dataStore';
 import { ResultItem, StorePrice } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import Container from 'react-bootstrap/Container';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { SelectForm } from './form/SelectForm';
 import { DetailForm } from './form/DetailForm';
 import { StepTrack } from './form/StepTrack';
 import { PreviewConfirm } from './form/PreviewConfirm';
 
-/* select an item to edit:
-display items and select one
-next one
-edit the properties of the item
-last one:
-holds preview and confirm and submit
-*/
+// ! return here make sure the update is working the price number is all funky
 
-// !! keep goi9ng with this and compare side by side with FormApp to do a siumilar flwo
 type EditFormData = {
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
     /** new price set by user */
     price: StorePrice;
+    // displayPrice: number | null;
     /** storeTitle aka the new title user may choose */
     storeTitle: string;
     isDataLoading: boolean;
@@ -36,6 +30,7 @@ const INITIAL_DATA: EditFormData = {
     selectOptions: [],
     selectedItem: null,
     price: { dollars: 0, cents: 0 },
+    // displayPrice: null,
     storeTitle: '',
     isDataLoading: false,
 };
@@ -70,8 +65,8 @@ export function EditForm() {
         />,
         <DetailForm {...data} updateFields={updateFields} />,
         <PreviewConfirm
-        // {...data}
-        // updateFields={updateFields}
+            {...data}
+            updateFields={updateFields}
         />,
     ]);
     function updateFields(fields: Partial<EditFormData>) {
@@ -79,39 +74,36 @@ export function EditForm() {
         setData(prev => ({ ...prev, ...fields }));
     }
 
+    // TODO this needs be a global function
+    function consolidateStorePrice({ dollars, cents }: StorePrice): number {
+        return +(dollars + (cents / 100));
+    }
+
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         if (isFirstStep) { // then its the select one
-            if (data.selectedItem === null) {
+            console.log('select one');
+            console.log(data)
+            if (data.selectedItem === null || !data.selectedItem) {
                 alert('select an item to continue');
-                return;
-            }
-        }
-        if (!isLastStep) {
-            if (!isFirstStep) { // its the second step (at least in this case when only 3 steps)
-                // if (data.selectedItem === null) {
-                //     alert('select an item to continue');
-                //     return;
-                // }
-                alert('placeholder for validating the fields');
                 return;
             }
             return next();
         }
+        if (!isLastStep) return next();
         if (isLastStep) {
-            // addStoreItem({
-            //     id: uuidv4(),
-            //     name: data.storeTitle,
-            //     price: +`${data.price.dollars}.${data.price.cents}`,
-            //     imgUrl: data.selectedItem?.imgUrl || '',
-            // }).then(() => {
-            //     navigate('/store');
-            //     // TODO naviagate themn to like a confirmation page/success page>..
-            //     // * send it like ... const { state } = useLocation();
-            // }).catch((err) => {
-            //     alert(`something went wrong: ${err}`)
-            // })
-            alert('submitting last step')
+            updateStoreItem({
+                id: data.selectedItem?.id || '',
+                name: data.storeTitle,
+                // price: +`${data.price.dollars}.${data.price.cents}`,
+                price: consolidateStorePrice(data.price),
+                imgUrl: data.selectedItem?.imgUrl || '',
+            }).then(() => {
+                navigate('/store');
+            }).catch((err) => {
+                alert(`something went wrong: ${err}`);
+            })
+            // TODO have a flash notification message thing at top corner to alert users of things happening but not blocking the ui
         }
     }
 

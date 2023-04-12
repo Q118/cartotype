@@ -63,8 +63,8 @@ export function SelectForm({
 
     function updateWithSelection(identifier: string) {
         const selectedItem: any = findSelection(selectOptions, identifier);
-        console.log('selectedItem:', selectedItem)
-        const itemPrice = parseStorePrice(selectedItem.price);
+        // console.log('selectedItem:', selectedItem)
+        const itemPrice: StorePrice = parseStorePrice(selectedItem?.price);
         updateFields({
             selectedItem: selectedItem,
             // !! get thisg ogining.. need to parse out price or have it saved somewhere
@@ -88,7 +88,6 @@ export function SelectForm({
     function parseStorePrice(price: number): StorePrice {
         const dollars = Math.floor(price);
         const cents = +(price - dollars).toFixed(2).split('0.')[1];
-        // split('.').join('');
         return { dollars, cents };
     }
 

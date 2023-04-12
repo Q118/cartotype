@@ -30,6 +30,7 @@ type FormData = {
     price: StorePrice;
     storeTitle: string;
     isDataLoading: boolean;
+    // displayPrice: number | null;
     // imgUrl: string;
 }
 
@@ -41,6 +42,7 @@ const INITIAL_DATA: FormData = {
     price: { dollars: 0, cents: 0 },
     storeTitle: '',
     isDataLoading: false,
+    // displayPrice: null,
     // imgUrl: '',
 }
 

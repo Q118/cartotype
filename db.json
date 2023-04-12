@@ -3,25 +3,25 @@
     {
       "id": "0001",
       "name": "Book",
-      "price": 10.99,
+      "price": 10.02,
       "imgUrl": "/imgs/book.jpg"
     },
     {
       "id": "0002",
       "name": "Computer",
-      "price": 1199,
+      "price": 1199.2,
       "imgUrl": "/imgs/computer.jpg"
     },
     {
       "id": "0003",
       "name": "Banana",
-      "price": 1.05,
+      "price": 1.5,
       "imgUrl": "/imgs/banana.jpg"
     },
     {
       "id": "0004",
       "name": "Car",
-      "price": 14000,
+      "price": 14000.04,
       "imgUrl": "/imgs/car.jpg"
     },
     {
@@ -45,7 +45,7 @@
     {
       "id": "0008",
       "name": "Socks",
-      "price": 9.99,
+      "price": 11.04,
       "imgUrl": "/imgs/socks.jfif"
     },
     {
@@ -69,7 +69,7 @@
     {
       "id": "cd7684d1-0266-45d2-854f-c15d0ebe0bd0",
       "name": "Green Beetle",
-      "price": 32,
+      "price": 32.05,
       "imgUrl": "https://images.unsplash.com/photo-1581859680484-a9fb0180a858?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NjIxNzc&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ]
