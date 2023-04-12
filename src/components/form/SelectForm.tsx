@@ -3,16 +3,20 @@ import { FiRefreshCcw } from 'react-icons/fi';
 import Row from 'react-bootstrap/Row';
 import { Spinner } from 'react-bootstrap';
 import { TooltipWrapper } from '../../utilities/TooltipWrapper';
-import { ResultItem } from '../../types';
+import { ResultItem, StorePrice } from '../../types';
 import { SelectItem } from './SelectItem';
 import { useTheme } from '../../context/ThemeContext';
 
 
 type SelectFormData = {
+    /** mode for edit, if false its in add mode */
+    editMode?: boolean;
+    price?: StorePrice;
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
-    inputSearch: string;
+    inputSearch?: string;
     isDataLoading: boolean;
+    storeTitle?: string;
     refreshData: () => Promise<QueryObserverResult<unknown, unknown>>;
 };
 
@@ -23,12 +27,14 @@ type SelectFormProps = SelectFormData & {
 
 
 export function SelectForm({
+    editMode = false,
     selectOptions,
-    inputSearch,
+    inputSearch = '',
     isDataLoading,
     refreshData,
     selectedItem,
     updateFields,
+    // storeTitle = '',
 }: SelectFormProps) {
 
     const { currentTheme } = useTheme();
@@ -56,7 +62,15 @@ export function SelectForm({
     }
 
     function updateWithSelection(identifier: string) {
-        updateFields({ selectedItem: findSelection(selectOptions, identifier) });
+        const selectedItem: any = findSelection(selectOptions, identifier);
+        console.log('selectedItem:', selectedItem)
+        const itemPrice = parseStorePrice(selectedItem.price);
+        updateFields({
+            selectedItem: selectedItem,
+            // !! get thisg ogining.. need to parse out price or have it saved somewhere
+            ...editMode && { price: { dollars: itemPrice?.dollars, cents: itemPrice?.cents } },
+            ...editMode && { storeTitle: selectedItem?.name },
+        });
     }
 
     function findSelection(list: ResultItem[], id: string) {
@@ -66,7 +80,20 @@ export function SelectForm({
         }
     }
 
-    if (selectOptions.length === 0) return (                  
+    /**
+     * 
+     * @function parseStorePrice - parses the price from the store into dollars and cents
+     * @returns {StorePrice}
+     */
+    function parseStorePrice(price: number): StorePrice {
+        const dollars = Math.floor(price);
+        const cents = +(price - dollars).toFixed(2).split('0.')[1];
+        // split('.').join('');
+        return { dollars, cents };
+    }
+
+    // TODO change this for in edit mode
+    if (selectOptions?.length === 0) return (
         <p style={{ textAlign: "center", padding: "20px" }}>
             <strong>No results found for "{inputSearch}"</strong>
         </p>
@@ -82,24 +109,26 @@ export function SelectForm({
                 </div>
             ) : (
                 <>
-                    <TooltipWrapper
-                        placement='right'
-                        overlayTitle='Refresh to get new results!'
-                        children={<button onClick={handleRefreshData}>
-                            <FiRefreshCcw />
-                        </button>}
-                    />
+                    {!editMode && (
+                        <TooltipWrapper
+                            placement='right'
+                            overlayTitle='Refresh to get new results!'
+                            children={<button onClick={handleRefreshData}>
+                                <FiRefreshCcw />
+                            </button>}
+                        />
+                    )}
                     <h2 style={{
                         textAlign: "center",
                         margin: "0px 0px 2rem"
                     }}>
-                        Select a Card to Display "{inputSearch}"
+                        Select a Card to {editMode ? "Edit" : "Display"} {inputSearch ? `"${inputSearch}"` : 'the item'}
                     </h2>
-
                     <Row md={2} xs={1} lg={3} className="g-3">
                         {selectOptions?.map((item: ResultItem) => {
                             return (
                                 <SelectItem
+                                    editMode={editMode}
                                     key={item.id}
                                     identifier={item.id}
                                     currentTheme={currentTheme}

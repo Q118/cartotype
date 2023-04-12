@@ -9,6 +9,7 @@ import { AiOutlineSelect } from 'react-icons/ai';
 
 
 type SelectItemProps = {
+    editMode?: boolean;
     identifier: string;
     currentTheme: string;
     imgUrl: string;
@@ -32,7 +33,8 @@ export function SelectItem({
     // creditorName,
     creditorDisplayName,
     handleOnSelect,
-    identifierSelected
+    identifierSelected,
+    editMode = false,
 }: SelectItemProps) {
 
     const [isSelected, setIsSelected] = useState(false);
@@ -60,15 +62,17 @@ export function SelectItem({
                         height="200px"
                         style={{ objectFit: 'cover' }}
                     />
-                    <span className={`credit-text credit-text-${currentTheme}`}>
-                        Photo by&nbsp;
-                        <a href={CREDITOR_URL(creditorDisplayName)} target="_blank" rel="noreferrer">
-                            {creditorDisplayName}
-                        </a> on
-                        <a href={UNSPLASH_URL} target="_blank" rel="noreferrer">
-                            Unsplash
-                        </a>
-                    </span>
+                    {!editMode && (
+                        <span className={`credit-text credit-text-${currentTheme}`}>
+                            Photo by&nbsp;
+                            <a href={CREDITOR_URL(creditorDisplayName)} target="_blank" rel="noreferrer">
+                                {creditorDisplayName}
+                            </a> on
+                            <a href={UNSPLASH_URL} target="_blank" rel="noreferrer">
+                                Unsplash
+                            </a>
+                        </span>
+                    )}
                     <Card.Body className={`d-flex flex-column ${currentThemeClasses}`}>
                         <div style={{
                             marginTop: "1rem",

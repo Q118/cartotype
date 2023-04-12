@@ -10,6 +10,8 @@ export type ResultItem = {
     downloadLocation: string;
     displayName: string;
     name: string;
+    price?: StorePrice;
+    storeTitle?: string;
 }
 
 export type StorePrice = {

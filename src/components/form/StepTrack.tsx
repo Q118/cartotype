@@ -1,5 +1,6 @@
 
 type StepTrackProps = {
+    editMode?: boolean;
     stepLength: number;
     currentStepIndex: number;
     step: JSX.Element;
@@ -9,6 +10,7 @@ type StepTrackProps = {
 }
 
 export function StepTrack({
+    editMode = false,
     stepLength,
     currentStepIndex,
     step,
@@ -37,7 +39,7 @@ export function StepTrack({
             }}>
                 {!isFirstStep && <button type="button" onClick={back}>Back</button>}
                 <button type="submit">
-                    {isLastStep ? "Finish" : isFirstStep ? "Search" : "Next"}
+                    {isLastStep ? "Finish" : (isFirstStep && !editMode) ? "Search" : "Next"}
                 </button>
             </div>
         </>

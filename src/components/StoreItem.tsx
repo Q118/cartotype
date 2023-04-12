@@ -12,7 +12,7 @@ const BTN_WRAPPER_CLASSES: string = 'd-flex align-items-center justify-content-c
 
 type StoreItemProps = {
     id: string;
-    name: string;
+    name?: string;
     price: number;
     imgUrl: string;
     isPreview: boolean;

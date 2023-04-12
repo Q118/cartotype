@@ -8,7 +8,7 @@ import { useTheme } from "../../context/ThemeContext";
 
 type DetailFormData = {
     selectedItem: ResultItem | null;
-    inputSearch: string;
+    inputSearch?: string;
     price: StorePrice;
     storeTitle: string;
     // imgUrl: string;
@@ -28,6 +28,7 @@ export function DetailForm({
 
     const { currentTheme } = useTheme();
 
+    console.log('price in DetailForm:', price);
 
     function consolidateStorePrice({ dollars, cents }: StorePrice): number {
         return +(dollars + (cents / 100));
@@ -37,7 +38,7 @@ export function DetailForm({
         <FormWrapper title="Edit Details for Store">
             <label>Price: </label>
             <div className="mb-3 input-group">
-            <span className={`input-group-text bg-${currentTheme === 'dark' ? 'secondary' : 'light'} text-${currentTheme === 'dark' ? 'light' : 'dark'}`}>$</span>
+                <span className={`input-group-text bg-${currentTheme === 'dark' ? 'secondary' : 'light'} text-${currentTheme === 'dark' ? 'light' : 'dark'}`}>$</span>
                 <input
                     placeholder="0"
                     type="number"
@@ -53,11 +54,9 @@ export function DetailForm({
                     type="number"
                     id={`input-${currentTheme}`}
                     value={price.cents}
-                    // not required; let them leave it at 0 if they want
+                    //! not required; let them leave it at 0 if they want
                     className="form-control"
-                    style={{
-                        maxWidth: '4rem'
-                    }}
+                    style={{ maxWidth: '4rem' }}
                     onChange={e => updateFields({ price: { ...price, cents: +e.target.value } })}
                 />
             </div>
@@ -66,7 +65,7 @@ export function DetailForm({
                 type="text"
                 className="form-control"
                 id={`input-${currentTheme}`}
-                placeholder={inputSearch}
+                placeholder={storeTitle}
                 value={storeTitle}
                 onChange={e => updateFields({ storeTitle: e.target.value })}
                 maxLength={20}
