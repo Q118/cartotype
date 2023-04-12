@@ -33,7 +33,7 @@
     {
       "id": "0006",
       "name": "Shirt",
-      "price": 19.99,
+      "price": 22.99,
       "imgUrl": "/imgs/shirt.jpg"
     },
     {
@@ -71,6 +71,12 @@
       "name": "Green Beetle",
       "price": 32.05,
       "imgUrl": "https://images.unsplash.com/photo-1581859680484-a9fb0180a858?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NjIxNzc&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "324e71d4-3f3a-4f5e-baf4-3ec3bceaa747",
+      "name": "Teeth",
+      "price": 5.15,
+      "imgUrl": "https://images.unsplash.com/photo-1615592602923-9fb437226763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODEzMzA2MDQ&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ]
 }

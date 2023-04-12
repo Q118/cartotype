@@ -12,6 +12,7 @@ import { SelectForm } from './form/SelectForm';
 import { DetailForm } from './form/DetailForm';
 import { StepTrack } from './form/StepTrack';
 import { PreviewConfirm } from './form/PreviewConfirm';
+import { consolidateStorePrice } from '../utilities/formatCurrency';
 
 // ! return here make sure the update is working the price number is all funky
 
@@ -74,10 +75,6 @@ export function EditForm() {
         setData(prev => ({ ...prev, ...fields }));
     }
 
-    // TODO this needs be a global function
-    function consolidateStorePrice({ dollars, cents }: StorePrice): number {
-        return +(dollars + (cents / 100));
-    }
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();

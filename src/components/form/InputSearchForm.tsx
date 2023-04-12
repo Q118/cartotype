@@ -1,4 +1,4 @@
-import { FormWrapper } from "./FormWrapper";
+import { FormWrapper } from "../../utilities/FormWrapper";
 // import { ResultItem } from '../../types';
 import { useTheme } from "../../context/ThemeContext";
 

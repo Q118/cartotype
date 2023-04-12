@@ -1,6 +1,7 @@
 import { StoreItem } from "../StoreItem";
 // import { FormWrapper } from "./FormWrapper";
 import { ResultItem, StorePrice } from '../../types';
+import { consolidateStorePrice } from "../../utilities/formatCurrency";
 
 
 type PreviewConfirmData = {
@@ -19,11 +20,6 @@ export function PreviewConfirm({
     price,
     updateFields,
 }: PreviewConfirmProps) {
-
-    // TODO make this a global helper
-    function consolidateStorePrice({ dollars, cents }: StorePrice): number {
-        return +(dollars + (cents / 100));
-    }
 
     return (
         <>
