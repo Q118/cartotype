@@ -9,7 +9,7 @@
     {
       "id": "0002",
       "name": "Computer",
-      "price": 1199.2,
+      "price": 1199.23,
       "imgUrl": "/imgs/computer.jpg"
     },
     {
@@ -77,6 +77,12 @@
       "name": "Teeth",
       "price": 5.15,
       "imgUrl": "https://images.unsplash.com/photo-1615592602923-9fb437226763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODEzMzA2MDQ&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "c0714047-9029-4767-81c7-c3ad137e8b1c",
+      "name": "Pinneapple",
+      "price": 4.2,
+      "imgUrl": "https://images.unsplash.com/photo-1470347630276-b592bce24d96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODEzMzIxNjA&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ]
 }

@@ -30,7 +30,7 @@ export function InputSearchForm({
                 type="text"
                 value={inputSearch}
                 id={`input-${currentTheme}`}
-                // !! tthis
+                autoComplete="off"
                 onChange={e => updateFields({ inputSearch: e.target.value })}
             />
         </FormWrapper>

@@ -7,7 +7,7 @@
  */
 import { useState } from 'react';
 import { FormApp } from "../components/form/FormApp";
-import { EditForm } from "../components/EditForm";
+import { EditForm } from "../components/form/EditForm";
 import { useTheme } from "../context/ThemeContext";
 import { Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
 

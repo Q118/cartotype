@@ -8,6 +8,7 @@ type PreviewConfirmData = {
     selectedItem: ResultItem | null;
     storeTitle: string;
     price: StorePrice;
+    editMode?: boolean;
 };
 
 type PreviewConfirmProps = PreviewConfirmData & {
@@ -19,12 +20,13 @@ export function PreviewConfirm({
     storeTitle,
     price,
     updateFields,
+    editMode = false,
 }: PreviewConfirmProps) {
 
     return (
         <>
             <div style={{ padding: '10px' }}>
-                <h2>Preview Your Updated Item</h2>
+                <h2>Preview Your {editMode ? "Updated" : "New"} Item</h2>
             </div>
             <br />
             <StoreItem
@@ -35,6 +37,8 @@ export function PreviewConfirm({
                 imgUrl={selectedItem?.imgUrl || ''}
                 isPreview={true}
             />
+            <br />
+            <p>If you're happy with everything, hit <i>finish</i></p>
         </>
     )
 }

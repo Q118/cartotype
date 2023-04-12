@@ -62,12 +62,13 @@ export function SelectItem({
                         height="200px"
                         style={{ objectFit: 'cover' }}
                     />
+                    {/* // TODO: persist the displayNames in to the database SO THAT we can use the crediting when in Edit Mode also! */}
                     {!editMode && (
                         <span className={`credit-text credit-text-${currentTheme}`}>
                             Photo by&nbsp;
                             <a href={CREDITOR_URL(creditorDisplayName)} target="_blank" rel="noreferrer">
                                 {creditorDisplayName}
-                            </a> on
+                            </a> on&nbsp;
                             <a href={UNSPLASH_URL} target="_blank" rel="noreferrer">
                                 Unsplash
                             </a>

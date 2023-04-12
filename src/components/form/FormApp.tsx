@@ -15,7 +15,7 @@ import { ResultItem, StorePrice } from '../../types';
 import { StepTrack } from './StepTrack';
 // import { addToStore } from '../../utilities/store';
 import { addStoreItem } from '../../api/dataStore';
-
+import { PreviewConfirm } from './PreviewConfirm';
 
 // // TODO: put all the useQuery stuff into its own hooks file
 
@@ -74,6 +74,10 @@ export function FormApp() {
             updateFields={updateFields}
         />,
         <DetailForm
+            {...data}
+            updateFields={updateFields}
+        />,
+        <PreviewConfirm
             {...data}
             updateFields={updateFields}
         />,

@@ -2,17 +2,17 @@
 // it will allow user to update/delete items in the db
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMultistepForm } from '../hooks/useMultistepForm';
-import { updateStoreItem, getStoreItems } from '../api/dataStore';
-import { ResultItem, StorePrice } from '../types';
-import { useTheme } from '../context/ThemeContext';
+import { useMultistepForm } from '../../hooks/useMultistepForm';
+import { updateStoreItem, getStoreItems } from '../../api/dataStore';
+import { ResultItem, StorePrice } from '../../types';
+import { useTheme } from '../../context/ThemeContext';
 import Container from 'react-bootstrap/Container';
 import { useQuery } from '@tanstack/react-query';
-import { SelectForm } from './form/SelectForm';
-import { DetailForm } from './form/DetailForm';
-import { StepTrack } from './form/StepTrack';
-import { PreviewConfirm } from './form/PreviewConfirm';
-import { consolidateStorePrice } from '../utilities/formatCurrency';
+import { SelectForm } from './SelectForm';
+import { DetailForm } from './DetailForm';
+import { StepTrack } from './StepTrack';
+import { PreviewConfirm } from './PreviewConfirm';
+import { consolidateStorePrice } from '../../utilities/formatCurrency';
 
 // ! return here make sure the update is working the price number is all funky
 
@@ -68,6 +68,7 @@ export function EditForm() {
         <PreviewConfirm
             {...data}
             updateFields={updateFields}
+            editMode={true}
         />,
     ]);
     function updateFields(fields: Partial<EditFormData>) {
