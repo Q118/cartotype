@@ -13,13 +13,14 @@ import { ThemeProvider } from './context/ThemeContext';
 import { ShoppingCart } from './components/ShoppingCart';
 import { NotificationToast } from './components/NotificationToast';
 
+// import TimeAgo from './components/Demo';
 
 const queryClient = new QueryClient();
 
 
 function App() {
     // const [count, setCount] = useState(0)
-
+    // const timestamp: number = Date.now() - 5000;
     return (
         <QueryClientProvider client={queryClient}>
             <ThemeProvider>
@@ -34,6 +35,7 @@ function App() {
                             <Route path="/notes" element={<Notes />} />
                         </Routes>
                         <ShoppingCart />
+                        {/* <TimeAgo timestamp={timestamp} /> */}
                     </Container>
                 </ShoppingCartProvider>
             </ThemeProvider>
