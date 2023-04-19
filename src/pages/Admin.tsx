@@ -6,7 +6,7 @@
  * edit items in the database store
  */
 import { useState } from 'react';
-import { FormApp } from "../components/form/FormApp";
+import { FormApp } from "../components/form/AddForm";
 import { EditForm } from "../components/form/EditForm";
 import { useTheme } from "../context/ThemeContext";
 import { Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';

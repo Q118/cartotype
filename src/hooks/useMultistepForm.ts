@@ -1,9 +1,8 @@
 import { ReactElement, useState } from "react";
-
-
+import { useShoppingCart } from "../context/ShoppingCartContext";
 
 export function useMultistepForm(steps: ReactElement[]) {
-
+    const { notificationState, setNotificationState } = useShoppingCart();
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     // console.log('currentStepIndex', currentStepIndex); // debug
 
@@ -25,6 +24,10 @@ export function useMultistepForm(steps: ReactElement[]) {
         setCurrentStepIndex(index);
     }
 
+    function notify(message: string) {
+        setNotificationState({ message, show: true });
+    }
+
 
 
     return {
@@ -36,5 +39,6 @@ export function useMultistepForm(steps: ReactElement[]) {
         goTo,
         next,
         back,
+        notify
     };
 }

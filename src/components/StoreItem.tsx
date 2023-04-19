@@ -4,7 +4,6 @@ import { formatCurrency } from '../utilities/formatCurrency';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 import { useTheme } from '../context/ThemeContext';
 
-
 const TITLE_CLASSES: string = 'd-flex justify-content-between align-items-baseline mb-4';
 const INNER_BTN_CLASSES: string = 'd-flex align-items-center flex-column';
 const BTN_WRAPPER_CLASSES: string = 'd-flex align-items-center justify-content-center';
@@ -12,7 +11,7 @@ const BTN_WRAPPER_CLASSES: string = 'd-flex align-items-center justify-content-c
 
 type StoreItemProps = {
     id: string;
-    name?: string;
+    name: string;
     price: number;
     imgUrl: string;
     isPreview: boolean;
@@ -23,7 +22,7 @@ export function StoreItem({ id, name, price, imgUrl, isPreview = false }: StoreI
         getItemQuantity,
         increaseCartQuantity,
         decreaseCartQuantity,
-        removeFromCart
+        removeFromCart,
     } = useShoppingCart();
     const { currentTheme } = useTheme();
 
@@ -56,10 +55,10 @@ export function StoreItem({ id, name, price, imgUrl, isPreview = false }: StoreI
                         <span className='fs-2'>{name}</span>
                         <span className='ms-2 h6'>{formatCurrency(price)}</span>
                     </Card.Title>
-                    {/* mt-auto to fill all aviailable  space */}
+                    {/* // * mt-auto to fill all aviailable space */}
                     <div className='mt-auto'>
                         {quantity === 0 ? (
-                            <Button className='w-100' onClick={() => increaseCartQuantity(id)} disabled={isPreview}>
+                            <Button className='w-100' onClick={() => increaseCartQuantity(id, true, name)} disabled={isPreview}>
                                 + Add To Cart
                             </Button>
                         ) : (
@@ -71,7 +70,7 @@ export function StoreItem({ id, name, price, imgUrl, isPreview = false }: StoreI
                                     </div>
                                     <Button onClick={() => increaseCartQuantity(id)}>+</Button>
                                 </div>
-                                <Button variant="danger" size='sm' onClick={() => removeFromCart(id)}>
+                                <Button variant="danger" size='sm' onClick={() => removeFromCart(id, name)}>
                                     Remove
                                 </Button>
                             </div>

@@ -51,6 +51,7 @@ export function EditForm() {
         isLastStep,
         next,
         back,
+        notify
     } = useMultistepForm([
         <SelectForm
             {...data}
@@ -72,6 +73,23 @@ export function EditForm() {
         setData(prev => ({ ...prev, ...fields }));
     }
 
+    // TODO make this a global helper.
+    function handleLastStep() {
+        updateStoreItem({
+            id: data.selectedItem?.id || '',
+            name: data.storeTitle,
+            // price: +`${data.price.dollars}.${data.price.cents}`,
+            price: consolidateStorePrice(data.price),
+            imgUrl: data.selectedItem?.imgUrl || '',
+        }).then(() => {
+            navigate('/store');
+            notify(`Successfully updated ${data.storeTitle} in the store`);
+        }).catch((err) => {
+            notify(`something went wrong: ${err}`);
+            return;
+        })
+    }
+
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
@@ -85,19 +103,7 @@ export function EditForm() {
             return next();
         }
         if (!isLastStep) return next();
-        if (isLastStep) {
-            updateStoreItem({
-                id: data.selectedItem?.id || '',
-                name: data.storeTitle,
-                // price: +`${data.price.dollars}.${data.price.cents}`,
-                price: consolidateStorePrice(data.price),
-                imgUrl: data.selectedItem?.imgUrl || '',
-            }).then(() => {
-                navigate('/store');
-            }).catch((err) => {
-                alert(`something went wrong: ${err}`);
-            })
-        }
+        if (isLastStep) handleLastStep();
     }
 
 

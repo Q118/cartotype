@@ -63,7 +63,7 @@
     {
       "id": "96f0b358-ae38-43f4-9295-59be9c4a91a3",
       "name": "Gnome",
-      "price": 18.65,
+      "price": 18.75,
       "imgUrl": "https://images.unsplash.com/photo-1512209840695-c9b154d2a2aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTQ4OTQ&ixlib=rb-4.0.3&q=80&w=1080"
     },
     {
@@ -83,6 +83,12 @@
       "name": "Pinneapple",
       "price": 4.2,
       "imgUrl": "https://images.unsplash.com/photo-1470347630276-b592bce24d96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODEzMzIxNjA&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "49fb1238-e7fd-4d5e-af91-737b6344aff0",
+      "name": "Pillow",
+      "price": 5.6,
+      "imgUrl": "https://images.unsplash.com/photo-1583354608715-177553a4035e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODE5NDM2OTU&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ]
 }

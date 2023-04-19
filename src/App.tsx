@@ -11,6 +11,7 @@ import { Admin } from './pages/Admin';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { ShoppingCart } from './components/ShoppingCart';
+import { NotificationToast } from './components/NotificationToast';
 
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ function App() {
                 <ShoppingCartProvider>
                     <Container className="mb-4">
                         <Navbar />
+                        <NotificationToast />
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/store" element={<Store />} />

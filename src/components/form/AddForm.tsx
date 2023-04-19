@@ -55,6 +55,7 @@ export function FormApp() {
         isLastStep,
         next,
         back,
+        notify
     } = useMultistepForm([
         <InputSearchForm {...data} updateFields={updateFields} />,
         <SelectForm {...data} isDataLoading={isDataLoading}
@@ -71,6 +72,21 @@ export function FormApp() {
         setData(prev => ({ ...prev, ...fields }));
     }
 
+    function handleLastStep() {
+        addStoreItem({
+            id: uuidv4(),
+            name: data.storeTitle,
+            price: +`${data.price.dollars}.${data.price.cents}`,
+            imgUrl: data.selectedItem?.imgUrl || '',
+        }).then(() => {
+            navigate('/store');
+            notify(`Successfully added ${data.storeTitle} to the store!`);
+        }).catch((err) => {
+            notify(`something went wrong: ${err}`);
+            return;
+        })
+    };
+
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         if (isFirstStep) { // then its the search one
@@ -81,27 +97,14 @@ export function FormApp() {
         if (!isLastStep) {
             if (!isFirstStep) { // its the second step (at least in this case)
                 if (data.selectedItem === null) {
-                    alert('select an item to continue');
+                    // alert('select an item to continue');
+                    notify('Please select an item to continue.');
                     return;
                 }
             }
-            // any other step in between the first and last
-            return next();
+            return next();// any other step in between the first and last
         }
-        if (isLastStep) {
-            addStoreItem({
-                id: uuidv4(),
-                name: data.storeTitle,
-                price: +`${data.price.dollars}.${data.price.cents}`,
-                imgUrl: data.selectedItem?.imgUrl || '',
-            }).then(() => {
-                navigate('/store');
-                // TODO naviagate themn to like a confirmation page/success page>..
-                // * send it like ... const { state } = useLocation();
-            }).catch((err) => {
-                alert(`something went wrong: ${err}`)
-            })
-        }
+        if (isLastStep) return handleLastStep();
     }
 
     return (

@@ -25,6 +25,7 @@ export function StepTrack({
 
     const BTN_STYLE = {
         width: "3rem",
+        minWidth: 'fit-content',
         height: "3rem",
         padding: "0.3rem",
     };

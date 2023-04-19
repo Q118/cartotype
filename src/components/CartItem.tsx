@@ -49,7 +49,7 @@ export function CartItem({ id, quantity }: CartItemProps) {
             <div>
                 {formatCurrency(item.price * quantity)}
             </div>
-            <Button variant="outline-danger" size="sm" onClick={() => removeFromCart(id)}>
+            <Button variant="outline-danger" size="sm" onClick={() => removeFromCart(id, item.name)}>
                 &times;
             </Button>
         </Stack>

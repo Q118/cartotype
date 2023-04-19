@@ -13,9 +13,12 @@ the notes are all about the different products and there will then be an option 
     - like the scroll event triggers more querying
 
     
-<!-- TODO have a flash notification message thing at top corner to alert users of things happening but not blocking the ui -->
-
-
+<!-- // TODO have a flash notification message thing at top corner to alert users of things happening but not blocking the ui 
+// the items getting removed from cart
+// added to cart?
+// admin items added to store
+// admin item updated
+-->
 - the final details part of form Steps: 
     <!-- // have that card be more of a thumbnail size AND  -->
     <!-- // HAVE that add button but disabled -->
