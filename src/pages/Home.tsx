@@ -33,9 +33,13 @@ function Home() {
                 <p>Vist the <Link className={`style-link link-${currentTheme}`} to="/store">store</Link> to buy items.</p>
                 <p>Visit the <Link to="/admin" className={`style-link link-${currentTheme}`}>admin</Link> page to add or edit items in your vendor shop.</p>
                 <p>And visit the <Link to="/notes" className={`style-link link-${currentTheme}`}>notes</Link> page to research the store products. There you can add your own notes to the community research pool.</p>
-                <span style={ h5_spanStyle}>
-                    <small>- notes are markdown supported text that review product information <br />
-                        - you can also view the notes per product directly from the store. Look for the <GiStabbedNote size={35} /> on a store item.</small>
+                <span style={{ ...h5_spanStyle, justifyContent: 'center' }}>
+                    <small>
+                        <li>notes are markdown supported text that review product information</li>
+                        <li>
+                            you can also view the notes per product directly from the store. Look for the <GiStabbedNote size={35} /> on a store item.
+                        </li>
+                    </small>
                 </span>
             </div>
         </>
