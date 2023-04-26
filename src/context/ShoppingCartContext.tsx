@@ -1,7 +1,10 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { StoreItem } from '../types';
+// import useInterval from 'beautiful-react-hooks/useInterval';
 
+
+// !! FIX THE TOAST CRAP
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
@@ -12,10 +15,11 @@ type CartItem = {
     quantity: number;
 };
 
-type NotificationToast = {
+export type NotificationToast = {
     show: boolean;
     // setShow: (show: boolean) => void;
     message: string;
+    id: string;
     // variant: string;
 };
 
@@ -33,8 +37,10 @@ type ShoppingCartContext = {
     globalStoreItems: any;
     setGlobalStoreItems: any;
     /** Notification Toasts for alerting user of completion or not of tasks.. i.e item removed from cart, item added, item saved successfully and so on  */
-    notificationState: NotificationToast;
-    setNotificationState: (notificationState: NotificationToast) => void;
+    notificationToasts: NotificationToast[];
+    setNotificationToasts: (notificationToasts: NotificationToast[]) => void;
+    addNotificationToast: (message: string) => void;
+    removeNotificationToast: (id: string) => void;
 };
 
 // make it contain the values of the type this way
@@ -55,11 +61,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     const [globalStoreItems, setGlobalStoreItems] = useState<StoreItem[]>([]);
 
-    const [notificationState, setNotificationState] = useState<NotificationToast>({
-        show: false,
-        // setShow: (show: boolean) => setNotificationState({ ...notificationState, show }),
-        message: '',
-    });
+    const [notificationToasts, setNotificationToasts] = useState<NotificationToast[]>([{ show: false, message: '', id: '' }]);
+
+
+    useEffect(() => {
+        console.log('notificationToasts', notificationToasts)
+    }, [notificationToasts])
 
     // this calculates the total quantity of items in the cart
     const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
@@ -67,13 +74,25 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const openCart = () => setIsOpen(true);
     const closeCart = () => setIsOpen(false);
 
+    function addNotificationToast(message: string) {
+        const newToast = { show: true, message, id: notificationToasts.length + '' };
+        setNotificationToasts((notificationToasts) => {
+            return [newToast, ...notificationToasts];
+        }) // ID
+    }
+
+    function removeNotificationToast(id: string) {
+        setNotificationToasts((notificationToasts) => {
+            return notificationToasts.filter((toast) => toast.id !== id);
+        })
+    };
 
     function getItemQuantity(id: string) {
         // if the find, return the quantity, otherwise return 0
         return cartItems.find((item) => item.id === id)?.quantity || 0;
     }
     function increaseCartQuantity(id: string, firstTime: boolean = false, item: string = '') {
-        if (firstTime) setNotificationState({ show: true, message: `Item: ${item} added to cart!` });
+        if (firstTime) addNotificationToast(`Item: ${item} added to cart!`);
         setCartItems((currentItems) => {
             if (currentItems.find((item) => item.id === id) == null) {
                 return [...currentItems, { id, quantity: 1 }];
@@ -99,8 +118,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             }
         })
     }
-    function removeFromCart(id: string, item: string) {
-        setNotificationState({ show: true, message: `Item: ${item} removed from cart.` } as NotificationToast);
+    function removeFromCart(id: string, itemName: string) {
+        // setNotificationToasts([{ ...notificationToasts, show: true, message: `Item: ${itemName} removed from cart.` }]);
+        addNotificationToast(`Item: ${itemName} removed from cart.`);
         setCartItems((currentItems) => {
             return currentItems.filter((item) => item.id !== id);
         })
@@ -119,8 +139,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             isOpen,
             globalStoreItems,
             setGlobalStoreItems,
-            notificationState,
-            setNotificationState,
+            notificationToasts,
+            setNotificationToasts,
+            addNotificationToast,
+            removeNotificationToast
         }}>
             {children}
         </ShoppingCartContext.Provider>

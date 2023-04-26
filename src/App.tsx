@@ -11,7 +11,8 @@ import { Admin } from './pages/Admin';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { ShoppingCart } from './components/ShoppingCart';
-import { NotificationToast } from './components/NotificationToast';
+
+import { NotificationToast, DisplayToast } from './components/NotificationToast';
 
 // import TimeAgo from './components/Demo';
 
@@ -27,7 +28,7 @@ function App() {
                 <ShoppingCartProvider>
                     <Container className="mb-4">
                         <Navbar />
-                        <NotificationToast />
+                        <DisplayToast />
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/store" element={<Store />} />

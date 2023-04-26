@@ -1,5 +1,7 @@
 import { useContext, createContext, ReactNode, useEffect } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { Theme } from 'react-toastify';
+
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
@@ -7,8 +9,8 @@ type ShoppingCartProviderProps = {
 
 
 type ThemeContext = {
-    currentTheme: string;
-    setTheme: (theme: string) => void;
+    currentTheme: Theme;
+    setTheme: (theme: Theme) => void;
     getTheme: () => string;
 };
 
@@ -19,7 +21,7 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: ShoppingCartProviderProps) {
-    const [currentTheme, setCurrentTheme] = useLocalStorage<string>("cart-site-theme", "dark");
+    const [currentTheme, setCurrentTheme] = useLocalStorage<Theme>("cart-site-theme", "dark");
 
     useEffect(() => {
         if (currentTheme === "light") {
@@ -32,7 +34,7 @@ export function ThemeProvider({ children }: ShoppingCartProviderProps) {
 
     const getTheme = () => currentTheme;
 
-    function setTheme(theme: string) {
+    function setTheme(theme: Theme) {
         if (theme === "light") {
             document.documentElement.classList.remove('bg-dark', 'text-light');
             document.body.classList.remove('bg-dark', 'text-light');

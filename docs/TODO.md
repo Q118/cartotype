@@ -19,7 +19,7 @@ the notes are all about the different products and there will then be an option 
 // admin items added to store
 // admin item updated
 -->
-- the final details part of form Steps: 
+<!-- // the final details part of form Steps:  -->
     <!-- // have that card be more of a thumbnail size AND  -->
     <!-- // HAVE that add button but disabled -->
     <!--// TODO add confirmation on last step that the user wants to add the item with those details, to the store -->

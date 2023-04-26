@@ -9,7 +9,7 @@
     {
       "id": "0002",
       "name": "Computer",
-      "price": 1199.23,
+      "price": 1199.25,
       "imgUrl": "/imgs/computer.jpg"
     },
     {
@@ -89,6 +89,12 @@
       "name": "Pillow",
       "price": 5.6,
       "imgUrl": "https://images.unsplash.com/photo-1583354608715-177553a4035e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODE5NDM2OTU&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "dbc96b4b-d09d-46e6-be74-f40ca50282f3",
+      "name": "Ballman",
+      "price": 4,
+      "imgUrl": "https://images.unsplash.com/photo-1552234458-9a63237d6d93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI1MzExMzU&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ]
 }

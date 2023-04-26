@@ -2,7 +2,7 @@ import { ReactElement, useState } from "react";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 
 export function useMultistepForm(steps: ReactElement[]) {
-    const { notificationState, setNotificationState } = useShoppingCart();
+    const { notificationToasts, setNotificationToasts, addNotificationToast } = useShoppingCart();
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     // console.log('currentStepIndex', currentStepIndex); // debug
 
@@ -25,7 +25,8 @@ export function useMultistepForm(steps: ReactElement[]) {
     }
 
     function notify(message: string) {
-        setNotificationState({ message, show: true });
+        // setNotificationToasts([...notificationToasts, { message, show: true }]);
+        addNotificationToast(message);
     }
 
 
