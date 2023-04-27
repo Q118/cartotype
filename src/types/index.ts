@@ -25,3 +25,28 @@ export type StoreItem = {
     price: number | null;
     imgUrl: string;
 };
+
+export type NoteData = {
+    title: string;
+    markdown: string;
+    tags: Tag[];
+}
+
+export type Tag = {
+    id: string;
+    label: string;
+}
+
+export type Note = {
+    id: string;
+} & NoteData;
+
+export type RawNote = {
+    id: string;
+} & RawNotedata;
+
+export type RawNotedata = {
+    title: string;
+    markdown: string;
+    tagIds: string[];
+}
