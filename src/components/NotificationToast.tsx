@@ -19,7 +19,11 @@ export function DisplayToast() {
 
     }, [notificationToasts.length])
 
-    const notify = (msg: string) => toast.success(msg, { theme: currentTheme, icon: <BiCartDownload /> });
+    const notify = (msg: string) => toast.success(msg, { 
+        theme: currentTheme, 
+        icon: <BiCartDownload /> ,
+        position: "top-left",
+    });
 
 
     return (
