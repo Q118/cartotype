@@ -12,7 +12,7 @@ import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { ShoppingCart } from './components/ShoppingCart';
 
-import { NotificationToast, DisplayToast } from './components/NotificationToast';
+import { DisplayToast } from './components/NotificationToast';
 
 // import TimeAgo from './components/Demo';
 

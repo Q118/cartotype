@@ -73,7 +73,6 @@ export function EditForm() {
         setData(prev => ({ ...prev, ...fields }));
     }
 
-    // TODO make this a global helper.
     function handleLastStep() {
         updateStoreItem({
             id: data.selectedItem?.id || '',
@@ -94,7 +93,6 @@ export function EditForm() {
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         if (isFirstStep) { // then its the select one
-            console.log('select one');
             console.log(data)
             if (data.selectedItem === null || !data.selectedItem) {
                 alert('select an item to continue');
@@ -129,6 +127,4 @@ export function EditForm() {
             </form>
         </Container>
     )
-
-
 }
