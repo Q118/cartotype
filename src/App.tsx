@@ -10,7 +10,7 @@ import { Notes } from './pages/Notes';
 import { Admin } from './pages/Admin';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ThemeProvider } from './context/ThemeContext';
-import { NoteContextProvider, useNoteContext } from './context/NoteContext';
+import { NoteContextProvider } from './context/NoteContext';
 import { ShoppingCart } from './components/ShoppingCart';
 import { NewNote } from './components/notes/NewNote';
 import { DisplayToast } from './components/NotificationToast';
@@ -21,36 +21,39 @@ const queryClient = new QueryClient();
 
 
 function App() {
-    // const [count, setCount] = useState(0)
-    // const timestamp: number = Date.now() - 5000;
 
-    const { onCreateNote } = useNoteContext();
+    // const { onCreateNote } = useNoteContext();
 
     return (
         <QueryClientProvider client={queryClient}>
             <ThemeProvider>
                 <ShoppingCartProvider>
-                    <Container className="mb-4">
-                        <Navbar />
-                        <DisplayToast />
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/store" element={<Store />} />
-                            <Route path="/admin" element={<Admin />} />
-                            {/* // TODO display flash toast if get redirected */}
-                            <Route path="/notes" element={<Notes />}>
-                                <Route path="new" element={<NewNote onSubmit={onCreateNote} />} />
-                                <Route path=":noteId">
-                                    <Route index element={<>Show</>} />
-                                    <Route path="edit" element={<>Edit</>} />
+                    <NoteContextProvider>
+                        <Container className="mb-4">
+                            <Navbar />
+                            <DisplayToast />
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/store" element={<Store />} />
+                                <Route path="/admin" element={<Admin />} />
+                                {/* // TODO display flash toast if get redirected */}
+                                <Route path="/notes" element={<Notes />}>
+                                    <Route path="new" element={<NewNote
+                                        // onSubmit={onCreateNote}
+                                        // onAddTag={addTag}
+                                        // availableTags={tags}
+                                    />} />
+                                    <Route path=":noteId">
+                                        <Route index element={<>Show</>} />
+                                        <Route path="edit" element={<>Edit</>} />
+                                    </Route>
                                 </Route>
-                            </Route>
-                            <Route path="*" element={<Navigate to="/" />} />
-                            {/* <Route path="*" element={<>Not Found</>} /> */}
-                        </Routes>
-                        <ShoppingCart />
-                        {/* <TimeAgo timestamp={timestamp} /> */}
-                    </Container>
+                                <Route path="*" element={<Navigate to="/" />} />
+                                {/* <Route path="*" element={<>Not Found</>} /> */}
+                            </Routes>
+                            <ShoppingCart />
+                        </Container>
+                    </NoteContextProvider>
                 </ShoppingCartProvider>
             </ThemeProvider>
             <ReactQueryDevtools />

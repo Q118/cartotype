@@ -7,28 +7,40 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag } from '../../types';
+import { v4 as uuidv4 } from 'uuid';
+import { useNoteContext } from '../../context/NoteContext';
+
 // TODO: customize all the styling to be consistent with rest of app
 
-type NoteFormProps = {
-    onSubmit: (data: NoteData) => void;
-}
+// type NoteFormProps = {
+    // onSubmit: (data: NoteData) => void;
+    // onAddTag: (tag: Tag) => void;
+    // availableTags: Tag[];
+// }
 
+// ! slightly didfferent bc i handle the note loginc iin NOrteCOntexrt so just keep that in mind
 
-export function NoteForm({ onSubmit }: NoteFormProps): JSX.Element {
+export function NoteForm(): JSX.Element {
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const titleRef = useRef<HTMLInputElement>(null);
     const markdownRef = useRef<HTMLTextAreaElement>(null);
 
+    const { 
+        addTag,
+        tags: availableTags,
+        onCreateNote
+    } = useNoteContext();
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-
-        onSubmit({
+        onCreateNote({
             title: titleRef.current!.value,
             markdown: markdownRef.current!.value, // they will never be null bc the refs are set to required so use ! to tell TS that
             tags: []
         })
     }
+
+
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -43,16 +55,24 @@ export function NoteForm({ onSubmit }: NoteFormProps): JSX.Element {
                     <Col>
                         <Form.Group controlId="tags">
                             <Form.Label>Tags</Form.Label>
-                            <CreatableReactSelect 
-                            isMulti 
-                            value={selectedTags.map(tag => {
-                                return { label: tag.label, value: tag.id }
-                            })}
-                            onChange={tags => {
-                                setSelectedTags(tags.map(tag => {
-                                    return { label: tag.label, id: tag.value }
-                                }))
-                            }}
+                            <CreatableReactSelect
+                                onCreateOption={label => {
+                                    const newTag = { id: uuidv4(), label };
+                                    addTag(newTag);
+                                    setSelectedTags(prevTags => [...prevTags, newTag]);
+                                }}
+                                value={selectedTags.map(tag => {
+                                    return { label: tag.label, value: tag.id }
+                                })}
+                                options={availableTags?.map(tag => {
+                                    return { label: tag.label, value: tag.id }
+                                })}
+                                onChange={tags => {
+                                    setSelectedTags(tags.map(tag => {
+                                        return { label: tag.label, id: tag.value }
+                                    }))
+                                }}
+                                isMulti
                             />
                         </Form.Group>
                     </Col>

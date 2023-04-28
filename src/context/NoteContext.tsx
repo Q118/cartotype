@@ -14,6 +14,7 @@ type NoteContext = {
     setTags: (tags: Tag[]) => void;
     notesWithTags: Note[];
     onCreateNote: (data: NoteData) => void;
+    addTag: (tag: Tag) => void;
 };
 
 const NoteContext = createContext({} as NoteContext);
@@ -37,17 +38,22 @@ export function NoteContextProvider({ children }: NoteProviderProps) {
         setNotes(prevNotes => {
             return [...prevNotes, { ...data, id: uuidv4(), tagIds: tags.map(tag => tag.id) }]
         })
-    } 
+    }
+
+    function addTag(tag: Tag) {
+        setTags(prev => [...prev, tag])
+    }
 
     return (
-        <NoteContext.Provider value={{ 
+        <NoteContext.Provider value={{
             notes,
             setNotes,
             tags,
             setTags,
             notesWithTags,
-            onCreateNote
-         }}>
+            onCreateNote,
+            addTag
+        }}>
             {children}
         </NoteContext.Provider>
     );

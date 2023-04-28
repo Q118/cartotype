@@ -1,17 +1,23 @@
 import { NoteForm } from "./NoteForm";
-import { NoteData } from "../../types";
+import { NoteData, Tag } from "../../types";
 
-type NewNoteProps = React.HTMLAttributes<HTMLDivElement> & {
-    onSubmit: (data: NoteData) => void;
-}
+// type NewNoteProps = {
+    // onSubmit: (data: NoteData) => void;
+    // onAddTag: (tag: Tag) => void;
+    // availableTags: Tag[];
+// }
 
-export function NewNote({ onSubmit, ...rest }: NewNoteProps): JSX.Element {
+export function NewNote(): JSX.Element {
 
 
     return (
-        <div {...rest}>
+        <>
             <h1 className="mb-4">New Note</h1>
-            <NoteForm onSubmit={onSubmit} />
-        </div>
+            <NoteForm
+                // onSubmit={onSubmit}
+                // onAddTag={onAddTag}
+                // availableTags={availableTags}
+            />
+        </>
     )
 }
