@@ -44,7 +44,7 @@ export function Notes() {
     }
 
     function updateTag(id: string, label: string) {
-        setNotes(prevTags => {
+        setTags(prevTags => {
             return prevTags.map(tag => {
                 if (tag.id !== id) return tag;
                 return { ...tag, label }

@@ -15,7 +15,6 @@ type EditTagsModalProps = {
     onUpdateTag: (id: string, label: string) => void;
 }
 
-
 export function EditTagsModal({ availableTags, show, handleClose, onDeleteTag, onUpdateTag }: EditTagsModalProps) {
     return (
         <Modal show={show} onHide={handleClose}>
