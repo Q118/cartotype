@@ -16,12 +16,12 @@ type NoteFormProps = {
     onSubmit: (data: NoteData) => void;
     onAddTag: (tag: Tag) => void;
     availableTags: Tag[];
-}
+} & Partial<NoteData>; // pass in any of the note data as props but make them optional
 
 // ! slightly didfferent bc i handle the note loginc iin NOrteCOntexrt so just keep that in mind
 
-export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps): JSX.Element {
-    const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdown = "", tags = [] }: NoteFormProps): JSX.Element {
+    const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
     const titleRef = useRef<HTMLInputElement>(null);
     const markdownRef = useRef<HTMLTextAreaElement>(null);
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps): 
                     <Col>
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control ref={titleRef} required />
+                            <Form.Control ref={titleRef} required defaultValue={title}/>
                         </Form.Group>
                     </Col>
                     <Col>
@@ -76,7 +76,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps): 
                 </Row>
                 <Form.Group controlId="markdown">
                     <Form.Label>Body</Form.Label>
-                    <Form.Control ref={markdownRef} as="textarea" rows={15} required />
+                    <Form.Control ref={markdownRef} as="textarea" rows={15} required defaultValue={markdown}/>
                 </Form.Group>
                 <Stack direction="horizontal" gap={2} className="justify-content-end">
                     <Button type="submit">Save</Button>

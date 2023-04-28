@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import Container from 'react-bootstrap/Container';
 import { Route, Routes } from 'react-router-dom';
-import { Note, NewNote, NoteList, NoteLayout } from '../components/notes';
+import { Note, NewNote, NoteList, NoteLayout, EditNote } from '../components/notes';
 
 
 export function Notes() {
@@ -28,6 +28,15 @@ export function Notes() {
         setTags(prev => [...prev, tag])
     }
 
+    function onUpdateNote(id: string, { tags, ...data }: NoteData) {
+        setNotes(prevNotes => {
+            return prevNotes.map(note => {
+                if (note.id !== id) return note;
+                return { ...note, ...data, tagIds: tags.map(tag => tag.id) }
+            })
+        })
+    }
+
 
     return (
         <Container className="my-4">
@@ -44,7 +53,11 @@ export function Notes() {
                 />} />
                 <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
                     <Route index element={<Note />} />
-                    <Route path="edit" element={<>Edit</>} />
+                    <Route path="edit" element={<EditNote
+                        onSubmit={onUpdateNote}
+                        onAddTag={addTag}
+                        availableTags={tags}
+                    />} />
                 </Route>
                 {/* <Route path="*" element={<Navigate to="/" />} /> */}
                 <Route path="*" element={<>Not Found</>} />
