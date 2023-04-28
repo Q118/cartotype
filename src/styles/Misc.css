@@ -87,6 +87,7 @@
 
 
 /** Cards */
+
 .store-card-light {
     border: 1px solid black;
     min-width: fit-content;
@@ -94,4 +95,13 @@
 .store-card-dark {
     border: 1px solid white;
     min-width: fit-content;
+}
+.note-card-light {
+    border: 1px solid black;
+    background-color: #ced9decf;
+}
+.note-card-dark {
+    border: 1px solid white;
+    background-color: #6c757d;
+    
 }

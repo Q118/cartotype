@@ -51,6 +51,7 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
                     </Stack>
                 </Col>
             </Row>
+            <hr />
             <Form>
                 <Row className="mb-4">
                     <Col>

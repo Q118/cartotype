@@ -7,6 +7,8 @@ type NewNoteProps = {
     availableTags: Tag[];
 }
 
+
+
 export function NewNote({ onSubmit, onAddTag, availableTags }: NewNoteProps): JSX.Element {
 
 
