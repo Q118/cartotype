@@ -36,13 +36,13 @@ export function Notes() {
 
 
             <Routes>
-                <Route path="/" element={<NoteList availableTags={tags} />} />
+                <Route path="/" element={<NoteList availableTags={tags} notes={notesWithTags} />} />
                 <Route path="/new" element={<NewNote
                     onSubmit={onCreateNote}
                     onAddTag={addTag}
                     availableTags={tags}
                 />} />
-                <Route path="/:note_id">
+                <Route path="/:id">
                     <Route index element={<>Show</>} />
                     <Route path="edit" element={<>Edit</>} />
                 </Route>

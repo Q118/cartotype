@@ -1,0 +1,12 @@
+.card {
+    transition: translate ease-in-out 100 ms, box-shadow ease-in-out 100 ms;
+}
+
+/* ! this is helpful to use in other projects */
+
+.card:hover,
+.card:focus {
+    /* lift note up by 5 px */
+    translate: 0 -5px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
+}

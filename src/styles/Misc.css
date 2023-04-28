@@ -83,18 +83,15 @@
     justify-content: flex-end,
 } */
 
-/*
-#dark-tooltip {
-    background-color: #000000;
-    color: #ffffff;
-}
 
-#light-tooltip {
-    background-color: #ffffff !important;
-    color: #000000;
-}
-*/
 
-/* .card.true-preview {
-    size: 50px;
-} */
+
+/** Cards */
+.store-card-light {
+    border: 1px solid black;
+    min-width: fit-content;
+}
+.store-card-dark {
+    border: 1px solid white;
+    min-width: fit-content;
+}

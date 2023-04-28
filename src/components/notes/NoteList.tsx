@@ -5,17 +5,35 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ReactSelect from 'react-select/creatable';
-import { useState } from 'react';
-import { Tag } from '../../types';
+import { useMemo, useState } from 'react';
+import { Tag, Note } from '../../types';
+// import { Notes } from '../../pages/Notes';
+import {NoteCard } from './NoteCard';
 
 
 type NoteListProps = {
     availableTags: Tag[];
+    notes: Note[];
 }
 
-export function NoteList({ availableTags }: NoteListProps) {
+export function NoteList({ availableTags, notes }: NoteListProps) {
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [title, setTitle] = useState('');
+
+
+    const filteredNotes = useMemo(() => {
+        return notes.filter(note => {
+            return (
+                (title === "" ||
+                note.title.toLowerCase().includes(title.toLowerCase())) &&
+                //* check to make  sure the note has all of the tags being searched for
+                (selectedTags.length === 0 ||
+                    selectedTags.every(tag =>
+                        note.tags.some(noteTag => noteTag.id === tag.id)
+                    ))
+            )
+        })
+    }, [title, selectedTags, notes])
 
     return (
         <>
@@ -39,7 +57,7 @@ export function NoteList({ availableTags }: NoteListProps) {
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" value={title}
-                            onChange={e => setTitle(e.target.value)} />
+                                onChange={e => setTitle(e.target.value)} />
                         </Form.Group>
                     </Col>
                     <Col>
@@ -63,6 +81,14 @@ export function NoteList({ availableTags }: NoteListProps) {
                     </Col>
                 </Row>
             </Form>
+            <Row xs={1} md={2} lg={3} className="g-3">
+                {filteredNotes.map(note => (
+                    <Col key={note.id}>
+                        <NoteCard id={note.id} title={note.title} tags={note.tags} />
+                    </Col>
+                ))}
+
+            </Row>
 
         </>
     )

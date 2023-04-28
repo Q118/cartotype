@@ -50,3 +50,9 @@ export type RawNotedata = {
     markdown: string;
     tagIds: string[];
 }
+
+export type SimplifiedNote = {
+    tags: Tag[];
+    title: string;
+    id: string;
+}

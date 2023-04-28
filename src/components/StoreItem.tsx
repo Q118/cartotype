@@ -36,16 +36,14 @@ export function StoreItem({ id, name, price, imgUrl, isPreview = false }: StoreI
 
     return (
         <>
-            <Card className={`h-100 ${isPreview}-preview`} style={{
-                border: `1px solid ${currentTheme === 'dark' ? '#ccc' : 'black'}`,
-                minWidth: 'fit-content'
-            }}>
+            <Card
+                className={`h-100 ${isPreview}-preview store-card-${currentTheme}`}
+            >
                 <Card.Img
                     variant="top"
                     src={imgUrl}
                     height="200px"
                     style={{ objectFit: 'cover' }}
-                    // title='' TODO
                 />
                 <Card.Body
                     className={`d-flex flex-column ${currentThemeClasses}}`}
