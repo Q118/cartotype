@@ -33,7 +33,6 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdo
             markdown: markdownRef.current!.value, // they will never be null bc the refs are set to required so use ! to tell TS that
             tags: selectedTags
         })
-
         navigate('..');
     }
 
