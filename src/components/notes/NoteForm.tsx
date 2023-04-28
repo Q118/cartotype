@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import CreatableReactSelect from 'react-select/creatable';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
@@ -24,15 +24,17 @@ export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps): 
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const titleRef = useRef<HTMLInputElement>(null);
     const markdownRef = useRef<HTMLTextAreaElement>(null);
-
+    const navigate = useNavigate();
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         onSubmit({
             title: titleRef.current!.value,
             markdown: markdownRef.current!.value, // they will never be null bc the refs are set to required so use ! to tell TS that
-            tags: []
+            tags: selectedTags
         })
+
+        navigate('..');
     }
 
 

@@ -5,6 +5,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import Container from 'react-bootstrap/Container';
 import { Route, Routes, Navigate, Link } from 'react-router-dom';
 import { NewNote } from '../components/notes/NewNote';
+import { NoteList } from '../components/notes/NoteList';
 
 export function Notes() {
     const [notes, setNotes] = useLocalStorage<RawNote[]>('NOTES', []);
@@ -32,23 +33,22 @@ export function Notes() {
         <Container className="my-4">
             <h4>Notes Page</h4>
             <hr />
-            <Link to="new">New Note</Link>
 
 
             <Routes>
-                <Route path="/">
-                    <Route path="new" element={<NewNote
-                        onSubmit={onCreateNote}
-                        onAddTag={addTag}
-                        availableTags={tags}
-                    />} />
-                    <Route path=":note_id">
-                        <Route index element={<>Show</>} />
-                        <Route path="edit" element={<>Edit</>} />
-                    </Route>
-                    <Route path="*" element={<Navigate to="/" />} />
-                    {/* <Route path="*" element={<>Not Found</>} /> */}
+                <Route path="/" element={<NoteList availableTags={tags} />} />
+                <Route path="/new" element={<NewNote
+                    onSubmit={onCreateNote}
+                    onAddTag={addTag}
+                    availableTags={tags}
+                />} />
+                <Route path="/:note_id">
+                    <Route index element={<>Show</>} />
+                    <Route path="edit" element={<>Edit</>} />
                 </Route>
+                {/* <Route path="*" element={<Navigate to="/" />} /> */}
+                <Route path="*" element={<>Not Found</>} />
+                {/* </Route> */}
 
             </Routes>
 
