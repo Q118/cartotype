@@ -7,25 +7,28 @@ import Form from 'react-bootstrap/Form';
 import ReactSelect from 'react-select/creatable';
 import { useMemo, useState } from 'react';
 import { Tag, Note } from '../../types';
-// import { Notes } from '../../pages/Notes';
-import {NoteCard } from './NoteCard';
+
+import { EditTagsModal } from './EditTagsModal';
+import { NoteCard } from './NoteCard';
 
 
 type NoteListProps = {
     availableTags: Tag[];
     notes: Note[];
+    onDeleteTag: (id: string) => void;
+    onUpdateTag: (id: string, label: string) => void;
 }
 
-export function NoteList({ availableTags, notes }: NoteListProps) {
+export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: NoteListProps) {
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [title, setTitle] = useState('');
-
+    const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
 
     const filteredNotes = useMemo(() => {
         return notes.filter(note => {
             return (
                 (title === "" ||
-                note.title.toLowerCase().includes(title.toLowerCase())) &&
+                    note.title.toLowerCase().includes(title.toLowerCase())) &&
                 //* check to make  sure the note has all of the tags being searched for
                 (selectedTags.length === 0 ||
                     selectedTags.every(tag =>
@@ -33,21 +36,21 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
                     ))
             )
         })
-    }, [title, selectedTags, notes])
+    }, [title, selectedTags, notes]);
 
     return (
         <>
             <Row className="align-items-center mb-4">
-                <Col>
-                    <h1>Notes</h1>
-                </Col>
+                <Col><h1>Notes</h1></Col>
                 {/* //* use xs = auto to forcee it smallas possible while fitting */}
                 <Col xs="auto">
                     <Stack gap={2} direction="horizontal">
                         <Link to="new">
                             <Button variant="primary">Create</Button>
                         </Link>
-                        <Button variant="outline-secondary">Edit Tags</Button>
+                        <Button variant="outline-secondary" onClick={() => setEditTagsModalIsOpen(true)}>
+                            Edit Tags
+                        </Button>
                     </Stack>
                 </Col>
             </Row>
@@ -57,7 +60,7 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
                     <Col>
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" value={title}
+                            <Form.Control type="text" value={title} placeholder='Search by title'
                                 onChange={e => setTitle(e.target.value)} />
                         </Form.Group>
                     </Col>
@@ -65,6 +68,7 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
                         <Form.Group controlId="tags">
                             <Form.Label>Tags</Form.Label>
                             <ReactSelect
+                                placeholder='Select tags to filter by'
                                 value={selectedTags.map(tag => {
                                     return { label: tag.label, value: tag.id }
                                 })}
@@ -90,7 +94,13 @@ export function NoteList({ availableTags, notes }: NoteListProps) {
                 ))}
 
             </Row>
-
+            <EditTagsModal
+                show={editTagsModalIsOpen}
+                handleClose={() => setEditTagsModalIsOpen(false)}
+                availableTags={availableTags}
+                onDeleteTag={onDeleteTag}
+                onUpdateTag={onUpdateTag}
+            />
         </>
     )
 }

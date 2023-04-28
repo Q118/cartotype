@@ -43,6 +43,21 @@ export function Notes() {
         })
     }
 
+    function updateTag(id: string, label: string) {
+        setNotes(prevTags => {
+            return prevTags.map(tag => {
+                if (tag.id !== id) return tag;
+                return { ...tag, label }
+            })
+        })
+    }
+
+    function deleteTag(id: string) {
+        setTags(prevTags => {
+            return prevTags.filter(tag => tag.id !== id)
+        })
+    }
+
 
     return (
         <Container className="my-4">
@@ -51,7 +66,12 @@ export function Notes() {
 
 
             <Routes>
-                <Route path="/" element={<NoteList availableTags={tags} notes={notesWithTags} />} />
+                <Route path="/" element={<NoteList
+                    availableTags={tags}
+                    notes={notesWithTags}
+                    onUpdateTag={updateTag}
+                    onDeleteTag={deleteTag}
+                />} />
                 <Route path="/new" element={<NewNote
                     onSubmit={onCreateNote}
                     onAddTag={addTag}
