@@ -1,24 +1,32 @@
 import { useState, useEffect } from 'react';
-
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 interface TimeAgoProps {
     timestamp: number;
 }
 
 
-function TimeAgo({timestamp}: TimeAgoProps): JSX.Element {
-    const [secondsAgo, setSecondsAgo] = useState<number>(Math.floor((Date.now() - timestamp) / 1000))
-    
-    
-    
+function TimeAgo(): JSX.Element {
+    const [secondsAgo, setSecondsAgo] = useState<number>(0)
+
+
+
     useEffect(() => {
-        const intervalId = setInterval(() => {   
-            setSecondsAgo(Math.floor((Date.now() - timestamp) / 1000));
+        const intervalId = setInterval(() => {
+            setSecondsAgo(prevSecondsAgo => prevSecondsAgo + 1);
         }, 1000);
         return () => clearInterval(intervalId);
-    }, [timestamp]);
+    }, []);
 
-    return <div>{secondsAgo} seconds ago</div>;
+    return (
+        <>
+            <div>{secondsAgo} seconds ago</div>
+            <Routes>
+                <Route path="account" element={<>ACCOUNT</>} />
+                <Route path=":id" element={<>ID SHOW</>} />
+            </Routes>
+        </>
+    );
 }
 
 export default TimeAgo;

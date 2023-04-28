@@ -8,32 +8,27 @@ import { Link } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
-import { useNoteContext } from '../../context/NoteContext';
+// import { useNoteContext } from '../../context/NoteContext';
 
 // TODO: customize all the styling to be consistent with rest of app
 
-// type NoteFormProps = {
-    // onSubmit: (data: NoteData) => void;
-    // onAddTag: (tag: Tag) => void;
-    // availableTags: Tag[];
-// }
+type NoteFormProps = {
+    onSubmit: (data: NoteData) => void;
+    onAddTag: (tag: Tag) => void;
+    availableTags: Tag[];
+}
 
 // ! slightly didfferent bc i handle the note loginc iin NOrteCOntexrt so just keep that in mind
 
-export function NoteForm(): JSX.Element {
+export function NoteForm({ onSubmit, onAddTag, availableTags }: NoteFormProps): JSX.Element {
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const titleRef = useRef<HTMLInputElement>(null);
     const markdownRef = useRef<HTMLTextAreaElement>(null);
 
-    const { 
-        addTag,
-        tags: availableTags,
-        onCreateNote
-    } = useNoteContext();
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        onCreateNote({
+        onSubmit({
             title: titleRef.current!.value,
             markdown: markdownRef.current!.value, // they will never be null bc the refs are set to required so use ! to tell TS that
             tags: []
@@ -58,7 +53,7 @@ export function NoteForm(): JSX.Element {
                             <CreatableReactSelect
                                 onCreateOption={label => {
                                     const newTag = { id: uuidv4(), label };
-                                    addTag(newTag);
+                                    onAddTag(newTag);
                                     setSelectedTags(prevTags => [...prevTags, newTag]);
                                 }}
                                 value={selectedTags.map(tag => {
