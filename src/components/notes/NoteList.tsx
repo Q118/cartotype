@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import ReactSelect from 'react-select/creatable';
 import { useMemo, useState } from 'react';
 import { Tag, Note } from '../../types';
-
+import { useTheme } from '../../context/ThemeContext';
 import { EditTagsModal } from './EditTagsModal';
 import { NoteCard } from './NoteCard';
 
@@ -23,7 +23,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [title, setTitle] = useState('');
     const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
-
+    const { currentTheme } = useTheme();
     const filteredNotes = useMemo(() => {
         return notes.filter(note => {
             return (
@@ -68,6 +68,17 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
                         <Form.Group controlId="tags">
                             <Form.Label>Tags</Form.Label>
                             <ReactSelect
+                                theme={(theme) => ({
+                                    ...theme,
+                                    colors: {
+                                        ...theme.colors,
+                                        primary25: currentTheme === 'dark' ? 'indigo' : '#e7d1ff', // item hover in menu
+                                        primary50: currentTheme === 'dark' ? 'darkblue' : 'lightblue', // item click in menu
+                                        neutral0: currentTheme === 'dark' ? '#212529' : '#fff', //input background
+                                        neutral10: currentTheme === 'dark' ? 'darkgreen' : 'lightgreen', // item background
+                                        neutral80: currentTheme === 'dark' ? '#fff' : '#212529', // text color in item
+                                    },
+                                })}
                                 placeholder='Select tags to filter by'
                                 value={selectedTags.map(tag => {
                                     return { label: tag.label, value: tag.id }

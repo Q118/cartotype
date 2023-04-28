@@ -65,10 +65,12 @@
     background-color: #000000;
     color: #ffffff;
 }
+
 #input-light {
     background-color: #ffffff;
     color: #000000;
 }
+
 /* .dark-selectBtn {
     background-color: #000000;
     color: #ffffff !important;
@@ -92,16 +94,29 @@
     border: 1px solid black;
     min-width: fit-content;
 }
+
 .store-card-dark {
     border: 1px solid white;
     min-width: fit-content;
 }
+
 .note-card-light {
     border: 1px solid black;
     background-color: #ced9decf;
 }
+
 .note-card-dark {
     border: 1px solid white;
     background-color: #6c757d;
-    
+
+}
+
+
+
+/**inputs, selects, etc */
+
+input,
+textarea {
+    background-color: inherit !important;
+    color: inherit !important;
 }
