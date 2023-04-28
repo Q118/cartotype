@@ -3,8 +3,8 @@ import { NoteCard } from './NoteCard';
 import { NoteForm } from './NoteForm';
 import { NoteList } from './NoteList';
 import { NoteLayout } from './NoteLayout';
-import {Note } from './Note';
-
+import { Note } from './Note';
+import { EditNote } from './EditNote';
 
 
 
@@ -14,5 +14,6 @@ export {
     NoteForm,
     NoteList,
     NoteLayout,
-    Note
+    Note,
+    EditNote
 }
