@@ -5,7 +5,6 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
 
 
-import { useTheme } from '../../context/ThemeContext';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
@@ -46,7 +45,6 @@ export function FormApp() {
         enabled: false,
     });
 
-    const { currentTheme } = useTheme();
     const {
         steps,
         currentStepIndex,
@@ -108,15 +106,7 @@ export function FormApp() {
     }
 
     return (
-        <Container
-            style={{
-                border: `1px solid ${currentTheme === 'dark' ? 'white' : 'black'}`,
-                borderRadius: '5px',
-                padding: '1rem',
-                position: "relative",
-                maxWidth: "max-content",
-            }}
-        >
+        <Container className="form-container">
             <form onSubmit={handleSubmit}>
                 <StepTrack
                     stepLength={steps.length}

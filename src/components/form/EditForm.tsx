@@ -35,7 +35,6 @@ const INITIAL_DATA: EditFormData = {
 export function EditForm() {
     const [data, setData] = useState(INITIAL_DATA);
     const navigate = useNavigate();
-    const { currentTheme } = useTheme();
 
     const { data: storeItems, isLoading, error, refetch, isFetching }: any = useQuery({
         queryKey: [`get-all-store-items`],
@@ -77,7 +76,6 @@ export function EditForm() {
         updateStoreItem({
             id: data.selectedItem?.id || '',
             name: data.storeTitle,
-            // price: +`${data.price.dollars}.${data.price.cents}`,
             price: consolidateStorePrice(data.price),
             imgUrl: data.selectedItem?.imgUrl || '',
         }).then(() => {
@@ -107,13 +105,7 @@ export function EditForm() {
 
 
     return (
-        <Container style={{
-            border: `1px solid ${currentTheme === 'dark' ? 'white' : 'black'}`,
-            borderRadius: '5px',
-            padding: '1rem',
-            position: "relative",
-            maxWidth: "max-content",
-        }}>
+        <Container className="form-container">
             <form onSubmit={handleSubmit}>
                 <StepTrack
                     stepLength={steps.length}

@@ -4,17 +4,14 @@ import Card from 'react-bootstrap/Card';
 import styles from '../../styles/NoteList.module.css';
 import Stack from "react-bootstrap/esm/Stack";
 import Badge from "react-bootstrap/Badge";
-import { useTheme } from "../../context/ThemeContext";
 
 //* the tags cahn filter the notes
 
 
 export function NoteCard({ id, title, tags }: SimplifiedNote) {
 
-    const { currentTheme } = useTheme();
-
     return (
-        <Card as={Link} to={`${id}`} className={`h-100 text-reset text-decoration-none ${styles.card} note-card-${currentTheme}`} >
+        <Card as={Link} to={`${id}`} className={`h-100 text-reset text-decoration-none ${styles.card} note-card`} >
             <Card.Body>
                 <Stack gap={2} className="align-items-center justify-content-center h-100">
                     <span className="fs-5">{title}</span>
