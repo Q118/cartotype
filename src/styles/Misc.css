@@ -1,3 +1,18 @@
+.bg-dark {
+    --modal-background: #343a40;
+    --modal-text-color: #ffffff;
+    --input-border-color: #ffffff;
+}
+
+
+.bg-light {
+    --modal-background: #ced9de;
+    --modal-text-color: #000000;
+    --input-border-color: #000000;
+}
+
+
+
 #darkCart:hover {
     background-color: #ffffff;
     color: #000000;
@@ -119,4 +134,24 @@ input,
 textarea {
     background-color: inherit !important;
     color: inherit !important;
+}
+
+
+/** Modal */
+.modal-content {
+    background-color: var(--modal-background) !important;
+    color: var(--modal-text-color) !important;
+}
+.modal-content input {
+    border: 1px solid var(--input-border-color);
+}
+.modal-content .btn-close {
+    color: red !important;
+}
+#close-modal-x {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 2rem;
+    color: var(--modal-text-color) !important;
 }

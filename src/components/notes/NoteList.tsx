@@ -1,14 +1,12 @@
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
-import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { SelectableWrapper } from '../../utilities/SelectableWrapper';
-
-import { useMemo, useState } from 'react';
 import { Tag, Note } from '../../types';
-import { useTheme } from '../../context/ThemeContext';
 import { EditTagsModal } from './EditTagsModal';
 import { NoteCard } from './NoteCard';
 
@@ -24,7 +22,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
     const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
     const [title, setTitle] = useState('');
     const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
-    const { currentTheme } = useTheme();
+
     const filteredNotes = useMemo(() => {
         return notes.filter(note => {
             return (

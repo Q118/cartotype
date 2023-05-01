@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag } from '../../types';
-import { v4 as uuidv4 } from 'uuid';
 import { useTheme } from '../../context/ThemeContext';
 import { SelectableWrapper } from '../../utilities/SelectableWrapper';
 

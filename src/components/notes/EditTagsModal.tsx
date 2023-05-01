@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { Tag } from '../../types';
-
+import { useTheme } from '../../context/ThemeContext';
 
 type EditTagsModalProps = {
     show: boolean;
@@ -18,7 +18,7 @@ type EditTagsModalProps = {
 export function EditTagsModal({ availableTags, show, handleClose, onDeleteTag, onUpdateTag }: EditTagsModalProps) {
     return (
         <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>Edit Tags</Modal.Title>
                 <Modal.Body>
                     <Form>
@@ -32,6 +32,7 @@ export function EditTagsModal({ availableTags, show, handleClose, onDeleteTag, o
                                     </Col>
                                     <Col xs="auto">
                                         <Button
+                                            title="Delete Tag"
                                             onClick={() => onDeleteTag(tag.id)}
                                             variant="outline-danger"
                                         >&times;
@@ -42,6 +43,9 @@ export function EditTagsModal({ availableTags, show, handleClose, onDeleteTag, o
                         </Stack>
                     </Form>
                 </Modal.Body>
+                <Button id="close-modal-x" onClick={handleClose}>
+                    &times;
+                </Button>
             </Modal.Header>
         </Modal>
     )

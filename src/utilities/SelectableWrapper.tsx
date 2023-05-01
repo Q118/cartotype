@@ -68,8 +68,7 @@ export function SelectableWrapper({
                     onAddTag(newTag);
                     setSelectedTags((prevTags: any) => [...prevTags, newTag]);
                 }}
-                // use to remove option to 'create new tag'
-                isValidNewOption={() => createOptionEnabled}
+                isValidNewOption={() => createOptionEnabled} // use to remove option to 'create new tag'
             />
         </>
     )
