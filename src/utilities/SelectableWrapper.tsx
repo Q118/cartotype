@@ -46,6 +46,10 @@ export function SelectableWrapper({
         },
     })
 
+    // console.log('selectedTags', selectedTags);
+    // console.log('availableTags', availableTags);
+
+
 
     return (
         <>
@@ -66,20 +70,14 @@ export function SelectableWrapper({
                 }}
                 onCreateOption={label => {
                     if (!createOptionEnabled) return undefined;
-                    if (label.length === 0) return undefined;
+                    if (!label || label.length == 0) return undefined;
                     const newTag = { id: uuidv4(), label };
                     onAddTag(newTag);
                     setSelectedTags((prevTags: any) => [...prevTags, newTag]);
                 }}
-                isValidNewOption={() => createOptionEnabled} // use to remove option to 'create new tag' like for NoteList...
+                // use to remove option to 'create new tag' like for NoteList...
+                isValidNewOption={(inputValue: string) => createOptionEnabled && inputValue.length > 0} 
             />
         </>
     )
 }
-
-/*
-/**
-     * Determines whether the "create new ..." option should be displayed based on
-     * the current input value, select value and options array.
-isValidNewOption?: (inputValue: string, value: Options<Option>, options: OptionsOrGroups<Option, Group>, accessors: Accessors<Option>) => boolean;
-*/

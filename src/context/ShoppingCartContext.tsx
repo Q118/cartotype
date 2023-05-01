@@ -1,8 +1,7 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { StoreItem } from '../types';
+import { StoreItem, StoreItemTag } from '../types';
 import { QueryObserverResult } from '@tanstack/react-query';
-
 import { useQuery } from '@tanstack/react-query';
 import { getStoreItems } from '../api/dataStore';
 
@@ -37,6 +36,8 @@ type ShoppingCartContext = {
     isOpen: boolean;
     globalStoreItems: any;
     setGlobalStoreItems: any;
+    globalStoreItemTags: StoreItemTag[];
+    setGlobalStoreItemTags: (storeItemTags: StoreItemTag[]) => void;
     /** Notification Toasts for alerting user of completion or not of tasks.. i.e item removed from cart, item added, item saved successfully and so on  */
     notificationToasts: NotificationToast[];
     setNotificationToasts: (notificationToasts: NotificationToast[]) => void;
@@ -66,6 +67,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     );
     const [globalStoreItems, setGlobalStoreItems] = useState<StoreItem[]>([]);
     const [notificationToasts, setNotificationToasts] = useState<NotificationToast[]>([{ show: false, message: '', id: '' }]);
+    // const [globalStoreItemTags, setGlobalStoreItemTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
+    const [globalStoreItemTags, setGlobalStoreItemTags] = useState<StoreItemTag[]>([]);
+
+
 
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
         queryKey: [`get-all-store-items`],
@@ -76,6 +81,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     useEffect(() => {
         if (storeItems?.length > 0) {
             setGlobalStoreItems(storeItems);
+            setGlobalStoreItemTags(storeItems.map((item: StoreItem) => {
+                return { id: item.id, label: item.name }
+            }));
         }
     }, [JSON.stringify(storeItems)]);
     const isStoreItemsLoading = isLoading || isFetching;
@@ -157,7 +165,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             removeNotificationToast,
             isStoreItemsLoading,
             storeItemsError,
-            refreshStoreItems
+            refreshStoreItems,
+            globalStoreItemTags,
+            setGlobalStoreItemTags,
         }}>
             {children}
         </ShoppingCartContext.Provider>

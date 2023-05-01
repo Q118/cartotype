@@ -4,8 +4,6 @@ import Container from 'react-bootstrap/Container';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
-
-
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
@@ -47,7 +45,7 @@ export function FormApp() {
         enabled: false,
     });
     
-    const { globalStoreItems, refreshStoreItems, isStoreItemsLoading } = useShoppingCart();
+    const { refreshStoreItems } = useShoppingCart();
 
     const {
         steps,
@@ -81,7 +79,7 @@ export function FormApp() {
             price: +`${data.price.dollars}.${data.price.cents}`,
             imgUrl: data.selectedItem?.imgUrl || '',
         }).then(() => {
-            refreshStoreItems();
+            refreshStoreItems(); // update the global store items.. aka trigger a refetch
             navigate('/store');
             notify(`Successfully added ${data.storeTitle} to the store!`);
         }).catch((err) => {

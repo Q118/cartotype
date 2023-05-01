@@ -37,7 +37,7 @@ export type NoteData = {
     title: string;
     markdown: string;
     tags: Tag[];
-    storeItems?: StoreItemTag[];
+    storeItemTags?: StoreItemTag[];
 }
 
 export type Tag = {

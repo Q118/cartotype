@@ -3,7 +3,10 @@
 <!-- TODO: make the whpole app be agnostic.... like a total agnostic that could just be skeleton and any kind of data thats realted to eachother could e pluugged into it... or really just great skeleton to use for any starting point wiht a new React App -->
 
 !!!!!!!!!!!!!!!!!!!!!!!
-<!-- first prob need to like have the notes go to database instead of local stopreage.. but really just using ids to relate so may be okay for now... -->
+<!--TODO first prob need to like have the notes go to database instead of local stopreage.. but really just using ids to relate so may be okay for now... -->
+
+*****NOW*****
+<!-- * okay just got the storeItem taGS TO persist.... thats it.. keep going and get themn hooked up all the way to the store items -->
 <!-- ! Work on this next.. and start the linkedIn course yaaa
 ? THEN.. start to hook it up to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
 *  the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others] ... its like a portal...

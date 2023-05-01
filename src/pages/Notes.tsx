@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { NoteData, RawNote, RawNotedata, Tag } from '../types';
+import { NoteData, RawNote, StoreItemTag, Tag } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import Container from 'react-bootstrap/Container';
@@ -10,7 +10,7 @@ import { Note, NewNote, NoteList, NoteLayout, EditNote } from '../components/not
 export function Notes() {
     const [notes, setNotes] = useLocalStorage<RawNote[]>('NOTES', []);
     const [tags, setTags] = useLocalStorage<Tag[]>('TAGS', []);
-
+    // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
 
     const notesWithTags = useMemo(() => {
         return notes.map(note => {
@@ -25,7 +25,8 @@ export function Notes() {
     }
 
     function addTag(tag: Tag) {
-        setTags(prev => [...prev, tag])
+        setTags(prev => [...prev, tag]);
+        // setStoreTags(prev => [...prev, tag])
     }
 
     function onUpdateNote(id: string, { tags, ...data }: NoteData) {

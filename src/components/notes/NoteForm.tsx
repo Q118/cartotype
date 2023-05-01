@@ -14,19 +14,20 @@ type NoteFormProps = {
     onSubmit: (data: NoteData) => void;
     onAddTag: (tag: Tag) => void;
     availableTags: Tag[];
-    // storeItems: any[];
+    storeTags?: StoreItemTag[];
 } & Partial<NoteData>; // pass in any of the note data as props but make them optional
 
 
-export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdown = "", tags = [] }: NoteFormProps): JSX.Element {
+export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdown = "", tags = [], storeTags = [] }: NoteFormProps): JSX.Element {
+    const { globalStoreItemTags } = useShoppingCart();
     const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
-    const [selectedStoreItems, setSelectedStoreItems] = useState<StoreItemTag[]>([]);
+    const [selectedStoreItemTags, setSelectedStoreItemTags] = useState<StoreItemTag[]>(storeTags);
+
 
     const titleRef = useRef<HTMLInputElement>(null);
     const markdownRef = useRef<HTMLTextAreaElement>(null);
     const navigate = useNavigate();
 
-    const { globalStoreItems } = useShoppingCart();
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
@@ -34,15 +35,11 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdo
             title: titleRef.current!.value,
             markdown: markdownRef.current!.value, // they will never be null bc the refs are set to required so use ! to tell TS that
             tags: selectedTags,
-            storeItems: selectedStoreItems
+            storeItemTags: selectedStoreItemTags
         })
         navigate('..');
     }
-    console.log(globalStoreItems)
-    const storeItemTags: StoreItemTag[] = globalStoreItems.map((item: StoreItem) => {
-        return { value: item.id, label: item.name }
-    });
-
+    
 
 
     return (
@@ -74,12 +71,9 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdo
                             <Form.Label>Store Items</Form.Label>
                             <SelectableWrapper
                                 createOptionEnabled={false}
-
-                                availableTags={storeItemTags}
-                                selectedTags={selectedStoreItems}
-                                setSelectedTags={setSelectedStoreItems}
-
-                            // onAddTag={onAddTag}
+                                availableTags={globalStoreItemTags}
+                                selectedTags={selectedStoreItemTags}
+                                setSelectedTags={setSelectedStoreItemTags}
                             />
                         </Form.Group>
                     </Col>
