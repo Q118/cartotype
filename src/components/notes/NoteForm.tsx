@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag } from '../../types';
-import { useTheme } from '../../context/ThemeContext';
 import { SelectableWrapper } from '../../utilities/SelectableWrapper';
 
 
@@ -25,7 +24,6 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdo
     const titleRef = useRef<HTMLInputElement>(null);
     const markdownRef = useRef<HTMLTextAreaElement>(null);
     const navigate = useNavigate();
-    const { currentTheme } = useTheme();
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();

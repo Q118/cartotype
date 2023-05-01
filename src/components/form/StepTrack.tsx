@@ -1,5 +1,4 @@
 import { Button } from "react-bootstrap";
-import { useTheme } from "../../context/ThemeContext";
 
 type StepTrackProps = {
     editMode?: boolean;
@@ -21,7 +20,6 @@ export function StepTrack({
     back,
 }: StepTrackProps) {
 
-    const { currentTheme } = useTheme();
 
     const BTN_STYLE = {
         width: "3rem",
@@ -34,9 +32,8 @@ export function StepTrack({
         return (
             <Button
                 type={type}
-                id={currentTheme === 'dark' ? 'darkCart' : 'lightCart'}
                 variant="outline-light"
-                className="rounded-circle"
+                className="rounded-circle cart-button"
                 onClick={type === "button" ? back : () => { }}
                 style={BTN_STYLE}>
                 {type === "button" ? "Back" : isLastStep ? "Finish" : (isFirstStep && !editMode) ? "Search" : "Next"}

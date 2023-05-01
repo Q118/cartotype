@@ -101,16 +101,13 @@ nav .cart-button {
     border-radius: 5px !important;
 }
 
-.link-dark:hover {
-    background-color: #ffffff;
-    color: #000000;
-    border-color: #000000;
-}
 
-.link-light:hover {
-    background-color: #000000;
-    color: #ffffff;
-    border-color: darkgray;
+/** links */
+.style-link:hover {
+    /* opposite everything */
+    color: var(--btn-background) !important;
+    background-color: var(--btn-text) !important;
+    border: 1px solid var(--btn-background) !important;
 }
 
 
@@ -125,36 +122,18 @@ nav .cart-button {
     color: #000000;
 }
 
-/* .dark-selectBtn {
-    background-color: #000000;
-    color: #ffffff !important;
-    border: 1px solid #ffffff;
-} */
-
-/* ! this will get our buttons to the far right side
-.stick-right {
-    margin-top: 1rem;
-    display: flex;
-    gap: .5rem;
-    justify-content: flex-end,
-} */
-
 
 
 
 /** Cards */
-
 .store-card-light {
     border: 1px solid black;
     min-width: fit-content;
 }
-
 .store-card-dark {
     border: 1px solid white;
     min-width: fit-content;
 }
-
-
 .note-card {
     border: 1px solid var(--border-color);
     background-color: var(--nav-background);
@@ -164,7 +143,6 @@ nav .cart-button {
 
 
 /**inputs, selects, etc */
-
 input,
 textarea {
     background-color: inherit !important;
@@ -177,15 +155,12 @@ textarea {
     background-color: var(--modal-background) !important;
     color: var(--modal-text-color) !important;
 }
-
 .modal-content input {
     border: 1px solid var(--border-color);
 }
-
 .modal-content .btn-close {
     color: red !important;
 }
-
 #close-modal-x {
     background-color: transparent;
     border: none;
@@ -198,11 +173,17 @@ textarea {
 
 
 
-
+/** Uncategorized */
 .form-container {
     border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 1rem;
     position: relative;
     max-width: max-content;
+}
+
+#home-div-wrapper {
+    background-color: var(--nav-background);
+    color: var(--body-text);
+    position: absolute;
 }

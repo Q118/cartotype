@@ -8,7 +8,6 @@
 import { useState } from 'react';
 import { FormApp } from "../components/form/AddForm";
 import { EditForm } from "../components/form/EditForm";
-import { useTheme } from "../context/ThemeContext";
 import { Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 
@@ -17,10 +16,6 @@ import { Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
 export function Admin() {
 
     const [formPath, setFormPath] = useState<string | null>(null);
-
-
-    const { currentTheme } = useTheme();
-// TODO on the tabs, put  the overlay over those tabs
 
 
     const renderOverlayColumn = (type: string, title: string) => {
@@ -32,7 +27,7 @@ export function Admin() {
                         {overlayTitle}
                     </Tooltip>
                 }>
-                    <Button variant="outline-light" id={`${currentTheme}Cart`} onClick={() => setFormPath(type)}>
+                    <Button variant="outline-light" className="cart-button" onClick={() => setFormPath(type)}>
                         {title}
                     </Button>
                 </OverlayTrigger>

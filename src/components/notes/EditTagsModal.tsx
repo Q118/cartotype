@@ -5,7 +5,6 @@ import Stack from 'react-bootstrap/Stack';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { Tag } from '../../types';
-import { useTheme } from '../../context/ThemeContext';
 
 type EditTagsModalProps = {
     show: boolean;
