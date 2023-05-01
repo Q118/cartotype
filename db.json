@@ -9,13 +9,13 @@
     {
       "id": "0002",
       "name": "Computer",
-      "price": 1199.25,
+      "price": 1193.29,
       "imgUrl": "/imgs/computer.jpg"
     },
     {
       "id": "0003",
       "name": "Banana",
-      "price": 1.5,
+      "price": 1.55,
       "imgUrl": "/imgs/banana.jpg"
     },
     {
@@ -45,13 +45,13 @@
     {
       "id": "0008",
       "name": "Socks",
-      "price": 11.04,
+      "price": 11.1,
       "imgUrl": "/imgs/socks.jfif"
     },
     {
       "id": "0009",
-      "name": "Watch",
-      "price": 99.99,
+      "name": "Wrist-Watch",
+      "price": 95.99,
       "imgUrl": "/imgs/watch.jfif"
     },
     {
@@ -87,7 +87,7 @@
     {
       "id": "49fb1238-e7fd-4d5e-af91-737b6344aff0",
       "name": "Pillow",
-      "price": 5.6,
+      "price": 5.61,
       "imgUrl": "https://images.unsplash.com/photo-1583354608715-177553a4035e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODE5NDM2OTU&ixlib=rb-4.0.3&q=80&w=1080"
     },
     {
@@ -95,6 +95,18 @@
       "name": "Ballman",
       "price": 4,
       "imgUrl": "https://images.unsplash.com/photo-1552234458-9a63237d6d93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI1MzExMzU&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "328c5d53-b488-40f4-a89b-92b6805043cb",
+      "name": "Frisbee",
+      "price": 1.13,
+      "imgUrl": "https://images.unsplash.com/photo-1649772317307-988009f89c2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI5Nzg4NzA&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "860bd90f-a829-48ee-8d5d-d80be95325f9",
+      "name": "Giraffe",
+      "price": 100.5,
+      "imgUrl": "https://images.unsplash.com/photo-1617180284937-9ce5cff5487b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI5NzkxOTY&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ]
 }

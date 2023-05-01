@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
+import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 
 import { useMultistepForm } from '../../hooks/useMultistepForm';
@@ -39,11 +40,14 @@ const INITIAL_DATA: FormData = {
 export function FormApp() {
     const [data, setData] = useState(INITIAL_DATA);
     const navigate = useNavigate();
+    
     const { data: resultData, isLoading, error, refetch, isFetching: isDataLoading }: UseQueryResult = useQuery({
         queryKey: [`photo-request-${data.inputSearch}`],
         queryFn: () => getPhotosForSelection(data.inputSearch),
         enabled: false,
     });
+    
+    const { globalStoreItems, refreshStoreItems, isStoreItemsLoading } = useShoppingCart();
 
     const {
         steps,
@@ -77,6 +81,7 @@ export function FormApp() {
             price: +`${data.price.dollars}.${data.price.cents}`,
             imgUrl: data.selectedItem?.imgUrl || '',
         }).then(() => {
+            refreshStoreItems();
             navigate('/store');
             notify(`Successfully added ${data.storeTitle} to the store!`);
         }).catch((err) => {

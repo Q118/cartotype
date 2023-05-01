@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { updateStoreItem, getStoreItems } from '../../api/dataStore';
 import { ResultItem, StorePrice } from '../../types';
-import { useTheme } from '../../context/ThemeContext';
+// import { useTheme } from '../../context/ThemeContext';
 import Container from 'react-bootstrap/Container';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
 import { StepTrack } from './StepTrack';
 import { PreviewConfirm } from './PreviewConfirm';
 import { consolidateStorePrice } from '../../utilities/formatCurrency';
-
+import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 type EditFormData = {
     selectOptions: ResultItem[];
@@ -27,7 +27,6 @@ const INITIAL_DATA: EditFormData = {
     selectOptions: [],
     selectedItem: null,
     price: { dollars: 0, cents: 0 },
-    // displayPrice: null,
     storeTitle: '',
     isDataLoading: false,
 };
@@ -36,11 +35,7 @@ export function EditForm() {
     const [data, setData] = useState(INITIAL_DATA);
     const navigate = useNavigate();
 
-    const { data: storeItems, isLoading, error, refetch, isFetching }: any = useQuery({
-        queryKey: [`get-all-store-items`],
-        queryFn: () => getStoreItems(),
-        enabled: true,
-    });
+    const { globalStoreItems, refreshStoreItems, isStoreItemsLoading } = useShoppingCart();
 
     const {
         steps,
@@ -55,9 +50,9 @@ export function EditForm() {
         <SelectForm
             {...data}
             editMode={true}
-            selectOptions={storeItems}
-            isDataLoading={isFetching}
-            refreshData={() => refetch()}
+            selectOptions={globalStoreItems}
+            isDataLoading={isStoreItemsLoading}
+            refreshData={() => refreshStoreItems()}
             updateFields={updateFields}
         />,
         <DetailForm {...data} updateFields={updateFields} />,
@@ -79,6 +74,7 @@ export function EditForm() {
             price: consolidateStorePrice(data.price),
             imgUrl: data.selectedItem?.imgUrl || '',
         }).then(() => {
+            refreshStoreItems();
             navigate('/store');
             notify(`Successfully updated ${data.storeTitle} in the store`);
         }).catch((err) => {

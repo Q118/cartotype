@@ -26,10 +26,18 @@ export type StoreItem = {
     imgUrl: string;
 };
 
+export type StoreItemTag = {
+    /** id of the store item it refers to */
+    id: string;
+    /** name of the store item it refers to */
+    label: string;
+}
+
 export type NoteData = {
     title: string;
     markdown: string;
     tags: Tag[];
+    storeItems?: StoreItemTag[];
 }
 
 export type Tag = {
@@ -49,6 +57,8 @@ export type RawNotedata = {
     title: string;
     markdown: string;
     tagIds: string[];
+    /** array of 0 or more storeItemIds that the note associated with */
+    storeItemIds?: string[];
 }
 
 export type SimplifiedNote = {

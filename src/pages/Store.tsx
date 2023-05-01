@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useShoppingCart } from '../context/ShoppingCartContext';
-import { useQuery } from '@tanstack/react-query';
-import { getStoreItems } from '../api/dataStore';
+// import { useQuery } from '@tanstack/react-query';
+// import { getStoreItems } from '../api/dataStore';
 import Spinner from 'react-bootstrap/Spinner';
 import { Col, Row } from 'react-bootstrap';
 import { StoreItem } from '../components/StoreItem';
@@ -10,26 +10,26 @@ import { StoreItem as StoreItemType } from '../types';
 
 function Store() {
 
-    const { setGlobalStoreItems } = useShoppingCart();
+    const { globalStoreItems, isStoreItemsLoading, storeItemsError } = useShoppingCart();
 
     // TODO: come back and useQuery and set up lazy continuous loading.../paginationSituation
-    const { data: storeItems, isLoading, error, refetch, isFetching }: any = useQuery({
-        queryKey: [`get-all-store-items`],
-        queryFn: () => getStoreItems(),
-        enabled: true,
-    });
+    // const { data: storeItems, isLoading, error, refetch, isFetching }: any = useQuery({
+    //     queryKey: [`get-all-store-items`],
+    //     queryFn: () => getStoreItems(),
+    //     enabled: true,
+    // });
 
-    useEffect(() => {
-        if (storeItems) {
-            setGlobalStoreItems(storeItems);
-        }
-    }, [storeItems]);
+    // useEffect(() => {
+    //     if (storeItems) {
+    //         setGlobalStoreItems(storeItems);
+    //     } // set the global store items in the context if they change?
+    // }, [storeItems.length]);
 
     return (
         <>
             <h1>Store</h1>
-            {error && <p>Error: {error.message}</p>}
-            {(isLoading || isFetching) ? (
+            {storeItemsError && <p>Error: {storeItemsError.message}</p>}
+            {isStoreItemsLoading ? (
                 <div>
                     <Spinner animation="grow" variant="success" />
                     <p>Loading...</p>
@@ -37,7 +37,7 @@ function Store() {
                 </div>
             ) : (
                 <Row md={2} xs={1} lg={3} className="g-3">
-                    {storeItems?.map((item: StoreItemType) => (
+                    {globalStoreItems?.map((item: StoreItemType) => (
                         <Col key={item.id}>
                             <StoreItem {...item} isPreview={false} />
                         </Col>

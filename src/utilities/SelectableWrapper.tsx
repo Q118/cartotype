@@ -1,15 +1,18 @@
 import { ThemeConfig } from "react-select";
 import CreatableReactSelect from 'react-select/creatable';
-import { Tag } from "../types";
+import { Tag, StoreItemTag } from "../types";
 import { useTheme } from "../context/ThemeContext";
 import { v4 as uuidv4 } from 'uuid';
+
+
 
 type SelectableWrapperProps = {
     placeholder?: string;
     /** boolean if there is an onCreate event ot take place */
     createOptionEnabled: boolean;
-    availableTags: Tag[];
-    selectedTags: Tag[];
+    /** tags are tags OR they are store item names... */
+    availableTags: Tag[]|StoreItemTag[];
+    selectedTags: Tag[]|StoreItemTag[];
     setSelectedTags: (tags: any) => void;
     onAddTag?: (tag: Tag) => void;
 }

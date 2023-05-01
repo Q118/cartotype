@@ -1,6 +1,11 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { StoreItem } from '../types';
+import { QueryObserverResult } from '@tanstack/react-query';
+
+import { useQuery } from '@tanstack/react-query';
+import { getStoreItems } from '../api/dataStore';
+
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
@@ -37,7 +42,14 @@ type ShoppingCartContext = {
     setNotificationToasts: (notificationToasts: NotificationToast[]) => void;
     addNotificationToast: (message: string) => void;
     removeNotificationToast: (id: string) => void;
+    /** states for the api calls */
+    isStoreItemsLoading: boolean;
+    // isStoreItemsFetching: boolean;
+    storeItemsError: any;
+    /** handle refetch after an update */
+    refreshStoreItems: () => Promise<QueryObserverResult<unknown, unknown>>;
 };
+
 
 // make it contain the values of the type this way
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -48,18 +60,25 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [isOpen, setIsOpen] = useState(false);
-
-
     const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
         "shopping-cart",
         []
     );
-
     const [globalStoreItems, setGlobalStoreItems] = useState<StoreItem[]>([]);
-
     const [notificationToasts, setNotificationToasts] = useState<NotificationToast[]>([{ show: false, message: '', id: '' }]);
 
+    const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
+        queryKey: [`get-all-store-items`],
+        queryFn: () => getStoreItems(),
+        enabled: true,
+    });
 
+    useEffect(() => {
+        if (storeItems?.length > 0) {
+            setGlobalStoreItems(storeItems);
+        }
+    }, [JSON.stringify(storeItems)]);
+    const isStoreItemsLoading = isLoading || isFetching;
 
     // this calculates the total quantity of items in the cart
     const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
@@ -135,7 +154,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             notificationToasts,
             setNotificationToasts,
             addNotificationToast,
-            removeNotificationToast
+            removeNotificationToast,
+            isStoreItemsLoading,
+            storeItemsError,
+            refreshStoreItems
         }}>
             {children}
         </ShoppingCartContext.Provider>
