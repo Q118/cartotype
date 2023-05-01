@@ -6,8 +6,9 @@
 
 <!--! Work on this next.. and start the linkedIn course yaaa -->
 <!-- //Implement the Notes page using Kyles video as starting point -->
-<!-- * CLEAN up and modulate all the new note code -->... consistent styluign... and THEN.. start to hook it up to the rest of theapp.. connect to the store items and shit and the admin stuff too 
-the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others]
+<!-- * CLEAN up and modulate all the new note code ... apply consistent styling, etc...  [the modal for editing tags fo sho]
+? THEN.. start to hook it up to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
+* ? the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others] -->
 
 
 

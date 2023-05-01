@@ -4,7 +4,8 @@ import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ReactSelect from 'react-select/creatable';
+import { SelectableWrapper } from '../../utilities/SelectableWrapper';
+
 import { useMemo, useState } from 'react';
 import { Tag, Note } from '../../types';
 import { useTheme } from '../../context/ThemeContext';
@@ -67,31 +68,12 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
                     <Col>
                         <Form.Group controlId="tags">
                             <Form.Label>Tags</Form.Label>
-                            <ReactSelect
-                                theme={(theme) => ({
-                                    ...theme,
-                                    colors: {
-                                        ...theme.colors,
-                                        primary25: currentTheme === 'dark' ? 'indigo' : '#e7d1ff', // item hover in menu
-                                        primary50: currentTheme === 'dark' ? 'darkblue' : 'lightblue', // item click in menu
-                                        neutral0: currentTheme === 'dark' ? '#212529' : '#fff', //input background
-                                        neutral10: currentTheme === 'dark' ? 'darkgreen' : 'lightgreen', // item background
-                                        neutral80: currentTheme === 'dark' ? '#fff' : '#212529', // text color in item
-                                    },
-                                })}
-                                placeholder='Select tags to filter by'
-                                value={selectedTags.map(tag => {
-                                    return { label: tag.label, value: tag.id }
-                                })}
-                                options={availableTags?.map(tag => {
-                                    return { label: tag.label, value: tag.id }
-                                })}
-                                onChange={tags => {
-                                    setSelectedTags(tags.map(tag => {
-                                        return { label: tag.label, id: tag.value }
-                                    }))
-                                }}
-                                isMulti
+                            <SelectableWrapper
+                                createOptionEnabled={false}
+                                placeholder='Tags to filter by'
+                                availableTags={availableTags}
+                                selectedTags={selectedTags}
+                                setSelectedTags={setSelectedTags}
                             />
                         </Form.Group>
                     </Col>
