@@ -35,11 +35,11 @@ export function SelectableWrapper({
             /** item click in menu */
             primary50: currentTheme === 'dark' ? 'darkblue' : 'lightblue',
             /** input background */
-            neutral0: currentTheme === 'dark' ? '#212529' : '#fff',
+            neutral0: currentTheme === 'dark' ? '#212529' : '#f8f9fa',
             /** item background */
             neutral10: currentTheme === 'dark' ? 'darkgreen' : 'lightgreen',
             /** text color in item */
-            neutral80: currentTheme === 'dark' ? '#fff' : '#212529',
+            neutral80: currentTheme === 'dark' ? '#f8f9fa' : '#212529',
         },
     })
 
@@ -68,7 +68,7 @@ export function SelectableWrapper({
                     onAddTag(newTag);
                     setSelectedTags((prevTags: any) => [...prevTags, newTag]);
                 }}
-                isValidNewOption={() => createOptionEnabled} // use to remove option to 'create new tag'
+                isValidNewOption={() => createOptionEnabled} // use to remove option to 'create new tag' like for NoteList...
             />
         </>
     )

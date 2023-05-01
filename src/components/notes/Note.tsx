@@ -34,14 +34,14 @@ export function Note({ onDelete }: NoteProps) {
                                 Edit
                             </Button>
                         </Link>
-                        <Button variant="outline-danger" onClick={() => {
+                        <Button variant="danger" onClick={() => {
                             onDelete(note.id);
                             navigate('/notes');
                         }}>
                             Delete
                         </Button>
                         <Link to="..">
-                            <Button variant="outline-secondary">Back</Button>
+                            <Button variant="secondary">Back</Button>
                         </Link>
                     </Stack>
                 </Col>

@@ -47,7 +47,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
                         <Link to="new">
                             <Button variant="primary">Create</Button>
                         </Link>
-                        <Button variant="outline-secondary" onClick={() => setEditTagsModalIsOpen(true)}>
+                        <Button variant="secondary" onClick={() => setEditTagsModalIsOpen(true)}>
                             Edit Tags
                         </Button>
                     </Stack>
@@ -83,7 +83,6 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
                         <NoteCard id={note.id} title={note.title} tags={note.tags} />
                     </Col>
                 ))}
-
             </Row>
             <EditTagsModal
                 show={editTagsModalIsOpen}
