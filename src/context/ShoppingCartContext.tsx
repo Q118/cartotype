@@ -1,10 +1,6 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { StoreItem } from '../types';
-// import useInterval from 'beautiful-react-hooks/useInterval';
-
-
-// !! FIX THE TOAST CRAP
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
@@ -64,9 +60,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [notificationToasts, setNotificationToasts] = useState<NotificationToast[]>([{ show: false, message: '', id: '' }]);
 
 
-    useEffect(() => {
-        console.log('notificationToasts', notificationToasts)
-    }, [notificationToasts])
 
     // this calculates the total quantity of items in the cart
     const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
