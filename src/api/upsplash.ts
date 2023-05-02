@@ -7,11 +7,15 @@ const BASE_URL = 'https://api.unsplash.com';
 // const AUTH_HEADER = import.meta.env.MODE === 'development' ? `Client-ID ${import.meta.env.VITE_UPSPLASH_ACCESS_KEY}` : `Client-ID ${process.env.UPSPLASH_ACCESS_KEY}`;
 const AUTH_HEADER = `Client-ID ${import.meta.env.VITE_UPSPLASH_ACCESS_KEY}`;
 
-
+if (import.meta.env.MODE === 'development') {
+    console.log(import.meta.env);
+    console.log('development mode');
+} 
 
 
 // $('img.post').attr('src', firstPhoto['urls']['regular']);
-// console.log(import.meta.env);
+
+
 type PhotoItem = {
     id: string;
     description: string;
