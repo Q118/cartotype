@@ -13,7 +13,10 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat(
  * @function formatCurrency
  * Formats a number as a currency string.
  */
-export function formatCurrency(number: number) {
+export function formatCurrency(number: number|null) {
+    if (number === null) {
+        return '';
+    }
     return CURRENCY_FORMATTER.format(number);
 }
 
