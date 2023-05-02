@@ -6,16 +6,16 @@
 <!--TODO first prob need to like have the notes go to database instead of local stopreage.. but really just using ids to relate so may be okay for now... -->
 
 *****NOW*****
-<!-- * okay just got the storeItem taGS TO persist.... thats it.. keep going and get themn hooked up all the way to the store items -->
+<!-- * okay just got the storeItem taGS TO persist.... thats it.. keep going and do stuff below: -->
 <!-- ! Work on this next.. and start the linkedIn course yaaa
 ? THEN.. start to hook it up to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
 *  the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others] ... its like a portal...
-    ? - cant use tags for store items.. tags are for searchign and shiz
-
 ! click on the note symbol on the storeItemCard => opens up notes view of all notes that relate to that store item... so using like routing for that in the url... also an addNote option from the storeItem itseldf?
-? but if you hover over the symbol.. the popup holds the titles of all the notes related to it...
+? but if you hover over the symbol in the shop.. the popup holds the titles of all the notes related to it...
+... and thenlike vickyverky the notesList too
+* maybe just something in the top right corner that says which shop itemS it belongs to for teh storeItem and a 
 
-* maybe just something in the top right corner that says which shop itemS it belongs to
+
 
 -->
 

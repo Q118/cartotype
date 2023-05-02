@@ -2,6 +2,8 @@ import { useNote } from "./NoteLayout";
 import { Badge, Button, Stack, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 
 type NoteProps = {
     onDelete: (id: string) => void;
@@ -46,7 +48,10 @@ export function Note({ onDelete }: NoteProps) {
                     </Stack>
                 </Col>
             </Row>
-            <ReactMarkdown>{note.markdown}</ReactMarkdown>
+            {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {note.markdown}
+            </ReactMarkdown> */}
+            <ReactMarkdown children={note.markdown} remarkPlugins={[remarkGfm]} />
         </>
     )
 }
