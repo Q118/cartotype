@@ -2,7 +2,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
-// import CreatableReactSelect from 'react-select/creatable';
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
@@ -39,7 +38,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdo
         })
         navigate('..');
     }
-    
+
 
 
     return (
@@ -82,9 +81,11 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdo
                 <Form.Group controlId="markdown">
                     <Form.Label>Body</Form.Label>
                     <Form.Control ref={markdownRef} as="textarea" rows={15} required defaultValue={markdown} />
-                    <Form.Text className="text-muted">
-                        Markdown is supported.
-                    </Form.Text>
+                    <div className="mt-1">
+                        <Form.Text className="text-muted">
+                            Markdown is supported. (Follows <a href="https://github.github.com/gfm/" target="_blank">GitHub Flavored Markdown</a>)
+                        </Form.Text>
+                    </div>
                 </Form.Group>
                 <Stack direction="horizontal" gap={2} className="justify-content-end">
                     <Button type="submit">Save</Button>
