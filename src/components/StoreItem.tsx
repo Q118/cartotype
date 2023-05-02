@@ -11,13 +11,13 @@ const BTN_WRAPPER_CLASSES: string = 'd-flex align-items-center justify-content-c
 
 type StoreItemProps = {
     id: string;
-    name: string;
+    name?: string;
     price: number|null;
     imgUrl: string;
     isPreview: boolean;
 };
 
-export function StoreItem({ id, name, price, imgUrl, isPreview = false }: StoreItemProps) {
+export function StoreItem({ id, name = '', price, imgUrl, isPreview = false }: StoreItemProps) {
     const {
         getItemQuantity,
         increaseCartQuantity,

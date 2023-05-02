@@ -3,10 +3,14 @@ import axios from 'axios';
 
 const BASE_URL = 'https://api.unsplash.com';
 
-const AUTH_HEADER = `Client-ID ${config.UPSPLASH_ACCESS_KEY}`;
+
+
+const AUTH_HEADER = import.meta.env.MODE === 'development' ? `Client-ID ${config.UPSPLASH_ACCESS_KEY}` : `Client-ID ${process.env.UPSPLASH_ACCESS_KEY}`;
+
+
 
 // $('img.post').attr('src', firstPhoto['urls']['regular']);
-
+// console.log(import.meta.env);
 type PhotoItem = {
     id: string;
     description: string;
