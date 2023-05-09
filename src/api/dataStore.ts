@@ -5,52 +5,42 @@ import { StoreItem } from '../types';
 const BASE_URL = 'http://localhost:3001';
 
 
-import { createClient } from '@supabase/supabase-js'
+import { PostgrestError, createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://egbxdvrsptkzvjaqxwpi.supabase.co';
 // const supabaseKey = import.meta.env.MODE === 'development' ? import.meta.env.VITE_DATABASE_API_KEY : process.env.DATABASE_API_KEY;
 const supabaseKey = import.meta.env.VITE_DATABASE_API_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
-// !!! PU HERE
-// use the api docs in https://app.supabase.com/project/veiblggssnhvdmfiwpmx/editor/28668
-// TODO:: keep going and get the new databse to replace all the jsonserver crap and the NOTes stff too...
 
+
+const handleError = (error: PostgrestError, retValue: any) => {
+    console.log('error', error);
+    return retValue;
+}
 
 async function getStoreItems() {
     // read all rows from the 'StoreItem' table
-    let { data: storeItems, error } = await supabase.from('store_items').select('*');
-    if (error) {
-        console.log('error', error);
-        return [];
-    }
+    let { data: storeItems, error } = await supabase.from('store_items').select('*').order('name', { ascending: true });
+    if (error) handleError(error, []);
     return storeItems;
 }
 
 
 async function getStoreItem(id: string) {
     const { data, error } = await supabase.from('cities').select('*').eq('id', id);
-    if (error) {
-        console.log('error', error);
-        return {};
-    }
+    if (error) handleError(error, {});
     return data;
 }
 
 async function addStoreItem(item: StoreItem) {
     const { data, error } = await supabase.from('store_items').insert([ item ]);
-    if (error) {
-        console.log('error', error);
-        return {};
-    }
+    if (error) handleError(error, {});
     return data;
 }
 
 async function updateStoreItem(item: StoreItem) {
     const { data, error } = await supabase.from('store_items').upsert(item).eq('id', item.id);
-    if (error) {
-        console.log('error', error);
-        return {};
-    }
+    if (error) handleError(error, {});
     return data;
 }
 
