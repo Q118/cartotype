@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { StoreItem } from '../types';
 
 // * temp using jsonserver for mocking and focusing on logic
@@ -7,7 +7,7 @@ const BASE_URL = 'http://localhost:3001';
 
 import { PostgrestError, createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://egbxdvrsptkzvjaqxwpi.supabase.co';
+const supabaseUrl = `https://${import.meta.env.VITE_SUPABASE_NAME}.supabase.co`;
 // const supabaseKey = import.meta.env.MODE === 'development' ? import.meta.env.VITE_DATABASE_API_KEY : process.env.DATABASE_API_KEY;
 const supabaseKey = import.meta.env.VITE_DATABASE_API_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -27,7 +27,7 @@ async function getStoreItems() {
 
 
 async function getStoreItem(id: string) {
-    const { data, error } = await supabase.from('cities').select('*').eq('id', id);
+    const { data, error } = await supabase.from('store_items').select('*').eq('id', id);
     if (error) handleError(error, {});
     return data;
 }
