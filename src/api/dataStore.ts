@@ -13,60 +13,40 @@ const supabaseKey = import.meta.env.VITE_DATABASE_API_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey)
 // !!! PU HERE
 // use the api docs in https://app.supabase.com/project/veiblggssnhvdmfiwpmx/editor/28668
-// * and get the new databse to replace all the jsonserver crap -> get this done and then go.
-// TODO:: keep going
+// TODO:: keep going and get the new databse to replace all the jsonserver crap and the NOTes stff too...
 
 
 
-// function getStoreItems() {
-//     return axios
-//         .get(`${BASE_URL}/storeItems`)
-//         .then((response) => {
-//             return response.data;
-//         })
-//         .catch((error: Error) => {
-//             console.log('error in getStoreItems: ');
-//             console.log(error.message);
-//             return [];
-//         });
-// }
 
+
+// TODO update all usage of this method to await
 async function getStoreItems() {
     // read all rows from the 'StoreItem' table
     let { data: storeItems, error } = await supabase.from('store_items').select('*');
     if (error) {
         console.log('error', error);
         return [];
-    }   
-    console.log('storeItems', storeItems);
+    }
     return storeItems;
 }
 
+
 async function getStoreItem(id: string) {
-    return axios
-        .get(`${BASE_URL}/storeItems/${id}`)
-        .then((response) => {
-            return response.data;
-        })
-        .catch((error: Error) => {
-            console.log('error in getStoreItem: ');
-            console.log(error.message);
-            return [];
-        });
+    const { data, error } = await supabase.from('cities').select('*').eq('id', id);
+    if (error) {
+        console.log('error', error);
+        return {};
+    }
+    return data;
 }
 
 async function addStoreItem(item: StoreItem) {
-    return axios
-        .post(`${BASE_URL}/storeItems`, item)
-        .then((response) => {
-            console.log('added item to data store');
-            return response.data;
-        })
-        .catch((error: Error) => {
-            console.log('error in addStoreItem: ');
-            console.log(error.message);
-            return [];
-        });
+    const { data, error } = await supabase.from('store_items').insert([ item ]);
+    if (error) {
+        console.log('error', error);
+        return {};
+    }
+    return data;
 }
 
 async function updateStoreItem(item: StoreItem) {
