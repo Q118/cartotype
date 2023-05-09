@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
-import { updateStoreItem, getStoreItems } from '../../api/dataStore';
+import { updateStoreItem } from '../../api/dataStore';
 import { ResultItem, StorePrice } from '../../types';
 // import { useTheme } from '../../context/ThemeContext';
 import Container from 'react-bootstrap/Container';

@@ -74,7 +74,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
         queryKey: [`get-all-store-items`],
-        queryFn: () => getStoreItems(),
+        queryFn: async () => await getStoreItems(),
         enabled: true,
     });
 

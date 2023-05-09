@@ -13,17 +13,6 @@ function Store() {
     const { globalStoreItems, isStoreItemsLoading, storeItemsError } = useShoppingCart();
 
     // TODO: come back and useQuery and set up lazy continuous loading.../paginationSituation
-    // const { data: storeItems, isLoading, error, refetch, isFetching }: any = useQuery({
-    //     queryKey: [`get-all-store-items`],
-    //     queryFn: () => getStoreItems(),
-    //     enabled: true,
-    // });
-
-    // useEffect(() => {
-    //     if (storeItems) {
-    //         setGlobalStoreItems(storeItems);
-    //     } // set the global store items in the context if they change?
-    // }, [storeItems.length]);
 
     return (
         <>
