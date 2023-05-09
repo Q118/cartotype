@@ -8,8 +8,8 @@ const BASE_URL = 'http://localhost:3001';
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://egbxdvrsptkzvjaqxwpi.supabase.co';
-const supabaseKey = import.meta.env.MODE === 'development' ? import.meta.env.VITE_DATABASE_API_KEY : process.env.DATABASE_API_KEY;
-
+// const supabaseKey = import.meta.env.MODE === 'development' ? import.meta.env.VITE_DATABASE_API_KEY : process.env.DATABASE_API_KEY;
+const supabaseKey = import.meta.env.VITE_DATABASE_API_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey)
 // !!! PU HERE
 // use the api docs in https://app.supabase.com/project/veiblggssnhvdmfiwpmx/editor/28668
