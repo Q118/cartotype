@@ -16,10 +16,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // TODO:: keep going and get the new databse to replace all the jsonserver crap and the NOTes stff too...
 
 
-
-
-
-// TODO update all usage of this method to await
 async function getStoreItems() {
     // read all rows from the 'StoreItem' table
     let { data: storeItems, error } = await supabase.from('store_items').select('*');
@@ -50,17 +46,12 @@ async function addStoreItem(item: StoreItem) {
 }
 
 async function updateStoreItem(item: StoreItem) {
-    return axios
-        .put(`${BASE_URL}/storeItems/${item.id}`, item)
-        .then((response) => {
-            console.log('updated item in data store');
-            return response.data;
-        })
-        .catch((error: Error) => {
-            console.log('error in updateStoreItem: ');
-            console.log(error.message);
-            return {};
-        });
+    const { data, error } = await supabase.from('store_items').upsert(item).eq('id', item.id);
+    if (error) {
+        console.log('error', error);
+        return {};
+    }
+    return data;
 }
 
 export {
