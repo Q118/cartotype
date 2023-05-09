@@ -5,18 +5,44 @@ import { StoreItem } from '../types';
 const BASE_URL = 'http://localhost:3001';
 
 
+import { createClient } from '@supabase/supabase-js'
 
-function getStoreItems() {
-    return axios
-        .get(`${BASE_URL}/storeItems`)
-        .then((response) => {
-            return response.data;
-        })
-        .catch((error: Error) => {
-            console.log('error in getStoreItems: ');
-            console.log(error.message);
-            return [];
-        });
+const supabaseUrl = 'https://egbxdvrsptkzvjaqxwpi.supabase.co';
+const supabaseKey = import.meta.env.MODE === 'development' ? import.meta.env.VITE_DATABASE_API_KEY : process.env.DATABASE_API_KEY;
+
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+
+
+// !!! PU HERE
+// use the api docs in https://app.supabase.com/project/veiblggssnhvdmfiwpmx/editor/28668
+// * and get the new databse to replace all the jsonserver crap -> get this done and then go.
+// TODO:: keep going
+
+
+
+// function getStoreItems() {
+//     return axios
+//         .get(`${BASE_URL}/storeItems`)
+//         .then((response) => {
+//             return response.data;
+//         })
+//         .catch((error: Error) => {
+//             console.log('error in getStoreItems: ');
+//             console.log(error.message);
+//             return [];
+//         });
+// }
+
+async function getStoreItems() {
+    // read all rows from the 'StoreItem' table
+    let { data: storeItems, error } = await supabase.from('store_items').select('*');
+    if (error) {
+        console.log('error', error);
+        return [];
+    }   
+    console.log('storeItems', storeItems);
+    return storeItems;
 }
 
 async function getStoreItem(id: string) {

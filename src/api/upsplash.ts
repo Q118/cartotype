@@ -12,6 +12,8 @@ if (import.meta.env.MODE === 'development') {
     console.log('development mode');
 } 
 
+//* in production for the db, use process.env.DATABASE_URL
+//* and for dev use import.meta.env.VITE_DATABASE_URL
 
 // $('img.post').attr('src', firstPhoto['urls']['regular']);
 

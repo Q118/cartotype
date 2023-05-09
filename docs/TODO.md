@@ -2,11 +2,14 @@
 
 <!-- TODO: make the whpole app be agnostic.... like a total agnostic that could just be skeleton and any kind of data thats realted to eachother could e pluugged into it... or really just great skeleton to use for any starting point wiht a new React App -->
 
-!!!!!!!!!!!!!!!!!!!!!!!
-<!--TODO first prob need to like have the notes go to database instead of local stopreage.. but really just using ids to relate so may be okay for now... -->
 
+!!!!!!!!!!!!!!!!!!!!!!!
+# ONE
+<!--TODO first prob need to like have the notes go to database instead of local stopreage. --> IN middle of setting all this up and ... got the database setuP! its on supabase and in the .env-local and is ready to be put in and replacing the local db.json... and okay got it to finally read the stoer items... NEXT::: keep going and make ALL necessary changes to accomodate SUpabase migration forom db.json and also the notwes stuff tpp-->
+!!!!!!!!!!!!!!!!!!!!!!!
 *****NOW*****
-<!-- * okay just got the storeItem taGS TO persist.... thats it.. keep going and do stuff below: -->
+# TWO
+<!-- * okay just keep going and do stuff below: (got the storeItem tags persisting)-->
 <!-- ! Work on this next.. and start the linkedIn course yaaa
 ? THEN.. start to hook it up to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
 *  the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others] ... its like a portal...

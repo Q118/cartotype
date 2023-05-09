@@ -4,109 +4,127 @@
       "id": "0001",
       "name": "Book",
       "price": 10.02,
-      "imgUrl": "/imgs/book.jpg"
+      "imgUrl": "/imgs/book.jpg",
+      "notes": "[]"
     },
     {
       "id": "0002",
       "name": "Computer",
       "price": 1193.29,
-      "imgUrl": "/imgs/computer.jpg"
+      "imgUrl": "/imgs/computer.jpg",
+      "notes": "[]"
     },
     {
       "id": "0003",
       "name": "Banana",
       "price": 1.58,
-      "imgUrl": "/imgs/banana.jpg"
+      "imgUrl": "/imgs/banana.jpg",
+      "notes": "[]"
     },
     {
       "id": "0004",
       "name": "Car",
       "price": 14000.04,
-      "imgUrl": "/imgs/car.jpg"
+      "imgUrl": "/imgs/car.jpg",
+      "notes": "[]"
     },
     {
       "id": "0005",
       "name": "Phone",
       "price": 499,
-      "imgUrl": "/imgs/Phone.jpg"
+      "imgUrl": "/imgs/Phone.jpg",
+      "notes": "[]"
     },
     {
       "id": "0006",
       "name": "Shirt",
       "price": 22.99,
-      "imgUrl": "/imgs/shirt.jpg"
+      "imgUrl": "/imgs/shirt.jpg",
+      "notes": "[]"
     },
     {
       "id": "0007",
       "name": "Shoes",
       "price": 49.99,
-      "imgUrl": "/imgs/shoes.jfif"
+      "imgUrl": "/imgs/shoes.jfif",
+      "notes": "[]"
     },
     {
       "id": "0008",
       "name": "Socks",
       "price": 11.1,
-      "imgUrl": "/imgs/socks.jfif"
+      "imgUrl": "/imgs/socks.jfif",
+      "notes": "[]"
     },
     {
       "id": "0009",
       "name": "Wrist-Watch",
       "price": 95.99,
-      "imgUrl": "/imgs/watch.jfif"
+      "imgUrl": "/imgs/watch.jfif",
+      "notes": "[]"
     },
     {
       "id": "e9e1efad-0f2f-43a3-a35f-255fc6a1b9ca",
       "name": "Pickle Sandwich",
       "price": 7.63,
-      "imgUrl": "https://images.unsplash.com/photo-1541833000669-8dbe1bfb574a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTQ4MDg&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1541833000669-8dbe1bfb574a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTQ4MDg&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     },
     {
       "id": "96f0b358-ae38-43f4-9295-59be9c4a91a3",
       "name": "Gnome",
       "price": 18.75,
-      "imgUrl": "https://images.unsplash.com/photo-1512209840695-c9b154d2a2aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTQ4OTQ&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1512209840695-c9b154d2a2aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NTQ4OTQ&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     },
     {
       "id": "cd7684d1-0266-45d2-854f-c15d0ebe0bd0",
       "name": "Green Beetle",
       "price": 32.05,
-      "imgUrl": "https://images.unsplash.com/photo-1581859680484-a9fb0180a858?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NjIxNzc&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1581859680484-a9fb0180a858?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODA1NjIxNzc&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     },
     {
       "id": "324e71d4-3f3a-4f5e-baf4-3ec3bceaa747",
       "name": "Teeth",
       "price": 5.15,
-      "imgUrl": "https://images.unsplash.com/photo-1615592602923-9fb437226763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODEzMzA2MDQ&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1615592602923-9fb437226763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODEzMzA2MDQ&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     },
     {
       "id": "c0714047-9029-4767-81c7-c3ad137e8b1c",
       "name": "Pinneapple",
       "price": 4.2,
-      "imgUrl": "https://images.unsplash.com/photo-1470347630276-b592bce24d96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODEzMzIxNjA&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1470347630276-b592bce24d96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODEzMzIxNjA&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     },
     {
       "id": "49fb1238-e7fd-4d5e-af91-737b6344aff0",
       "name": "Pillow",
       "price": 5.61,
-      "imgUrl": "https://images.unsplash.com/photo-1583354608715-177553a4035e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODE5NDM2OTU&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1583354608715-177553a4035e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODE5NDM2OTU&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     },
     {
       "id": "dbc96b4b-d09d-46e6-be74-f40ca50282f3",
       "name": "Ballman",
       "price": 4,
-      "imgUrl": "https://images.unsplash.com/photo-1552234458-9a63237d6d93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI1MzExMzU&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1552234458-9a63237d6d93?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI1MzExMzU&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     },
     {
       "id": "328c5d53-b488-40f4-a89b-92b6805043cb",
       "name": "Frisbee",
       "price": 1.13,
-      "imgUrl": "https://images.unsplash.com/photo-1649772317307-988009f89c2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI5Nzg4NzA&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1649772317307-988009f89c2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI5Nzg4NzA&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     },
     {
       "id": "860bd90f-a829-48ee-8d5d-d80be95325f9",
       "name": "Giraffe",
       "price": 100.5,
-      "imgUrl": "https://images.unsplash.com/photo-1617180284937-9ce5cff5487b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI5NzkxOTY&ixlib=rb-4.0.3&q=80&w=1080"
+      "imgUrl": "https://images.unsplash.com/photo-1617180284937-9ce5cff5487b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0Mjg2MjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODI5NzkxOTY&ixlib=rb-4.0.3&q=80&w=1080",
+      "notes": "[]"
     }
   ]
 }
