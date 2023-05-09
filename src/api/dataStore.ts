@@ -11,9 +11,6 @@ const supabaseUrl = 'https://egbxdvrsptkzvjaqxwpi.supabase.co';
 const supabaseKey = import.meta.env.MODE === 'development' ? import.meta.env.VITE_DATABASE_API_KEY : process.env.DATABASE_API_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseKey)
-
-
-
 // !!! PU HERE
 // use the api docs in https://app.supabase.com/project/veiblggssnhvdmfiwpmx/editor/28668
 // * and get the new databse to replace all the jsonserver crap -> get this done and then go.
