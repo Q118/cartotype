@@ -6,7 +6,7 @@ const supabaseKey = import.meta.env.VITE_DATABASE_API_KEY;
 
 
 const handleError = (error: PostgrestError, retValue: any) => {
-    console.log('error', error);
+    console.error(error);
     return retValue;
 }
 
@@ -29,7 +29,7 @@ type QueryObject = {
 * Filters must be applied after any of select(), update(), upsert(), delete(), and rpc() and before modifiers. 
 */
 
-export class SupabaseFactory {
+export class SupabaseTableFactory {
     client: SupabaseClient;
     tableName: string;
 
@@ -91,8 +91,8 @@ export class SupabaseFactory {
 
 
 
-    static async create(tableName: string) {
-        return new SupabaseFactory(tableName);
+    static create(tableName: string) {
+        return new SupabaseTableFactory(tableName);
     }
 
 

@@ -1,7 +1,7 @@
-import { SupabaseFactory } from "./models/Supabase";
+import { SupabaseTableFactory } from "./models/SupabaseTable";
 
 // TODO come back and do this
-export class Notes extends SupabaseFactory {
+export class Notes extends SupabaseTableFactory {
     constructor() {
         super('notes');
     }
