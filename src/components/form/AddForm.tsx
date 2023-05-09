@@ -11,7 +11,7 @@ import { InputSearchForm } from './InputSearchForm';
 import { getPhotosForSelection } from "../../api/upsplash";
 import { ResultItem, StorePrice } from '../../types';
 import { StepTrack } from './StepTrack';
-import { addStoreItem } from '../../api/dataStore';
+import { addStoreItem } from '../../api/storeItems';
 import { PreviewConfirm } from './PreviewConfirm';
 
 
