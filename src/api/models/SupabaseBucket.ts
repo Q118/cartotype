@@ -1,6 +1,11 @@
+/**
+ * @class SupabaseBucketFactory - a factory class for creating and managing buckets and folders in Supabase Storage
+ * explicity for use with json blobs
+ */
+
+
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { StorageError, SearchOptions } from '@supabase/storage-js';
-
 
 const supabaseUrl = `https://${import.meta.env.VITE_SUPABASE_NAME}.supabase.co`;
 const supabaseKey = import.meta.env.VITE_DATABASE_API_KEY;
@@ -9,6 +14,7 @@ const handleError = (error: StorageError, retValue: any) => {
     console.error(error);
     return retValue;
 }
+
 
 
 export class SupabaseBucketFactory {
@@ -111,9 +117,15 @@ export class SupabaseBucketFactory {
     async getFileContent(folderPath: string, fileName: string) {
         const { data, error } = await this.client.storage
             .from(this.bucketName)
-            .download(`${folderPath}/${fileName}.json`)
+            .createSignedUrl(`${folderPath}/${fileName}`, 60);
         if (error) handleError(error, {});
-        return data;
+        if (data) {
+            const response = await fetch(data.signedUrl);
+            const fileContents = await response.json();
+            console.log('getFileContent', fileContents)
+            return fileContents;
+        }
+        return {};
     }
 
     async listAllFiles(fileOptions: SearchOptions = {}, searchString: string | null = null) {
@@ -124,7 +136,8 @@ export class SupabaseBucketFactory {
                 ...fileOptions,
                 ...searchString && { search: searchString }
             });
-        if (error) handleError(error, {});
+        if (error) handleError(error, []);
+        console.log('listAllFiles', data)
         return data;
     }
 
@@ -145,7 +158,7 @@ export class SupabaseBucketFactory {
             .createBucket(bucketName, {
                 public: isPublic,
                 allowedMimeTypes: [ 'application/json' ],
-            })
+            });
         if (error) handleError(error, {});
         return data;
     }

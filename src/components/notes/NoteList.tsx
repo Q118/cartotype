@@ -24,7 +24,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
     const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
 
     const filteredNotes = useMemo(() => {
-        return notes.filter(note => {
+        return notes?.filter(note => {
             return (
                 (title === "" ||
                     note.title.toLowerCase().includes(title.toLowerCase())) &&
@@ -78,7 +78,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
                 </Row>
             </Form>
             <Row xs={1} md={2} lg={3} className="g-3">
-                {filteredNotes.map(note => (
+                {filteredNotes?.map(note => (
                     <Col key={note.id}>
                         <NoteCard id={note.id} title={note.title} tags={note.tags} />
                     </Col>

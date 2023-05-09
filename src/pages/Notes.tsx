@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { NoteData, RawNote, StoreItemTag, Tag } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocalStorage } from '../hooks/useLocalStorage';
@@ -6,31 +6,65 @@ import Container from 'react-bootstrap/Container';
 import { Route, Routes } from 'react-router-dom';
 import { Note, NewNote, NoteList, NoteLayout, EditNote } from '../components/notes';
 
+import { useQuery } from '@tanstack/react-query';
+import { Notes as NoteConstructor } from '../api/lib/notes';
+import { MdEditNote } from 'react-icons/md';
+
+// TODO: chang from devNotes to prodNotes or whatever end up using
+// * or potentially using loginSession info
+const NOTE_SUBFOLDER = 'devNotes';
+
 
 export function Notes() {
-    const [notes, setNotes] = useLocalStorage<RawNote[]>('NOTES', []);
-    const [tags, setTags] = useLocalStorage<Tag[]>('TAGS', []);
+    /** notes for the current user session */
+    const [ userNotes, setUserNotes ] = useState<RawNote[]>([]);
+
+    const {
+        data: notes,
+        isLoading,
+        error: notesError,
+        refetch: refetchNotes,
+        isFetching
+    }: any = useQuery({
+        queryKey: [ `get-all-notes` ],
+        queryFn: async () => {
+            const allNotes = await NoteConstructor.create(NOTE_SUBFOLDER).getAllNotes();
+            return allNotes || [];
+        },
+        enabled: true,
+    });
+
+
+    useEffect(() => {
+        console.log('notes', notes)
+        if (notes) setUserNotes(notes);
+    }, [ notes ]);
+
+
+
+
+    const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
     // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
 
     const notesWithTags = useMemo(() => {
-        return notes.map(note => {
-            return { ...note, tags: tags.filter(tag => note.tagIds.includes(tag.id)) }
+        return userNotes?.map((note: any) => {
+            return { ...note, tags: tags.filter(tag => note.tagIds?.includes(tag.id)) }
         })
-    }, [notes, tags]);
+    }, [ userNotes, tags ]);
 
     function onCreateNote({ tags, ...data }: NoteData) {
-        setNotes(prevNotes => {
-            return [...prevNotes, { ...data, id: uuidv4(), tagIds: tags.map(tag => tag.id) }]
+        setUserNotes((prevNotes: any) => {
+            return [ ...prevNotes, { ...data, id: uuidv4(), tagIds: tags.map(tag => tag.id) } ]
         })
     }
 
     function addTag(tag: Tag) {
-        setTags(prev => [...prev, tag]);
+        setTags(prev => [ ...prev, tag ]);
         // setStoreTags(prev => [...prev, tag])
     }
 
     function onUpdateNote(id: string, { tags, ...data }: NoteData) {
-        setNotes(prevNotes => {
+        setUserNotes(prevNotes => {
             return prevNotes.map(note => {
                 if (note.id !== id) return note;
                 return { ...note, ...data, tagIds: tags.map(tag => tag.id) }
@@ -39,7 +73,7 @@ export function Notes() {
     }
 
     function onDeleteNote(id: string) {
-        setNotes(prevNotes => {
+        setUserNotes(prevNotes => {
             return prevNotes.filter(note => note.id !== id)
         })
     }
@@ -64,7 +98,11 @@ export function Notes() {
         <Container className="my-4">
             {/* <h4>Notes Page</h4> */}
             {/* <hr /> */}
-
+            <div className='text-center'>
+                <MdEditNote size={32} />
+                <MdEditNote size={32} />
+                <MdEditNote size={32} />
+            </div>
 
             <Routes>
                 <Route path="/" element={<NoteList
@@ -86,12 +124,8 @@ export function Notes() {
                         availableTags={tags}
                     />} />
                 </Route>
-                {/* <Route path="*" element={<Navigate to="/" />} /> */}
                 <Route path="*" element={<>Not Found</>} />
-                {/* </Route> */}
-
             </Routes>
-
         </Container>
     );
 }

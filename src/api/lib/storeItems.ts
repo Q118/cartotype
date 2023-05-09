@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { StoreItem } from '../types';
+import { StoreItem } from '../../types';
 
 // * temp using jsonserver for mocking and focusing on logic
 const BASE_URL = 'http://localhost:3001';

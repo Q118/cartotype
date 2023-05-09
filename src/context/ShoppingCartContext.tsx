@@ -3,7 +3,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { StoreItem, StoreItemTag } from '../types';
 import { QueryObserverResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
-import { getStoreItems } from '../api/storeItems';
+import { getStoreItems } from '../api/lib/storeItems';
 
 
 type ShoppingCartProviderProps = {
