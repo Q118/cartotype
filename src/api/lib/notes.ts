@@ -1,6 +1,5 @@
-import { SupabaseBucketFactory } from "../models/SupabaseBucket";
+import { SupabaseBucketFactory, FileObject } from "../models/SupabaseBucket";
 import { RawNote } from "../../types";
-
 // TODO come back and do this
 
 
@@ -16,31 +15,38 @@ export class Notes extends SupabaseBucketFactory {
     }
 
 
-    // async getAllNotes(): Promise<RawNote[]> {
-    async getAllNotes(): Promise<any[]|null> {
-        const allNoteData = await this.listAllFiles();
-        const allNotes = allNoteData?.map(async (note: any) => {
+    async getAllNotes(): Promise<RawNote[]> {
+        const allNoteData: FileObject[] = await this.listAllFiles();
+        let allNotes: RawNote[] = [];
+        for await (const note of allNoteData) {
             let noteObject = await this.getFileContent(this.subFolder, note.name);
-            console.log(noteObject)
-            return {
+            if (!noteObject) return [];
+            allNotes.push({
                 id: note.name,
-                // title: noteObject?.name,
-                // markdown: noteObject?.markdown,
-            };
-        });
-
-        return allNoteData;
-        // return allNotes;
+                title: noteObject.title,
+                markdown: noteObject.markdown,
+                tagIds: noteObject.tagIds,
+                //TODO change below like in the supabase bucket to only house ids.
+                storeItemIds: noteObject.storeItemTags.map((storeItemTag: any) => storeItemTag.id),
+            });
+        }
+        return allNotes;
     }
 
     addNote(fileName: string, fileBody: string) {
-        // TODO
+        // TODO change the storeItemTags to only house ids.
         return this.addFile(fileName, fileBody);
     }
 
 
     static create(subFolderName: string) {
         return new Notes(subFolderName);
+    }
+
+    static getAllNotes(subFolderName: string): Promise<RawNote[]> {
+        const notes = Notes.create(subFolderName);
+        // console.log('!!!!notes in getAllNotes', notes);
+        return notes.getAllNotes();
     }
 }
 

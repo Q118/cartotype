@@ -5,7 +5,7 @@
 
 
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { StorageError, SearchOptions } from '@supabase/storage-js';
+import { StorageError, SearchOptions, FileObject } from '@supabase/storage-js';
 
 const supabaseUrl = `https://${import.meta.env.VITE_SUPABASE_NAME}.supabase.co`;
 const supabaseKey = import.meta.env.VITE_DATABASE_API_KEY;
@@ -15,7 +15,8 @@ const handleError = (error: StorageError, retValue: any) => {
     return retValue;
 }
 
-
+export type { FileObject };
+//  = FileObject;
 
 export class SupabaseBucketFactory {
     client: SupabaseClient;
@@ -112,7 +113,7 @@ export class SupabaseBucketFactory {
     }
 
     /**
-     * @method getFile - downloads a file from an existing bucket
+     * @method getFile - downloads a files content from an existing bucket
      */
     async getFileContent(folderPath: string, fileName: string) {
         const { data, error } = await this.client.storage
@@ -122,13 +123,12 @@ export class SupabaseBucketFactory {
         if (data) {
             const response = await fetch(data.signedUrl);
             const fileContents = await response.json();
-            console.log('getFileContent', fileContents)
             return fileContents;
         }
         return {};
     }
 
-    async listAllFiles(fileOptions: SearchOptions = {}, searchString: string | null = null) {
+    async listAllFiles(fileOptions: SearchOptions = {}, searchString: string | null = null): Promise<FileObject[]> {
         // TODO using offset for pagination...
         const { data, error } = await this.client.storage
             .from(this.bucketName)
@@ -137,8 +137,8 @@ export class SupabaseBucketFactory {
                 ...searchString && { search: searchString }
             });
         if (error) handleError(error, []);
-        console.log('listAllFiles', data)
-        return data;
+        // console.log('listAllFiles', data)
+        return data || [];
     }
 
     async queryFiles(fileOptions: SearchOptions = {}, searchString: string) {

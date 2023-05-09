@@ -18,6 +18,10 @@ const NOTE_SUBFOLDER = 'devNotes';
 export function Notes() {
     /** notes for the current user session */
     const [ userNotes, setUserNotes ] = useState<RawNote[]>([]);
+    const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
+
+    // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
+
 
     const {
         data: notes,
@@ -28,23 +32,17 @@ export function Notes() {
     }: any = useQuery({
         queryKey: [ `get-all-notes` ],
         queryFn: async () => {
-            const allNotes = await NoteConstructor.create(NOTE_SUBFOLDER).getAllNotes();
-            return allNotes || [];
+            const allNotes = await NoteConstructor.getAllNotes(NOTE_SUBFOLDER);
+            return allNotes;
         },
         enabled: true,
     });
 
 
     useEffect(() => {
-        console.log('notes', notes)
+        // console.log('notes', notes)
         if (notes) setUserNotes(notes);
     }, [ notes ]);
-
-
-
-
-    const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
-    // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
 
     const notesWithTags = useMemo(() => {
         return userNotes?.map((note: any) => {
