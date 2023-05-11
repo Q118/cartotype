@@ -21,7 +21,7 @@ type FormData = {
     selectedItem: ResultItem | null;
     price: StorePrice;
     storeTitle: string;
-    isDataLoading: boolean;
+    isDataLoading: () => boolean;
 }
 
 
@@ -31,20 +31,20 @@ const INITIAL_DATA: FormData = {
     selectedItem: null,
     price: { dollars: 0, cents: 0 },
     storeTitle: '',
-    isDataLoading: false,
+    isDataLoading: () => false,
 }
 
 
 export function FormApp() {
-    const [data, setData] = useState(INITIAL_DATA);
+    const [ data, setData ] = useState(INITIAL_DATA);
     const navigate = useNavigate();
-    
-    const { data: resultData, isLoading, error, refetch, isFetching: isDataLoading }: UseQueryResult = useQuery({
-        queryKey: [`photo-request-${data.inputSearch}`],
+
+    const { data: resultData, isLoading, error, refetch, isFetching }: UseQueryResult = useQuery({
+        queryKey: [ `photo-request-${data.inputSearch}` ],
         queryFn: () => getPhotosForSelection(data.inputSearch),
         enabled: false,
     });
-    
+
     const { refreshStoreItems } = useShoppingCart();
 
     const {
@@ -58,7 +58,7 @@ export function FormApp() {
         notify
     } = useMultistepForm([
         <InputSearchForm {...data} updateFields={updateFields} />,
-        <SelectForm {...data} isDataLoading={isDataLoading}
+        <SelectForm {...data} isDataLoading={() => isLoading || isFetching}
             refreshData={() => refetch()}
             updateFields={updateFields}
         />,
