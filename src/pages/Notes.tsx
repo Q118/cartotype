@@ -10,8 +10,10 @@ import { useQuery } from '@tanstack/react-query';
 import { Notes as NoteConstructor } from '../api/lib/notes';
 import { MdEditNote } from 'react-icons/md';
 
+
+
 // TODO: chang from devNotes to prodNotes or whatever end up using
-// * or potentially using loginSession info for the folder name :)
+// * or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
 const NOTE_SUBFOLDER = 'devNotes';
 
 
@@ -36,11 +38,10 @@ export function Notes() {
             return allNotes;
         },
         enabled: true,
-    });
+    }); // big part of why this takes longer than storeItems is that the storeItems query is enabled in the global context, so the cache is already loaded when the page is loaded, whereas this is not the case for the notes query bc its in here in its own compoent... (not necessarily slower bc of buckets but it may be..)
 
 
     useEffect(() => {
-        // console.log('notes', notes)
         if (notes) setUserNotes(notes);
     }, [ notes ]);
 

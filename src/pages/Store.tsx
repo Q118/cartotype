@@ -13,8 +13,7 @@ function Store() {
     const { globalStoreItems, isStoreItemsLoading, storeItemsError } = useShoppingCart();
 
     // TODO: come back and useQuery and set up lazy continuous loading.../paginationSituation
-
-    console.log(isStoreItemsLoading());
+    // * for the images while they are white and loading.. display react-skeleton
 
     return (
         <>

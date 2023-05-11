@@ -10,7 +10,8 @@ import { Tag, Note } from '../../types';
 import { EditTagsModal } from './EditTagsModal';
 import { NoteCard } from './NoteCard';
 import Spinner from 'react-bootstrap/Spinner';
-
+// import Skeleton from 'react-loading-skeleton';
+// import 'react-loading-skeleton/dist/skeleton.css';
 
 type NoteListProps = {
     availableTags: Tag[];
@@ -40,71 +41,87 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
         })
     }, [ title, selectedTags, notes ]);
 
+    // using a asthetic arbitruary amount of skeleton cards
+    // const skeletonArray = new Array(notes.length).fill(<Skeleton height={150} />);
+    // * i mean i like this the skeletons.. .but i dont love it
+
+    const spinnerSituation = () => {
+        return (
+            <div className="text-center">
+                <Spinner animation="grow" variant="success" size="sm" />
+                <Spinner animation="grow" variant="success" />
+                <Spinner animation="grow" variant="success" size="sm" />
+                <Spinner animation="grow" variant="success" />
+                <Spinner animation="grow" variant="success" size="sm" />
+                <Spinner animation="grow" variant="success" />
+                <Spinner animation="grow" variant="success" size="sm" />
+                <Spinner animation="grow" variant="success" />
+            </div>
+        )
+    }
+
+
+
     return (
         <>
-            {notesLoading && (
-                <div>
-                    <Spinner animation="grow" variant="success" />
-                    <p>Loading...</p>
-                    <Spinner animation="grow" variant="success" />
-                </div>
-            )}
-            {!notesLoading && (
-                <>
-                    <Row className="align-items-center mb-4">
-                        <Col><h1>Notes</h1></Col>
-                        {/* //* use xs = auto to forcee it smallas possible while fitting */}
-                        <Col xs="auto">
-                            <Stack gap={2} direction="horizontal">
-                                <Link to="new">
-                                    <Button variant="primary">Create</Button>
-                                </Link>
-                                <Button variant="secondary" onClick={() => setEditTagsModalIsOpen(true)}>
-                                    Edit Tags
-                                </Button>
-                            </Stack>
-                        </Col>
-                    </Row>
-                    <hr />
-                    <Form>
-                        <Row className="mb-4">
-                            <Col>
-                                <Form.Group controlId="title">
-                                    <Form.Label>Title</Form.Label>
-                                    <Form.Control type="text" value={title} placeholder='Search by title'
-                                        onChange={e => setTitle(e.target.value)} />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group controlId="tags">
-                                    <Form.Label>Tags</Form.Label>
-                                    <SelectableWrapper
-                                        createOptionEnabled={false}
-                                        placeholder='Tags to filter by'
-                                        availableTags={availableTags}
-                                        selectedTags={selectedTags}
-                                        setSelectedTags={setSelectedTags}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                    </Form>
-                    <Row xs={1} md={2} lg={3} className="g-3">
-                        {filteredNotes?.map(note => (
+            <Row className="align-items-center mb-4">
+                <Col><h1>Notes</h1></Col>
+                {/* //* use xs = auto to forcee it smallas possible while fitting */}
+                <Col xs="auto">
+                    <Stack gap={2} direction="horizontal">
+                        <Link to="new">
+                            <Button variant="primary">Create</Button>
+                        </Link>
+                        <Button variant="secondary" onClick={() => setEditTagsModalIsOpen(true)}>
+                            Edit Tags
+                        </Button>
+                    </Stack>
+                </Col>
+            </Row>
+            <hr />
+            <Form>
+                <Row className="mb-4">
+                    <Col>
+                        <Form.Group controlId="title">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text" value={title} placeholder='Search by title'
+                                onChange={e => setTitle(e.target.value)} />
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group controlId="tags">
+                            <Form.Label>Tags</Form.Label>
+                            <SelectableWrapper
+                                createOptionEnabled={false}
+                                placeholder='Tags to filter by'
+                                availableTags={availableTags}
+                                selectedTags={selectedTags}
+                                setSelectedTags={setSelectedTags}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </Form>
+            {notesLoading && spinnerSituation()}
+            {!notesLoading && (<>
+                <Row xs={1} md={2} lg={3} className="g-3">
+                    {/* {notesLoading && skeletonArray} */}
+                    {filteredNotes?.map(note => {
+                        return (
                             <Col key={note.id}>
                                 <NoteCard id={note.id} title={note.title} tags={note.tags} />
                             </Col>
-                        ))}
-                    </Row>
-                    <EditTagsModal
-                        show={editTagsModalIsOpen}
-                        handleClose={() => setEditTagsModalIsOpen(false)}
-                        availableTags={availableTags}
-                        onDeleteTag={onDeleteTag}
-                        onUpdateTag={onUpdateTag}
-                    />
-                </>
-            )}
+                        )
+                    })}
+                </Row>
+                <EditTagsModal
+                    show={editTagsModalIsOpen}
+                    handleClose={() => setEditTagsModalIsOpen(false)}
+                    availableTags={availableTags}
+                    onDeleteTag={onDeleteTag}
+                    onUpdateTag={onUpdateTag}
+                />
+            </>)}
         </>
     )
 }
