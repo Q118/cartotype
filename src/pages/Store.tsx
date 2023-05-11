@@ -14,17 +14,19 @@ function Store() {
 
     // TODO: come back and useQuery and set up lazy continuous loading.../paginationSituation
 
+    console.log(isStoreItemsLoading());
+
     return (
         <>
             <h1>Store</h1>
             {storeItemsError && <p>Error: {storeItemsError.message}</p>}
-            {isStoreItemsLoading ? (
-                <div>
+            {isStoreItemsLoading() === true &&
+                (<div>
                     <Spinner animation="grow" variant="success" />
                     <p>Loading...</p>
                     <Spinner animation="grow" variant="success" />
-                </div>
-            ) : (
+                </div>)}
+            {isStoreItemsLoading() === false && (
                 <Row md={2} xs={1} lg={3} className="g-3">
                     {globalStoreItems?.map((item: StoreItemType) => (
                         <Col key={item.id}>

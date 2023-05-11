@@ -44,7 +44,7 @@ type ShoppingCartContext = {
     addNotificationToast: (message: string) => void;
     removeNotificationToast: (id: string) => void;
     /** states for the api calls */
-    isStoreItemsLoading: boolean;
+    isStoreItemsLoading: () => boolean;
     // isStoreItemsFetching: boolean;
     storeItemsError: any;
     /** handle refetch after an update */
@@ -70,13 +70,15 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     // const [globalStoreItemTags, setGlobalStoreItemTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
     const [globalStoreItemTags, setGlobalStoreItemTags] = useState<StoreItemTag[]>([]);
 
-
-
+    
+    
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
         queryKey: [`get-all-store-items`],
         queryFn: async () => await getStoreItems(),
         enabled: true,
     });
+
+    // const isStoreItemsLoading = isLoading || isFetching;
 
     useEffect(() => {
         if (storeItems?.length > 0) {
@@ -86,7 +88,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             }));
         }
     }, [JSON.stringify(storeItems)]);
-    const isStoreItemsLoading = isLoading || isFetching;
 
     // this calculates the total quantity of items in the cart
     const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
@@ -163,7 +164,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             setNotificationToasts,
             addNotificationToast,
             removeNotificationToast,
-            isStoreItemsLoading,
+            isStoreItemsLoading: () => isLoading|| isFetching,
             storeItemsError,
             refreshStoreItems,
             globalStoreItemTags,

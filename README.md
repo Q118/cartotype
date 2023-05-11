@@ -20,8 +20,8 @@ Aim is to keep components “pure” without overcomplicating modularization.
 ## Run the app locally
     - go to the root directory
     - `npm install`
-    - `npm run dev` in one terminal
-    - `npm run db` in another terminal
+    - `npm run dev`
+    - go to http://localhost:5173
 
 
 #### This app is also a collection of agnostic components intended to be able to be plugged into any React app

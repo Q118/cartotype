@@ -11,7 +11,7 @@ import { Notes as NoteConstructor } from '../api/lib/notes';
 import { MdEditNote } from 'react-icons/md';
 
 // TODO: chang from devNotes to prodNotes or whatever end up using
-// * or potentially using loginSession info
+// * or potentially using loginSession info for the folder name :)
 const NOTE_SUBFOLDER = 'devNotes';
 
 
@@ -108,6 +108,7 @@ export function Notes() {
                     notes={notesWithTags}
                     onUpdateTag={updateTag}
                     onDeleteTag={deleteTag}
+                    notesLoading={isLoading || isFetching}
                 />} />
                 <Route path="/new" element={<NewNote
                     onSubmit={onCreateNote}

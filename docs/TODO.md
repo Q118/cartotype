@@ -1,12 +1,10 @@
 <!-- // a lot of logic will need to be made bc like it WAS expecting that json list and now i need to UPDATE THROUGHOUT to have it use the db! -->... 
 <!-- ** to get it deployed.. make a pr to master -->
-<!-- add user seperation? logins... -->
-<!-- TODO: make the whpole app be agnostic.... like a total agnostic that could just be skeleton and any kind of data thats realted to eachother could e pluugged into it... or really just great skeleton to use for any starting point wiht a new React App -->
-<!-- TODO: change every console.log to logger -->
+<!-- maybe dont use the buckets.. just use jsonb datatype in a postgresql  -->
 
 !!!!!!!!!!!!!!!!!!!!!!!
 # ONE
-<!--TODO NEXT::: keep going and make ALL necessary changes to accomodate SUpabase migration forom db.json and also the notwes stuff tpp-->
+<!--TODO NEXT::: keep going and make ALL necessary changes to accomodate SUpabase migration forom db.json :: continue with the notes.. it can read them all but need to make changes for the rest of the methods..update.. insert etc... -->
 !!!!!!!!!!!!!!!!!!!!!!!
 *****NOW*****
 # TWO
@@ -21,7 +19,10 @@
 
 
 
--->
+<!-- add user seperation? logins... -->
+<!-- TODO: make the whpole app be agnostic.... like a total agnostic that could just be skeleton and any kind of data thats realted to eachother could e pluugged into it... or really just great skeleton to use for any starting point wiht a new React App -->
+<!-- TODO: change every console.log to logger -->
+
 
 
 - in admin and Store: make the loading appear until the photos are fully rendered SO THAT the user doesnt see those ugly blank squares.
