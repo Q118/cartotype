@@ -14,7 +14,7 @@ import { MdEditNote } from 'react-icons/md';
 
 // TODO: chang from devNotes to prodNotes or whatever end up using
 // * or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
-const NOTE_SUBFOLDER = 'devNotes';
+const NOTE_SUBPARTITION = 'dev';
 
 
 export function Notes() {
@@ -23,7 +23,7 @@ export function Notes() {
     const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
 
     // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
-
+    // !! PU in here.. do all the cruding for the notes..
 
     const {
         data: notes,
@@ -34,12 +34,11 @@ export function Notes() {
     }: any = useQuery({
         queryKey: [ `get-all-notes` ],
         queryFn: async () => {
-            const allNotes = await NoteConstructor.getAllNotes(NOTE_SUBFOLDER);
+            const allNotes = await NoteConstructor.getAllNotes(NOTE_SUBPARTITION);
             return allNotes;
         },
         enabled: true,
-    }); // big part of why this takes longer than storeItems is that the storeItems query is enabled in the global context, so the cache is already loaded when the page is loaded, whereas this is not the case for the notes query bc its in here in its own compoent... (not necessarily slower bc of buckets but it may be..)
-
+    });
 
     useEffect(() => {
         if (notes) setUserNotes(notes);
@@ -109,7 +108,8 @@ export function Notes() {
                     notes={notesWithTags}
                     onUpdateTag={updateTag}
                     onDeleteTag={deleteTag}
-                    notesLoading={isLoading || isFetching}
+                    // notesLoading={isLoading || isFetching} yea we dont need an also for fetching bx the data is already there...
+                    notesLoading={isLoading}
                 />} />
                 <Route path="/new" element={<NewNote
                     onSubmit={onCreateNote}

@@ -48,7 +48,7 @@ export class SupabaseTableFactory {
             .select('*')
             .order(orderBy, { ascending: ascending });
         if (error) handleError(error, []);
-        return data;
+        return data || [];
     }
 
     async getItemById(id: string) {

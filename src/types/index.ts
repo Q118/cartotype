@@ -33,6 +33,11 @@ export type StoreItemTag = {
     label: string;
 }
 
+/** use plain Note for the displaying notes i.e. holding the objects for the tags.. raw notes for backendish thigns */
+export type Note = {
+    id: string;
+} & NoteData;
+
 export type NoteData = {
     title: string;
     markdown: string;
@@ -45,10 +50,8 @@ export type Tag = {
     label: string;
 }
 
-export type Note = {
-    id: string;
-} & NoteData;
 
+/** more for data in raw form, backend, fetching etc */
 export type RawNote = {
     id: string;
 } & RawNotedata;
@@ -56,6 +59,7 @@ export type RawNote = {
 export type RawNotedata = {
     title: string;
     markdown: string;
+    created_at?: string;
     tagIds: string[];
     /** array of 0 or more storeItemIds that the note associated with */
     storeItemIds?: string[];

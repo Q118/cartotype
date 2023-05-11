@@ -119,6 +119,7 @@ export class SupabaseBucketFactory {
         const { data, error } = await this.client.storage
             .from(this.bucketName)
             .createSignedUrl(`${folderPath}/${fileName}`, 60);
+            //?? ooo okay yea use creaturlsssss and optu on in tto the function
         if (error) handleError(error, {});
         if (data) {
             const response = await fetch(data.signedUrl);

@@ -13,6 +13,7 @@ import { NoteCard } from './NoteCard';
 // import 'react-loading-skeleton/dist/skeleton.css';
 import { LoadingDivComponent } from '../LoadingDivComponent';
 
+// TODO: okay so just listenign for isLoading BUT TODO:::: when isFetching have another little square skeltopn loading in iits next spot to signify hey we are loading a new one but keeping the rest of the already loading ones there
 
 type NoteListProps = {
     availableTags: Tag[];

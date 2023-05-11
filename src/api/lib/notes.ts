@@ -1,37 +1,32 @@
-import { SupabaseBucketFactory, FileObject } from "../models/SupabaseBucket";
+// import { SupabaseBucketFactory, FileObject } from "../models/SupabaseBucket";
+import { SupabaseTableFactory } from "../models/SupabaseTable";
 import { RawNote } from "../../types";
-// TODO come back and do this
+// TODO CONVERT THIS TO USE THE DB AND NOT THE STORAGE...
 
 
-export class Notes extends SupabaseBucketFactory {
-    subFolderName!: string;
+export class Notes extends SupabaseTableFactory {
+    // subFolderName!: string;
+    // tableName!: string;
+    subPartitionName!: string;
+    // TODO future tableName will break apart by user. maybe.
 
-
-
-    constructor(subFolderName: string) {
+    constructor(subPartitionName: string) {
         // attach all methods from parent class
-        super('notes', subFolderName);
+        super(`notes_${subPartitionName}`);
         this.getAllNotes = this.getAllNotes.bind(this);
     }
 
+    async getAllNotes() {
+        let allNotes: Partial<RawNote>[] = [];
 
-    async getAllNotes(): Promise<RawNote[]> {
-        const allNoteData: FileObject[] = await this.listAllFiles();
-        let allNotes: RawNote[] = [];
-        for await (const note of allNoteData) {
-            let noteObject = await this.getFileContent(this.subFolder, note.name);
-            if (!noteObject) return [];
-            allNotes.push({
-                id: note.name,
-                title: noteObject.title,
-                markdown: noteObject.markdown,
-                tagIds: noteObject.tagIds,
-                //TODO change below like in the supabase bucket to only house ids.
-                storeItemIds: noteObject.storeItemTags.map((storeItemTag: any) => storeItemTag.id),
-            });
-        }
+        allNotes = await this.getAllItems('id', true);
+
+
+
+
         return allNotes;
-    }
+    };
+
 
     addNote(fileName: string, fileBody: string) {
         // TODO change the storeItemTags to only house ids.
