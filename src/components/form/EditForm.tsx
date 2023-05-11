@@ -20,7 +20,7 @@ type EditFormData = {
     price: StorePrice;
     /** storeTitle aka the new title user may choose */
     storeTitle: string;
-    isDataLoading: boolean;
+    isDataLoading: () => boolean;
 };
 
 const INITIAL_DATA: EditFormData = {
@@ -28,7 +28,7 @@ const INITIAL_DATA: EditFormData = {
     selectedItem: null,
     price: { dollars: 0, cents: 0 },
     storeTitle: '',
-    isDataLoading: false,
+    isDataLoading: () => false,
 };
 
 export function EditForm() {
@@ -51,7 +51,7 @@ export function EditForm() {
             {...data}
             editMode={true}
             selectOptions={globalStoreItems}
-            isDataLoading={isStoreItemsLoading}
+            isDataLoading={() => isStoreItemsLoading()}
             refreshData={() => refreshStoreItems()}
             updateFields={updateFields}
         />,

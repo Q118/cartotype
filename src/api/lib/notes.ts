@@ -36,13 +36,9 @@ export class Notes extends SupabaseTableFactory {
 
     static async getAllNotes(subFolderName: string) {
         const notes = Notes.create(subFolderName);
-        // notes.getAllNotes().then((notes) => {
-        //     console.log('notes in getAllNotes', notes);
-        //     return notes;
-        // });
         const allNotes = await notes.getAllNotes();
         return allNotes.map((note) => {
-            console.log('note', note.markdown.markdown);
+            // * we need to grab the nested markdown string from the markdown object thats stored in the table that cannot hold specailk characters either
             note.markdown = note.markdown.markdown as string;
             return note;
         });
