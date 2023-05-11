@@ -58,7 +58,8 @@ export type RawNote = {
 
 export type RawNotedata = {
     title: string;
-    markdown: string;
+    // markdown: string | { markdown: string };
+    markdown: any;
     created_at?: string;
     tagIds: string[];
     /** array of 0 or more storeItemIds that the note associated with */
