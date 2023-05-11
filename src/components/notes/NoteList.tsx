@@ -9,9 +9,10 @@ import { SelectableWrapper } from '../../utilities/SelectableWrapper';
 import { Tag, Note } from '../../types';
 import { EditTagsModal } from './EditTagsModal';
 import { NoteCard } from './NoteCard';
-import Spinner from 'react-bootstrap/Spinner';
 // import Skeleton from 'react-loading-skeleton';
 // import 'react-loading-skeleton/dist/skeleton.css';
+import { LoadingDivComponent } from '../LoadingDivComponent';
+
 
 type NoteListProps = {
     availableTags: Tag[];
@@ -44,21 +45,6 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
     // using a asthetic arbitruary amount of skeleton cards
     // const skeletonArray = new Array(notes.length).fill(<Skeleton height={150} />);
     // * i mean i like this the skeletons.. .but i dont love it
-
-    const spinnerSituation = () => {
-        return (
-            <div className="text-center">
-                <Spinner animation="grow" variant="success" size="sm" />
-                <Spinner animation="grow" variant="success" />
-                <Spinner animation="grow" variant="success" size="sm" />
-                <Spinner animation="grow" variant="success" />
-                <Spinner animation="grow" variant="success" size="sm" />
-                <Spinner animation="grow" variant="success" />
-                <Spinner animation="grow" variant="success" size="sm" />
-                <Spinner animation="grow" variant="success" />
-            </div>
-        )
-    }
 
 
 
@@ -102,7 +88,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                     </Col>
                 </Row>
             </Form>
-            {notesLoading && spinnerSituation()}
+            {notesLoading && <LoadingDivComponent />}
             {!notesLoading && (<>
                 <Row xs={1} md={2} lg={3} className="g-3">
                     {/* {notesLoading && skeletonArray} */}
