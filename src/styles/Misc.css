@@ -199,7 +199,11 @@ textarea {
     color: var(--modal-text-color) !important;
 }
 
-
+/** Badges and Tags o my! */
+.raw-tag-badge {
+    background-color: var(--tag-background) !important;
+    color: var(--btn-text) !important;
+}
 
 
 
