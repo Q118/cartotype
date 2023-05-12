@@ -40,7 +40,7 @@ function App() {
                                 {/* // TODO display flash toast if get redirected */}
                                 {/* <Route path="/demo/*" element={<TimeAgo />} /> */}
                                 <Route path="/notes/*" element={<Notes />} />
-                                <Route path="*" element={<Navigate to="/" />} />
+                                {/* <Route path="*" element={<Navigate to="/" />} /> */}
                                 {/* <Route path="*" element={<>Not Found</>} /> */}
                             </Routes>
                             <ShoppingCart />

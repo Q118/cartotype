@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { FormApp } from "../components/form/AddForm";
 import { EditForm } from "../components/form/EditForm";
 import { Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
-
+import { CartButton } from '../components/Buttons';
 
 // TODO: turn the buttons in to tabs so that they each are tabs for each page
 
@@ -30,6 +30,7 @@ export function Admin() {
                     <Button variant="outline-light" className="cart-button" onClick={() => setFormPath(type)}>
                         {title}
                     </Button>
+                    {/* <CartButton title={title} clickHandler={setFormPath(type)} /> */}
                 </OverlayTrigger>
             </Col>
         )
