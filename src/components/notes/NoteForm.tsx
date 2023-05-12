@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag, StoreItem, StoreItemTag } from '../../types';
 import { SelectableWrapper } from '../../utilities/SelectableWrapper';
-import { useShoppingCart } from '../../context/ShoppingCartContext';
+// import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 type NoteFormProps = {
     onSubmit: (data: NoteData) => void;

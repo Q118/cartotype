@@ -12,7 +12,8 @@ import { useLibNote } from '../api/hooks/useLibNote';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 
 // TODO; displayyyy teh storeItemTagss ;; confirmed they are mapped correctly
-// dusplay them in the LIST and also make them shop up in the edit form
+// dusplay them in the LIST
+// // and also make them shop up in the edit form
 
 
 // TODO[future]: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
@@ -25,9 +26,6 @@ export function Notes() {
     /** notes and tags for the current user session */
     const [ userNotes, setUserNotes ] = useState<RawNote[]>([]);
     const [ userTags, setUserTags ] = useState<Tag[]>([]);
-    // const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
-    // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
-    // const { notes, isNotesLoading, refetchNotes} = useLibNote();
 
     const { addNotificationToast, globalStoreItems, globalStoreItemTags } = useShoppingCart();
 
@@ -44,16 +42,8 @@ export function Notes() {
     });
 
     useEffect(() => { if (notes) setUserNotes(notes); }, [ notes ]);
-    useEffect(() => { if (tags) setUserTags(tags); console.log(tags) }, [ tags ]);
+    useEffect(() => { if (tags) setUserTags(tags); }, [ tags ]);
 
-
-    /*
-        const availableStoreTags = useMemo(() => {
-            return globalStoreItems?.map((storeItem: StoreItem) => {
-                return { id: storeItem.id, label: storeItem.name }
-            })
-        }, [ globalStoreItems ]);
-    */
     const notesWithTags = useMemo(() => {
         return userNotes?.map((note: any) => {
             return {

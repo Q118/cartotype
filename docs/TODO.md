@@ -2,15 +2,11 @@
 <!-- ** to get it deployed.. make a pr to master -->
 <!-- maybe dont use the buckets.. just use jsonb datatype in a postgresql  -->
 
-!!!!!!!!!!!!!!!!!!!!!!!
-# ONE
-<!--TODO NEXT::: keep going and make ALL necessary changes to accomodate SUpabase migration forom db.json :: continue with the notes.. it can read them all but need to make changes for the rest of the methods..update.. insert etc..  and the tags next... RETURN TO pages/NOTES.tsx. -->
-!!!!!!!!!!!!!!!!!!!!!!!
+
 *****NOW*****
-# TWO
 <!-- * okay just keep going and do stuff below: (got the storeItem tags persisting)-->
 <!-- ! Work on this next.. and start the linkedIn course yaaa
-? THEN.. start to hook it up to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
+? THEN.. start to hook up the notes and tagging to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
 *  the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others] ... its like a portal...
 ! click on the note symbol on the storeItemCard => opens up notes view of all notes that relate to that store item... so using like routing for that in the url... also an addNote option from the storeItem itseldf?
 ? but if you hover over the symbol in the shop.. the popup holds the titles of all the notes related to it...

@@ -14,10 +14,8 @@ type EditNoteProps = {
 
 export function EditNote({ onSubmit, onAddTag, availableTags, availableStoreTags }: EditNoteProps): JSX.Element {
     
-    console.log('availableStoreTags', availableStoreTags)
+    // console.log('availableStoreTags', availableStoreTags)
     const note = useNote();
-    console.log('note in EditNote', note);
-    // const storeItemsIds = note.storeItemTags?.map(storeItemTag => storeItemTag.id);
 
     return (
         <>
