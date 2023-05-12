@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { RawNote, NoteData, StoreItemTag, RawNotedata } from '../../types';
+// import { useQuery } from '@tanstack/react-query';
+import { NoteData, StoreItemTag } from '../../types';
 import { Notes as NoteConstructor } from '../lib/notes';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -15,23 +15,6 @@ const NOTE_SUBPARTITION = 'dev';
 export function useLibNote({ tags, ...data }: NoteData, fetchCallback: () => void, note_id: string = '') {
     const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
     const handleStoreItemTags = (storeItemTags: StoreItemTag[]) => storeItemTags.map(tag => tag.id);
-
-/*
-    const {
-        data: notes,
-        isLoading: isNotesLoading,
-        error: notesError,
-        refetch: refetchNotes,
-        isFetching
-    }: any = useQuery({
-        queryKey: [ `get-all-notes` ],
-        queryFn: async () => {
-            const allNotes = await NoteConstructor.getAllNotes(NOTE_SUBPARTITION);
-            return allNotes;
-        },
-        enabled: true,
-    });
-    */
 
     async function onCreate() {
         let storeItemIds: string[] = [];
@@ -69,8 +52,5 @@ export function useLibNote({ tags, ...data }: NoteData, fetchCallback: () => voi
     return {
         onCreate,
         onUpdate,
-        // notes,
-        // isNotesLoading,
-        // notesError
     };
 }

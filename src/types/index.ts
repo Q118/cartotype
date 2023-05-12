@@ -48,6 +48,7 @@ export type NoteData = {
 export type Tag = {
     id: string;
     label: string;
+    created_at?: string;
 }
 
 

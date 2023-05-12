@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { v4 as uuidv4 } from 'uuid';
 import Container from 'react-bootstrap/Container';
-import { NoteData, RawNote, StoreItemTag, Tag } from '../types';
-// import { useLocalStorage } from '../hooks/useLocalStorage';
+
+import { NoteData, RawNote, StoreItemTag, Tag, StoreItem } from '../types';
 import { Note, NewNote, NoteList, NoteLayout, EditNote } from '../components/notes';
 import { Notes as NoteConstructor } from '../api/lib/notes';
 import { MdEditNote } from 'react-icons/md';
@@ -13,8 +12,8 @@ import { useLibNote } from '../api/hooks/useLibNote';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 
 // TODO; displayyyy teh storeItemTagss ;; confirmed they are mapped correctly
+// dusplay them in the LIST and also make them shop up in the edit form
 
-// TODO add notifictions for crud actions
 
 // TODO[future]: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
 const NOTE_SUBPARTITION = 'dev';
@@ -30,7 +29,7 @@ export function Notes() {
     // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
     // const { notes, isNotesLoading, refetchNotes} = useLibNote();
 
-    const { addNotificationToast } = useShoppingCart();
+    const { addNotificationToast, globalStoreItems, globalStoreItemTags } = useShoppingCart();
 
     const { data: notes, isLoading, error: notesError, refetch: refetchNotes, isFetching }: any = useQuery({
         queryKey: [ `get-all-notes` ],
@@ -45,13 +44,26 @@ export function Notes() {
     });
 
     useEffect(() => { if (notes) setUserNotes(notes); }, [ notes ]);
-    useEffect(() => { if (tags) setUserTags(tags); }, [ tags ]);
+    useEffect(() => { if (tags) setUserTags(tags); console.log(tags) }, [ tags ]);
 
+
+    /*
+        const availableStoreTags = useMemo(() => {
+            return globalStoreItems?.map((storeItem: StoreItem) => {
+                return { id: storeItem.id, label: storeItem.name }
+            })
+        }, [ globalStoreItems ]);
+    */
     const notesWithTags = useMemo(() => {
         return userNotes?.map((note: any) => {
-            return { ...note, tags: userTags.filter(tag => note.tagIds?.includes(tag.id)) }
-        })
+            return {
+                ...note,
+                tags: userTags.filter(tag => note.tagIds?.includes(tag.id)),
+                storeItemTags: globalStoreItemTags.filter(storeItemTag => note.storeItemIds?.includes(storeItemTag.id))
+            }
+        }) // this will be a note with the tags array populated
     }, [ userNotes, userTags ]);
+
 
     /**  post it to the data base */
     function onCreateNote({ tags, ...data }: NoteData) {
@@ -67,13 +79,13 @@ export function Notes() {
     }
 
     function onDeleteNote(id: string) {
-        // TODO set alert to confirm delete
+        // TODO set alert to confirm delete and move this into the hooklib
         let userConfirm = window.confirm('Are you sure you want to delete this note?');
         if (!userConfirm) return;
         const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
-        noteClient.deleteNote(id).then((res: any) => { 
+        noteClient.deleteNote(id).then((res: any) => {
             addNotificationToast(`Successfully deleted note!`);
-            refetchNotes(); 
+            refetchNotes();
         }).catch((err: any) => {
             console.error(err);
         });
@@ -113,7 +125,6 @@ export function Notes() {
                 <MdEditNote size={32} />
                 <MdEditNote size={32} />
             </div>
-
             <Routes>
                 <Route path="/" element={<NoteList
                     availableTags={userTags}
@@ -127,6 +138,8 @@ export function Notes() {
                     onSubmit={onCreateNote}
                     onAddTag={addTag}
                     availableTags={userTags}
+                    availableStoreTags={globalStoreItemTags}
+
                 />} />
                 <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
                     <Route index element={<Note onDelete={onDeleteNote} />} />
@@ -134,6 +147,7 @@ export function Notes() {
                         onSubmit={onUpdateNote}
                         onAddTag={addTag}
                         availableTags={userTags}
+                        availableStoreTags={globalStoreItemTags}
                     />} />
                 </Route>
                 <Route path="*" element={<>Not Found</>} />
