@@ -1,28 +1,32 @@
 import { useEffect, useMemo, useState } from 'react';
-import { NoteData, RawNote, StoreItemTag, Tag } from '../types';
-import { v4 as uuidv4 } from 'uuid';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import Container from 'react-bootstrap/Container';
 import { Route, Routes } from 'react-router-dom';
-import { Note, NewNote, NoteList, NoteLayout, EditNote } from '../components/notes';
-
 import { useQuery } from '@tanstack/react-query';
+import { v4 as uuidv4 } from 'uuid';
+import Container from 'react-bootstrap/Container';
+import { NoteData, RawNote, StoreItemTag, Tag } from '../types';
+// import { useLocalStorage } from '../hooks/useLocalStorage';
+import { Note, NewNote, NoteList, NoteLayout, EditNote } from '../components/notes';
 import { Notes as NoteConstructor } from '../api/lib/notes';
 import { MdEditNote } from 'react-icons/md';
+import { Tags as TagConstructor } from '../api/lib/tags';
+// TODO; displayyyy teh storeItemTagss
 
 
-
-// TODO: chang from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
+// TODO: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
 const NOTE_SUBPARTITION = 'dev';
-
+const TAG_SUBPARTITION = 'dev';
+// TODO modulate this into a hook??? that can be used by tags or notes or whatever.. but really TODO modulate this....
+//!! look how im doing the same thing for tags and for notes... (hook>)
 
 export function Notes() {
-    /** notes for the current user session */
+    /** notes and tags for the current user session */
     const [ userNotes, setUserNotes ] = useState<RawNote[]>([]);
-    const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
+    const [ userTags, setUserTags ] = useState<Tag[]>([]);
+    // const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
+
     // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
     // !!!!!!!!!!!!!!!!
-    // !! PU in here.. do all the cruding for the notes..and then move on to tags and shiz..
+    // !! PU in here..then move on to tags and shiz..
 
     const { data: notes, isLoading, error: notesError, refetch: refetchNotes, isFetching }: any = useQuery({
         queryKey: [ `get-all-notes` ],
@@ -33,13 +37,23 @@ export function Notes() {
         enabled: true,
     });
 
+    const { data: tags, isLoading: tagsLoading, error: tagsError, refetch: refetchTags, isFetching: isTagFetching }: any = useQuery({
+        queryKey: [ `get-all-tags` ],
+        queryFn: async () => {
+            const allTags = await TagConstructor.getAllTags(TAG_SUBPARTITION);
+            return allTags;
+        },
+        enabled: true,
+    });
+
     useEffect(() => { if (notes) setUserNotes(notes); }, [ notes ]);
+    useEffect(() => { if (tags) setUserTags(tags); }, [ tags ]);
 
     const notesWithTags = useMemo(() => {
         return userNotes?.map((note: any) => {
-            return { ...note, tags: tags.filter(tag => note.tagIds?.includes(tag.id)) }
+            return { ...note, tags: userTags.filter(tag => note.tagIds?.includes(tag.id)) }
         })
-    }, [ userNotes, tags ]);
+    }, [ userNotes, userTags ]);
 
     const handleStoreItemTags = (storeItemTags: StoreItemTag[]) => storeItemTags.map(tag => tag.id);
 
@@ -59,7 +73,6 @@ export function Notes() {
         });
     }
 
-
     function onUpdateNote(id: string, { tags, ...data }: NoteData) {
         const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
         let storeItemIds: string[] = [];
@@ -77,31 +90,35 @@ export function Notes() {
 
     function onDeleteNote(id: string) {
         // TODO set alert to confirm delete
-        //then if confirmed delete it
+        let userConfirm = window.confirm('Are you sure you want to delete this note?');
+        if (!userConfirm) return;
         const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
         noteClient.deleteNote(id).then((res: any) => { refetchNotes(); }).catch((err: any) => {
             console.error(err);
         });
-        // setUserNotes(prevNotes => {
-        // return prevNotes.filter(note => note.id !== id)
-        // })
     }
 
     function addTag(tag: Tag) {
-        setTags(prev => [ ...prev, tag ]);
-        // setStoreTags(prev => [...prev, tag])
+        const tagClient = new TagConstructor(TAG_SUBPARTITION);
+        tagClient.addTag(tag).then((res: any) => { refetchTags(); }).catch((err: any) => {
+            console.error(err);
+        });
     }
     function updateTag(id: string, label: string) {
-        setTags(prevTags => {
-            return prevTags.map(tag => {
-                if (tag.id !== id) return tag;
-                return { ...tag, label }
-            })
-        })
+        // setUserTags(prevTags => {
+        //     return prevTags.map(tag => {
+        //         if (tag.id !== id) return tag;
+        //         return { ...tag, label }
+        //     })
+        // })
+        const tagClient = new TagConstructor(TAG_SUBPARTITION);
+        tagClient.updateTag({ id, label }).then((res: any) => { refetchTags(); }).catch((err: any) => {
+            console.error(err);
+        });
     }
 
     function deleteTag(id: string) {
-        setTags(prevTags => {
+        setUserTags(prevTags => {
             return prevTags.filter(tag => tag.id !== id)
         })
     }
@@ -119,7 +136,7 @@ export function Notes() {
 
             <Routes>
                 <Route path="/" element={<NoteList
-                    availableTags={tags}
+                    availableTags={userTags}
                     notes={notesWithTags}
                     onUpdateTag={updateTag}
                     onDeleteTag={deleteTag}
@@ -129,14 +146,14 @@ export function Notes() {
                 <Route path="/new" element={<NewNote
                     onSubmit={onCreateNote}
                     onAddTag={addTag}
-                    availableTags={tags}
+                    availableTags={userTags}
                 />} />
                 <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
                     <Route index element={<Note onDelete={onDeleteNote} />} />
                     <Route path="edit" element={<EditNote
                         onSubmit={onUpdateNote}
                         onAddTag={addTag}
-                        availableTags={tags}
+                        availableTags={userTags}
                     />} />
                 </Route>
                 <Route path="*" element={<>Not Found</>} />

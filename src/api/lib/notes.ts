@@ -16,6 +16,7 @@ export class Notes extends SupabaseTableFactory {
         this.getAllNotes = this.getAllNotes.bind(this);
         // this.getNoteById = this.getNoteById.bind(this);
         // this.getNoteFromTags = this.getNoteFromTags.bind(this);
+        // TODO implement these other four
         // this.getNoteFromTitle = this.getNoteFromTitle.bind(this);
         // this.getNoteFromStoreTags = this.getNoteFromStoreTags.bind(this);
         this.addNote = this.addNote.bind(this);
