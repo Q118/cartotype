@@ -21,7 +21,6 @@ export function Notes() {
     /** notes for the current user session */
     const [ userNotes, setUserNotes ] = useState<RawNote[]>([]);
     const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
-
     // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
     // !! PU in here.. do all the cruding for the notes..
 
@@ -51,9 +50,28 @@ export function Notes() {
     }, [ userNotes, tags ]);
 
     function onCreateNote({ tags, ...data }: NoteData) {
-        setUserNotes((prevNotes: any) => {
-            return [ ...prevNotes, { ...data, id: uuidv4(), tagIds: tags.map(tag => tag.id) } ]
-        })
+        // post it to the data base
+        const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
+        let storeItemIds: string[] = [];
+        if (data.storeItemTags) {
+            storeItemIds = data.storeItemTags.map(storeItemTag => storeItemTag.id);
+        }
+        delete data.storeItemTags;
+        noteClient.addNote({
+            ...data,
+            id: uuidv4(),
+            storeItemIds: storeItemIds,
+            tagIds: tags.map(tag => tag.id)
+        }).then((res: any) => {
+            console.log('res', res);
+            refetchNotes();
+        }).catch((err: any) => {
+            console.log('err', err);
+        });
+        // then add it into the local state... or trigger a refetch...? then it will just follow the same flow as the other notes
+        // setUserNotes((prevNotes: any) => {
+        //     return [ ...prevNotes, { ...data, id: uuidv4(), tagIds: tags.map(tag => tag.id) } ]
+        // })
     }
 
     function addTag(tag: Tag) {

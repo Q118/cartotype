@@ -14,20 +14,27 @@ export class Notes extends SupabaseTableFactory {
         // attach all methods from parent class
         super(`notes_${subPartitionName}`);
         this.getAllNotes = this.getAllNotes.bind(this);
+        // this.getNoteById = this.getNoteById.bind(this);
+        // this.getNoteFromTags = this.getNoteFromTags.bind(this);
+        // this.getNoteFromTitle = this.getNoteFromTitle.bind(this);
+        // this.getNoteFromStoreTags = this.getNoteFromStoreTags.bind(this);
+        this.addNote = this.addNote.bind(this);
+        // this.updateNote = this.updateNote.bind(this);
     }
 
     async getAllNotes() {
         let allNotes: Partial<RawNote>[] = [];
-
         allNotes = await this.getAllItems('id', true);
         return allNotes;
     };
 
 
-    // addNote(fileName: string, fileBody: string) {
-    //     // TODO change the storeItemTags to only house ids.
-    //     return this.addFile(fileName, fileBody);
-    // }
+    async addNote(newNote: RawNote) {
+        console.log('newNote', newNote)
+        let retVal: any = {};
+        retVal = await this.addItem(newNote);
+        return retVal;
+    }
 
 
     static create(subFolderName: string) {
