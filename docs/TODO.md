@@ -1,7 +1,4 @@
 <!-- // a lot of logic will need to be made bc like it WAS expecting that json list and now i need to UPDATE THROUGHOUT to have it use the db! -->... 
-<!-- ** to get it deployed.. make a pr to master -->
-<!-- maybe dont use the buckets.. just use jsonb datatype in a postgresql  -->
-
 
 *****NOW*****
 <!-- * okay just keep going and do stuff below: (got the storeItem tags persisting)-->
@@ -20,6 +17,7 @@
 <!-- TODO: change every console.log to logger -->
 
 
+<!-- TODO: make the whpole app be agnostic.... like a total agnostic that could just be skeleton and any kind of data thats realted to eachother could e pluugged into it... or really just great skeleton to use for any starting point wiht a new React App -->
 
 - in admin and Store: make the loading appear until the photos are fully rendered SO THAT the user doesnt see those ugly blank squares.
 
