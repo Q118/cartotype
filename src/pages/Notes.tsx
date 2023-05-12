@@ -15,18 +15,18 @@ import { Tags as TagConstructor } from '../api/lib/tags';
 // TODO: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
 const NOTE_SUBPARTITION = 'dev';
 const TAG_SUBPARTITION = 'dev';
+
 // TODO modulate this into a hook??? that can be used by tags or notes or whatever.. but really TODO modulate this....
 //!! look how im doing the same thing for tags and for notes... (hook>)
+
+// TODO add notifictions for crud actions
 
 export function Notes() {
     /** notes and tags for the current user session */
     const [ userNotes, setUserNotes ] = useState<RawNote[]>([]);
     const [ userTags, setUserTags ] = useState<Tag[]>([]);
     // const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
-
     // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
-    // !!!!!!!!!!!!!!!!
-    // !! PU in here..then move on to tags and shiz..
 
     const { data: notes, isLoading, error: notesError, refetch: refetchNotes, isFetching }: any = useQuery({
         queryKey: [ `get-all-notes` ],
@@ -118,16 +118,15 @@ export function Notes() {
     }
 
     function deleteTag(id: string) {
-        setUserTags(prevTags => {
-            return prevTags.filter(tag => tag.id !== id)
-        })
+        const tagClient = new TagConstructor(TAG_SUBPARTITION);
+        tagClient.deleteTag(id).then((res: any) => { refetchTags(); }).catch((err: any) => {
+            console.error(err);
+        });
     }
 
 
     return (
         <Container className="my-4">
-            {/* <h4>Notes Page</h4> */}
-            {/* <hr /> */}
             <div className='text-center'>
                 <MdEditNote size={32} />
                 <MdEditNote size={32} />
