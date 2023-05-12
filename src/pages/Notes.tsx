@@ -9,17 +9,18 @@ import { Note, NewNote, NoteList, NoteLayout, EditNote } from '../components/not
 import { Notes as NoteConstructor } from '../api/lib/notes';
 import { MdEditNote } from 'react-icons/md';
 import { Tags as TagConstructor } from '../api/lib/tags';
-// TODO; displayyyy teh storeItemTagss
+import { useLibNote } from '../api/hooks/useLibNote';
+import { useShoppingCart } from '../context/ShoppingCartContext';
 
+// TODO; displayyyy teh storeItemTagss ;; confirmed they are mapped correctly
 
-// TODO: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
+// TODO add notifictions for crud actions
+
+// TODO[future]: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
 const NOTE_SUBPARTITION = 'dev';
 const TAG_SUBPARTITION = 'dev';
 
-// TODO modulate this into a hook??? that can be used by tags or notes or whatever.. but really TODO modulate this....
-//!! look how im doing the same thing for tags and for notes... (hook>)
 
-// TODO add notifictions for crud actions
 
 export function Notes() {
     /** notes and tags for the current user session */
@@ -27,22 +28,19 @@ export function Notes() {
     const [ userTags, setUserTags ] = useState<Tag[]>([]);
     // const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
     // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
+    // const { notes, isNotesLoading, refetchNotes} = useLibNote();
+
+    const { addNotificationToast } = useShoppingCart();
 
     const { data: notes, isLoading, error: notesError, refetch: refetchNotes, isFetching }: any = useQuery({
         queryKey: [ `get-all-notes` ],
-        queryFn: async () => {
-            const allNotes = await NoteConstructor.getAllNotes(NOTE_SUBPARTITION);
-            return allNotes;
-        },
+        queryFn: async () => await NoteConstructor.getAllNotes(NOTE_SUBPARTITION),
         enabled: true,
     });
-
+    // todo may need the loading and errors...
     const { data: tags, isLoading: tagsLoading, error: tagsError, refetch: refetchTags, isFetching: isTagFetching }: any = useQuery({
         queryKey: [ `get-all-tags` ],
-        queryFn: async () => {
-            const allTags = await TagConstructor.getAllTags(TAG_SUBPARTITION);
-            return allTags;
-        },
+        queryFn: async () => await TagConstructor.getAllTags(TAG_SUBPARTITION),
         enabled: true,
     });
 
@@ -55,37 +53,17 @@ export function Notes() {
         })
     }, [ userNotes, userTags ]);
 
-    const handleStoreItemTags = (storeItemTags: StoreItemTag[]) => storeItemTags.map(tag => tag.id);
-
+    /**  post it to the data base */
     function onCreateNote({ tags, ...data }: NoteData) {
-        // post it to the data base
-        const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
-        let storeItemIds: string[] = [];
-        if (data.storeItemTags) storeItemIds = handleStoreItemTags(data.storeItemTags);
-        delete data.storeItemTags;
-        // this is all we need to do bc the effect will update the userNotes
-        noteClient.addNote({
-            ...data, id: uuidv4(),
-            markdown: { "rawText": data.markdown },
-            storeItemIds, tagIds: tags.map(tag => tag.id)
-        }).then((res: any) => { refetchNotes(); }).catch((err: any) => {
-            console.error(err);
-        });
+        const { onCreate } = useLibNote({ tags, ...data }, refetchNotes);
+        onCreate().then(() => addNotificationToast(`Successfully created note, ${data.title}`));
+        return;
     }
 
     function onUpdateNote(id: string, { tags, ...data }: NoteData) {
-        const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
-        let storeItemIds: string[] = [];
-        if (data.storeItemTags) storeItemIds = handleStoreItemTags(data.storeItemTags);
-        delete data.storeItemTags;
-        // this is all we need to do bc the effect will update the userNotes
-        noteClient.updateNote({
-            ...data, id, storeItemIds,
-            markdown: { "rawText": data.markdown },
-            tagIds: tags.map(tag => tag.id)
-        }).then((res: any) => { refetchNotes(); }).catch((err: any) => {
-            console.error(err);
-        });
+        const { onUpdate } = useLibNote({ tags, ...data }, refetchNotes, id);
+        onUpdate().then(() => addNotificationToast(`Successfully updated note, ${data.title}`));
+        return;
     }
 
     function onDeleteNote(id: string) {
@@ -93,7 +71,10 @@ export function Notes() {
         let userConfirm = window.confirm('Are you sure you want to delete this note?');
         if (!userConfirm) return;
         const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
-        noteClient.deleteNote(id).then((res: any) => { refetchNotes(); }).catch((err: any) => {
+        noteClient.deleteNote(id).then((res: any) => { 
+            addNotificationToast(`Successfully deleted note!`);
+            refetchNotes(); 
+        }).catch((err: any) => {
             console.error(err);
         });
     }
