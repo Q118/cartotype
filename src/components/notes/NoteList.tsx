@@ -84,6 +84,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                                 availableTags={availableTags}
                                 selectedTags={selectedTags}
                                 setSelectedTags={setSelectedTags}
+                                isRawTag={true}
                             />
                         </Form.Group>
                     </Col>

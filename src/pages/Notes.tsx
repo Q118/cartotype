@@ -28,6 +28,7 @@ export function Notes() {
     const [ userTags, setUserTags ] = useState<Tag[]>([]);
 
     const { addNotificationToast, globalStoreItems, globalStoreItemTags } = useShoppingCart();
+    const queryObject = {};
 
     const { data: notes, isLoading, error: notesError, refetch: refetchNotes, isFetching }: any = useQuery({
         queryKey: [ `get-all-notes` ],

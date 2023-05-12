@@ -12,6 +12,7 @@ type ThemeContext = {
     currentTheme: Theme;
     setTheme: (theme: Theme) => void;
     getTheme: () => string;
+    isDark: () => boolean;
 };
 
 const ThemeContext = createContext({} as ThemeContext);
@@ -32,7 +33,10 @@ export function ThemeProvider({ children }: ShoppingCartProviderProps) {
         }
     }, [currentTheme]);
 
+
     const getTheme = () => currentTheme;
+    const isDark = () => currentTheme === "dark";
+
 
     function setTheme(theme: Theme) {
         if (theme === "light") {
@@ -50,7 +54,7 @@ export function ThemeProvider({ children }: ShoppingCartProviderProps) {
     }
 
     return (
-        <ThemeContext.Provider value={{ currentTheme, setTheme, getTheme }}>
+        <ThemeContext.Provider value={{ currentTheme, setTheme, getTheme, isDark }}>
             {children}
         </ThemeContext.Provider>
     );

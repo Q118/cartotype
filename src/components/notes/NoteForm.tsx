@@ -68,6 +68,7 @@ export function NoteForm({
                                 selectedTags={selectedTags}
                                 setSelectedTags={setSelectedTags}
                                 onAddTag={onAddTag}
+                                isRawTag={true}
                             />
                         </Form.Group>
                     </Col>
@@ -79,6 +80,7 @@ export function NoteForm({
                                 availableTags={availableStoreTags}
                                 selectedTags={selectedStoreItemTags}
                                 setSelectedTags={setSelectedStoreItemTags}
+                                isRawTag={false}
                             />
                         </Form.Group>
                     </Col>

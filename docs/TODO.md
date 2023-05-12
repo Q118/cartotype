@@ -1,13 +1,13 @@
 <!-- // a lot of logic will need to be made bc like it WAS expecting that json list and now i need to UPDATE THROUGHOUT to have it use the db! -->... 
+pr to master from dev to kick of production deployment
 
 *****NOW*****
-<!-- * okay just keep going and do stuff below: (got the storeItem tags persisting)-->
 <!-- ! Work on this next.. and start the linkedIn course yaaa
 ? THEN.. start to hook up the notes and tagging to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
-*  the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others] ... its like a portal...
-! click on the note symbol on the storeItemCard => opens up notes view of all notes that relate to that store item... so using like routing for that in the url... also an addNote option from the storeItem itseldf?
-? but if you hover over the symbol in the shop.. the popup holds the titles of all the notes related to it...
-... and thenlike vickyverky the notesList too
+    *  the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others] ... its like a portal...
+    ! click on the note symbol on the storeItemCard => opens up notes view of all notes that relate to that store item... so using like routing for that in the url... also an addNote option from the storeItem itseldf?
+    ? but if you hover over the symbol in the shop.. the popup holds the titles of all the notes related to it...
+    ... and thenlike vickyverky the notesList too
 * maybe just something in the top right corner that says which shop itemS it belongs to for teh storeItem and a 
 
 

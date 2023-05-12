@@ -32,9 +32,7 @@ export function Note({ onDelete }: NoteProps) {
                     <Stack gap={2} direction="horizontal">
                         {/* <Link to={`${note.id}/edit`}> */}
                         <Link to="edit">
-                            <Button variant="primary">
-                                Edit
-                            </Button>
+                            <Button variant="primary">Edit</Button>
                         </Link>
                         <Button variant="danger" onClick={() => {
                             onDelete(note.id);
@@ -48,9 +46,6 @@ export function Note({ onDelete }: NoteProps) {
                     </Stack>
                 </Col>
             </Row>
-            {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {note.markdown}
-            </ReactMarkdown> */}
             <ReactMarkdown children={note.markdown} remarkPlugins={[remarkGfm]} />
         </>
     )
