@@ -8,7 +8,7 @@
     --body-text: #f8f9fa;
     --nav-background: #6c757d;
     --tag-background: darkgreen;
-    --storeTag-background: #343a40;
+    --storeTag-background: indigo;
 }
 
 .bg-light {
@@ -21,6 +21,7 @@
     --body-text: #212529;
     --nav-background: #fff;
     --tag-background: lightgreen;
+    --storeTag-background: #e7d1ff;
 }
 
 
@@ -204,7 +205,10 @@ textarea {
     background-color: var(--tag-background) !important;
     color: var(--btn-text) !important;
 }
-
+.store-tag-badge {
+    background-color: var(--storeTag-background) !important;
+    color: var(--btn-text) !important;
+}
 
 
 /** Uncategorized */

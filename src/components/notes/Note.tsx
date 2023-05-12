@@ -29,7 +29,7 @@ export function Note({ onDelete }: NoteProps) {
                     )}
                 </Col>
                 <Col xs="auto">
-                    <Stack gap={2} direction="horizontal">
+                    <Stack gap={2} direction="horizontal" className="mb-2">
                         {/* <Link to={`${note.id}/edit`}> */}
                         <Link to="edit">
                             <Button variant="primary">Edit</Button>
@@ -44,6 +44,16 @@ export function Note({ onDelete }: NoteProps) {
                             <Button variant="secondary">Back</Button>
                         </Link>
                     </Stack>
+                    {/* // !  PUT THE STORE TAGS IN HURRRRRR or uder the others depending on what looks betta... maybe in a different place */}
+                    {note.tags.length > 0 && (
+                        <Stack gap={1} direction="horizontal" className="flex-wrap">
+                            {note.tags.map(tag => (
+                                <Badge className='text-truncate store-tag-badge' key={tag.id}>
+                                    {tag.label}
+                                </Badge>
+                            ))}
+                        </Stack>
+                    )}
                 </Col>
             </Row>
             <ReactMarkdown children={note.markdown} remarkPlugins={[remarkGfm]} />
