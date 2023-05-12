@@ -19,7 +19,7 @@ export class Notes extends SupabaseTableFactory {
         // this.getNoteFromTitle = this.getNoteFromTitle.bind(this);
         // this.getNoteFromStoreTags = this.getNoteFromStoreTags.bind(this);
         this.addNote = this.addNote.bind(this);
-        // this.updateNote = this.updateNote.bind(this);
+        this.updateNote = this.updateNote.bind(this);
     }
 
     async getAllNotes() {
@@ -30,9 +30,15 @@ export class Notes extends SupabaseTableFactory {
 
 
     async addNote(newNote: RawNote) {
-        console.log('newNote', newNote)
+        // console.log('newNote', newNote)
         let retVal: any = {};
         retVal = await this.addItem(newNote);
+        return retVal;
+    }
+
+    async updateNote(updatedNote: RawNote) {
+        let retVal: any = {};
+        retVal = await this.updateItem(updatedNote);
         return retVal;
     }
 
@@ -46,7 +52,7 @@ export class Notes extends SupabaseTableFactory {
         const allNotes = await notes.getAllNotes();
         return allNotes.map((note) => {
             // * we need to grab the nested markdown string from the markdown object thats stored in the table that cannot hold specailk characters either
-            note.markdown = note.markdown.markdown as string;
+            note.markdown = note.markdown.rawText as string;
             return note;
         });
     }

@@ -4,6 +4,8 @@ const supabaseUrl = `https://${import.meta.env.VITE_SUPABASE_NAME}.supabase.co`;
 // const supabaseKey = import.meta.env.MODE === 'development' ? import.meta.env.VITE_DATABASE_API_KEY : process.env.DATABASE_API_KEY;
 const supabaseKey = import.meta.env.VITE_DATABASE_API_KEY;
 
+// TODO pagination
+
 
 const handleError = (error: PostgrestError, retValue: any) => {
     console.error(error);

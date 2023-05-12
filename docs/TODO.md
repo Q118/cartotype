@@ -4,7 +4,7 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!
 # ONE
-<!--TODO NEXT::: keep going and make ALL necessary changes to accomodate SUpabase migration forom db.json :: continue with the notes.. it can read them all but need to make changes for the rest of the methods..update.. insert etc... -->
+<!--TODO NEXT::: keep going and make ALL necessary changes to accomodate SUpabase migration forom db.json :: continue with the notes.. it can read them all but need to make changes for the rest of the methods..update.. insert etc..  and the tags next... RETURN TO pages/NOTES.tsx. -->
 !!!!!!!!!!!!!!!!!!!!!!!
 *****NOW*****
 # TWO

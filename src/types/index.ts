@@ -58,7 +58,7 @@ export type RawNote = {
 
 export type RawNotedata = {
     title: string;
-    // markdown: string | { markdown: string };
+    // markdown: string | { rawText: string };
     markdown: any;
     created_at?: string;
     tagIds: string[];

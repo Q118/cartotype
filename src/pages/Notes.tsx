@@ -12,8 +12,7 @@ import { MdEditNote } from 'react-icons/md';
 
 
 
-// TODO: chang from devNotes to prodNotes or whatever end up using
-// * or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
+// TODO: chang from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
 const NOTE_SUBPARTITION = 'dev';
 
 
@@ -22,7 +21,8 @@ export function Notes() {
     const [ userNotes, setUserNotes ] = useState<RawNote[]>([]);
     const [ tags, setTags ] = useLocalStorage<Tag[]>('TAGS', []);
     // const [storeTags, setStoreTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
-    // !! PU in here.. do all the cruding for the notes..
+    // !!!!!!!!!!!!!!!!
+    // !! PU in here.. do all the cruding for the notes..and then move on to tags and shiz..
 
     const {
         data: notes,
@@ -39,9 +39,7 @@ export function Notes() {
         enabled: true,
     });
 
-    useEffect(() => {
-        if (notes) setUserNotes(notes);
-    }, [ notes ]);
+    useEffect(() => { if (notes) setUserNotes(notes); }, [ notes ]);
 
     const notesWithTags = useMemo(() => {
         return userNotes?.map((note: any) => {
@@ -53,25 +51,17 @@ export function Notes() {
         // post it to the data base
         const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
         let storeItemIds: string[] = [];
-        if (data.storeItemTags) {
-            storeItemIds = data.storeItemTags.map(storeItemTag => storeItemTag.id);
-        }
+        if (data.storeItemTags) storeItemIds = data.storeItemTags.map(storeItemTag => storeItemTag.id);
         delete data.storeItemTags;
+        // this is all we need to do bc the effect will update the userNotes
         noteClient.addNote({
             ...data,
             id: uuidv4(),
             storeItemIds: storeItemIds,
             tagIds: tags.map(tag => tag.id)
-        }).then((res: any) => {
-            console.log('res', res);
-            refetchNotes();
-        }).catch((err: any) => {
-            console.log('err', err);
+        }).then((res: any) => { refetchNotes(); }).catch((err: any) => {
+            console.error(err);
         });
-        // then add it into the local state... or trigger a refetch...? then it will just follow the same flow as the other notes
-        // setUserNotes((prevNotes: any) => {
-        //     return [ ...prevNotes, { ...data, id: uuidv4(), tagIds: tags.map(tag => tag.id) } ]
-        // })
     }
 
     function addTag(tag: Tag) {
@@ -80,12 +70,18 @@ export function Notes() {
     }
 
     function onUpdateNote(id: string, { tags, ...data }: NoteData) {
-        setUserNotes(prevNotes => {
-            return prevNotes.map(note => {
-                if (note.id !== id) return note;
-                return { ...note, ...data, tagIds: tags.map(tag => tag.id) }
-            })
-        })
+        const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
+        let storeItemIds: string[] = [];
+        if (data.storeItemTags) storeItemIds = data.storeItemTags.map(storeItemTag => storeItemTag.id);
+        delete data.storeItemTags;
+        // this is all we need to do bc the effect will update the userNotes
+        noteClient.updateNote({
+            ...data, id, storeItemIds,
+            markdown: { "rawText": data.markdown }, 
+            tagIds: tags.map(tag => tag.id)
+        }).then((res: any) => { refetchNotes(); }).catch((err: any) => {
+            console.error(err);
+        });
     }
 
     function onDeleteNote(id: string) {
