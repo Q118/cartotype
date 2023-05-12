@@ -7,14 +7,15 @@ type EditNoteProps = {
     onSubmit: (id: string, data: NoteData) => void;
     onAddTag: (tag: Tag) => void;
     availableTags: Tag[];
+    availableStoreTags: Tag[];
 }
 
 
 
-export function EditNote({ onSubmit, onAddTag, availableTags }: EditNoteProps): JSX.Element {
+export function EditNote({ onSubmit, onAddTag, availableTags, availableStoreTags }: EditNoteProps): JSX.Element {
+    
+    // console.log('availableStoreTags', availableStoreTags)
     const note = useNote();
-
-    // const storeItemsIds = note.storeItemTags?.map(storeItemTag => storeItemTag.id);
 
     return (
         <>
@@ -25,8 +26,9 @@ export function EditNote({ onSubmit, onAddTag, availableTags }: EditNoteProps): 
                 title={note.title}
                 markdown={note.markdown}
                 tags={note.tags}
+                storeItemTags={note.storeItemTags}
                 availableTags={availableTags}
-                storeTags={note.storeItemTags}
+                availableStoreTags={availableStoreTags}
             />
         </>
     )

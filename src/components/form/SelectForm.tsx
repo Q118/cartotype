@@ -15,7 +15,7 @@ type SelectFormData = {
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
     inputSearch?: string;
-    isDataLoading: boolean;
+    isDataLoading: () => boolean;
     storeTitle?: string;
     refreshData: () => Promise<QueryObserverResult<unknown, unknown>>;
 };
@@ -75,7 +75,7 @@ export function SelectForm({
 
     function findSelection(list: ResultItem[], id: string) {
         for (let x = 0, max = list.length; x < max; x++) {
-            let selectOption = list[x];
+            let selectOption = list[ x ];
             if (selectOption.id === id) return selectOption;
         }
     }
@@ -87,7 +87,7 @@ export function SelectForm({
      */
     function parseStorePrice(price: number): StorePrice {
         const dollars = Math.floor(price);
-        const cents = +(price - dollars).toFixed(2).split('0.')[1];
+        const cents = +(price - dollars).toFixed(2).split('0.')[ 1 ];
         return { dollars, cents };
     }
 
@@ -100,13 +100,14 @@ export function SelectForm({
 
     return (
         <>
-            {isDataLoading === true ? (
+            {isDataLoading() === true && (
                 <div>
                     <Spinner animation="grow" variant="success" />
                     <p>Loading...</p>
                     <Spinner animation="grow" variant="success" />
                 </div>
-            ) : (
+            )}
+            {isDataLoading() === false && (
                 <>
                     {!editMode && (
                         <TooltipWrapper

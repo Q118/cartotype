@@ -9,22 +9,28 @@ import { SelectableWrapper } from '../../utilities/SelectableWrapper';
 import { Tag, Note } from '../../types';
 import { EditTagsModal } from './EditTagsModal';
 import { NoteCard } from './NoteCard';
+// import Skeleton from 'react-loading-skeleton';
+// import 'react-loading-skeleton/dist/skeleton.css';
+import { LoadingDivComponent } from '../LoadingDivComponent';
 
+// TODO: okay so just listenign for isLoading BUT TODO:::: when isFetching have another little square skeltopn loading in iits next spot to signify hey we are loading a new one but keeping the rest of the already loading ones there
 
 type NoteListProps = {
     availableTags: Tag[];
     notes: Note[];
     onDeleteTag: (id: string) => void;
     onUpdateTag: (id: string, label: string) => void;
+    /** holds if the notes data is still loading */
+    notesLoading: boolean;
 }
 
-export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: NoteListProps) {
-    const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
-    const [title, setTitle] = useState('');
-    const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
+export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notesLoading }: NoteListProps) {
+    const [ selectedTags, setSelectedTags ] = useState<Tag[]>([]);
+    const [ title, setTitle ] = useState('');
+    const [ editTagsModalIsOpen, setEditTagsModalIsOpen ] = useState(false);
 
     const filteredNotes = useMemo(() => {
-        return notes.filter(note => {
+        return notes?.filter(note => {
             return (
                 (title === "" ||
                     note.title.toLowerCase().includes(title.toLowerCase())) &&
@@ -35,7 +41,13 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
                     ))
             )
         })
-    }, [title, selectedTags, notes]);
+    }, [ title, selectedTags, notes ]);
+
+    // using a asthetic arbitruary amount of skeleton cards
+    // const skeletonArray = new Array(notes.length).fill(<Skeleton height={150} />);
+    // * i mean i like this the skeletons.. .but i dont love it
+
+
 
     return (
         <>
@@ -77,20 +89,26 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag }: Not
                     </Col>
                 </Row>
             </Form>
-            <Row xs={1} md={2} lg={3} className="g-3">
-                {filteredNotes.map(note => (
-                    <Col key={note.id}>
-                        <NoteCard id={note.id} title={note.title} tags={note.tags} />
-                    </Col>
-                ))}
-            </Row>
-            <EditTagsModal
-                show={editTagsModalIsOpen}
-                handleClose={() => setEditTagsModalIsOpen(false)}
-                availableTags={availableTags}
-                onDeleteTag={onDeleteTag}
-                onUpdateTag={onUpdateTag}
-            />
+            {notesLoading && <LoadingDivComponent />}
+            {!notesLoading && (<>
+                <Row xs={1} md={2} lg={3} className="g-3">
+                    {/* {notesLoading && skeletonArray} */}
+                    {filteredNotes?.map(note => {
+                        return (
+                            <Col key={note.id}>
+                                <NoteCard id={note.id} title={note.title} tags={note.tags} />
+                            </Col>
+                        )
+                    })}
+                </Row>
+                <EditTagsModal
+                    show={editTagsModalIsOpen}
+                    handleClose={() => setEditTagsModalIsOpen(false)}
+                    availableTags={availableTags}
+                    onDeleteTag={onDeleteTag}
+                    onUpdateTag={onUpdateTag}
+                />
+            </>)}
         </>
     )
 }

@@ -7,21 +7,29 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag, StoreItem, StoreItemTag } from '../../types';
 import { SelectableWrapper } from '../../utilities/SelectableWrapper';
-import { useShoppingCart } from '../../context/ShoppingCartContext';
+// import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 type NoteFormProps = {
     onSubmit: (data: NoteData) => void;
     onAddTag: (tag: Tag) => void;
     availableTags: Tag[];
-    storeTags?: StoreItemTag[];
+    availableStoreTags: StoreItemTag[];
 } & Partial<NoteData>; // pass in any of the note data as props but make them optional
 
 
-export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdown = "", tags = [], storeTags = [] }: NoteFormProps): JSX.Element {
-    const { globalStoreItemTags } = useShoppingCart();
-    const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
-    const [selectedStoreItemTags, setSelectedStoreItemTags] = useState<StoreItemTag[]>(storeTags);
-
+export function NoteForm({
+    onSubmit,
+    onAddTag,
+    availableTags,
+    title = "",
+    markdown = "",
+    tags = [],
+    availableStoreTags,
+    storeItemTags = []
+}: NoteFormProps): JSX.Element {
+    // const { globalStoreItemTags } = useShoppingCart();
+    const [ selectedTags, setSelectedTags ] = useState<Tag[]>(tags);
+    const [ selectedStoreItemTags, setSelectedStoreItemTags ] = useState<StoreItemTag[]>(storeItemTags);
 
     const titleRef = useRef<HTMLInputElement>(null);
     const markdownRef = useRef<HTMLTextAreaElement>(null);
@@ -38,8 +46,6 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdo
         })
         navigate('..');
     }
-
-
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -70,7 +76,7 @@ export function NoteForm({ onSubmit, onAddTag, availableTags, title = "", markdo
                             <Form.Label>Store Items</Form.Label>
                             <SelectableWrapper
                                 createOptionEnabled={false}
-                                availableTags={globalStoreItemTags}
+                                availableTags={availableStoreTags}
                                 selectedTags={selectedStoreItemTags}
                                 setSelectedTags={setSelectedStoreItemTags}
                             />

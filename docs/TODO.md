@@ -1,17 +1,9 @@
 <!-- // a lot of logic will need to be made bc like it WAS expecting that json list and now i need to UPDATE THROUGHOUT to have it use the db! -->... 
 
-
-
-!!!!!!!!!!!!!!!!!!!!!!!
-# ONE
-<!--TODO first prob need to like have the notes go to database instead of local stopreage. --> IN middle of setting all this up and ... got the database setuP! its on supabase and in the .env-local and is ready to be put in and replacing the local db.json... and okay got it to finally read the stoer items... 
-<!-- ! NEXT::: keep going and make ALL necessary changes to accomodate SUpabase migration forom db.json and also the notwes stuff tpp   and set up USER session... just have my stuff in devuser and make acouple others and yea the notes to belong per user?? or commuinal? like hmmm but we want 'added_by' ?-->
-!!!!!!!!!!!!!!!!!!!!!!!
 *****NOW*****
-# TWO
 <!-- * okay just keep going and do stuff below: (got the storeItem tags persisting)-->
 <!-- ! Work on this next.. and start the linkedIn course yaaa
-? THEN.. start to hook it up to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
+? THEN.. start to hook up the notes and tagging to the rest of theapp.. connect to  the store items and shit and the admin stuff too 
 *  the notes are all about the different products and there will then be an option on each produc card; view any related notes for this product made by you [or others] ... its like a portal...
 ! click on the note symbol on the storeItemCard => opens up notes view of all notes that relate to that store item... so using like routing for that in the url... also an addNote option from the storeItem itseldf?
 ? but if you hover over the symbol in the shop.. the popup holds the titles of all the notes related to it...
@@ -20,7 +12,10 @@
 
 
 
--->
+<!-- add user seperation? logins... -->
+<!-- TODO: make the whpole app be agnostic.... like a total agnostic that could just be skeleton and any kind of data thats realted to eachother could e pluugged into it... or really just great skeleton to use for any starting point wiht a new React App -->
+<!-- TODO: change every console.log to logger -->
+
 
 <!-- TODO: make the whpole app be agnostic.... like a total agnostic that could just be skeleton and any kind of data thats realted to eachother could e pluugged into it... or really just great skeleton to use for any starting point wiht a new React App -->
 
