@@ -24,13 +24,7 @@ export function Notes() {
     // !!!!!!!!!!!!!!!!
     // !! PU in here.. do all the cruding for the notes..and then move on to tags and shiz..
 
-    const {
-        data: notes,
-        isLoading,
-        error: notesError,
-        refetch: refetchNotes,
-        isFetching
-    }: any = useQuery({
+    const { data: notes, isLoading, error: notesError, refetch: refetchNotes, isFetching }: any = useQuery({
         queryKey: [ `get-all-notes` ],
         queryFn: async () => {
             const allNotes = await NoteConstructor.getAllNotes(NOTE_SUBPARTITION);
@@ -47,37 +41,34 @@ export function Notes() {
         })
     }, [ userNotes, tags ]);
 
+    const handleStoreItemTags = (storeItemTags: StoreItemTag[]) => storeItemTags.map(tag => tag.id);
+
     function onCreateNote({ tags, ...data }: NoteData) {
         // post it to the data base
         const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
         let storeItemIds: string[] = [];
-        if (data.storeItemTags) storeItemIds = data.storeItemTags.map(storeItemTag => storeItemTag.id);
+        if (data.storeItemTags) storeItemIds = handleStoreItemTags(data.storeItemTags);
         delete data.storeItemTags;
         // this is all we need to do bc the effect will update the userNotes
         noteClient.addNote({
-            ...data,
-            id: uuidv4(),
-            storeItemIds: storeItemIds,
-            tagIds: tags.map(tag => tag.id)
+            ...data, id: uuidv4(),
+            markdown: { "rawText": data.markdown },
+            storeItemIds, tagIds: tags.map(tag => tag.id)
         }).then((res: any) => { refetchNotes(); }).catch((err: any) => {
             console.error(err);
         });
     }
 
-    function addTag(tag: Tag) {
-        setTags(prev => [ ...prev, tag ]);
-        // setStoreTags(prev => [...prev, tag])
-    }
 
     function onUpdateNote(id: string, { tags, ...data }: NoteData) {
         const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
         let storeItemIds: string[] = [];
-        if (data.storeItemTags) storeItemIds = data.storeItemTags.map(storeItemTag => storeItemTag.id);
+        if (data.storeItemTags) storeItemIds = handleStoreItemTags(data.storeItemTags);
         delete data.storeItemTags;
         // this is all we need to do bc the effect will update the userNotes
         noteClient.updateNote({
             ...data, id, storeItemIds,
-            markdown: { "rawText": data.markdown }, 
+            markdown: { "rawText": data.markdown },
             tagIds: tags.map(tag => tag.id)
         }).then((res: any) => { refetchNotes(); }).catch((err: any) => {
             console.error(err);
@@ -85,11 +76,21 @@ export function Notes() {
     }
 
     function onDeleteNote(id: string) {
-        setUserNotes(prevNotes => {
-            return prevNotes.filter(note => note.id !== id)
-        })
+        // TODO set alert to confirm delete
+        //then if confirmed delete it
+        const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
+        noteClient.deleteNote(id).then((res: any) => { refetchNotes(); }).catch((err: any) => {
+            console.error(err);
+        });
+        // setUserNotes(prevNotes => {
+        // return prevNotes.filter(note => note.id !== id)
+        // })
     }
 
+    function addTag(tag: Tag) {
+        setTags(prev => [ ...prev, tag ]);
+        // setStoreTags(prev => [...prev, tag])
+    }
     function updateTag(id: string, label: string) {
         setTags(prevTags => {
             return prevTags.map(tag => {

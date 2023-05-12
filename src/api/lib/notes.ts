@@ -20,6 +20,7 @@ export class Notes extends SupabaseTableFactory {
         // this.getNoteFromStoreTags = this.getNoteFromStoreTags.bind(this);
         this.addNote = this.addNote.bind(this);
         this.updateNote = this.updateNote.bind(this);
+        this.deleteNote = this.deleteNote.bind(this);
     }
 
     async getAllNotes() {
@@ -39,6 +40,13 @@ export class Notes extends SupabaseTableFactory {
     async updateNote(updatedNote: RawNote) {
         let retVal: any = {};
         retVal = await this.updateItem(updatedNote);
+        return retVal;
+    }
+
+    async deleteNote(id: string) {
+        let retVal: any = {};
+        retVal = await this.deleteItem(id);
+        // console.log('retVal', retVal)
         return retVal;
     }
 

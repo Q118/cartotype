@@ -43,13 +43,14 @@ export class SupabaseTableFactory {
         this.queryItems = this.queryItems.bind(this);
         this.addItem = this.addItem.bind(this);
         this.updateItem = this.updateItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     async getAllItems(orderBy: string = 'id', ascending: boolean = true) {
         const { data, error } = await this.client.from(this.tableName)
             .select('*')
             .order(orderBy, { ascending: ascending });
-        if (error) handleError(error, []);
+        if (error) return handleError(error, []);
         return data || [];
     }
 
@@ -57,7 +58,7 @@ export class SupabaseTableFactory {
         const { data, error } = await this.client.from(this.tableName)
             .select('*')
             .eq('id', id);
-        if (error) handleError(error, {});
+        if (error) return handleError(error, {});
         return data;
     }
 
@@ -69,14 +70,14 @@ export class SupabaseTableFactory {
             .select(_select)
             .eq(queryObject.eq[ 0 ], queryObject.eq[ 1 ])
             .order(_orderBy, { ascending: _order === 'asc' });
-        if (error) handleError(error, []);
+        if (error) return handleError(error, []);
         return data;
     }
 
     async addItem(item: ItemToUpsert) {
         const { data, error } = await this.client.from(this.tableName)
             .insert([ item ]);
-        if (error) handleError(error, {});
+        if (error) return handleError(error, {});
         return data;
     }
 
@@ -84,10 +85,17 @@ export class SupabaseTableFactory {
         const { data, error } = await this.client.from(this.tableName)
             .upsert(item)
             .eq('id', item.id);
-        if (error) handleError(error, {});
+        if (error) return handleError(error, {});
         return data;
     }
 
+    async deleteItem(id: string) {
+        const { data, error } = await this.client.from(this.tableName)
+            .delete()
+            .eq('id', id);
+        if (error) return handleError(error, {});
+        return data;
+    }
 
 
 
