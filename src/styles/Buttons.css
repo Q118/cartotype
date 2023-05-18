@@ -1,11 +1,9 @@
 /** buttons */
 
-.add-btn-c:hover,
-.increase-btn-c:hover,
-.decrease-btn-c:hover,
-.remove-btn-c:hover {
-    color: rgba(255, 255, 255, 1);
-    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+/* cool modern hover effect applied to all buttons */
+button:hover {
+    /* color: rgba(255, 255, 255, 1); */
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4) !important;
     /* background-color: initial; */
 }
 
@@ -73,13 +71,16 @@
 }
 
 .delete-note-btn {
-    background-color: var(--accent);
+    background-color: var(--accent) !important;
     color: var(--primary-bg);
+    border-radius: 50% !important;
     border-color: var(--primary-bg);
 }
 
+
 .delete-note-btn:hover {
-    background-color: 'red' !important;
-    color: var(--primary-bg);
-    border-color: var(--primary-bg);
+    background-color: red !important;
+    color: var(--primary-text) !important;
+    border-color: var(--primary-text) !important;
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
 }

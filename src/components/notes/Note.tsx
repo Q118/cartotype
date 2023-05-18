@@ -13,7 +13,8 @@ type NoteProps = {
 }
 
 //!!!! PU IN HERE!!!!!
-
+// * first finish the big design revamp and then PU in here
+// *hovering tooltips around them each row to know which is which...
 export function Note({ onDelete }: NoteProps) {
     const note = useNote();
     const navigate = useNavigate();
@@ -73,7 +74,7 @@ export function Note({ onDelete }: NoteProps) {
                         </Link>
                     </Stack>
                     <Stack direction="horizontal" className="justify-content-end">
-                        <Button className="delete-note-btn rounded-circle" onClick={() => {
+                        <Button className="delete-note-btn" onClick={() => {
                             onDelete(note.id);
                             navigate('/notes');
                         }}>
