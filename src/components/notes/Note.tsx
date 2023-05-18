@@ -61,19 +61,19 @@ export function Note({ onDelete }: NoteProps) {
                         {/* <Link to={`${note.id}/edit`}> */}
                         <Link to="edit">
                             {/* <Button variant="primary">Edit</Button> */}
-                            <Button variant="outline-light" className="cart-button">
+                            <Button className="edit-button">
                                 Edit
                             </Button>
                         </Link>
                         <Link to="..">
                             {/* <Button variant="secondary">Back</Button> */}
-                            <Button variant="outline-light" className="cart-button" title="delete">
+                            <Button className="back-button" title="delete">
                                 Back
                             </Button>
                         </Link>
                     </Stack>
                     <Stack direction="horizontal" className="justify-content-end">
-                        <Button variant="danger" className="rounded-circle" onClick={() => {
+                        <Button className="delete-note-btn rounded-circle" onClick={() => {
                             onDelete(note.id);
                             navigate('/notes');
                         }}>

@@ -57,9 +57,9 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                 <Col xs="auto">
                     <Stack gap={2} direction="horizontal">
                         <Link to="new">
-                            <Button variant="primary">Create</Button>
+                            <Button className="carto-btn">Create</Button>
                         </Link>
-                        <Button variant="secondary" onClick={() => setEditTagsModalIsOpen(true)}>
+                        <Button className="carto-btn-alt" onClick={() => setEditTagsModalIsOpen(true)}>
                             Edit Tags
                         </Button>
                     </Stack>
@@ -71,7 +71,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                     <Col>
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" value={title} placeholder='Search by title'
+                            <Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
                                 onChange={e => setTitle(e.target.value)} />
                         </Form.Group>
                     </Col>

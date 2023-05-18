@@ -39,21 +39,19 @@ export function SelectableWrapper({
         colors: {
             ...theme.colors,
             /** item hover in menu */
-            ...(isDark() && isRawTag) && { primary25: 'indigo' },
-            ...(!isDark() && !isRawTag) && { primary25: 'lightgreen' },
-            ...(!isDark() && isRawTag) && { primary25: '#e7d1ff' },
-            ...(isDark() && !isRawTag) && { primary25: 'darkgreen' },
+            primary25: isDark() ? 'var(--bs-secondary)' : 'lightgray',
+            // ...isRawTag && { primary25: 'var(--tag-background)' },
+            // ...!isRawTag && { primary25: 'var(--storeTag-background)' },
             /** item click in menu */
-            primary50: isDark() ? 'darkblue' : 'lightblue',
+            primary50: 'var(--accent)',
             /** input background */
-            neutral0: isDark() ? '#212529' : '#f8f9fa',
+            neutral0: isDark() ? 'var(--primary-bg)' : '#f8f9fa',
             /** item background */
-            ...(isDark() && isRawTag) && { neutral10: 'darkgreen' },
-            ...(!isDark() && !isRawTag) && { neutral10: '#e7d1ff' },
-            ...(!isDark() && isRawTag) && { neutral10: 'lightgreen' },
-            ...(isDark() && !isRawTag) && { neutral10: 'indigo' },
+            ...isRawTag && { neutral10: 'var(--tag-background)' },
+            ...!isRawTag && { neutral10: 'var(--storeTag-background)' },
             /** text color in item */
-            neutral80: isDark() ? '#f8f9fa' : '#212529',
+            neutral80: 'var(--primary-bg)',
+            // neutral90: 'pink'
         },
     })
 

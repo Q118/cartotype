@@ -1,28 +1,30 @@
+/* yea the btns can stay same maybe darkt o light but not the rest */
+
 .cart-bg-dark {
     --primary-bg: #242426;
-    /* --primary-bg:  pink; */
-    
+    --accent: #e3b448;
+    --primary-text: #d7dadc;
     --body-background: #171718;
-    
-    
-    --modal-background: #343a40;
-
-
-    
-    --modal-text-color: #ffffff;
-    --border-color: #ffffff;
+    --border-color: var(--accent);
+    /* --modal-text-color: #ffffff; */
+    --btn-primary: #b2ac88;
+    --btn-secondary: #3a6b35;
+    --badge-primary: #888EB2;
+    --badge-secondary: #88B2AC;
+    --badge-txt-primary: #ffffff;
 
 
     --btn-background: #1d1e20;
     --btn-text: #ffffff;
-    --body-text: #f8f9fa;
-    
-    
+
+    --body-text: var(--primary-text);
 
 
 
-    --tag-background: darkgreen;
-    --storeTag-background: indigo;
+
+
+    --tag-background: var(--badge-primary);
+    --storeTag-background: var(--badge-secondary);
 }
 
 .bg-light {
@@ -43,28 +45,12 @@ body {
     color: var(--body-text) !important;
 }
 
-/** buttons */
-.cart-button {
-    /* background-color: var(--btn-background); */
-    background-color: transparent;
-    color: var(--btn-text);
-    border: 1px solid var(--btn-text);
-}
 
-.cart-button:hover {
-    background-color: var(--btn-text);
-    color: var(--btn-background);
-    border: 1px solid var(--btn-background);
+.css-1f43avz-a11yText-A11yText {
+    color: var(--primary-bg) !important;
 }
 
 
-.cart-img-item {
-    width: 125px;
-    height: 75px;
-    object-fit: cover;
-    border: 2px solid var(--border-color);
-    border-radius: 5px;
-}
 
 /** nav */
 nav .cart-button {
@@ -74,10 +60,17 @@ nav .cart-button {
     position: relative;
 }
 
-.cart-nav {
+.cart-nav,
+.nav-link {
     background-color: var(--primary-bg) !important;
     border-radius: 3%;
+    color: var(--primary-text) !important;
 }
+
+.nav-link.active {
+    color: var(--accent) !important;
+}
+
 
 #cart-quantity-wrapper {
     color: white;
@@ -107,7 +100,12 @@ table {
 
 }
 
-tbody, td, tfoot, th, thead, tr {
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
     border-color: inherit !important;
     border-style: solid !important;
     border-width: 2px !important;
@@ -174,29 +172,29 @@ tbody, td, tfoot, th, thead, tr {
 
 
 /** Cards */
-.store-card-light {
-    border: 1px solid black;
-    min-width: fit-content;
+.store-card_body-c {
+    background-color: var(--primary-bg) !important;
 }
 
-.store-card-dark {
-    border: 1px solid white;
+.store-card_card-c {
+    border: var(--accent) 2px solid;
     min-width: fit-content;
 }
 
 .note-card {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--accent);
     background-color: var(--primary-bg);
 }
-
-
 
 
 /**inputs, selects, etc */
 input,
 textarea {
-    background-color: inherit !important;
-    color: inherit !important;
+    /* background-color: inherit !important; */
+    /* color: inherit !important; */
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+
 }
 
 #search-input {
@@ -227,17 +225,18 @@ textarea {
 /** Badges and Tags o my! */
 .raw-tag-badge {
     background-color: var(--tag-background) !important;
-    color: var(--btn-text) !important;
+    color: var(--primary-bg) !important;
 }
+
 .store-tag-badge {
     background-color: var(--storeTag-background) !important;
-    color: var(--btn-text) !important;
+    color: var(--primary-bg) !important;
 }
 
 .raw-tag-badge-view {
     background-color: var(--tag-background) !important;
-    color: var(--btn-text) !important;
-    font-size: medium; 
+    color: var(--primary-bg) !important;
+    font-size: medium;
 }
 
 

@@ -1,0 +1,85 @@
+/** buttons */
+
+.add-btn-c:hover,
+.increase-btn-c:hover,
+.decrease-btn-c:hover,
+.remove-btn-c:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+    /* background-color: initial; */
+}
+
+.add-btn-c,
+.carto-btn {
+    background-color: var(--btn-primary) !important;
+    color: var(--primary-bg) !important;
+    border: none !important;
+}
+
+.remove-btn-c {
+    background-color: var(--btn-secondary) !important;
+    color: var(--primary-text) !important;
+    border: none !important;
+}
+
+.carto-btn {
+    background-color: var(--btn-primary) !important;
+    color: var(--primary-bg) !important;
+    border: none !important;
+}
+
+
+.carto-btn-alt {
+    background-color: var(--btn-secondary) !important;
+    color: var(--primary-text) !important;
+    border: none !important;
+}
+
+
+.edit-button {
+    background-color: var(--btn-primary);
+    /* border: 1px solid var(--btn-text); */
+    color: var(--primary-bg) !important;
+    border: 1px solid var(--btn-text);
+}
+
+.back-button {
+    background-color: var(--btn-secondary);
+    /* border: 1px solid var(--btn-text); */
+    color: var(--primary-text) !important;
+    border: 1px solid var(--btn-text);
+}
+
+
+.edit-button:hover,
+.back-button:hover {
+    /* background-color: var(--btn-text); */
+    /* color: var(--btn-background); */
+    /* border: 1px solid var(--btn-background); */
+    /* background-color: ; */
+    color: var(--primary-text) !important;
+    border-color: var(--primary-text) !important;
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+    background-color: initial;
+}
+
+
+.cart-img-item {
+    width: 125px;
+    height: 75px;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.delete-note-btn {
+    background-color: var(--accent);
+    color: var(--primary-bg);
+    border-color: var(--primary-bg);
+}
+
+.delete-note-btn:hover {
+    background-color: 'red' !important;
+    color: var(--primary-bg);
+    border-color: var(--primary-bg);
+}
