@@ -14,7 +14,7 @@ export function ShoppingCart() {
             show={isOpen}
             onHide={closeCart}
             placement="end"
-            className={currentTheme === "dark" ? 'bg-dark text-light' : 'bg-light text-dark'}
+            className={currentTheme === "dark" ? 'cart-bg-dark text-light' : 'bg-light text-dark'}
         >
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Shopping Cart</Offcanvas.Title>

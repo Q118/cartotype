@@ -1,12 +1,26 @@
-.bg-dark {
+.cart-bg-dark {
+    --primary-bg: #242426;
+    /* --primary-bg:  pink; */
+    
+    --body-background: #171718;
+    
+    
     --modal-background: #343a40;
+
+
+    
     --modal-text-color: #ffffff;
     --border-color: #ffffff;
-    --body-background: #1d1e20;
+
+
     --btn-background: #1d1e20;
     --btn-text: #ffffff;
     --body-text: #f8f9fa;
-    --nav-background: #6c757d;
+    
+    
+
+
+
     --tag-background: darkgreen;
     --storeTag-background: indigo;
 }
@@ -19,11 +33,15 @@
     --btn-background: #f8f9fa;
     --btn-text: #000000;
     --body-text: #212529;
-    --nav-background: #fff;
+    --primary-bg: #fff;
     --tag-background: lightgreen;
     --storeTag-background: #e7d1ff;
 }
 
+body {
+    background-color: var(--body-background) !important;
+    color: var(--body-text) !important;
+}
 
 /** buttons */
 .cart-button {
@@ -38,6 +56,7 @@
     color: var(--btn-background);
     border: 1px solid var(--btn-background);
 }
+
 
 .cart-img-item {
     width: 125px;
@@ -55,6 +74,11 @@ nav .cart-button {
     position: relative;
 }
 
+.cart-nav {
+    background-color: var(--primary-bg) !important;
+    border-radius: 3%;
+}
+
 #cart-quantity-wrapper {
     color: white;
     width: 1.5rem;
@@ -66,7 +90,7 @@ nav .cart-button {
 }
 
 #cartotype-navbar {
-    background-color: var(--nav-background);
+    background-color: var(--primary-bg);
     color: var(--body-text);
 }
 
@@ -162,7 +186,7 @@ tbody, td, tfoot, th, thead, tr {
 
 .note-card {
     border: 1px solid var(--border-color);
-    background-color: var(--nav-background);
+    background-color: var(--primary-bg);
 }
 
 
@@ -210,6 +234,12 @@ textarea {
     color: var(--btn-text) !important;
 }
 
+.raw-tag-badge-view {
+    background-color: var(--tag-background) !important;
+    color: var(--btn-text) !important;
+    font-size: medium; 
+}
+
 
 /** Uncategorized */
 .form-container {
@@ -221,7 +251,7 @@ textarea {
 }
 
 #home-div-wrapper {
-    background-color: var(--nav-background);
+    background-color: var(--primary-bg);
     color: var(--body-text);
     position: absolute;
 }

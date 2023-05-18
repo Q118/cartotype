@@ -1,14 +1,18 @@
 import { useNote } from "./NoteLayout";
 import { Badge, Button, Stack, Row, Col } from "react-bootstrap";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
+import { VscTrash } from "react-icons/vsc";
 
 type NoteProps = {
     onDelete: (id: string) => void;
 }
 
+//!!!! PU IN HERE!!!!!
 
 export function Note({ onDelete }: NoteProps) {
     const note = useNote();
@@ -19,34 +23,21 @@ export function Note({ onDelete }: NoteProps) {
                 <Col>
                     <h1>{note.title}</h1>
                     {note.tags.length > 0 && (
-                        <Stack gap={1} direction="horizontal" className="flex-wrap">
+                        <Stack gap={1} direction="horizontal" className="flex-wrap mb-2">
+                            {/* <OverlayTrigger placement="bottom" overlay={<Tooltip id="tags-tooltip">Tags</Tooltip>}> */}
                             {note.tags.map(tag => (
-                                <Badge className='text-truncate raw-tag-badge' key={tag.id}>
+                                <Badge className='text-truncate raw-tag-badge-view' key={tag.id}>
                                     {tag.label}
                                 </Badge>
                             ))}
+                            {/* </OverlayTrigger> */}
                         </Stack>
                     )}
-                </Col>
-                <Col xs="auto">
-                    <Stack gap={2} direction="horizontal" className="mb-2">
-                        {/* <Link to={`${note.id}/edit`}> */}
-                        <Link to="edit">
-                            <Button variant="primary">Edit</Button>
-                        </Link>
-                        <Button variant="danger" onClick={() => {
-                            onDelete(note.id);
-                            navigate('/notes');
-                        }}>
-                            Delete
-                        </Button>
-                        <Link to="..">
-                            <Button variant="secondary">Back</Button>
-                        </Link>
-                    </Stack>
-                    {/* // !  PUT THE STORE TAGS IN HURRRRRR or uder the others depending on what looks betta... maybe in a different place */}
+                    {/* hovering tooltips around them each row to know which is which... */}
+
                     {note.tags.length > 0 && (
                         <Stack gap={1} direction="horizontal" className="flex-wrap">
+                            {/* Store Tags: */}
                             {note.tags.map(tag => (
                                 <Badge className='text-truncate store-tag-badge' key={tag.id}>
                                     {tag.label}
@@ -55,8 +46,43 @@ export function Note({ onDelete }: NoteProps) {
                         </Stack>
                     )}
                 </Col>
+                <Col xs="auto">
+                    {/* {note.tags.length > 0 && (
+                        <Stack gap={1} direction="horizontal" className="flex-wrap mb-2 justify-content-end">
+                            StoreItem tags: 
+                            {note.tags.map(tag => (
+                                <Badge className='text-truncate store-tag-badge' key={tag.id}>
+                                    {tag.label}
+                                </Badge>
+                            ))}
+                        </Stack>
+                    )} */}
+                    <Stack gap={2} direction="horizontal" className="justify-content-end mb-2">
+                        {/* <Link to={`${note.id}/edit`}> */}
+                        <Link to="edit">
+                            {/* <Button variant="primary">Edit</Button> */}
+                            <Button variant="outline-light" className="cart-button">
+                                Edit
+                            </Button>
+                        </Link>
+                        <Link to="..">
+                            {/* <Button variant="secondary">Back</Button> */}
+                            <Button variant="outline-light" className="cart-button" title="delete">
+                                Back
+                            </Button>
+                        </Link>
+                    </Stack>
+                    <Stack direction="horizontal" className="justify-content-end">
+                        <Button variant="danger" className="rounded-circle" onClick={() => {
+                            onDelete(note.id);
+                            navigate('/notes');
+                        }}>
+                            <VscTrash />
+                        </Button>
+                    </Stack>
+                </Col>
             </Row>
-            <ReactMarkdown children={note.markdown} remarkPlugins={[remarkGfm]} />
+            <ReactMarkdown children={note.markdown} remarkPlugins={[ remarkGfm ]} />
         </>
     )
 }

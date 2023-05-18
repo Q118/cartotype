@@ -40,15 +40,15 @@ export function ThemeProvider({ children }: ShoppingCartProviderProps) {
 
     function setTheme(theme: Theme) {
         if (theme === "light") {
-            document.documentElement.classList.remove('bg-dark', 'text-light');
-            document.body.classList.remove('bg-dark', 'text-light');
-            document.documentElement.classList.add('bg-light', 'text-dark');
-            document.body.classList.add('bg-light', 'text-dark');
+            document.documentElement.classList.remove('cart-bg-dark');
+            document.body.classList.remove('cart-bg-dark');
+            document.documentElement.classList.add('bg-light');
+            document.body.classList.add('bg-light');
         } else {
-            document.documentElement.classList.add('bg-dark', 'text-light');
-            document.body.classList.add('bg-dark', 'text-light');
-            document.documentElement.classList.remove('bg-light', 'text-dark');
-            document.body.classList.remove('bg-light', 'text-dark');
+            document.documentElement.classList.add('cart-bg-dark');
+            document.body.classList.add('cart-bg-dark');
+            document.documentElement.classList.remove('bg-light');
+            document.body.classList.remove('bg-light');
         }
         setCurrentTheme(theme);
     }
