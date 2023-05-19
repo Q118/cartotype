@@ -1,9 +1,4 @@
-/* yea the btns can stay same maybe darkt o light but not the rest */
-/* !!! PU HERER FIRST!
-... the big design change
-!  keep synching it up to the rest of the app */
-
-
+/* keeps the theme colors the same but mode changes for body and text */
 .cart-bg-dark {
     --primary-bg: #242426;
     --body-background: #171718;
@@ -56,32 +51,12 @@ body {
 }
 
 
+/** Uncategorized */
+
+/* this is for the react-select */
 .css-1f43avz-a11yText-A11yText {
     color: var(--primary-bg) !important;
 }
-
-
-
-/** nav */
-nav .cart-button {
-    width: 3rem;
-    height: 3rem;
-    padding: 0.3rem;
-    position: relative;
-}
-
-.cart-nav,
-.nav-link {
-    background-color: var(--primary-bg) !important;
-    border-radius: 3%;
-    color: var(--primary-text) !important;
-}
-
-.nav-link.active {
-    color: var(--active-link) !important;
-    border-bottom: var(--active-link) 2px solid !important;
-}
-
 
 #cart-quantity-wrapper {
     color: white;
@@ -93,157 +68,7 @@ nav .cart-button {
     transform: translate(25%, 25%);
 }
 
-#cartotype-navbar {
-    background-color: var(--primary-bg);
-    color: var(--body-text);
-}
 
-
-
-/** Tables */
-table {
-    /* border-collapse: collapse !important; */
-    border-color: inherit !important;
-    display: block !important;
-    width: max-content !important;
-    max-width: 100% !important;
-    overflow: auto !important;
-
-}
-
-tbody,
-td,
-tfoot,
-th,
-thead,
-tr {
-    border-color: inherit !important;
-    border-style: solid !important;
-    border-width: 2px !important;
-    padding: 5px !important;
-    margin: 5px !important;
-}
-
-
-
-
-
-
-
-.credit-text {
-    padding: 2px;
-    /* font-style: italic; */
-}
-
-.credit-text-dark {
-    color: #ffffff !important;
-    background-color: var(--bs-dark) !important;
-}
-
-.credit-text-light {
-    color: #000000 !important;
-    background-color: var(--bs-light) !important;
-}
-
-
-.style-link {
-    color: inherit !important;
-    font-weight: bolder !important;
-    font-size: larger !important;
-    border: 1px dashed !important;
-    padding: 3px !important;
-    border-radius: 5px !important;
-}
-
-
-/** links */
-.style-link:hover {
-    /* opposite everything */
-    color: var(--body-background) !important;
-    background-color: var(--primary-text) !important;
-    border: 1px solid var(--body-background) !important;
-}
-
-
-/* Form shtuff */
-#input-dark {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-#input-light {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-
-
-
-/** Cards */
-.store-card_body-c {
-    background-color: var(--primary-bg) !important;
-}
-
-.store-card_card-c {
-    border: var(--accent) 2px solid !important;
-    min-width: fit-content;
-}
-
-.note-card {
-    border: 1px solid var(--accent);
-    background-color: var(--primary-bg);
-}
-
-.selected-card {
-    /* color: pink; */
-    border: 4px solid var(--accent-complement) !important;
-}
-
-
-/**inputs, selects, etc */
-input,
-textarea {
-    /* background-color: inherit !important; */
-    /* color: inherit !important; */
-    background-color: var(--primary-bg) !important;
-    color: var(--primary-text) !important;
-
-}
-
-#search-input {
-    background-color: var(--body-background);
-    color: var(--body-text);
-    border: 1px solid var(--border-color) !important;
-}
-
-/** Modal */
-.modal-content {
-    background-color: var(--modal-background) !important;
-    color: var(--modal-text-color) !important;
-    border: 1px solid var(--border-color) !important;
-}
-
-.modal-content input {
-    border: 1px solid var(--border-color);
-}
-
-#close-modal-x {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    font-size: 2rem;
-    color: var(--modal-text-color) !important;
-}
-
-
-/** Uncategorized */
-.form-container {
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 1rem;
-    position: relative;
-    max-width: max-content;
-}
 
 #home-div-wrapper {
     background-color: var(--primary-bg);

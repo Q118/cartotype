@@ -1,0 +1,36 @@
+/* Form shtuff */
+
+.form-container {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 1rem;
+    position: relative;
+    max-width: max-content;
+}
+
+
+#input-dark {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+#input-light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/**inputs, selects, etc */
+input,
+textarea {
+    /* background-color: inherit !important; */
+    /* color: inherit !important; */
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+
+}
+
+#search-input {
+    background-color: var(--body-background);
+    color: var(--body-text);
+    border: 1px solid var(--border-color) !important;
+}

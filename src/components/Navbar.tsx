@@ -11,6 +11,8 @@ export function Navbar() {
     const { currentTheme } = useTheme();
     const { openCart, cartQuantity } = useShoppingCart();
 
+    const btnVariant = currentTheme === 'dark' ? 'outline-light' : 'outline-dark';
+
     return (
         <NavbarBS id='cartotype-navbar' sticky='top' className={`shadow-sm mb-3 cart-bg-${currentTheme} cart-nav`}>
             <Container>
@@ -30,7 +32,7 @@ export function Navbar() {
                 </Nav>
                 <ThemeToggler />
                 {cartQuantity > 0 && (
-                    <Button onClick={openCart} variant="outline-light" className="rounded-circle cart-button">
+                    <Button onClick={openCart} variant={btnVariant} className="nav-cart-button">
                         <GiShoppingCart
                             style={{ width: "2.5rem", height: "2.5rem", color: 'inherit' }} />
                         <div className={DIV_CLASSES} id="cart-quantity-wrapper">

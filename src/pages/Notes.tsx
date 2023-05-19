@@ -111,11 +111,11 @@ export function Notes() {
 
     return (
         <Container className="my-4">
-            <div className='text-center'>
+            {/* <div className='text-center'>
                 <MdEditNote size={32} />
                 <MdEditNote size={32} />
                 <MdEditNote size={32} />
-            </div>
+            </div> */}
             <Routes>
                 <Route path="/" element={<NoteList
                     availableTags={userTags}

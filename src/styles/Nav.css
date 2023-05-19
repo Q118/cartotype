@@ -1,0 +1,17 @@
+/** nav */
+.cart-nav,
+.nav-link {
+    background-color: var(--primary-bg) !important;
+    border-radius: 3%;
+    color: var(--primary-text) !important;
+}
+
+.nav-link.active {
+    color: var(--active-link) !important;
+    border-bottom: var(--active-link) 2px solid !important;
+}
+
+#cartotype-navbar {
+    background-color: var(--primary-bg);
+    color: var(--body-text);
+}
