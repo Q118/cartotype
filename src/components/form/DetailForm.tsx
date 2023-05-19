@@ -2,7 +2,7 @@ import { FormWrapper } from "../../utilities/FormWrapper";
 import { ResultItem, StorePrice } from '../../types';
 import { StoreItem } from "../StoreItem";
 import { Col, Row } from "react-bootstrap";
-import { useTheme } from "../../context/ThemeContext";
+// import { useTheme } from "../../context/ThemeContext";
 import { consolidateStorePrice } from "../../utilities/formatCurrency";
 // import { FormEvent } from "react";
 
@@ -26,9 +26,9 @@ export function DetailForm({
     updateFields,
 }: DetailFormProps) {
 
-    const { currentTheme } = useTheme();
+    // const { currentTheme } = useTheme();
 
-    const SPAN_CLASS = `input-group-text bg-${currentTheme === 'dark' ? 'secondary' : 'light'} text-${currentTheme === 'dark' ? 'light' : 'dark'}`;
+    // const SPAN_CLASS = `input-group-text bg-${currentTheme === 'dark' ? 'secondary' : 'light'} text-${currentTheme === 'dark' ? 'light' : 'dark'}`;
 
 
 
@@ -37,22 +37,24 @@ export function DetailForm({
         <FormWrapper title="Edit Details for Store">
             <label>Price: </label>
             <div className="mb-3 input-group">
-                <span className={SPAN_CLASS}>$</span>
+                <span className="input-group-text">$</span>
                 <input placeholder="0" type="number"
                     className="form-control" required value={price.dollars}
                     onChange={e => updateFields({ price: { ...price, dollars: +e.target.value } })}
                 />
-                <span className={SPAN_CLASS}>.</span>
+                <span className="input-group-text">.</span>
                 {/* //! not required; let them leave it at 0 if they want */}
                 <input placeholder="00" type="number"
-                    value={price.cents} className="form-control" style={{ maxWidth: '4rem' }}
+                    value={price.cents} className="form-control" 
+                    style={{ maxWidth: '4rem' }}
                     onChange={(e) => updateFields({ price: { ...price, cents: +e.target.value } })}
                     max={99} min={0}
                 />
             </div>
             <label>Official Title: </label>
             <input type="text" className="form-control"
-                placeholder={storeTitle} value={storeTitle} maxLength={20}
+                placeholder={storeTitle} value={storeTitle} 
+                maxLength={20} autoFocus
                 onChange={e => updateFields({ storeTitle: e.target.value })}
             />
             <h6>Preview:</h6>

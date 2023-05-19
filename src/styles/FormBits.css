@@ -21,6 +21,7 @@
 
 /**inputs, selects, etc */
 input,
+.form-control,
 textarea {
     /* background-color: inherit !important; */
     /* color: inherit !important; */
@@ -29,6 +30,7 @@ textarea {
     border: 1px solid var(--accent) !important;
 }
 
+.form-control:focus,
 input:focus {
     border: 2px solid var(--accent) !important;
     box-shadow: 0 5px 15px var(--btn-hover-shadow) !important;
@@ -38,4 +40,25 @@ input:focus {
 .form-container {
     background-color: var(--primary-bg) !important;
     color: var(--primary-text) !important;
+}
+
+/* eg the [$] and the [.] */
+.input-group-text {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+    border-color: var(--accent) !important;
+}
+
+
+
+/* div that looks like an input for react-select */
+.css-1h4l97-control {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+    border-color: var(--accent) !important;
+}
+/* then when it is in focus: */
+.css-aisdkm-control {
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 5px 15px var(--btn-hover-shadow) !important;
 }

@@ -27,7 +27,8 @@
     --primary-text: #242426;
     --body-background: #f7f7f7;
     --accent-complement: #4877E3;
-    --accent: #e3b448;
+    --accent: #3a6b35;
+    /* ^ keep the accent in light different than dark bc its more aesthetically pleasing */
     --border-color: var(--accent);
     --btn-primary: #b2ac88;
     --btn-txt-primary: #171718;
