@@ -18,7 +18,7 @@ export function NoteCard({ id, title, tags }: SimplifiedNote) {
                     {tags.length > 0 && (
                         <Stack gap={1} direction="horizontal" className="justify-content-center flex-wrap">
                             {tags.map(tag => (
-                                <Badge key={tag.id} className="text-truncate">
+                                <Badge key={tag.id} className="store-tag-badge" pill={true}>
                                     {tag.label}
                                 </Badge>
                             ))}

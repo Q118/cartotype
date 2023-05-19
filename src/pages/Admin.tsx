@@ -9,14 +9,15 @@ import { useState } from 'react';
 import { FormApp } from "../components/form/AddForm";
 import { EditForm } from "../components/form/EditForm";
 import { Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
-import { CartButton } from '../components/Buttons';
-
+// import { CartButton } from '../components/Buttons';
+import { useTheme } from '../context/ThemeContext';
 // TODO: turn the buttons in to tabs so that they each are tabs for each page
 
 export function Admin() {
 
-    const [formPath, setFormPath] = useState<string | null>(null);
-
+    const [ formPath, setFormPath ] = useState<string | null>(null);
+    const { currentTheme } = useTheme();
+    const btnVariant = currentTheme === 'dark' ? 'outline-light' : 'outline-dark';
 
     const renderOverlayColumn = (type: string, title: string) => {
         const overlayTitle = type === 'add' ? 'add a new item to the shop' : 'edit the current items in the shop';
@@ -27,7 +28,7 @@ export function Admin() {
                         {overlayTitle}
                     </Tooltip>
                 }>
-                    <Button variant="outline-light" className="cart-button" onClick={() => setFormPath(type)}>
+                    <Button variant={btnVariant} onClick={() => setFormPath(type)}>
                         {title}
                     </Button>
                     {/* <CartButton title={title} clickHandler={setFormPath(type)} /> */}

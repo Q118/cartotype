@@ -1,0 +1,20 @@
+/** Badges and Tags o my! */
+.raw-tag-badge {
+    background-color: var(--tag-background) !important;
+    color: var(--badge-text) !important;
+    border-radius: var(--bs-border-radius-pill)!important;
+}
+
+.store-tag-badge {
+    background-color: var(--storeTag-background) !important;
+    color: var(--badge-text) !important;
+    border-radius: var(--bs-border-radius-pill)!important;
+}
+
+.raw-tag-badge-view {
+    background-color: var(--tag-background) !important;
+    color: var(--badge-text) !important;
+    font-size: medium;
+    border-radius: var(--bs-border-radius-pill)!important;
+}
+

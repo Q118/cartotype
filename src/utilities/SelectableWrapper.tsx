@@ -39,18 +39,19 @@ export function SelectableWrapper({
         colors: {
             ...theme.colors,
             /** item hover in menu */
-            primary25: isDark() ? 'var(--bs-secondary)' : 'lightgray',
+            primary25: isDark() ? 'var(--bs-secondary)' : 'lightblue',
+            // primary25: 'var(--bs-secondary)',
             // ...isRawTag && { primary25: 'var(--tag-background)' },
             // ...!isRawTag && { primary25: 'var(--storeTag-background)' },
             /** item click in menu */
             primary50: 'var(--accent)',
             /** input background */
-            neutral0: isDark() ? 'var(--primary-bg)' : '#f8f9fa',
+            neutral0: 'var(--primary-bg)',
             /** item background */
             ...isRawTag && { neutral10: 'var(--tag-background)' },
             ...!isRawTag && { neutral10: 'var(--storeTag-background)' },
             /** text color in item */
-            neutral80: 'var(--primary-bg)',
+            neutral80: 'var(--badge-text)',
             // neutral90: 'pink'
         },
     })

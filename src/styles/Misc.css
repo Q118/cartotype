@@ -1,47 +1,51 @@
 /* yea the btns can stay same maybe darkt o light but not the rest */
 /* !!! PU HERER FIRST!
 ... the big design change
-! get the light varaibles all set up next and then keep synching it up to the rest of the app */
+!  keep synching it up to the rest of the app */
 
 
 .cart-bg-dark {
     --primary-bg: #242426;
-    --accent: #e3b448;
-    --primary-text: #d7dadc;
     --body-background: #171718;
+    --primary-text: #d7dadc;
+    --accent: #e3b448;
+    --accent-complement: #4877E3;
     --border-color: var(--accent);
-    /* --modal-text-color: #ffffff; */
     --btn-primary: #b2ac88;
+    --btn-txt-primary: #171718;
     --btn-secondary: #3a6b35;
+    --btn-txt-secondary: #ffffff;
     --badge-primary: #888EB2;
     --badge-secondary: #88B2AC;
     --badge-txt-primary: #ffffff;
-
-
-    /* --btn-background: #1d1e20; */
-    --btn-text: #ffffff;
-
+    /* backwards compatibility */
     --body-text: var(--primary-text);
-
-
-
-
-
     --tag-background: var(--badge-primary);
     --storeTag-background: var(--badge-secondary);
+    --badge-text: #171718;
+    --active-link: var(--accent);
 }
 
 .bg-light {
-    --modal-background: #ced9de;
-    --modal-text-color: #000000;
-    --border-color: #000000;
-    --body-background: #f8f9fa;
-    --btn-background: #f8f9fa;
-    --btn-text: #000000;
-    --body-text: #212529;
-    --primary-bg: #fff;
-    --tag-background: lightgreen;
-    --storeTag-background: #e7d1ff;
+    --primary-bg: #d7dadc;
+    --primary-text: #242426;
+    --body-background: #f7f7f7;
+    --accent-complement: #4877E3;
+    --accent: #e3b448;
+    --border-color: var(--accent);
+    --btn-primary: #b2ac88;
+    --btn-txt-primary: #171718;
+    --btn-secondary: #3a6b35;
+    --btn-txt-secondary: #ffffff;
+    --badge-primary: #888EB2;
+    --badge-secondary: #88B2AC;
+    --badge-txt-primary: #ffffff;
+    --body-text: var(--primary-text);
+    /* backwards compatibility */
+    --tag-background: var(--badge-primary);
+    --storeTag-background: var(--badge-secondary);
+    --active-link: var(--btn-secondary);
+    --badge-text: #171718;
 }
 
 body {
@@ -72,7 +76,8 @@ nav .cart-button {
 }
 
 .nav-link.active {
-    color: var(--accent) !important;
+    color: var(--active-link) !important;
+    border-bottom: var(--active-link) 2px solid !important;
 }
 
 
@@ -120,10 +125,7 @@ tr {
 
 
 
-.selected-card {
-    /* color: pink; */
-    border: 4px solid greenyellow !important;
-}
+
 
 
 .credit-text {
@@ -181,13 +183,18 @@ tr {
 }
 
 .store-card_card-c {
-    border: var(--accent) 2px solid;
+    border: var(--accent) 2px solid !important;
     min-width: fit-content;
 }
 
 .note-card {
     border: 1px solid var(--accent);
     background-color: var(--primary-bg);
+}
+
+.selected-card {
+    /* color: pink; */
+    border: 4px solid var(--accent-complement) !important;
 }
 
 
@@ -224,23 +231,6 @@ textarea {
     padding: 0;
     font-size: 2rem;
     color: var(--modal-text-color) !important;
-}
-
-/** Badges and Tags o my! */
-.raw-tag-badge {
-    background-color: var(--tag-background) !important;
-    color: var(--primary-bg) !important;
-}
-
-.store-tag-badge {
-    background-color: var(--storeTag-background) !important;
-    color: var(--primary-bg) !important;
-}
-
-.raw-tag-badge-view {
-    background-color: var(--tag-background) !important;
-    color: var(--primary-bg) !important;
-    font-size: medium;
 }
 
 

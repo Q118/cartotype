@@ -37,14 +37,14 @@ export function SelectItem({
     editMode = false,
 }: SelectItemProps) {
 
-    const [isSelected, setIsSelected] = useState(false);
+    const [ isSelected, setIsSelected ] = useState(false);
     useEffect(() => {
         if (identifierSelected === identifier) {
             setIsSelected(true);
         } else {
             setIsSelected(false);
         }
-    }, [identifierSelected])
+    }, [ identifierSelected ])
 
     const currentThemeClasses: string = currentTheme === 'dark' ? 'bg-secondary text-white' : 'bg-white text-dark';
 
@@ -53,8 +53,7 @@ export function SelectItem({
         <>
             <Col>
                 <Card id={`${identifier}-card`}
-                    className={`h-100 ${isSelected ? 'selected-card' : ''}`}
-                    style={{ border: `1px solid ${currentTheme === 'dark' ? '#ccc' : 'black'}` }}>
+                    className={`h-100 store-card_card-c ${isSelected ? 'selected-card' : ''}`}>
                     <Card.Img
                         title={description}
                         variant="top"
@@ -74,7 +73,7 @@ export function SelectItem({
                             </a>
                         </span>
                     )}
-                    <Card.Body className={`d-flex flex-column ${currentThemeClasses}`}>
+                    <Card.Body className={`d-flex flex-column store-card_body-c`}>
                         <div style={{
                             marginTop: "1rem",
                             display: "flex",
