@@ -24,6 +24,7 @@
     --storeTag-background: var(--badge-secondary);
     --badge-text: #171718;
     --active-link: var(--accent);
+    --btn-hover-shadow: rgba(179, 182, 92, 0.4);
 }
 
 .bg-light {
@@ -46,6 +47,7 @@
     --storeTag-background: var(--badge-secondary);
     --active-link: var(--btn-secondary);
     --badge-text: #171718;
+    --btn-hover-shadow: rgba(137, 182, 92, 0.777);
 }
 
 body {

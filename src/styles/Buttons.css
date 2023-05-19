@@ -3,7 +3,7 @@
 /* cool modern hover effect applied to all buttons */
 button:hover {
     /* color: rgba(255, 255, 255, 1); */
-    box-shadow: 0 5px 15px rgba(145, 92, 182, .4) !important;
+    box-shadow: 0 5px 15px var(--btn-hover-shadow) !important;
     /* background-color: initial; */
 }
 

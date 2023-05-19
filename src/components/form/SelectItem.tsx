@@ -46,7 +46,7 @@ export function SelectItem({
         }
     }, [ identifierSelected ])
 
-    const currentThemeClasses: string = currentTheme === 'dark' ? 'bg-secondary text-white' : 'bg-white text-dark';
+    // const currentThemeClasses: string = currentTheme === 'dark' ? 'bg-secondary text-white' : 'bg-white text-dark';
 
 
     return (
