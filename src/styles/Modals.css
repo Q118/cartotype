@@ -1,6 +1,6 @@
 /** Modal */
 .modal-content {
-    background-color: var(--modal-background) !important;
+    background-color: var(--primary-bg) !important;
     color: var(--modal-text-color) !important;
     border: 1px solid var(--border-color) !important;
 }

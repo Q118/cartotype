@@ -13,8 +13,8 @@ type NoteProps = {
 }
 
 //!!!! PU IN HERE!!!!!
-// * first finish the big design revamp and then PU in here
 // *hovering tooltips around them each row to know which is which...
+//! AND THEN GET the storeItemTags logic implemented!
 export function Note({ onDelete }: NoteProps) {
     const note = useNote();
     const navigate = useNavigate();

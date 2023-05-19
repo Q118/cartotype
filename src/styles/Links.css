@@ -2,7 +2,7 @@
 
 
 .style-link {
-    color: inherit !important;
+    color: var(--accent) !important;
     font-weight: bolder !important;
     font-size: larger !important;
     border: 1px dashed !important;
@@ -10,13 +10,11 @@
     border-radius: 5px !important;
 }
 
-
-
 .style-link:hover {
     /* opposite everything */
     color: var(--body-background) !important;
-    background-color: var(--primary-text) !important;
-    border: 1px solid var(--body-background) !important;
+    background-color: var(--accent) !important;
+    /* border: 2px solid var(--body-background) !important; */
 }
 
 .credit-text {

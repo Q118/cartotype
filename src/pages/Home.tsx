@@ -10,7 +10,7 @@ const H5_SPAN = {
     justifyContent: "flex-end",
 };
 
-// TODO add a feed to this that shows the latest notes, tags, items etc added to the community pool and use subscriptions to update the feed in real time
+// TODO add a feed to this that shows the latest notes, tags, items etc added to the community pool and use subscriptions to update the feed in real time supabase
 
 function Home() {
 
