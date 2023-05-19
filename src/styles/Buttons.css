@@ -51,10 +51,6 @@ button:hover {
 
 .edit-button:hover,
 .back-button:hover {
-    /* background-color: var(--btn-text); */
-    /* color: var(--btn-background); */
-    /* border: 1px solid var(--btn-background); */
-    /* background-color: ; */
     color: var(--primary-text) !important;
     border-color: var(--primary-text) !important;
     box-shadow: 0 5px 15px rgba(145, 92, 182, .4);

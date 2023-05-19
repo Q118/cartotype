@@ -1,4 +1,8 @@
 /* yea the btns can stay same maybe darkt o light but not the rest */
+/* !!! PU HERER FIRST!
+... the big design change
+! get the light varaibles all set up next and then keep synching it up to the rest of the app */
+
 
 .cart-bg-dark {
     --primary-bg: #242426;
@@ -14,7 +18,7 @@
     --badge-txt-primary: #ffffff;
 
 
-    --btn-background: #1d1e20;
+    /* --btn-background: #1d1e20; */
     --btn-text: #ffffff;
 
     --body-text: var(--primary-text);
@@ -151,9 +155,9 @@ tr {
 /** links */
 .style-link:hover {
     /* opposite everything */
-    color: var(--btn-background) !important;
-    background-color: var(--btn-text) !important;
-    border: 1px solid var(--btn-background) !important;
+    color: var(--body-background) !important;
+    background-color: var(--primary-text) !important;
+    border: 1px solid var(--body-background) !important;
 }
 
 
