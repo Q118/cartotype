@@ -53,7 +53,7 @@ export function SelectItem({
         <>
             <Col>
                 <Card id={`${identifier}-card`}
-                    className={`h-100 store-card_card-c ${isSelected ? 'selected-card' : ''}`}>
+                    className={`h-100 store-card_admin ${isSelected ? 'selected-card' : ''}`}>
                     <Card.Img
                         title={description}
                         variant="top"
@@ -73,7 +73,7 @@ export function SelectItem({
                             </a>
                         </span>
                     )}
-                    <Card.Body className={`d-flex flex-column store-card_body-c`}>
+                    <Card.Body className={`d-flex flex-column store-card_admin-body`}>
                         <div style={{
                             marginTop: "1rem",
                             display: "flex",

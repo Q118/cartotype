@@ -26,7 +26,7 @@ export function InputSearchForm({
                 required
                 type="text"
                 value={inputSearch}
-                id="search-input"
+                className="form-control"
                 autoComplete="off"
                 onChange={e => updateFields({ inputSearch: e.target.value })}
             />

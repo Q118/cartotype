@@ -38,20 +38,20 @@ export function DetailForm({
             <label>Price: </label>
             <div className="mb-3 input-group">
                 <span className={SPAN_CLASS}>$</span>
-                <input placeholder="0" type="number" id={`input-${currentTheme}`}
+                <input placeholder="0" type="number"
                     className="form-control" required value={price.dollars}
                     onChange={e => updateFields({ price: { ...price, dollars: +e.target.value } })}
                 />
                 <span className={SPAN_CLASS}>.</span>
                 {/* //! not required; let them leave it at 0 if they want */}
-                <input placeholder="00" type="number" id={`input-${currentTheme}`}
+                <input placeholder="00" type="number"
                     value={price.cents} className="form-control" style={{ maxWidth: '4rem' }}
                     onChange={(e) => updateFields({ price: { ...price, cents: +e.target.value } })}
                     max={99} min={0}
                 />
             </div>
             <label>Official Title: </label>
-            <input type="text" className="form-control" id={`input-${currentTheme}`}
+            <input type="text" className="form-control"
                 placeholder={storeTitle} value={storeTitle} maxLength={20}
                 onChange={e => updateFields({ storeTitle: e.target.value })}
             />

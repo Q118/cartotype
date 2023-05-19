@@ -9,7 +9,7 @@
 }
 
 
-#input-dark {
+/* #input-dark {
     background-color: #000000;
     color: #ffffff;
 }
@@ -17,7 +17,7 @@
 #input-light {
     background-color: #ffffff;
     color: #000000;
-}
+} */
 
 /**inputs, selects, etc */
 input,
@@ -26,11 +26,16 @@ textarea {
     /* color: inherit !important; */
     background-color: var(--primary-bg) !important;
     color: var(--primary-text) !important;
-
+    border: 1px solid var(--accent) !important;
 }
 
-#search-input {
-    background-color: var(--body-background);
-    color: var(--body-text);
-    border: 1px solid var(--border-color) !important;
+input:focus {
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 5px 15px var(--btn-hover-shadow) !important;
+}
+
+
+.form-container {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
 }
