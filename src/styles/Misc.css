@@ -22,7 +22,7 @@
     --btn-hover-shadow: rgba(179, 182, 92, 0.4);
 }
 
-.bg-light {
+.cart-bg-light {
     --primary-bg: #d7dadc;
     --primary-text: #242426;
     --body-background: #f7f7f7;
@@ -58,15 +58,6 @@ body {
     color: var(--primary-bg) !important;
 }
 
-#cart-quantity-wrapper {
-    color: white;
-    width: 1.5rem;
-    height: 1.5rem;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transform: translate(25%, 25%);
-}
 
 
 

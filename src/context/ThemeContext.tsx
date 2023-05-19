@@ -42,13 +42,13 @@ export function ThemeProvider({ children }: ShoppingCartProviderProps) {
         if (theme === "light") {
             document.documentElement.classList.remove('cart-bg-dark');
             document.body.classList.remove('cart-bg-dark');
-            document.documentElement.classList.add('bg-light');
-            document.body.classList.add('bg-light');
+            document.documentElement.classList.add('cart-bg-light');
+            document.body.classList.add('cart-bg-light');
         } else {
             document.documentElement.classList.add('cart-bg-dark');
             document.body.classList.add('cart-bg-dark');
-            document.documentElement.classList.remove('bg-light');
-            document.body.classList.remove('bg-light');
+            document.documentElement.classList.remove('cart-bg-light');
+            document.body.classList.remove('cart-bg-light');
         }
         setCurrentTheme(theme);
     }
