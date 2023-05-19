@@ -33,9 +33,7 @@ export function StepTrack({
         return (
             <Button
                 type={type}
-                // variant="outline-light"
                 className={type === "button" ? "carto-btn" : isLastStep ? "carto-btn-alt" : (isFirstStep && !editMode) ? "carto-btn-alt" : "carto-btn-alt"}
-                // className="carto-btn-alt"
                 onClick={type === "button" ? back : () => { }}
                 style={BTN_STYLE}>
                 {type === "button" ? "Back" : isLastStep ? "Finish" : (isFirstStep && !editMode) ? "Search" : "Next"}
