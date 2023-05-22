@@ -23,6 +23,7 @@
     /* border: 1px solid var(--tag-background) !important; */
     color: var(--tag-background) !important;
     padding: 2px;
+
 }
 .tag-the-storeTag {
     color: var(--storeTag-background) !important;
