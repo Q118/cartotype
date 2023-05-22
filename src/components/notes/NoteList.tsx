@@ -54,42 +54,30 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
             <Row className="align-items-center mb-4">
                 <Col><h1>Notes</h1></Col>
                 {/* //* use xs = auto to forcee it smallas possible while fitting */}
-                <Col xs="auto">
-                    <Stack gap={2} direction="horizontal">
-                        <Link to="new">
-                            <Button className="carto-btn">Create</Button>
-                        </Link>
-                        <Button className="carto-btn-alt" onClick={() => setEditTagsModalIsOpen(true)}>
-                            Edit Tags
-                        </Button>
-                    </Stack>
-                </Col>
+                <Col xs="auto"><Stack gap={2} direction="horizontal">
+                    <Link to="new"><Button className="carto-btn">Create</Button></Link>
+                    <Button className="carto-btn-alt" onClick={() => setEditTagsModalIsOpen(true)}>Edit Tags</Button>
+                </Stack></Col>
             </Row>
             <hr />
-            <Form>
-                <Row className="mb-4">
-                    <Col>
-                        <Form.Group controlId="title">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
-                                onChange={e => setTitle(e.target.value)} />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group controlId="tags">
-                            <Form.Label>Tags</Form.Label>
-                            <SelectableWrapper
-                                createOptionEnabled={false}
-                                placeholder='Tags to filter by'
-                                availableTags={availableTags}
-                                selectedTags={selectedTags}
-                                setSelectedTags={setSelectedTags}
-                                isRawTag={true}
-                            />
-                        </Form.Group>
-                    </Col>
-                </Row>
-            </Form>
+            <Form><Row className="mb-4">
+                <Col><Form.Group controlId="title">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
+                        onChange={e => setTitle(e.target.value)} />
+                </Form.Group></Col>
+                <Col><Form.Group controlId="tags">
+                    <Form.Label>Tags</Form.Label>
+                    <SelectableWrapper
+                        createOptionEnabled={false}
+                        placeholder='Tags to filter by'
+                        availableTags={availableTags}
+                        selectedTags={selectedTags}
+                        setSelectedTags={setSelectedTags}
+                        isRawTag={true}
+                    />
+                </Form.Group></Col>
+            </Row></Form>
             {notesLoading && <LoadingDivComponent />}
             {!notesLoading && (<>
                 <Row xs={1} md={2} lg={3} className="g-3">
