@@ -59,7 +59,7 @@ button:hover {
 
 .delete-note-btn:hover {
     background-color: red !important;
-    color: var(--primary-text) !important;
+    color: white !important;
     border-color: var(--primary-text) !important;
     box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
 }

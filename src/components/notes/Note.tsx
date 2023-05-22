@@ -2,7 +2,8 @@ import { useNote } from "./NoteLayout";
 import { Badge, Button, Stack, Row, Col } from "react-bootstrap";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-
+import { BsFillInfoCircleFill } from 'react-icons/bs';
+import { IconContext } from "react-icons";
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -15,9 +16,24 @@ type NoteProps = {
 //!!!! PU IN HERE!!!!!
 // *hovering tooltips around them each row to know which is which...
 //! AND THEN GET the storeItemTags logic implemented!
+
+
+// TODO modulate out parts of this file
+
 export function Note({ onDelete }: NoteProps) {
     const note = useNote();
     const navigate = useNavigate();
+
+
+    const overlay = (tagType: string) => (
+        <Tooltip id={`tooltip-${tagType}`}>
+            <span className={`tag-the-${tagType}`}>
+                <strong>{tagType === 'rawTag' ? 'User Selected Tags' : 'Store Tags'}</strong>
+            </span>
+        </Tooltip>
+    );
+
+
     return (
         <>
             <Row className="align-items-center mb-4">
@@ -25,39 +41,34 @@ export function Note({ onDelete }: NoteProps) {
                     <h1>{note.title}</h1>
                     {note.tags.length > 0 && (
                         <Stack gap={1} direction="horizontal" className="flex-wrap mb-2">
-                            {/* <OverlayTrigger placement="bottom" overlay={<Tooltip id="tags-tooltip">Tags</Tooltip>}> */}
                             {note.tags.map(tag => (
                                 <Badge className='text-truncate raw-tag-badge-view' key={tag.id}>
                                     {tag.label}
                                 </Badge>
                             ))}
-                            {/* </OverlayTrigger> */}
+                            <OverlayTrigger placement="right" overlay={overlay("rawTag")}>
+                                <a style={{ cursor: 'pointer' }}>
+                                    <BsFillInfoCircleFill className="rawTag-infoIcon" />
+                                </a>
+                            </OverlayTrigger>
                         </Stack>
                     )}
-                    {/* hovering tooltips around them each row to know which is which... */}
-
                     {note.tags.length > 0 && (
                         <Stack gap={1} direction="horizontal" className="flex-wrap">
-                            {/* Store Tags: */}
                             {note.tags.map(tag => (
                                 <Badge className='text-truncate store-tag-badge' key={tag.id}>
                                     {tag.label}
                                 </Badge>
                             ))}
+                            <OverlayTrigger placement="right" overlay={overlay("storeTag")}>
+                                <a style={{ cursor: 'pointer' }}>
+                                    <BsFillInfoCircleFill className="storeTag-infoIcon" />
+                                </a>
+                            </OverlayTrigger>
                         </Stack>
                     )}
                 </Col>
                 <Col xs="auto">
-                    {/* {note.tags.length > 0 && (
-                        <Stack gap={1} direction="horizontal" className="flex-wrap mb-2 justify-content-end">
-                            StoreItem tags: 
-                            {note.tags.map(tag => (
-                                <Badge className='text-truncate store-tag-badge' key={tag.id}>
-                                    {tag.label}
-                                </Badge>
-                            ))}
-                        </Stack>
-                    )} */}
                     <Stack gap={2} direction="horizontal" className="justify-content-end mb-2">
                         {/* <Link to={`${note.id}/edit`}> */}
                         <Link to="edit">
@@ -75,10 +86,10 @@ export function Note({ onDelete }: NoteProps) {
                     </Stack>
                     <Stack direction="horizontal" className="justify-content-end">
                         <Button variant="none" title="delete note"
-                        className="delete-note-btn" onClick={() => {
-                            onDelete(note.id);
-                            navigate('/notes');
-                        }}>
+                            className="delete-note-btn" onClick={() => {
+                                onDelete(note.id);
+                                navigate('/notes');
+                            }}>
                             <VscTrash />
                         </Button>
                     </Stack>

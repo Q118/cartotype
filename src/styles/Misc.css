@@ -49,6 +49,8 @@
 body {
     background-color: var(--body-background) !important;
     color: var(--body-text) !important;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 
