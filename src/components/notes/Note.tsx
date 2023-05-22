@@ -3,7 +3,6 @@ import { Badge, Button, Stack, Row, Col } from "react-bootstrap";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { BsFillInfoCircleFill } from 'react-icons/bs';
-import { IconContext } from "react-icons";
 import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -14,8 +13,7 @@ type NoteProps = {
 }
 
 //!!!! PU IN HERE!!!!!
-// *hovering tooltips around them each row to know which is which...
-//! AND THEN GET the storeItemTags logic implemented!
+//! GET the storeItemTags logic implemented!
 
 
 // TODO modulate out parts of this file
@@ -23,7 +21,7 @@ type NoteProps = {
 export function Note({ onDelete }: NoteProps) {
     const note = useNote();
     const navigate = useNavigate();
-
+    // const { globalStoreItemTags } = useShoppingCart();
 
     const overlay = (tagType: string) => (
         <Tooltip id={`tooltip-${tagType}`}>
@@ -33,7 +31,7 @@ export function Note({ onDelete }: NoteProps) {
         </Tooltip>
     );
 
-
+        console.log('note: ', note);
     return (
         <>
             <Row className="align-items-center mb-4">
@@ -53,9 +51,9 @@ export function Note({ onDelete }: NoteProps) {
                             </OverlayTrigger>
                         </Stack>
                     )}
-                    {note.tags.length > 0 && (
+                    {note.storeItemTags!.length > 0 && (
                         <Stack gap={1} direction="horizontal" className="flex-wrap">
-                            {note.tags.map(tag => (
+                            {note.storeItemTags!.map(tag => (
                                 <Badge className='text-truncate store-tag-badge' key={tag.id}>
                                     {tag.label}
                                 </Badge>
@@ -70,15 +68,12 @@ export function Note({ onDelete }: NoteProps) {
                 </Col>
                 <Col xs="auto">
                     <Stack gap={2} direction="horizontal" className="justify-content-end mb-2">
-                        {/* <Link to={`${note.id}/edit`}> */}
                         <Link to="edit">
-                            {/* <Button variant="primary">Edit</Button> */}
                             <Button className="carto-btn" title="edit note">
                                 Edit
                             </Button>
                         </Link>
                         <Link to="..">
-                            {/* <Button variant="secondary">Back</Button> */}
                             <Button className="carto-btn-alt" title="back to notes">
                                 Back
                             </Button>
