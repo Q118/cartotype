@@ -6,6 +6,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 type TooltipWrapperProps = {
     overlayTitle: string,
+    // id?: string,
     placement: 'top' | 'bottom' | 'left' | 'right',
     children: ReactElement<any, string | JSXElementConstructor<any>>
 }
@@ -14,7 +15,7 @@ type TooltipWrapperProps = {
 export function TooltipWrapper({
     overlayTitle,
     children,
-    placement
+    placement, 
 }: TooltipWrapperProps) {
 
 

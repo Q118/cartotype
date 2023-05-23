@@ -1,6 +1,10 @@
 import { ReactElement, useState } from "react";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 
+//? is there a way to tell the form component what step its on SO THAT it can render at any point step it wants? 
+
+
+
 export function useMultistepForm(steps: ReactElement[]) {
     const { addNotificationToast } = useShoppingCart();
     const [ currentStepIndex, setCurrentStepIndex ] = useState(0);
@@ -28,6 +32,19 @@ export function useMultistepForm(steps: ReactElement[]) {
         // setNotificationToasts([...notificationToasts, { message, show: true }]);
         addNotificationToast(message);
     }
+
+    /**
+     * @function renderAtStep - renders the component at the given step index supplied by its parent component
+     * @param {number} stepIndex - the index of the step to render
+     */
+// wait goTo already does this
+    // function renderAtStep(stepIndex: number) {
+    //     if (stepIndex < 0 || stepIndex > steps.length - 1) {
+    //         console.error(`Invalid step index supplied to renderAtStep: ${stepIndex}`);
+    //         return null;
+    //     }
+    //     return steps[ stepIndex ];
+    // }
 
 
 

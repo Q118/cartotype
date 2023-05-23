@@ -1,4 +1,5 @@
 import { MouseEvent, useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
 import { GiCartwheel } from 'react-icons/gi';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -6,10 +7,9 @@ import Overlay from 'react-bootstrap/Overlay';
 import { BsChevronDown } from 'react-icons/bs';
 import { StoreItemTag } from '../types';
 import Stack from 'react-bootstrap/Stack';
-import { Link } from 'react-router-dom';
 // import { HiOutlineViewList } from 'react-icons/hi'; <-- maybe use this?
 // a little list item popout that can scroll///
-
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 
 // TODO be able to click and go to that store item from it?,, and/or an add at the bottom of the list
@@ -18,6 +18,7 @@ export function WheelTagCog(props: any) {
     const { storeItemTags } = props;
     const targetRef = useRef(null);
     const [ showOverlay, setShowOverlay ] = useState(false);
+    const navigate = useNavigate();
 
     const handleMouseClick = (e: MouseEvent) => {
         e.stopPropagation();
@@ -25,17 +26,32 @@ export function WheelTagCog(props: any) {
     };
 
     useEffect(() => {
-        document.addEventListener('mousedown', e => handleOutsideClick(e as any));
-        return () => document.removeEventListener('mousedown', e => handleOutsideClick(e as any));
+        document.getElementById('root')!.addEventListener('mousedown', e => handleOutsideClick(e as any));
+        return () => document.getElementById('root')!.removeEventListener('mousedown', e => handleOutsideClick(e as any));
     }, []);
 
     function handleOutsideClick(e: MouseEvent): void {
+        console.log('outside click');
         const mouseLocation = e.target;
         // if it's not in the overlay or inside a card, then close it
         if (mouseLocation !== targetRef.current) setShowOverlay(false);
     }
 
     const isEven = (num: number) => num % 2 === 0;
+
+    function handleListItemClick(e: MouseEvent) {
+        // e.target.removeEventListener('mousedown', e => handleOutsideClick(e as any));
+        e.stopPropagation();
+        console.log('hello!!!!?????');
+
+        // this function isnt running bc the overlay is covering the list item th div lives inside the bosdy...
+        // at the very bottom tho... outside of id=root!
+
+        console.log(e.currentTarget.id)
+        // e.stopPropagation();
+        // navigator
+        navigate(`/admin/edit/${e.currentTarget.id}`);
+    }
 
     return (
         <>
@@ -47,7 +63,11 @@ export function WheelTagCog(props: any) {
                     </ListGroup.Item>
                     <span className="innerGroup-storeTags-card">
                         {storeItemTags.length > 0 && storeItemTags.map((tag: StoreItemTag, index: number) => (
-                            <ListGroup.Item as={Link} to={`/storeTags/${tag.id}`}
+                            // * the tag.id is === the associated storeItem.id
+                            <ListGroup.Item
+                                id={tag.id}
+                                // as={Link} to={`/admin/edit/${tag.id}`}
+                                onClick={e => handleListItemClick(e)}
                                 className={`storeTags-listGroup-card-list-item ${isEven(+index) ? 'alt-listItem' : ''}`}
                                 key={tag.id}>
                                 <Badge className='text-truncate store-tag-badge' >

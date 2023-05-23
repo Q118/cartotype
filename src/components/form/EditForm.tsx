@@ -14,25 +14,44 @@ import { consolidateStorePrice } from '../../utilities/formatCurrency';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 type EditFormData = {
-    selectOptions: ResultItem[];
-    selectedItem: ResultItem | null;
+    selectOptions?: ResultItem[];
+    selectedItem?: ResultItem | null;
     /** new price set by user */
-    price: StorePrice;
+    price?: StorePrice;
     /** storeTitle aka the new title user may choose */
-    storeTitle: string;
-    isDataLoading: () => boolean;
+    storeTitle?: string;
+    isDataLoading?: () => boolean;
+    /** optional step to start form at if coming from elsewhere */
+    renderAtStep?: number|null;
 };
 
-const INITIAL_DATA: EditFormData = {
-    selectOptions: [],
-    selectedItem: null,
-    price: { dollars: 0, cents: 0 },
-    storeTitle: '',
-    isDataLoading: () => false,
-};
+// const INITIAL_DATA: EditFormData = {
+//     selectOptions: [],
+//     selectedItem: null,
+//     price: { dollars: 0, cents: 0 },
+//     storeTitle: '',
+//     isDataLoading: () => false,
+// };
 
-export function EditForm() {
-    const [data, setData] = useState(INITIAL_DATA);
+//? is there a way to tell this component what step its on SO THAT it can render at any point step it wants? 
+
+export function EditForm({
+    selectOptions = [],
+    selectedItem = null,
+    price = { dollars: 0, cents: 0 },
+    storeTitle = '',
+    isDataLoading = () => false,
+    renderAtStep = null,
+}: EditFormData) {
+    // const INITIAL_DATA: EditFormData
+
+    const [ data, setData ] = useState({
+        selectOptions,
+        selectedItem,
+        price,
+        storeTitle,
+        isDataLoading,
+    });
     const navigate = useNavigate();
 
     const { globalStoreItems, refreshStoreItems, isStoreItemsLoading } = useShoppingCart();
@@ -45,7 +64,8 @@ export function EditForm() {
         isLastStep,
         next,
         back,
-        notify
+        notify,
+        goTo
     } = useMultistepForm([
         <SelectForm
             {...data}
@@ -62,6 +82,9 @@ export function EditForm() {
             editMode={true}
         />,
     ]);
+
+    if (renderAtStep !== null) goTo(renderAtStep);
+
     function updateFields(fields: Partial<EditFormData>) {
         //* override all the old info with the new info
         setData(prev => ({ ...prev, ...fields }));

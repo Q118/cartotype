@@ -55,7 +55,8 @@
     background-color: var(--primary-bg) !important;
     border: var(--accent) 1px solid !important;
     border-radius: 5%;
-    max-height: 100px;
+    max-height: 120px;
+    /* width: fit-content; */
 }
 
 .innerGroup-storeTags-card {
