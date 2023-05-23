@@ -85,7 +85,7 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                     {filteredNotes?.map(note => {
                         return (
                             <Col key={note.id}>
-                                <NoteCard id={note.id} title={note.title} tags={note.tags} />
+                                <NoteCard id={note.id} title={note.title} tags={note.tags} storeItemTags={note.storeItemTags} />
                             </Col>
                         )
                     })}

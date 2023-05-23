@@ -42,7 +42,7 @@ export type NoteData = {
     title: string;
     markdown: string;
     tags: Tag[];
-    storeItemTags?: StoreItemTag[];
+    storeItemTags: StoreItemTag[];
 }
 
 export type Tag = {
@@ -69,6 +69,7 @@ export type RawNotedata = {
 
 export type SimplifiedNote = {
     tags: Tag[];
+    storeItemTags: StoreItemTag[];
     title: string;
     id: string;
 }

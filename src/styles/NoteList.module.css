@@ -1,5 +1,6 @@
 .card {
     transition: translate ease-in-out 100 ms, box-shadow ease-in-out 100 ms;
+    cursor: pointer;
 }
 
 /* ! this is helpful to use in other projects */

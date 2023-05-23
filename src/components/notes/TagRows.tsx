@@ -20,7 +20,7 @@ export function TagRows() {
                         </Badge>
                     ))}
                     <OverlayInfoWrapper tagType="rawTag" placement="right"
-                        children={<><BsFillInfoCircleFill className="rawTag-infoIcon" /></>}
+                        children={<BsFillInfoCircleFill className="rawTag-infoIcon" />}
                     />
                 </Stack>
             )}
@@ -32,7 +32,7 @@ export function TagRows() {
                         </Badge>
                     ))}
                     <OverlayInfoWrapper tagType="storeTag" placement="right"
-                        children={<><BsFillInfoCircleFill className="storeTag-infoIcon" /></>}
+                        children={<BsFillInfoCircleFill className="storeTag-infoIcon" />}
                     />
                 </Stack>
             )}

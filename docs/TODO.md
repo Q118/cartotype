@@ -12,6 +12,8 @@ pr to master from dev to kick of production deployment
 
 
 
+<!-- Admin: Tabbed INterfaces instead of clicking a button to route -->https://react-bootstrap.github.io/components/list-group/#tabbed-interfaces
+
 <!-- add user seperation? logins... -->
 <!-- TODO: make the whpole app be agnostic.... like a total agnostic that could just be skeleton and any kind of data thats realted to eachother could e pluugged into it... or really just great skeleton to use for any starting point wiht a new React App -->
 <!-- TODO: change every console.log to logger -->
