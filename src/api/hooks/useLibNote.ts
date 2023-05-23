@@ -1,4 +1,3 @@
-// import { useQuery } from '@tanstack/react-query';
 import { NoteData, StoreItemTag } from '../../types';
 import { Notes as NoteConstructor } from '../lib/notes';
 import { v4 as uuidv4 } from 'uuid';

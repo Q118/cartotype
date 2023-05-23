@@ -1,14 +1,12 @@
 import { MouseEvent, useRef, useState, useEffect } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import { GiCartwheel } from 'react-icons/gi';
-// import { Tooltip, Button, Stack, OverlayTrigger, Row } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
-// import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Overlay from 'react-bootstrap/Overlay';
 import { BsChevronDown } from 'react-icons/bs';
 import { StoreItemTag } from '../types';
-import { IconContext } from 'react-icons';
 import Stack from 'react-bootstrap/Stack';
+// import { HiOutlineViewList } from 'react-icons/hi'; <-- maybe use this?
 // a little list item popout that can scroll///
 
 
@@ -69,6 +67,7 @@ export function WheelTagCog(props: any) {
             <div className="cog-div-noteCard" ref={targetRef}
                 onClick={e => handleMouseClick(e)}>
                 <Stack direction='horizontal' gap={1}>
+                    {/* <HiOutlineViewList size="20" /><BsChevronDown size="10" /> */}
                     <GiCartwheel size="20" /><BsChevronDown size="10" />
                 </Stack>
             </div>
