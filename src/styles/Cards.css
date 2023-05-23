@@ -68,6 +68,11 @@
     padding: 4px 4px 4px 8px !important;
 }
 
+.storeTags-listGroup-card-list-item:hover {
+    background-color: var(--btn-hover-shadow) !important;
+    cursor: pointer;
+}
+
 .alt-listItem {
     background-color: var(--body-background) !important;
 }

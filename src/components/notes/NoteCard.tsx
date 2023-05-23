@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { SimplifiedNote, StoreItemTag } from "../../types";
+import { useNavigate } from "react-router-dom";
+import { SimplifiedNote } from "../../types";
 import Card from 'react-bootstrap/Card';
 import styles from '../../styles/NoteList.module.css';
 import Stack from "react-bootstrap/esm/Stack";

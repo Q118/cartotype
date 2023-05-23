@@ -6,8 +6,10 @@ import Overlay from 'react-bootstrap/Overlay';
 import { BsChevronDown } from 'react-icons/bs';
 import { StoreItemTag } from '../types';
 import Stack from 'react-bootstrap/Stack';
+import { Link } from 'react-router-dom';
 // import { HiOutlineViewList } from 'react-icons/hi'; <-- maybe use this?
 // a little list item popout that can scroll///
+
 
 
 // TODO be able to click and go to that store item from it?,, and/or an add at the bottom of the list
@@ -18,27 +20,19 @@ export function WheelTagCog(props: any) {
     const [ showOverlay, setShowOverlay ] = useState(false);
 
     const handleMouseClick = (e: MouseEvent) => {
-        // this is needed so that the click doesn't go to the card and open it
         e.stopPropagation();
         setShowOverlay(true);
-    }
-    // const handleMouseLeave = () => setShowOverlay(false);
-    // const handleMouseEnter = () => setShowOverlay(true);
+    };
 
     useEffect(() => {
         document.addEventListener('mousedown', e => handleOutsideClick(e as any));
-        return () => {
-            document.removeEventListener('mousedown', e => handleOutsideClick(e as any));
-        }
-    }, [])
-
+        return () => document.removeEventListener('mousedown', e => handleOutsideClick(e as any));
+    }, []);
 
     function handleOutsideClick(e: MouseEvent): void {
         const mouseLocation = e.target;
         // if it's not in the overlay or inside a card, then close it
-        if (mouseLocation !== targetRef.current) {
-            setShowOverlay(false);
-        }
+        if (mouseLocation !== targetRef.current) setShowOverlay(false);
     }
 
     const isEven = (num: number) => num % 2 === 0;
@@ -53,7 +47,7 @@ export function WheelTagCog(props: any) {
                     </ListGroup.Item>
                     <span className="innerGroup-storeTags-card">
                         {storeItemTags.length > 0 && storeItemTags.map((tag: StoreItemTag, index: number) => (
-                            <ListGroup.Item
+                            <ListGroup.Item as={Link} to={`/storeTags/${tag.id}`}
                                 className={`storeTags-listGroup-card-list-item ${isEven(+index) ? 'alt-listItem' : ''}`}
                                 key={tag.id}>
                                 <Badge className='text-truncate store-tag-badge' >
