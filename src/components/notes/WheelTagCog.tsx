@@ -52,7 +52,7 @@ export function WheelTagCog(props: any) {
                             // * the tag.id is === the associated storeItem.id
                             <ListGroup.Item
                                 id={tag.id}
-                                as={Link} to={`/store/view/${tag.id}`}
+                                as={Link} to={`/admin/${tag.id}/view`}
                                 onClick={e => e.stopPropagation()}
                                 className={`storeTags-listGroup-card-list-item ${isEven(+index) ? 'alt-listItem' : ''}`}
                                 key={tag.id}>
