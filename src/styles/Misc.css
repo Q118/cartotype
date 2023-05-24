@@ -63,6 +63,7 @@ body::-webkit-scrollbar {
 
 #root {
     height: 100vh !important;
+    width: 100vw !important;
 }
 
 /** Uncategorized */
