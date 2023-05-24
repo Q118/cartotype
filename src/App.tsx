@@ -11,11 +11,12 @@ import { Admin } from './pages/Admin';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ThemeProvider } from './context/ThemeContext';
 // import { NoteContextProvider } from './context/NoteContext';
-import { ShoppingCart } from './components/ShoppingCart';
+import { ShoppingCart } from './components/store/ShoppingCart';
 // import { NewNote } from './components/notes/NewNote';
 import { DisplayToast } from './components/NotificationToast';
-import { StoreItemView } from './components/StoreItemView';
-
+import { StoreItemView } from './components/store/StoreItemView';
+import { EditForm } from './components/form/EditForm';
+import { FormApp as AddForm } from './components/form/AddForm';
 
 // import 
 // import TimeAgo from './components/Demo';
@@ -40,9 +41,14 @@ function App() {
                                     <Route index element={<Store />} />
                                     <Route path="view/:item_id" element={<StoreItemView />} />
                                 </Route>
-                                <Route path="/admin" element={<Admin />} />
-                                    {/* <Route path="edit/:item_id" element={<StoreItemView />} /> */}
-                                {/* </Route> */}
+                                {/* <Route path="/admin">
+                                    <Route index element={<Admin />} />
+                                    <Route path='edit' element={<EditForm />} />
+                                    <Route path='add' element={<AddForm />} />
+                                </Route> */}
+                                <Route path="/admin/*" element={<Admin />} />
+
+
                                 {/* // TODO display flash toast if get redirected */}
                                 {/* <Route path="/demo/*" element={<TimeAgo />} /> */}
                                 <Route path="/notes/*" element={<Notes />} />

@@ -6,12 +6,16 @@
  * edit items in the database store
  */
 import { useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
 // import { useParams, useLocation, useHref } from 'react-router-dom'; not available when from the notes since it was outside the dom that called itnk
 // import { useLocation } from 'react-router-dom';
 import { FormApp } from "../components/form/AddForm";
 import { EditForm } from "../components/form/EditForm";
-import { Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Container, Button, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { useTheme } from '../context/ThemeContext';
+import { AdminLayout } from '../components/AdminLayout';
+import { StoreItemView } from '../components/store/StoreItemView';
 
 // TODO: turn the buttons in to tabs so that they each are tabs for each page
 // import { TooltipWrapper } from '../utilities/TooltipWrapper'; <- dont
@@ -23,13 +27,20 @@ type AdminProps = {
 export function Admin({ renderAtStep = 0 }: AdminProps) {
     // = useHref();
     // console.log(useLocation())
-
+    const navigate = useNavigate();
     // const { pathname } = useLocation();
     // it isnt reading the search params i think bcthe link is not within the router context so even tho it displays like it is, it isnt actually... leads me back to wanted to just manually tellt he Admin page to go TO certain step. which was my original idea
 
-    const [ formPath, setFormPath ] = useState<string | null>(null);
+    // const [ formPath, setFormPath ] = useState<string | null>(null);
     const { currentTheme } = useTheme();
     const btnVariant = currentTheme === 'dark' ? 'outline-light' : 'outline-dark';
+
+    const handleClick = (type: string) => {
+        if (type === 'add') navigate('add');
+        else if (type === 'edit') navigate('edit');
+    };
+
+
 
     const renderOverlayColumn = (type: string, title: string) => {
         const overlayTitle = type === 'add' ? 'add a new item to the shop' : 'edit the current items in the shop';
@@ -40,7 +51,7 @@ export function Admin({ renderAtStep = 0 }: AdminProps) {
                         {overlayTitle}
                     </Tooltip>
                 }>
-                    <Button variant={btnVariant} onClick={() => setFormPath(type)}>
+                    <Button variant={btnVariant} onClick={() => handleClick(type)}>
                         {title}
                     </Button>
                 </OverlayTrigger>
@@ -51,15 +62,34 @@ export function Admin({ renderAtStep = 0 }: AdminProps) {
 
 
     return (
-        <>
+        <Container className="my-4">
             <h1>Admin Dashboard</h1>
             <hr />
-            {/* {pathname.includes('/edit/') ? <EditForm renderAtStep={renderAtStep} /> : (
-                <>
-                
-                </>
-            )} */}
-            {formPath == null && (
+
+
+            <Routes>
+                <Route path='/' element={<>
+                    <p>Select an option:</p>
+                    <Row className="p-2 text-center">
+                        {renderOverlayColumn('add', 'Add New Item')}
+                        {renderOverlayColumn('edit', 'Edit Items')}
+                    </Row>
+                </>} />
+
+                <Route path='add' element={<FormApp />} />
+                <Route path='edit' element={<EditForm />} />
+
+
+                <Route path='/:item_id' element={<AdminLayout />}>
+                    <Route path="edit" element={<EditForm />} />
+                    <Route path="view" element={<StoreItemView />} />
+                </Route>
+
+            </Routes>
+
+
+
+            {/* {formPath == null && (
                 <>
                     <p>Select an option:</p>
                     <Row className="p-2 text-center">
@@ -68,7 +98,7 @@ export function Admin({ renderAtStep = 0 }: AdminProps) {
                     </Row>
                 </>
             )}
-            {formPath === 'add' ? <FormApp /> : formPath === 'edit' ? <EditForm /> : null}
-        </>
+            {formPath === 'add' ? <FormApp /> : formPath === 'edit' ? <EditForm /> : null} */}
+        </Container>
     );
 }
