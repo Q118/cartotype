@@ -5,7 +5,7 @@ import { GiCartwheel } from 'react-icons/gi';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Overlay from 'react-bootstrap/Overlay';
 import { BsChevronDown } from 'react-icons/bs';
-import { StoreItemTag } from '../types';
+import { StoreItemTag } from '../../types';
 import Stack from 'react-bootstrap/Stack';
 // import { HiOutlineViewList } from 'react-icons/hi'; <-- maybe use this?
 // a little list item popout that can scroll///

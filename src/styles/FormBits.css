@@ -23,7 +23,21 @@
 .listGroup-associatedNotes {
     max-height: 100px;
     overflow-y: scroll;
+    border: 1px solid var(--accent);
+    /* border-radius: 0 !important; */
+    background-color: var(--primary-bg) !important;
 }
+
+.listItem-associatedNotes {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+}
+
+.listItem-associatedNotes-alt {
+    background-color: var(--body-background) !important;
+    color: var(--primary-text) !important;
+}
+
 
 .listGroup-associatedNotes::-webkit-scrollbar {
     width: 8px;

@@ -1,20 +1,19 @@
 // import { DetailForm } from "./form/DetailForm"
-import { useShoppingCart } from "../context/ShoppingCartContext"
+import { useShoppingCart } from "../../context/ShoppingCartContext"
 import { useParams } from 'react-router-dom';
 import { Button, Container, ListGroup } from "react-bootstrap";
-// import { FormWrapper } from "../utilities/FormWrapper";
-// TODO edit btton somewhere to lead to that step in editform..
 import { StoreItem } from "./StoreItem";
 
 
-
+// ! PU HERE! gget the edit button to takeu to that detail step in form 
+// * and get the associated notes looking good here and in detail form
 
 export function StoreItemView() {
     const { item_id } = useParams();
     const { getStoreItemById } = useShoppingCart();
     const item = getStoreItemById(item_id || '');
 
-    // TODO show notes that are attached
+    // TODO make each note thats attached be a link
 
     // * disabled version of DetailForm... could have been better by sharing the components but oh well
 
@@ -24,12 +23,8 @@ export function StoreItemView() {
             <h1>Item: {item.name}</h1>
             <hr />
             <Container className="form-view-container">
-                <div style={{
-                    position: 'absolute',
-                    bottom: '.5rem',
-                    right: '.5rem'
-                }}>
-                    <Button className="carto-btn">Edit</Button>
+                <div className="bottom-right-container">
+                    <Button className="carto-btn-alt">Edit</Button>
                 </div>
                 <h2 style={{ textAlign: "center", margin: 0, marginBottom: "2rem" }}>View Details</h2>
                 <div style={{
@@ -47,11 +42,11 @@ export function StoreItemView() {
                     />
                     <label>Associated Notes</label>
                     <ListGroup className="listGroup-associatedNotes">
-                        <ListGroup.Item>note 1</ListGroup.Item>
-                        <ListGroup.Item>fmds,mf,.ds</ListGroup.Item>
-                        <ListGroup.Item>note 2</ListGroup.Item>
-                        <ListGroup.Item>note dmsadka</ListGroup.Item>
-                        <ListGroup.Item>ghfjdhdsk</ListGroup.Item>
+                        <ListGroup.Item className="listItem-associatedNotes">note 1</ListGroup.Item>
+                        <ListGroup.Item className="listItem-associatedNotes-alt">fmds,mf,.ds</ListGroup.Item>
+                        <ListGroup.Item className="listItem-associatedNotes">note 2</ListGroup.Item>
+                        <ListGroup.Item className="listItem-associatedNotes-alt">note dmsadka</ListGroup.Item>
+                        <ListGroup.Item className="listItem-associatedNotes">ghfjdhdsk</ListGroup.Item>
 
                     </ListGroup>
                     <h6>Preview:</h6>

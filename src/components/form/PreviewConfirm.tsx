@@ -1,4 +1,4 @@
-import { StoreItem } from "../StoreItem";
+import { StoreItem } from "../store/StoreItem";
 // import { FormWrapper } from "./FormWrapper";
 import { ResultItem, StorePrice } from '../../types';
 import { consolidateStorePrice } from "../../utilities/formatCurrency";

@@ -68,7 +68,12 @@ body::-webkit-scrollbar {
     color: var(--primary-bg) !important;
 }
 
-
+/* the parent needs to be position:relative */
+.bottom-right-container {
+    position: absolute;
+    bottom: .5rem;
+    right: .5rem;
+}
 
 
 #home-div-wrapper {

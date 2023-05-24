@@ -1,5 +1,10 @@
 import { ReactElement, useState } from "react";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+// import stuff from react-router-dom that will add # in to the urls that signify the step number
+// for example, /checkout#1, /checkout#2, /checkout#3, etc.
+// import { useLocation, useHistory } from "react-router-dom";
+
+
 
 //? is there a way to tell the form component what step its on SO THAT it can render at any point step it wants? 
 

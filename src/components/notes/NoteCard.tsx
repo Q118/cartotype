@@ -5,7 +5,7 @@ import styles from '../../styles/NoteList.module.css';
 import Stack from "react-bootstrap/esm/Stack";
 import Badge from "react-bootstrap/Badge";
 // import { IconContext } from "react-icons";
-import { WheelTagCog } from "../WheelTagCog";
+import { WheelTagCog } from "./WheelTagCog";
 
 //* the tags cahn filter the notes
 

@@ -1,8 +1,8 @@
 import { Offcanvas, Stack } from "react-bootstrap";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 // import { useTheme } from "../context/ThemeContext";
 import { CartItem } from "./CartItem";
-import { formatCurrency } from "../utilities/formatCurrency";
+import { formatCurrency } from "../../utilities/formatCurrency";
 
 export function ShoppingCart() {
 

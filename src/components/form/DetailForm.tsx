@@ -1,7 +1,7 @@
 import { FormWrapper } from "../../utilities/FormWrapper";
 import { ResultItem, StorePrice } from '../../types';
-import { StoreItem } from "../StoreItem";
-import { Col, Row } from "react-bootstrap";
+import { StoreItem } from "../store/StoreItem";
+import { Col, ListGroup, Row } from "react-bootstrap";
 // import { useTheme } from "../../context/ThemeContext";
 import { consolidateStorePrice } from "../../utilities/formatCurrency";
 // import { FormEvent } from "react";
@@ -26,7 +26,7 @@ export function DetailForm({
     updateFields,
 }: DetailFormProps) {
 
-
+    // TODO:obvs need to dynamically show the ntoes and make them links
     return (
         <FormWrapper title="Edit Details for Store">
             <label>Price: </label>
@@ -51,6 +51,16 @@ export function DetailForm({
                 maxLength={20} autoFocus
                 onChange={e => updateFields({ storeTitle: e.target.value })}
             />
+            <label>Associated Notes</label>
+            <ListGroup className="listGroup-associatedNotes">
+                <ListGroup.Item className="listItem-associatedNotes">note 1</ListGroup.Item>
+                <ListGroup.Item className="listItem-associatedNotes-alt">fmds,mf,.ds</ListGroup.Item>
+                <ListGroup.Item className="listItem-associatedNotes">note 2</ListGroup.Item>
+                <ListGroup.Item className="listItem-associatedNotes-alt">note dmsadka</ListGroup.Item>
+                <ListGroup.Item className="listItem-associatedNotes">ghfjdhdsk</ListGroup.Item>
+                <ListGroup.Item className="listItem-associatedNotes-alt">koekrl;ew</ListGroup.Item>
+
+            </ListGroup>
             <h6>Preview:</h6>
             <Row>
                 <Col style={{ maxWidth: '250px' }}>

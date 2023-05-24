@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
-import { formatCurrency } from '../utilities/formatCurrency';
-import { useShoppingCart } from '../context/ShoppingCartContext';
+import { formatCurrency } from '../../utilities/formatCurrency';
+import { useShoppingCart } from '../../context/ShoppingCartContext';
 // import { useTheme } from '../context/ThemeContext';
 
 const TITLE_CLASSES: string = 'd-flex justify-content-between align-items-baseline mb-4';
