@@ -1,5 +1,5 @@
 import { MouseEvent, useRef, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, BrowserRouter, Route, Routes } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
 import { GiCartwheel } from 'react-icons/gi';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -9,7 +9,7 @@ import { StoreItemTag } from '../types';
 import Stack from 'react-bootstrap/Stack';
 // import { HiOutlineViewList } from 'react-icons/hi'; <-- maybe use this?
 // a little list item popout that can scroll///
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+// import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 
 // TODO be able to click and go to that store item from it?,, and/or an add at the bottom of the list
@@ -18,7 +18,7 @@ export function WheelTagCog(props: any) {
     const { storeItemTags } = props;
     const targetRef = useRef(null);
     const [ showOverlay, setShowOverlay ] = useState(false);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handleMouseClick = (e: MouseEvent) => {
         e.stopPropagation();
@@ -39,20 +39,6 @@ export function WheelTagCog(props: any) {
 
     const isEven = (num: number) => num % 2 === 0;
 
-    function handleListItemClick(e: MouseEvent) {
-        // e.target.removeEventListener('mousedown', e => handleOutsideClick(e as any));
-        e.stopPropagation();
-        console.log('hello!!!!?????');
-
-        // this function isnt running bc the overlay is covering the list item th div lives inside the bosdy...
-        // at the very bottom tho... outside of id=root!
-
-        console.log(e.currentTarget.id)
-        // e.stopPropagation();
-        // navigator
-        navigate(`/admin/edit/${e.currentTarget.id}`);
-    }
-
     return (
         <>
             <Overlay target={targetRef.current} show={showOverlay} placement="top-start">
@@ -66,8 +52,8 @@ export function WheelTagCog(props: any) {
                             // * the tag.id is === the associated storeItem.id
                             <ListGroup.Item
                                 id={tag.id}
-                                // as={Link} to={`/admin/edit/${tag.id}`}
-                                onClick={e => handleListItemClick(e)}
+                                as={Link} to={`/store/view/${tag.id}`}
+                                onClick={e => e.stopPropagation()}
                                 className={`storeTags-listGroup-card-list-item ${isEven(+index) ? 'alt-listItem' : ''}`}
                                 key={tag.id}>
                                 <Badge className='text-truncate store-tag-badge' >

@@ -49,6 +49,7 @@ type ShoppingCartContext = {
     storeItemsError: any;
     /** handle refetch after an update */
     refreshStoreItems: () => Promise<QueryObserverResult<unknown, unknown>>;
+    getStoreItemById: (id: string) => StoreItem;
 };
 
 
@@ -147,6 +148,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         })
     }
 
+    function getStoreItemById(id: string) {
+        return globalStoreItems.find((item) => item.id === id) || {} as StoreItem;
+    }
+
     return (
         <ShoppingCartContext.Provider value={{
             getItemQuantity,
@@ -169,6 +174,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             refreshStoreItems,
             globalStoreItemTags,
             setGlobalStoreItemTags,
+            getStoreItemById
         }}>
             {children}
         </ShoppingCartContext.Provider>

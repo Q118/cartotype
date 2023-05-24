@@ -14,7 +14,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { ShoppingCart } from './components/ShoppingCart';
 // import { NewNote } from './components/notes/NewNote';
 import { DisplayToast } from './components/NotificationToast';
-import { EditForm } from './components/form/EditForm';
+import { StoreItemView } from './components/StoreItemView';
 
 
 // import 
@@ -36,10 +36,13 @@ function App() {
                             <DisplayToast />
                             <Routes>
                                 <Route path="/" element={<Home />} />
-                                <Route path="/store" element={<Store />} />
-                                <Route path="/admin" element={<Admin />}>
-                                    <Route path="edit/:item_id" element={<EditForm renderAtStep={2} />} />
+                                <Route path="/store">
+                                    <Route index element={<Store />} />
+                                    <Route path="view/:item_id" element={<StoreItemView />} />
                                 </Route>
+                                <Route path="/admin" element={<Admin />} />
+                                    {/* <Route path="edit/:item_id" element={<StoreItemView />} /> */}
+                                {/* </Route> */}
                                 {/* // TODO display flash toast if get redirected */}
                                 {/* <Route path="/demo/*" element={<TimeAgo />} /> */}
                                 <Route path="/notes/*" element={<Notes />} />

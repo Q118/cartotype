@@ -37,7 +37,7 @@ export function useMultistepForm(steps: ReactElement[]) {
      * @function renderAtStep - renders the component at the given step index supplied by its parent component
      * @param {number} stepIndex - the index of the step to render
      */
-// wait goTo already does this
+    // wait goTo already does this
     // function renderAtStep(stepIndex: number) {
     //     if (stepIndex < 0 || stepIndex > steps.length - 1) {
     //         console.error(`Invalid step index supplied to renderAtStep: ${stepIndex}`);

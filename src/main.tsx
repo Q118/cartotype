@@ -26,6 +26,7 @@ import './styles/index.scss';
 //     console.log(edgeConfig);
 // });
 
+// *...yea so this is why the router doesnt cover the modals, the tooltip pops up outside of the router context
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>

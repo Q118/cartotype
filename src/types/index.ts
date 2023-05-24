@@ -22,7 +22,7 @@ export type StorePrice = {
 export type StoreItem = {
     id: string;
     name: string;
-    price: number | null;
+    price: number;
     imgUrl: string;
 };
 

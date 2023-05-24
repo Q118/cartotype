@@ -26,12 +26,6 @@ export function DetailForm({
     updateFields,
 }: DetailFormProps) {
 
-    // const { currentTheme } = useTheme();
-
-    // const SPAN_CLASS = `input-group-text bg-${currentTheme === 'dark' ? 'secondary' : 'light'} text-${currentTheme === 'dark' ? 'light' : 'dark'}`;
-
-
-
 
     return (
         <FormWrapper title="Edit Details for Store">
@@ -45,7 +39,7 @@ export function DetailForm({
                 <span className="input-group-text">.</span>
                 {/* //! not required; let them leave it at 0 if they want */}
                 <input placeholder="00" type="number"
-                    value={price.cents} className="form-control" 
+                    value={price.cents} className="form-control"
                     style={{ maxWidth: '4rem' }}
                     onChange={(e) => updateFields({ price: { ...price, cents: +e.target.value } })}
                     max={99} min={0}
@@ -53,13 +47,13 @@ export function DetailForm({
             </div>
             <label>Official Title: </label>
             <input type="text" className="form-control"
-                placeholder={storeTitle} value={storeTitle} 
+                placeholder={storeTitle} value={storeTitle}
                 maxLength={20} autoFocus
                 onChange={e => updateFields({ storeTitle: e.target.value })}
             />
             <h6>Preview:</h6>
             <Row>
-                <Col style={{ maxWidth: '250px'}}>
+                <Col style={{ maxWidth: '250px' }}>
                     <StoreItem
                         name={storeTitle || inputSearch}
                         price={consolidateStorePrice(price)}

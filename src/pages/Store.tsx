@@ -17,7 +17,8 @@ function Store() {
 
     return (
         <>
-            <h1>Store</h1>
+            <h1>The Store</h1>
+            <hr />
             {storeItemsError && <p>Error: {storeItemsError.message}</p>}
             {isStoreItemsLoading() === true && <LoadingDivComponent />}
             {isStoreItemsLoading() === false && (
