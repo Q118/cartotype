@@ -14,7 +14,7 @@
     border-radius: 5px;
     padding: 1rem;
     position: relative;
-    max-width: 65vw;
+    max-width: max-content;
     background-color: var(--primary-bg);
     /* max-width: max-content; */
 }

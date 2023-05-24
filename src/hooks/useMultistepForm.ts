@@ -3,19 +3,26 @@ import { useShoppingCart } from "../context/ShoppingCartContext";
 // import stuff from react-router-dom that will add # in to the urls that signify the step number
 // for example, /checkout#1, /checkout#2, /checkout#3, etc.
 // import { useLocation, useHistory } from "react-router-dom";
-
+// import { useNavigate } from "react-router-dom";
 
 
 //? is there a way to tell the form component what step its on SO THAT it can render at any point step it wants? 
 
 
 
-export function useMultistepForm(steps: ReactElement[]) {
+export function useMultistepForm(steps: ReactElement[], startStep: number | null = 0) {
     const { addNotificationToast } = useShoppingCart();
-    const [ currentStepIndex, setCurrentStepIndex ] = useState(0);
+    const [ currentStepIndex, setCurrentStepIndex ] = useState(startStep || 0);
     // console.log('currentStepIndex', currentStepIndex); // debug
 
+    // const navigate = useNavigate();
+
+    // if (startStep) {
+    // setCurrentStepIndex(startStep);
+    // }
+
     function next() {
+        console.log('next')
         setCurrentStepIndex(i => {
             if (i >= steps.length - 1) return i; // bc already at last step
             return i + 1;

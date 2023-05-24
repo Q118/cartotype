@@ -1,32 +1,33 @@
 // import { DetailForm } from "./form/DetailForm"
 import { useShoppingCart } from "../../context/ShoppingCartContext"
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Container, ListGroup } from "react-bootstrap";
 import { StoreItem } from "./StoreItem";
 
 
-// ! PU HERE! gget the edit button to takeu to that detail step in form 
+// // PU HERE! gget the edit button to takeu to that detail step in form 
 // * and get the associated notes looking good here and in detail form
+// TODO make each note thats attached be a linkconsolidateStorePrice
 
 export function StoreItemView() {
     const { item_id } = useParams();
+    const navigate = useNavigate();
     const { getStoreItemById } = useShoppingCart();
     const item = getStoreItemById(item_id || '');
 
-    // TODO make each note thats attached be a link
 
     // * disabled version of DetailForm... could have been better by sharing the components but oh well
+    const handleEditClick = () => navigate(`/admin/${item.id}/edit`);
 
-    // console.log(item);
     return (
         <div>
-            <h1>Item: {item.name}</h1>
-            <hr />
             <Container className="form-view-container">
-                <div className="bottom-right-container">
-                    <Button className="carto-btn-alt">Edit</Button>
+                <div className="top-right-container">
+                    <Button className="carto-btn-alt" onClick={handleEditClick}>Edit</Button>
                 </div>
-                <h2 style={{ textAlign: "center", margin: 0, marginBottom: "2rem" }}>View Details</h2>
+                <h2 style={{ textAlign: "center", margin: 0, marginBottom: "2rem" }}>
+                    View Details: {item.name}
+                    </h2>
                 <div style={{
                     display: "grid",
                     gap: "1rem .5rem",
@@ -47,7 +48,6 @@ export function StoreItemView() {
                         <ListGroup.Item className="listItem-associatedNotes">note 2</ListGroup.Item>
                         <ListGroup.Item className="listItem-associatedNotes-alt">note dmsadka</ListGroup.Item>
                         <ListGroup.Item className="listItem-associatedNotes">ghfjdhdsk</ListGroup.Item>
-
                     </ListGroup>
                     <h6>Preview:</h6>
                     <div style={{ maxWidth: '250px' }}>

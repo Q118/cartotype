@@ -1,9 +1,6 @@
 // import axios from 'axios';
 import { StoreItem } from '../../types';
 
-// * temp using jsonserver for mocking and focusing on logic
-const BASE_URL = 'http://localhost:3001';
-
 
 import { PostgrestError, createClient } from '@supabase/supabase-js'
 

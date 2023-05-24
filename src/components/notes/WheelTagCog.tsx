@@ -1,5 +1,5 @@
 import { MouseEvent, useRef, useState, useEffect } from 'react';
-import { Link, BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
 import { GiCartwheel } from 'react-icons/gi';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -18,8 +18,7 @@ export function WheelTagCog(props: any) {
     const { storeItemTags } = props;
     const targetRef = useRef(null);
     const [ showOverlay, setShowOverlay ] = useState(false);
-    // const navigate = useNavigate();
-
+    
     const handleMouseClick = (e: MouseEvent) => {
         e.stopPropagation();
         setShowOverlay(true);
@@ -31,7 +30,7 @@ export function WheelTagCog(props: any) {
     }, []);
 
     function handleOutsideClick(e: MouseEvent): void {
-        console.log('outside click');
+        // console.log('outside click');
         const mouseLocation = e.target;
         // if it's not in the overlay or inside a card, then close it
         if (mouseLocation !== targetRef.current) setShowOverlay(false);

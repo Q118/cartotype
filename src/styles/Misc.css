@@ -80,6 +80,11 @@ body::-webkit-scrollbar {
     right: .5rem;
 }
 
+.top-right-container {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+}
 
 #home-div-wrapper {
     background-color: var(--primary-bg);

@@ -12,6 +12,8 @@ import { StepTrack } from './StepTrack';
 import { PreviewConfirm } from './PreviewConfirm';
 import { consolidateStorePrice } from '../../utilities/formatCurrency';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
+import { useAdminLayoutContext } from '../AdminLayout';
+
 
 type EditFormData = {
     selectOptions: ResultItem[];
@@ -23,15 +25,30 @@ type EditFormData = {
     isDataLoading: () => boolean;
 };
 
-const INITIAL_DATA: EditFormData = {
-    selectOptions: [],
-    selectedItem: null,
-    price: { dollars: 0, cents: 0 },
-    storeTitle: '',
-    isDataLoading: () => false,
+// okay so right now just hit next and it does go bit top get to the edit it just resets it back to the first step even when we provide a startStep
+// why, bc the startStep is not being passed down to the multistepform hook
+// to pass it down, we need to pass it down to the EditForm component, and then pass it down to the multistepform hook
+
+
+
+type EditFormProps = {
+    startStep?: number|null;
 };
 
-export function EditForm() {
+export function EditForm({ startStep = null }: EditFormProps) {
+    // const { item_id } = useParams();
+    // console.log(item_id);
+
+    // const selected_item = useAdminLayoutContext();
+
+    const INITIAL_DATA: EditFormData = {
+        selectOptions: [],
+        selectedItem: null,
+        price: { dollars: 0, cents: 0 },
+        storeTitle: '',
+        isDataLoading: () => false,
+    };
+
     const [ data, setData ] = useState(INITIAL_DATA);
     const navigate = useNavigate();
 
@@ -45,7 +62,8 @@ export function EditForm() {
         isLastStep,
         next,
         back,
-        notify
+        notify,
+        goTo
     } = useMultistepForm([
         <SelectForm
             {...data}
@@ -61,7 +79,11 @@ export function EditForm() {
             updateFields={updateFields}
             editMode={true}
         />,
-    ]);
+    ], startStep);
+
+    console.log('currentStepIndex: ', currentStepIndex);
+    // if (startStep) goTo(startStep);
+
     function updateFields(fields: Partial<EditFormData>) {
         //* override all the old info with the new info
         setData(prev => ({ ...prev, ...fields }));
@@ -92,7 +114,10 @@ export function EditForm() {
                 alert('select an item to continue');
                 return;
             }
+            // next();
+            // navigate(`/admin/${data.selectedItem.id}/edit`);
             return next();
+            // goTo(1);
         }
         if (!isLastStep) return next();
         if (isLastStep) handleLastStep();

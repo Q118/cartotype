@@ -16,6 +16,8 @@ import { Container, Button, Row, Col, Tooltip, OverlayTrigger } from 'react-boot
 import { useTheme } from '../context/ThemeContext';
 import { AdminLayout } from '../components/AdminLayout';
 import { StoreItemView } from '../components/store/StoreItemView';
+// import { useMultistepForm } from '../hooks/useMultistepForm';
+import { useShoppingCart } from '../context/ShoppingCartContext';
 
 // TODO: turn the buttons in to tabs so that they each are tabs for each page
 // import { TooltipWrapper } from '../utilities/TooltipWrapper'; <- dont
@@ -27,6 +29,8 @@ type AdminProps = {
 export function Admin({ renderAtStep = 0 }: AdminProps) {
     // = useHref();
     // console.log(useLocation())
+    const { globalStoreItems } = useShoppingCart();
+
     const navigate = useNavigate();
     // const { pathname } = useLocation();
     // it isnt reading the search params i think bcthe link is not within the router context so even tho it displays like it is, it isnt actually... leads me back to wanted to just manually tellt he Admin page to go TO certain step. which was my original idea
@@ -80,25 +84,14 @@ export function Admin({ renderAtStep = 0 }: AdminProps) {
                 <Route path='edit' element={<EditForm />} />
 
 
-                <Route path='/:item_id' element={<AdminLayout />}>
-                    <Route path="edit" element={<EditForm />} />
+                <Route path='/:item_id' element={<AdminLayout items={globalStoreItems} />}>
+                    <Route path="edit" element={<EditForm startStep={1} />} /> {/* // ? wait bah yess ccan render detail from from here bc in the adminLayout set it up to useItem right now it is rendering the EditFOrm but it just looks like its not since its already there...*/}
+
+                    {/* //! yea its getting set back to Zero... bc its renderin g the EditFormwhich starts at zero... so either tell it to start at or render detail for,,, */}
                     <Route path="view" element={<StoreItemView />} />
                 </Route>
 
             </Routes>
-
-
-
-            {/* {formPath == null && (
-                <>
-                    <p>Select an option:</p>
-                    <Row className="p-2 text-center">
-                        {renderOverlayColumn('add', 'Add New Item')}
-                        {renderOverlayColumn('edit', 'Edit Items')}
-                    </Row>
-                </>
-            )}
-            {formPath === 'add' ? <FormApp /> : formPath === 'edit' ? <EditForm /> : null} */}
         </Container>
     );
 }
