@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { updateStoreItem } from '../../api/lib/storeItems';
@@ -36,23 +36,22 @@ type EditFormProps = {
 };
 
 export function EditForm({ startStep = null }: EditFormProps) {
-    // const { item_id } = useParams();
-    // console.log(item_id);
+    const selected_item = useAdminLayoutContext(); 
+    const navigate = useNavigate();
+    const { globalStoreItems, refreshStoreItems, isStoreItemsLoading } = useShoppingCart();
 
-    // const selected_item = useAdminLayoutContext();
-
-    const INITIAL_DATA: EditFormData = {
+    const [ data, setData ] = useState<EditFormData>({
         selectOptions: [],
-        selectedItem: null,
+        selectedItem: selected_item || null,
         price: { dollars: 0, cents: 0 },
         storeTitle: '',
         isDataLoading: () => false,
-    };
+    });
 
-    const [ data, setData ] = useState(INITIAL_DATA);
-    const navigate = useNavigate();
 
-    const { globalStoreItems, refreshStoreItems, isStoreItemsLoading } = useShoppingCart();
+    useEffect(() => {
+        console.log('change to data', data)
+    }, [data])
 
     const {
         steps,
@@ -92,8 +91,8 @@ export function EditForm({ startStep = null }: EditFormProps) {
     function handleLastStep() {
         updateStoreItem({
             id: data.selectedItem?.id || '',
-            name: data.storeTitle,
-            price: consolidateStorePrice(data.price),
+            name: data.selectedItem?.name || data.storeTitle,
+            price: data.selectedItem?.price || consolidateStorePrice(data.price),
             imgUrl: data.selectedItem?.imgUrl || '',
         }).then(() => {
             refreshStoreItems();

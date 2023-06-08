@@ -7,7 +7,7 @@ import { StoreItem } from "./StoreItem";
 
 // // PU HERE! gget the edit button to takeu to that detail step in form 
 // * and get the associated notes looking good here and in detail form
-// TODO make each note thats attached be a linkconsolidateStorePrice
+// TODO make each note thats attached be a link
 
 export function StoreItemView() {
     const { item_id } = useParams();
@@ -17,6 +17,8 @@ export function StoreItemView() {
 
 
     // * disabled version of DetailForm... could have been better by sharing the components but oh well
+
+
     const handleEditClick = () => navigate(`/admin/${item.id}/edit`);
 
     return (
@@ -27,7 +29,7 @@ export function StoreItemView() {
                 </div>
                 <h2 style={{ textAlign: "center", margin: 0, marginBottom: "2rem" }}>
                     View Details: {item.name}
-                    </h2>
+                </h2>
                 <div style={{
                     display: "grid",
                     gap: "1rem .5rem",

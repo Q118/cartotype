@@ -2,6 +2,7 @@ import { StoreItem } from "../store/StoreItem";
 // import { FormWrapper } from "./FormWrapper";
 import { ResultItem, StorePrice } from '../../types';
 import { consolidateStorePrice } from "../../utilities/formatCurrency";
+import { useAdminLayoutContext } from "../AdminLayout";
 
 
 type PreviewConfirmData = {
@@ -16,12 +17,13 @@ type PreviewConfirmProps = PreviewConfirmData & {
 }
 
 export function PreviewConfirm({
-    selectedItem,
+    selectedItem: selectedItemProp,
     storeTitle,
     price,
-    updateFields,
     editMode = false,
 }: PreviewConfirmProps) {
+
+    const selected_item = useAdminLayoutContext(); // itll be null if not from view!
 
     return (
         <>
@@ -30,11 +32,10 @@ export function PreviewConfirm({
             </div>
             <br />
             <StoreItem
-                id={selectedItem?.id || ''}
-                name={storeTitle}
-                // price={+`${price.dollars}.${price.cents}`}
-                price={consolidateStorePrice(price)}
-                imgUrl={selectedItem?.imgUrl || ''}
+                id={selected_item ? selected_item.id : selectedItemProp!.id}
+                name={selected_item ? selected_item.name : storeTitle}
+                price={selected_item ? selected_item.price : consolidateStorePrice(price)}
+                imgUrl={selected_item ? selected_item.imgUrl : selectedItemProp!.imgUrl}
                 isPreview={true}
             />
             <br />

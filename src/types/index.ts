@@ -10,7 +10,9 @@ export type ResultItem = {
     downloadLocation: string;
     displayName: string;
     name: string;
-    price?: StorePrice;
+    // price?: StorePrice|number;
+    price?: number;
+    // ! possible may need to chage price type
     storeTitle?: string;
 }
 

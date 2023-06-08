@@ -79,18 +79,12 @@ export function Admin({ renderAtStep = 0 }: AdminProps) {
                         {renderOverlayColumn('edit', 'Edit Items')}
                     </Row>
                 </>} />
-
                 <Route path='add' element={<FormApp />} />
                 <Route path='edit' element={<EditForm />} />
-
-
                 <Route path='/:item_id' element={<AdminLayout items={globalStoreItems} />}>
-                    <Route path="edit" element={<EditForm startStep={1} />} /> {/* // ? wait bah yess ccan render detail from from here bc in the adminLayout set it up to useItem right now it is rendering the EditFOrm but it just looks like its not since its already there...*/}
-
-                    {/* //! yea its getting set back to Zero... bc its renderin g the EditFormwhich starts at zero... so either tell it to start at or render detail for,,, */}
+                    <Route path="edit" element={<EditForm startStep={1} />} /> 
                     <Route path="view" element={<StoreItemView />} />
                 </Route>
-
             </Routes>
         </Container>
     );
