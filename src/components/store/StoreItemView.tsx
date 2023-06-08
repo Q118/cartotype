@@ -3,11 +3,14 @@ import { useShoppingCart } from "../../context/ShoppingCartContext"
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Container, ListGroup } from "react-bootstrap";
 import { StoreItem } from "./StoreItem";
+import { formatCurrency } from "../../utilities/formatCurrency";
 
-
-// // PU HERE! gget the edit button to takeu to that detail step in form 
 // * and get the associated notes looking good here and in detail form
 // TODO make each note thats attached be a link
+
+// TODO get the price to be formatted correctly
+
+
 
 export function StoreItemView() {
     const { item_id } = useParams();
@@ -37,7 +40,7 @@ export function StoreItemView() {
                     gridTemplateColumns: "auto minmax(auto, 400px)",
                 }}>
                     <label>Price: </label>
-                    <input type="text" className="form-control" value={item.price} disabled maxLength={20} />
+                    <input type="text" className="form-control" value={formatCurrency(item.price)} disabled maxLength={20} />
                     <label>Official Title: </label>
                     <input type="text" className="form-control"
                         value={item.name}
