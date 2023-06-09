@@ -59,6 +59,7 @@ export type RawNote = {
     id: string;
 } & RawNotedata;
 
+/** note data before saved in db */
 export type RawNotedata = {
     title: string;
     // markdown: string | { rawText: string };

@@ -1,10 +1,12 @@
 import { FormWrapper } from "../../utilities/FormWrapper";
 import { ResultItem, StorePrice } from '../../types';
 import { StoreItem } from "../store/StoreItem";
-import { Col, ListGroup, Row } from "react-bootstrap";
+// import { Col, ListGroup, Row } from "react-bootstrap";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { consolidateStorePrice } from "../../utilities/formatCurrency";
 import { useAdminLayoutContext } from "../AdminLayout";
-
+import { NoteListGroupFormBit } from "./NoteListGroupFormBit";
 
 type DetailFormData = {
     selectedItem: ResultItem | null;
@@ -61,14 +63,7 @@ export function DetailForm(props: DetailFormProps) {
                 onChange={e => updateFields({ storeTitle: e.target.value })}
             />
             <label>Associated Notes</label>
-            <ListGroup className="listGroup-associatedNotes">
-                <ListGroup.Item className="listItem-associatedNotes">note 1</ListGroup.Item>
-                <ListGroup.Item className="listItem-associatedNotes-alt">fmds,mf,.ds</ListGroup.Item>
-                <ListGroup.Item className="listItem-associatedNotes">note 2</ListGroup.Item>
-                <ListGroup.Item className="listItem-associatedNotes-alt">note dmsadka</ListGroup.Item>
-                <ListGroup.Item className="listItem-associatedNotes">ghfjdhdsk</ListGroup.Item>
-                <ListGroup.Item className="listItem-associatedNotes-alt">koekrl;ew</ListGroup.Item>
-            </ListGroup>
+            <NoteListGroupFormBit />
             <h6>Preview:</h6>
             <Row>
                 <Col style={{ maxWidth: '250px' }}>
