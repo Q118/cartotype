@@ -26,6 +26,7 @@ export type StoreItem = {
     name: string;
     price: number;
     imgUrl: string;
+    noteIds?: string[];
 };
 
 export type StoreItemTag = {

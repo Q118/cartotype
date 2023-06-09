@@ -2,7 +2,7 @@ import { FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { updateStoreItem } from '../../api/lib/storeItems';
-import { ResultItem, StorePrice } from '../../types';
+import { RawNote, ResultItem, StorePrice } from '../../types';
 // import { useTheme } from '../../context/ThemeContext';
 import Container from 'react-bootstrap/Container';
 // import { useQuery } from '@tanstack/react-query';
@@ -12,7 +12,7 @@ import { StepTrack } from './StepTrack';
 import { PreviewConfirm } from './PreviewConfirm';
 import { consolidateStorePrice } from '../../utilities/formatCurrency';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
-import { useAdminLayoutContext } from '../AdminLayout';
+// import { useAdminLayoutContext } from '../AdminLayout';
 
 
 type EditFormData = {
@@ -23,6 +23,10 @@ type EditFormData = {
     /** storeTitle aka the new title user may choose */
     storeTitle: string;
     isDataLoading: () => boolean;
+    /** ids of notes to be attached to this store item */
+    attachedNoteIds: string[];
+    /** available global notes */
+    availableNotes: RawNote[];
 };
 
 // okay so right now just hit next and it does go bit top get to the edit it just resets it back to the first step even when we provide a startStep
@@ -36,16 +40,18 @@ type EditFormProps = {
 };
 
 export function EditForm({ startStep = null }: EditFormProps) {
-    const selected_item = useAdminLayoutContext(); 
+    // const selected_item = useAdminLayoutContext(); 
     const navigate = useNavigate();
-    const { globalStoreItems, refreshStoreItems, isStoreItemsLoading } = useShoppingCart();
+    const { globalStoreItems, refreshStoreItems, isStoreItemsLoading, availableNotes } = useShoppingCart();
 
     const [ data, setData ] = useState<EditFormData>({
         selectOptions: [],
-        selectedItem: selected_item || null,
+        selectedItem: null,
         price: { dollars: 0, cents: 0 },
         storeTitle: '',
         isDataLoading: () => false,
+        attachedNoteIds: [],
+        availableNotes: availableNotes,
     });
 
 
@@ -113,10 +119,8 @@ export function EditForm({ startStep = null }: EditFormProps) {
                 alert('select an item to continue');
                 return;
             }
-            // next();
             // navigate(`/admin/${data.selectedItem.id}/edit`);
             return next();
-            // goTo(1);
         }
         if (!isLastStep) return next();
         if (isLastStep) handleLastStep();

@@ -1,10 +1,10 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { StoreItem, StoreItemTag } from '../types';
+import { RawNote, StoreItem, StoreItemTag } from '../types';
 import { QueryObserverResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 import { getStoreItems } from '../api/lib/storeItems';
-
+import { Notes as NoteConstructor } from '../api/lib/notes';
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
@@ -50,8 +50,13 @@ type ShoppingCartContext = {
     /** handle refetch after an update */
     refreshStoreItems: () => Promise<QueryObserverResult<unknown, unknown>>;
     getStoreItemById: (id: string) => StoreItem;
+    /** available notes */
+    availableNotes: RawNote[];
+    // availableNoteIds: string[];
 };
 
+// TODO[future]: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
+const NOTE_SUBPARTITION = 'dev';
 
 // make it contain the values of the type this way
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -75,6 +80,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
         queryKey: [ `get-all-store-items` ],
         queryFn: async () => await getStoreItems(),
+        enabled: true,
+    });
+
+    const { data: notesData, isLoading: notesLoading, error: notesError, refetch: refetchNotes, isFetching: notesFetching }: any = useQuery({
+        queryKey: [ `get-all-notes` ],
+        queryFn: async () => await NoteConstructor.getAllNotes(NOTE_SUBPARTITION),
         enabled: true,
     });
 
@@ -173,7 +184,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             refreshStoreItems,
             globalStoreItemTags,
             setGlobalStoreItemTags,
-            getStoreItemById
+            getStoreItemById,
+            availableNotes: notesData,
+            // availableNoteIds: notesData!.map((note: RawNote) => note.id),
         }}>
             {children}
         </ShoppingCartContext.Provider>

@@ -1,7 +1,6 @@
 import { FormWrapper } from "../../utilities/FormWrapper";
-import { ResultItem, StorePrice } from '../../types';
+import { ResultItem, StorePrice, RawNote } from '../../types';
 import { StoreItem } from "../store/StoreItem";
-// import { Col, ListGroup, Row } from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { consolidateStorePrice } from "../../utilities/formatCurrency";
@@ -13,6 +12,8 @@ type DetailFormData = {
     inputSearch?: string;
     price: StorePrice;
     storeTitle: string;
+    availableNotes: RawNote[];
+    attachedNoteIds: string[];
 }
 
 type DetailFormProps = DetailFormData & {
@@ -28,12 +29,12 @@ const decouplePrice = (price: number) => {
 
 
 export function DetailForm(props: DetailFormProps) {
-    const { selectedItem: selectedItemProp, inputSearch, price, storeTitle, updateFields } = props;
-    const selected_item = useAdminLayoutContext(); // itll be null if not from view!
+    const { selectedItem: selectedItemProp, inputSearch, price, storeTitle, updateFields, availableNotes, attachedNoteIds } = props;
+    const selected_item = useAdminLayoutContext(); //! itll be null if not from view!
     const local_selectedItem = selected_item || selectedItemProp;
     const local_storeTitle = selected_item ? selected_item.name : storeTitle || inputSearch;
     const local_price = selected_item ? decouplePrice(selected_item.price) : price;
-
+    console.log(props);
 
     // TODO:obvs need to dynamically show the ntoes and make them links
 
@@ -63,7 +64,11 @@ export function DetailForm(props: DetailFormProps) {
                 onChange={e => updateFields({ storeTitle: e.target.value })}
             />
             <label>Associated Notes</label>
-            <NoteListGroupFormBit />
+            <NoteListGroupFormBit
+                availableNotes={availableNotes}
+                onAddNote={(id: string) => console.log('add note', id)}
+                attachedNoteIds={attachedNoteIds}
+            />
             <h6>Preview:</h6>
             <Row>
                 <Col style={{ maxWidth: '250px' }}>
