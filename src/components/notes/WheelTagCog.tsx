@@ -7,18 +7,18 @@ import Overlay from 'react-bootstrap/Overlay';
 import { BsChevronDown } from 'react-icons/bs';
 import { StoreItemTag } from '../../types';
 import Stack from 'react-bootstrap/Stack';
-// import { HiOutlineViewList } from 'react-icons/hi'; <-- maybe use this?
+import { IoPricetags } from 'react-icons/io5';
 // a little list item popout that can scroll///
 // import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 
-// TODO be able to click and go to that store item from it?,, and/or an add at the bottom of the list
+// TODO a little opetion add at the bottom of top of list
 
 export function WheelTagCog(props: any) {
     const { storeItemTags } = props;
     const targetRef = useRef(null);
     const [ showOverlay, setShowOverlay ] = useState(false);
-    
+
     const handleMouseClick = (e: MouseEvent) => {
         e.stopPropagation();
         setShowOverlay(true);
@@ -65,10 +65,11 @@ export function WheelTagCog(props: any) {
             </Overlay>
             <div className="cog-div-noteCard" ref={targetRef}
                 onClick={e => handleMouseClick(e)}>
-                <Stack direction='horizontal' gap={1}>
+                {/* <Stack direction='horizontal'> */}
                     {/* <HiOutlineViewList size="20" /><BsChevronDown size="10" /> */}
-                    <GiCartwheel size="20" /><BsChevronDown size="10" />
-                </Stack>
+                    <IoPricetags size="20" />
+                    {/* <BsChevronDown size="10" />.. redundant */}
+                {/* </Stack> */}
             </div>
         </>
     )

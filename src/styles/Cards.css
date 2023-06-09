@@ -42,7 +42,9 @@
 
 .cog-div-noteCard:hover {
     opacity: 1;
-    cursor: alias !important;
+    /* cursor: grab !important; */
+    cursor: zoom-in !important;
+    color: var(--accent) !important;
 }
 
 .icons-cog-note-card {

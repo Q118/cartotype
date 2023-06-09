@@ -26,6 +26,8 @@ type SelectFormProps = SelectFormData & {
 
 
 
+
+
 export function SelectForm({
     editMode = false,
     selectOptions,
@@ -108,7 +110,7 @@ export function SelectForm({
                 </div>
             )}
             {isDataLoading() === false && (
-                <>
+                <div className="edit-select-items-wrapper">
                     {!editMode && (
                         <TooltipWrapper
                             placement='right'
@@ -124,7 +126,7 @@ export function SelectForm({
                     }}>
                         Select a Card to {editMode ? "Edit" : "Display"} {inputSearch ? `"${inputSearch}"` : 'the item'}
                     </h2>
-                    <Row md={2} xs={1} lg={3} className="g-3">
+                    <Row md={2} xs={1} lg={3} className="g-3 edit-select-items">
                         {selectOptions?.map((item: ResultItem) => {
                             return (
                                 <SelectItem
@@ -145,7 +147,7 @@ export function SelectForm({
 
 
 
-                </>
+                </div>
             )}
         </>
     )

@@ -18,7 +18,7 @@ export function StoreItemView() {
     const { getStoreItemById } = useShoppingCart();
     const item = getStoreItemById(item_id || '');
 
-
+    console.log('item', item);
     // * disabled version of DetailForm... could have been better by sharing the components but oh well
 
 
@@ -27,8 +27,10 @@ export function StoreItemView() {
     return (
         <div>
             <Container className="form-view-container">
-                <div className="top-right-container">
+                <div className="bottom-right-container">
                     <Button className="carto-btn-alt" onClick={handleEditClick}>Edit</Button>
+                    {' '}
+                    <Button className="carto-btn" onClick={() => navigate('/notes')}>Back</Button>
                 </div>
                 <h2 style={{ textAlign: "center", margin: 0, marginBottom: "2rem" }}>
                     View Details: {item.name}

@@ -91,3 +91,25 @@ body::-webkit-scrollbar {
     color: var(--body-text);
     position: absolute;
 }
+
+.edit-select-items-wrapper {
+    max-height: 65vh;
+}
+
+.edit-select-items {
+    overflow-y: scroll !important;
+    max-height: 55vh;
+}
+/* .edit-select-items::-webkit-scrollbar {
+    display: none;
+} */
+
+.edit-select-items::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Handle */
+.edit-select-items::-webkit-scrollbar-thumb {
+    background: var(--accent) !important;
+    border-radius: 10px;
+}
