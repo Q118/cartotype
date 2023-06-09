@@ -57,7 +57,7 @@ export function EditForm({ startStep = null }: EditFormProps) {
 
     useEffect(() => {
         console.log('change to data', data)
-    }, [data])
+    }, [JSON.stringify(data)])
 
     const {
         steps,
@@ -100,6 +100,7 @@ export function EditForm({ startStep = null }: EditFormProps) {
             name: data.selectedItem?.name || data.storeTitle,
             price: data.selectedItem?.price || consolidateStorePrice(data.price),
             imgUrl: data.selectedItem?.imgUrl || '',
+            notes: data.attachedNoteIds
         }).then(() => {
             refreshStoreItems();
             navigate('/store');

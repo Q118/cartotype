@@ -14,6 +14,7 @@ export type ResultItem = {
     price?: number;
     // ! possible may need to chage price type
     storeTitle?: string;
+    notes?: string[];
 }
 
 export type StorePrice = {
@@ -26,7 +27,8 @@ export type StoreItem = {
     name: string;
     price: number;
     imgUrl: string;
-    noteIds?: string[];
+    // noteIds?: string[];
+    notes: string[];
 };
 
 export type StoreItemTag = {
