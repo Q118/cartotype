@@ -12,6 +12,7 @@ type ThemeContext = {
     currentTheme: Theme;
     setTheme: (theme: Theme) => void;
     getTheme: () => string;
+    isDark: () => boolean;
 };
 
 const ThemeContext = createContext({} as ThemeContext);
@@ -32,25 +33,28 @@ export function ThemeProvider({ children }: ShoppingCartProviderProps) {
         }
     }, [currentTheme]);
 
+
     const getTheme = () => currentTheme;
+    const isDark = () => currentTheme === "dark";
+
 
     function setTheme(theme: Theme) {
         if (theme === "light") {
-            document.documentElement.classList.remove('bg-dark', 'text-light');
-            document.body.classList.remove('bg-dark', 'text-light');
-            document.documentElement.classList.add('bg-light', 'text-dark');
-            document.body.classList.add('bg-light', 'text-dark');
+            document.documentElement.classList.remove('cart-bg-dark');
+            document.body.classList.remove('cart-bg-dark');
+            document.documentElement.classList.add('cart-bg-light');
+            document.body.classList.add('cart-bg-light');
         } else {
-            document.documentElement.classList.add('bg-dark', 'text-light');
-            document.body.classList.add('bg-dark', 'text-light');
-            document.documentElement.classList.remove('bg-light', 'text-dark');
-            document.body.classList.remove('bg-light', 'text-dark');
+            document.documentElement.classList.add('cart-bg-dark');
+            document.body.classList.add('cart-bg-dark');
+            document.documentElement.classList.remove('cart-bg-light');
+            document.body.classList.remove('cart-bg-light');
         }
         setCurrentTheme(theme);
     }
 
     return (
-        <ThemeContext.Provider value={{ currentTheme, setTheme, getTheme }}>
+        <ThemeContext.Provider value={{ currentTheme, setTheme, getTheme, isDark }}>
             {children}
         </ThemeContext.Provider>
     );

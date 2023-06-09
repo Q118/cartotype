@@ -1,32 +1,33 @@
 import { ReactElement, JSXElementConstructor } from "react";
-// import { OverlayChildren } from "react-bootstrap/esm/Overlay";
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 
 type TooltipWrapperProps = {
-    overlayTitle: string,
-    // id?: string,
+    tagType: string,
     placement: 'top' | 'bottom' | 'left' | 'right',
     children: ReactElement<any, string | JSXElementConstructor<any>>
 }
 
 
-export function TooltipWrapper({
-    overlayTitle,
+export function OverlayInfoWrapper({
+    tagType,
     children,
-    placement, 
+    placement
 }: TooltipWrapperProps) {
 
 
     return (
         <OverlayTrigger placement={placement} overlay={
-            <Tooltip>
-                {overlayTitle}
+            <Tooltip id={`tooltip-${tagType}`}>
+                <span className={`tag-the-${tagType}`}>
+                    <strong>{tagType === 'rawTag' ? 'User Selected Tags' : 'Store Tags'}</strong>
+                </span>
             </Tooltip>
         }>
-            {children}
+            <a style={{ cursor: 'pointer' }}>
+                {children}
+            </a>
         </OverlayTrigger>
     )
-
 }

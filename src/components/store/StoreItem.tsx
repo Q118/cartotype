@@ -1,8 +1,8 @@
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
-import { formatCurrency } from '../utilities/formatCurrency';
-import { useShoppingCart } from '../context/ShoppingCartContext';
-import { useTheme } from '../context/ThemeContext';
+import { formatCurrency } from '../../utilities/formatCurrency';
+import { useShoppingCart } from '../../context/ShoppingCartContext';
+// import { useTheme } from '../context/ThemeContext';
 
 const TITLE_CLASSES: string = 'd-flex justify-content-between align-items-baseline mb-4';
 const INNER_BTN_CLASSES: string = 'd-flex align-items-center flex-column';
@@ -24,12 +24,10 @@ export function StoreItem({ id, name = '', price, imgUrl, isPreview = false }: S
         decreaseCartQuantity,
         removeFromCart,
     } = useShoppingCart();
-    const { currentTheme } = useTheme();
-
+    // const { currentTheme } = useTheme();
+    // console.log(id, name) yes they the same
 
     const quantity: number = getItemQuantity(id);
-
-    const currentThemeClasses: string = currentTheme === 'dark' ? 'bg-secondary text-white' : 'bg-white text-dark';
 
 
 
@@ -37,7 +35,7 @@ export function StoreItem({ id, name = '', price, imgUrl, isPreview = false }: S
     return (
         <>
             <Card
-                className={`h-100 ${isPreview}-preview store-card-${currentTheme}`}
+                className={`h-100 ${isPreview}-preview store-card_card-c`}
             >
                 <Card.Img
                     variant="top"
@@ -46,7 +44,7 @@ export function StoreItem({ id, name = '', price, imgUrl, isPreview = false }: S
                     style={{ objectFit: 'cover' }}
                 />
                 <Card.Body
-                    className={`d-flex flex-column ${currentThemeClasses}}`}
+                    className={`d-flex flex-column store-card_body-c`}
                 >
                     {/* <Card.Body className='d-flex flex-column bg-secondary text-white'> */}
                     <Card.Title className={TITLE_CLASSES}>
@@ -56,19 +54,19 @@ export function StoreItem({ id, name = '', price, imgUrl, isPreview = false }: S
                     {/* // * mt-auto to fill all aviailable space */}
                     <div className='mt-auto'>
                         {quantity === 0 ? (
-                            <Button className='w-100' onClick={() => increaseCartQuantity(id, true, name)} disabled={isPreview}>
+                            <Button className='w-100 add-btn-c' onClick={() => increaseCartQuantity(id, true, name)} disabled={isPreview}>
                                 + Add To Cart
                             </Button>
                         ) : (
                             <div className={INNER_BTN_CLASSES} style={{ gap: ".5rem" }}>
                                 <div className={BTN_WRAPPER_CLASSES} style={{ gap: ".5rem" }}>
-                                    <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
+                                    <Button className="carto-btn" onClick={() => decreaseCartQuantity(id)} disabled={isPreview}>-</Button>
                                     <div>
                                         <span className='fs-3'>{quantity}</span> in cart
                                     </div>
-                                    <Button onClick={() => increaseCartQuantity(id)}>+</Button>
+                                    <Button className="carto-btn" onClick={() => increaseCartQuantity(id)} disabled={isPreview}>+</Button>
                                 </div>
-                                <Button variant="danger" size='sm' onClick={() => removeFromCart(id, name)}>
+                                <Button size='sm' onClick={() => removeFromCart(id, name)} className="remove-btn-c" disabled={isPreview}>
                                     Remove
                                 </Button>
                             </div>

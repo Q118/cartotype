@@ -11,13 +11,15 @@ import { Admin } from './pages/Admin';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ThemeProvider } from './context/ThemeContext';
 // import { NoteContextProvider } from './context/NoteContext';
-import { ShoppingCart } from './components/ShoppingCart';
+import { ShoppingCart } from './components/store/ShoppingCart';
 // import { NewNote } from './components/notes/NewNote';
 import { DisplayToast } from './components/NotificationToast';
-
+import { StoreItemView } from './components/store/StoreItemView';
+import { EditForm } from './components/form/EditForm';
+import { FormApp as AddForm } from './components/form/AddForm';
 
 // import 
-import TimeAgo from './components/Demo';
+// import TimeAgo from './components/Demo';
 
 const queryClient = new QueryClient();
 
@@ -35,12 +37,23 @@ function App() {
                             <DisplayToast />
                             <Routes>
                                 <Route path="/" element={<Home />} />
-                                <Route path="/store" element={<Store />} />
-                                <Route path="/admin" element={<Admin />} />
+                                <Route path="/store">
+                                    <Route index element={<Store />} />
+                                    {/* <Route path="view/:item_id" element={<StoreItemView />} /> */}
+                                </Route>
+                                {/* <Route path="/admin">
+                                    <Route index element={<Admin />} />
+                                    <Route path='edit' element={<EditForm />} />
+                                    <Route path='add' element={<AddForm />} />
+                                </Route> */}
+                                <Route path="/admin/*" element={<Admin />} />
+
+
                                 {/* // TODO display flash toast if get redirected */}
                                 {/* <Route path="/demo/*" element={<TimeAgo />} /> */}
                                 <Route path="/notes/*" element={<Notes />} />
-                                <Route path="*" element={<Navigate to="/" />} />
+                                {/* //* above may be the reason for that funky thung redirecting happening */}
+                                {/* <Route path="*" element={<Navigate to="/" />} /> */}
                                 {/* <Route path="*" element={<>Not Found</>} /> */}
                             </Routes>
                             <ShoppingCart />

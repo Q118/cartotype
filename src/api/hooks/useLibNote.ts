@@ -1,4 +1,3 @@
-// import { useQuery } from '@tanstack/react-query';
 import { NoteData, StoreItemTag } from '../../types';
 import { Notes as NoteConstructor } from '../lib/notes';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,10 +20,9 @@ export function useLibNote({ tags, ...data }: NoteData, fetchCallback: () => voi
         if (data.storeItemTags) {
             storeItemIds = handleStoreItemTags(data.storeItemTags);
         }
-        delete data.storeItemTags;
         // this is all we need to do bc the effect will update the userNotes
         noteClient.addNote({
-            ...data, id: uuidv4(),
+            title: data.title, id: uuidv4(),
             markdown: { "rawText": data.markdown },
             storeItemIds, tagIds: tags.map(tag => tag.id)
         }).then((res: any) => { fetchCallback(); }).catch((err: any) => {
@@ -37,9 +35,8 @@ export function useLibNote({ tags, ...data }: NoteData, fetchCallback: () => voi
         if (data.storeItemTags) {
             storeItemIds = handleStoreItemTags(data.storeItemTags);
         }
-        delete data.storeItemTags;
         noteClient.updateNote({
-            ...data, id: note_id, storeItemIds,
+            title: data.title, id: note_id, storeItemIds,
             markdown: { "rawText": data.markdown },
             tagIds: tags.map(tag => tag.id)
         }).then((res: any) => { fetchCallback(); }).catch((err: any) => {

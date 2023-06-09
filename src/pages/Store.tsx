@@ -4,7 +4,7 @@ import { useShoppingCart } from '../context/ShoppingCartContext';
 // import { getStoreItems } from '../api/dataStore';
 import Spinner from 'react-bootstrap/Spinner';
 import { Col, Row } from 'react-bootstrap';
-import { StoreItem } from '../components/StoreItem';
+import { StoreItem } from '../components/store/StoreItem';
 import { StoreItem as StoreItemType } from '../types';
 import { LoadingDivComponent } from '../components/LoadingDivComponent';
 
@@ -17,7 +17,8 @@ function Store() {
 
     return (
         <>
-            <h1>Store</h1>
+            <h1>The Store</h1>
+            <hr />
             {storeItemsError && <p>Error: {storeItemsError.message}</p>}
             {isStoreItemsLoading() === true && <LoadingDivComponent />}
             {isStoreItemsLoading() === false && (

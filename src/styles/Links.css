@@ -1,0 +1,33 @@
+/** links */
+
+
+.style-link {
+    color: var(--accent) !important;
+    font-weight: bolder !important;
+    font-size: larger !important;
+    border: 1px dashed !important;
+    padding: 3px !important;
+    border-radius: 5px !important;
+}
+
+.style-link:hover {
+    /* opposite everything */
+    color: var(--body-background) !important;
+    background-color: var(--accent) !important;
+    /* border: 2px solid var(--body-background) !important; */
+}
+
+.credit-text {
+    padding: 2px;
+    /* font-style: italic; */
+}
+
+.credit-text-dark {
+    color: #ffffff !important;
+    background-color: var(--bs-dark) !important;
+}
+
+.credit-text-light {
+    color: #000000 !important;
+    background-color: var(--bs-light) !important;
+}

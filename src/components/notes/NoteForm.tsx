@@ -68,6 +68,7 @@ export function NoteForm({
                                 selectedTags={selectedTags}
                                 setSelectedTags={setSelectedTags}
                                 onAddTag={onAddTag}
+                                isRawTag={true}
                             />
                         </Form.Group>
                     </Col>
@@ -79,6 +80,7 @@ export function NoteForm({
                                 availableTags={availableStoreTags}
                                 selectedTags={selectedStoreItemTags}
                                 setSelectedTags={setSelectedStoreItemTags}
+                                isRawTag={false}
                             />
                         </Form.Group>
                     </Col>
@@ -94,9 +96,9 @@ export function NoteForm({
                     </div>
                 </Form.Group>
                 <Stack direction="horizontal" gap={2} className="justify-content-end">
-                    <Button type="submit">Save</Button>
+                    <Button type="submit" className="carto-btn">Save</Button>
                     <Link to="..">
-                        <Button type="button" variant="secondary">Cancel</Button>
+                        <Button type="button" className='carto-btn-alt'>Cancel</Button>
                     </Link>
                 </Stack>
             </Stack>

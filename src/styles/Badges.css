@@ -1,0 +1,43 @@
+/** Badges and Tags o my! */
+.raw-tag-badge {
+    background-color: var(--tag-background) !important;
+    color: var(--badge-text) !important;
+    border-radius: var(--bs-border-radius-pill)!important;
+}
+
+.store-tag-badge {
+    background-color: var(--storeTag-background) !important;
+    color: var(--badge-text) !important;
+    border-radius: var(--bs-border-radius-pill)!important;
+}
+
+.raw-tag-badge-view {
+    background-color: var(--tag-background) !important;
+    color: var(--badge-text) !important;
+    font-size: medium;
+    border-radius: var(--bs-border-radius-pill)!important;
+}
+
+/* the little tagger to differentiate the tag type in Note view */
+.tag-the-rawTag {
+    /* border: 1px solid var(--tag-background) !important; */
+    color: var(--tag-background) !important;
+    padding: 2px;
+
+}
+.tag-the-storeTag {
+    color: var(--storeTag-background) !important;
+    padding: 2px;
+}
+
+.rawTag-infoIcon {
+    fill: var(--tag-background) !important;
+    margin-bottom: 15px;
+
+}
+
+
+.storeTag-infoIcon {
+    fill: var(--storeTag-background) !important;
+    margin-bottom: 15px;
+}

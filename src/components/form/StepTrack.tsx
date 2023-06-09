@@ -26,14 +26,14 @@ export function StepTrack({
         minWidth: 'fit-content',
         height: "3rem",
         padding: "0.3rem",
+        borderRadius: "50% !important"
     };
 
     const renderBtn = (type: any) => {
         return (
             <Button
                 type={type}
-                variant="outline-light"
-                className="rounded-circle cart-button"
+                className={type === "button" ? "carto-btn" : isLastStep ? "carto-btn-alt" : (isFirstStep && !editMode) ? "carto-btn-alt" : "carto-btn-alt"}
                 onClick={type === "button" ? back : () => { }}
                 style={BTN_STYLE}>
                 {type === "button" ? "Back" : isLastStep ? "Finish" : (isFirstStep && !editMode) ? "Search" : "Next"}

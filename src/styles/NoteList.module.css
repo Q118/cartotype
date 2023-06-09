@@ -1,12 +1,15 @@
 .card {
     transition: translate ease-in-out 100 ms, box-shadow ease-in-out 100 ms;
+    cursor: pointer;
 }
 
 /* ! this is helpful to use in other projects */
+
+/* TODO: use thise in the admin form, select portion */
 
 .card:hover,
 .card:focus {
     /* lift note up by 5 px */
     translate: 0 -5px;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 8px 0 var(--btn-hover-shadow);
 }

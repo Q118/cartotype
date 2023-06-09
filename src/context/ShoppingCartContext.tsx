@@ -49,6 +49,7 @@ type ShoppingCartContext = {
     storeItemsError: any;
     /** handle refetch after an update */
     refreshStoreItems: () => Promise<QueryObserverResult<unknown, unknown>>;
+    getStoreItemById: (id: string) => StoreItem;
 };
 
 
@@ -60,20 +61,20 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
+    const [ isOpen, setIsOpen ] = useState(false);
+    const [ cartItems, setCartItems ] = useLocalStorage<CartItem[]>(
         "shopping-cart",
         []
     );
-    const [globalStoreItems, setGlobalStoreItems] = useState<StoreItem[]>([]);
-    const [notificationToasts, setNotificationToasts] = useState<NotificationToast[]>([{ show: false, message: '', id: '' }]);
+    const [ globalStoreItems, setGlobalStoreItems ] = useState<StoreItem[]>([]);
+    const [ notificationToasts, setNotificationToasts ] = useState<NotificationToast[]>([ { show: false, message: '', id: '' } ]);
     // const [globalStoreItemTags, setGlobalStoreItemTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
-    const [globalStoreItemTags, setGlobalStoreItemTags] = useState<StoreItemTag[]>([]);
+    const [ globalStoreItemTags, setGlobalStoreItemTags ] = useState<StoreItemTag[]>([]);
 
-    
-    
+
+
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
-        queryKey: [`get-all-store-items`],
+        queryKey: [ `get-all-store-items` ],
         queryFn: async () => await getStoreItems(),
         enabled: true,
     });
@@ -87,7 +88,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
                 return { id: item.id, label: item.name }
             }));
         }
-    }, [JSON.stringify(storeItems)]);
+    }, [ JSON.stringify(storeItems) ]);
 
     // this calculates the total quantity of items in the cart
     const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
@@ -98,7 +99,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     function addNotificationToast(message: string) {
         const newToast = { show: true, message, id: notificationToasts.length + '' };
         setNotificationToasts((notificationToasts) => {
-            return [newToast, ...notificationToasts];
+            return [ newToast, ...notificationToasts ];
         }) // ID
     }
 
@@ -116,7 +117,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         if (firstTime) addNotificationToast(`Item: ${item} added to cart!`);
         setCartItems((currentItems) => {
             if (currentItems.find((item) => item.id === id) == null) {
-                return [...currentItems, { id, quantity: 1 }];
+                return [ ...currentItems, { id, quantity: 1 } ];
             } else {
                 // if ya do find it:
                 return currentItems.map((item) => {
@@ -147,6 +148,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         })
     }
 
+    function getStoreItemById(id: string) {
+        return globalStoreItems.find((item) => item.id === id) || {} as StoreItem;
+    }
+
     return (
         <ShoppingCartContext.Provider value={{
             getItemQuantity,
@@ -164,11 +169,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             setNotificationToasts,
             addNotificationToast,
             removeNotificationToast,
-            isStoreItemsLoading: () => isLoading|| isFetching,
+            isStoreItemsLoading: () => isLoading || isFetching,
             storeItemsError,
             refreshStoreItems,
             globalStoreItemTags,
             setGlobalStoreItemTags,
+            getStoreItemById
         }}>
             {children}
         </ShoppingCartContext.Provider>

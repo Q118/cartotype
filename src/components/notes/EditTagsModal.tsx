@@ -5,6 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { Tag } from '../../types';
+import { VscTrash } from "react-icons/vsc";
 
 type EditTagsModalProps = {
     show: boolean;
@@ -33,8 +34,9 @@ export function EditTagsModal({ availableTags, show, handleClose, onDeleteTag, o
                                         <Button
                                             title="Delete Tag"
                                             onClick={() => onDeleteTag(tag.id)}
-                                            variant="danger"
-                                        >&times;
+                                            // variant="danger"
+                                            className="delete-note-btn"
+                                        ><VscTrash />
                                         </Button>
                                     </Col>
                                 </Row>

@@ -1,21 +1,16 @@
 import { Offcanvas, Stack } from "react-bootstrap";
-import { useShoppingCart } from "../context/ShoppingCartContext";
-import { useTheme } from "../context/ThemeContext";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+// import { useTheme } from "../context/ThemeContext";
 import { CartItem } from "./CartItem";
-import { formatCurrency } from "../utilities/formatCurrency";
+import { formatCurrency } from "../../utilities/formatCurrency";
 
 export function ShoppingCart() {
 
     const { closeCart, cartItems, isOpen, globalStoreItems } = useShoppingCart();
-    const { currentTheme } = useTheme();
+    // const { currentTheme } = useTheme();
 
     return (
-        <Offcanvas
-            show={isOpen}
-            onHide={closeCart}
-            placement="end"
-            className={currentTheme === "dark" ? 'bg-dark text-light' : 'bg-light text-dark'}
-        >
+        <Offcanvas show={isOpen} onHide={closeCart} placement="end" className="sidebar-cart">
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
             </Offcanvas.Header>
@@ -28,7 +23,7 @@ export function ShoppingCart() {
                         Total:{" "}
                         {formatCurrency(
                             cartItems?.reduce((total, cartItem) => {
-                                const item = globalStoreItems.find((i: {id: string}) => i.id === cartItem.id)
+                                const item = globalStoreItems.find((i: { id: string }) => i.id === cartItem.id)
                                 return total + (item?.price || 0) * cartItem.quantity
                             }, 0)
                         )}

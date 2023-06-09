@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { updateStoreItem } from '../../api/lib/storeItems';
@@ -12,6 +12,8 @@ import { StepTrack } from './StepTrack';
 import { PreviewConfirm } from './PreviewConfirm';
 import { consolidateStorePrice } from '../../utilities/formatCurrency';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
+import { useAdminLayoutContext } from '../AdminLayout';
+
 
 type EditFormData = {
     selectOptions: ResultItem[];
@@ -23,19 +25,33 @@ type EditFormData = {
     isDataLoading: () => boolean;
 };
 
-const INITIAL_DATA: EditFormData = {
-    selectOptions: [],
-    selectedItem: null,
-    price: { dollars: 0, cents: 0 },
-    storeTitle: '',
-    isDataLoading: () => false,
+// okay so right now just hit next and it does go bit top get to the edit it just resets it back to the first step even when we provide a startStep
+// why, bc the startStep is not being passed down to the multistepform hook
+// to pass it down, we need to pass it down to the EditForm component, and then pass it down to the multistepform hook
+
+
+
+type EditFormProps = {
+    startStep?: number|null;
 };
 
-export function EditForm() {
-    const [data, setData] = useState(INITIAL_DATA);
+export function EditForm({ startStep = null }: EditFormProps) {
+    const selected_item = useAdminLayoutContext(); 
     const navigate = useNavigate();
-
     const { globalStoreItems, refreshStoreItems, isStoreItemsLoading } = useShoppingCart();
+
+    const [ data, setData ] = useState<EditFormData>({
+        selectOptions: [],
+        selectedItem: selected_item || null,
+        price: { dollars: 0, cents: 0 },
+        storeTitle: '',
+        isDataLoading: () => false,
+    });
+
+
+    useEffect(() => {
+        console.log('change to data', data)
+    }, [data])
 
     const {
         steps,
@@ -45,7 +61,8 @@ export function EditForm() {
         isLastStep,
         next,
         back,
-        notify
+        notify,
+        goTo
     } = useMultistepForm([
         <SelectForm
             {...data}
@@ -61,7 +78,11 @@ export function EditForm() {
             updateFields={updateFields}
             editMode={true}
         />,
-    ]);
+    ], startStep);
+
+    console.log('currentStepIndex: ', currentStepIndex);
+    // if (startStep) goTo(startStep);
+
     function updateFields(fields: Partial<EditFormData>) {
         //* override all the old info with the new info
         setData(prev => ({ ...prev, ...fields }));
@@ -70,8 +91,8 @@ export function EditForm() {
     function handleLastStep() {
         updateStoreItem({
             id: data.selectedItem?.id || '',
-            name: data.storeTitle,
-            price: consolidateStorePrice(data.price),
+            name: data.selectedItem?.name || data.storeTitle,
+            price: data.selectedItem?.price || consolidateStorePrice(data.price),
             imgUrl: data.selectedItem?.imgUrl || '',
         }).then(() => {
             refreshStoreItems();
@@ -92,7 +113,10 @@ export function EditForm() {
                 alert('select an item to continue');
                 return;
             }
+            // next();
+            // navigate(`/admin/${data.selectedItem.id}/edit`);
             return next();
+            // goTo(1);
         }
         if (!isLastStep) return next();
         if (isLastStep) handleLastStep();

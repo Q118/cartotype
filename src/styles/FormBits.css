@@ -1,0 +1,110 @@
+/* Form shtuff */
+
+.form-container {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 1rem;
+    position: relative;
+    max-width: max-content;
+}
+
+.form-view-container {
+    /* justify-content: center !important; */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 1rem;
+    position: relative;
+    max-width: max-content;
+    background-color: var(--primary-bg);
+    /* max-width: max-content; */
+}
+
+
+.listGroup-associatedNotes {
+    max-height: 100px;
+    overflow-y: scroll;
+    border: 1px solid var(--accent);
+    /* border-radius: 0 !important; */
+    background-color: var(--primary-bg) !important;
+}
+
+.listItem-associatedNotes {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+}
+
+.listItem-associatedNotes-alt {
+    background-color: var(--body-background) !important;
+    color: var(--primary-text) !important;
+}
+
+
+.listGroup-associatedNotes::-webkit-scrollbar {
+    width: 8px;
+}
+/* track */
+/* .listGroup-associatedNotes::-webkit-scrollbar-track {
+    background-color: var(--body-background) !important;
+    border-radius: 2% !important;
+} */
+
+/* Handle */
+.listGroup-associatedNotes::-webkit-scrollbar-thumb {
+    background: var(--accent) !important;
+    border-radius: 10px;
+}
+
+
+/* #input-dark {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+#input-light {
+    background-color: #ffffff;
+    color: #000000;
+} */
+
+/**inputs, selects, etc */
+input,
+.form-control,
+textarea {
+    /* background-color: inherit !important; */
+    /* color: inherit !important; */
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+    border: 1px solid var(--accent) !important;
+}
+
+.form-control:focus,
+input:focus {
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 5px 15px var(--btn-hover-shadow) !important;
+}
+
+
+.form-container {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+}
+
+/* eg the [$] and the [.] */
+.input-group-text {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+    border-color: var(--accent) !important;
+}
+
+/* ! WARNING - i am unsure if these names could change/are dyanmaic so keep your eyes on it */
+
+/* div that looks like an input for react-select */
+.css-1h4l97-control {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+    border-color: var(--accent) !important;
+}
+/* then when it is in focus: */
+.css-aisdkm-control {
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 5px 15px var(--btn-hover-shadow) !important;
+}

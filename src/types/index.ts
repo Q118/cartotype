@@ -10,7 +10,9 @@ export type ResultItem = {
     downloadLocation: string;
     displayName: string;
     name: string;
-    price?: StorePrice;
+    // price?: StorePrice|number;
+    price?: number;
+    // ! possible may need to chage price type
     storeTitle?: string;
 }
 
@@ -22,7 +24,7 @@ export type StorePrice = {
 export type StoreItem = {
     id: string;
     name: string;
-    price: number | null;
+    price: number;
     imgUrl: string;
 };
 
@@ -42,7 +44,7 @@ export type NoteData = {
     title: string;
     markdown: string;
     tags: Tag[];
-    storeItemTags?: StoreItemTag[];
+    storeItemTags: StoreItemTag[];
 }
 
 export type Tag = {
@@ -69,6 +71,7 @@ export type RawNotedata = {
 
 export type SimplifiedNote = {
     tags: Tag[];
+    storeItemTags: StoreItemTag[];
     title: string;
     id: string;
 }

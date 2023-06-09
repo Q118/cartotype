@@ -1,0 +1,65 @@
+/** buttons */
+
+/* cool modern hover effect applied to all buttons */
+button:hover {
+    /* color: rgba(255, 255, 255, 1); */
+    box-shadow: 0 5px 15px var(--btn-hover-shadow) !important;
+    /* background-color: initial; */
+}
+
+.nav-cart-button {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.3rem;
+    position: relative;
+    border-radius: 50% !important;
+}
+
+.add-btn-c,
+.carto-btn {
+    background-color: var(--btn-primary) !important;
+    color: var(--btn-txt-primary) !important;
+    /* border: 1px solid var(--btn-txt-primary) !important; */
+    /* background-color: pink; */
+    border: none !important;
+}
+
+.remove-btn-c {
+    background-color: var(--btn-secondary) !important;
+    color: var(--btn-txt-secondary) !important;
+    border: none !important;
+}
+
+.carto-btn-alt {
+    background-color: var(--btn-secondary) !important;
+    color: var(--btn-txt-secondary) !important;
+    /* border: 1px solid var(--btn-txt-secondary) !important; */
+    border: none !important;
+}
+
+
+.cart-img-item {
+    width: 125px;
+    height: 75px;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.delete-note-btn {
+    /* background-color: var(--accent) !important; */
+    background-color: transparent !important;
+    color: var(--primary-text);
+    border-radius: 50% !important;
+    /* top right bottom left*/
+    padding: 3px 6px 3px 6px !important;
+    border-color: var(--primary-text);
+}
+
+
+.delete-note-btn:hover {
+    background-color: red !important;
+    color: white !important;
+    border-color: var(--primary-text) !important;
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
