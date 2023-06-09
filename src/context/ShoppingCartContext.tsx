@@ -72,7 +72,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [ globalStoreItemTags, setGlobalStoreItemTags ] = useState<StoreItemTag[]>([]);
 
 
-
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
         queryKey: [ `get-all-store-items` ],
         queryFn: async () => await getStoreItems(),

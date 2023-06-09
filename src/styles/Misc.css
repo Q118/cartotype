@@ -73,6 +73,16 @@ body::-webkit-scrollbar {
     color: var(--primary-bg) !important;
 }
 
+
+.div-grid-cols-admin {
+    display: grid;
+    gap: 1rem .5rem;
+    justify-content: center;
+    grid-template-columns: auto minmax(auto, 400px);
+}
+
+
+
 /* the parent needs to be position:relative */
 .bottom-right-container {
     position: absolute;
@@ -80,10 +90,17 @@ body::-webkit-scrollbar {
     right: .5rem;
 }
 
+
 .top-right-container {
     position: absolute;
     top: .5rem;
     right: .5rem;
+}
+
+.top-left-container {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
 }
 
 #home-div-wrapper {
@@ -92,11 +109,11 @@ body::-webkit-scrollbar {
     position: absolute;
 }
 
-.edit-select-items-wrapper {
+.admin-scroll-wrapper {
     max-height: 65vh;
 }
 
-.edit-select-items {
+.admin-inner-scroll {
     overflow-y: scroll !important;
     max-height: 55vh;
 }
@@ -104,12 +121,12 @@ body::-webkit-scrollbar {
     display: none;
 } */
 
-.edit-select-items::-webkit-scrollbar {
+.admin-inner-scroll::-webkit-scrollbar {
     width: 8px;
 }
 
 /* Handle */
-.edit-select-items::-webkit-scrollbar-thumb {
+.admin-inner-scroll::-webkit-scrollbar-thumb {
     background: var(--accent) !important;
     border-radius: 10px;
 }
