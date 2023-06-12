@@ -62,11 +62,11 @@ export function SelectForm({
 
     function updateWithSelection(identifier: string) {
         const selectedItem: any = findSelection(selectOptions, identifier);
-        // console.log('selectedItem:', selectedItem)
+        console.log('selectedItem:', selectedItem)
         const itemPrice: StorePrice = parseStorePrice(selectedItem?.price);
         updateFields({
             selectedItem: selectedItem,
-            // !! get thisg ogining.. need to parse out price or have it saved somewhere
+            ...selectedItem.notes && { attachedNoteIds: JSON.parse(selectedItem.notes) },
             ...editMode && { price: { dollars: itemPrice?.dollars, cents: itemPrice?.cents } },
             ...editMode && { storeTitle: selectedItem?.name },
         });

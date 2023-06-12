@@ -75,7 +75,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [ notificationToasts, setNotificationToasts ] = useState<NotificationToast[]>([ { show: false, message: '', id: '' } ]);
     // const [globalStoreItemTags, setGlobalStoreItemTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
     const [ globalStoreItemTags, setGlobalStoreItemTags ] = useState<StoreItemTag[]>([]);
-
+    
+    const getAllNotesForStore = async () => await NoteConstructor.getAllNotes(NOTE_SUBPARTITION);
 
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
         queryKey: [ `get-all-store-items` ],
@@ -85,7 +86,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     const { data: notesData, isLoading: notesLoading, error: notesError, refetch: refetchNotes, isFetching: notesFetching }: any = useQuery({
         queryKey: [ `get-all-notes` ],
-        queryFn: async () => await NoteConstructor.getAllNotes(NOTE_SUBPARTITION),
+        queryFn: async () => await getAllNotesForStore(),
         enabled: true,
     });
 

@@ -24,6 +24,7 @@
     max-height: 100px;
     overflow-y: scroll;
     border: 1px solid var(--accent);
+    /* resize: both !important; */
     /* border-radius: 0 !important; */
     background-color: var(--primary-bg) !important;
 }

@@ -34,7 +34,7 @@ export function DetailForm(props: DetailFormProps) {
     const local_selectedItem = selected_item || selectedItemProp;
     const local_storeTitle = selected_item ? selected_item.name : storeTitle || inputSearch;
     const local_price = selected_item ? decouplePrice(selected_item.price) : price;
-    // console.log(props);
+    console.log(props);
 
     // TODO:obvs need to dynamically show the ntoes and make them links
 
@@ -66,7 +66,13 @@ export function DetailForm(props: DetailFormProps) {
             <label>Associated Notes</label>
             <NoteListGroupFormBit
                 availableNotes={availableNotes}
-                onAddNote={(id: string) => updateFields({ attachedNoteIds: [...attachedNoteIds, id] })}
+                onAddOrRemoveNote={(id: string) => {
+                    if (attachedNoteIds.includes(id)) {
+                        updateFields({ attachedNoteIds: attachedNoteIds.filter(noteId => noteId !== id) })
+                        return;
+                    }
+                    updateFields({ attachedNoteIds: [ ...attachedNoteIds, id ] })
+                }}
                 attachedNoteIds={attachedNoteIds}
                 selectedItem={local_selectedItem}
             />
