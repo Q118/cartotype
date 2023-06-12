@@ -92,6 +92,7 @@ export function EditForm({ startStep = null }: EditFormProps) {
     function updateFields(fields: Partial<EditFormData>) {
         //* override all the old info with the new info
         setData(prev => ({ ...prev, ...fields }));
+        //* for nested parts of data, still have to do the ...prev
     }
 
     function handleLastStep() {
