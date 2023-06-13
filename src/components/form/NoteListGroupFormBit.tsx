@@ -8,6 +8,8 @@ import { RawNote, RawNotedata, ResultItem } from '../../types';
 //** oooorrrrr or maybe like a Small version of the noteList... llike query and seelct and find insidethe square
 
 
+// TODO figuuyre out why its note sending the title..
+
 type NoteListGroupFormBitProps = {
     selectedItem: any;
     onAddOrRemoveNote: (id: string) => void;

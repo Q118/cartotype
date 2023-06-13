@@ -89,6 +89,7 @@ export class SupabaseTableFactory {
         return data;
     }
 
+
     async deleteItem(id: string) {
         const { data, error } = await this.client.from(this.tableName)
             .delete()
