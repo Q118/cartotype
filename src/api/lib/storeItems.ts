@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import { StoreItem } from '../../types';
-import { Notes } from './notes';
+import { Notes as NotesConstructor } from './notes';
 
 import { PostgrestError, createClient } from '@supabase/supabase-js'
 
@@ -44,30 +44,14 @@ async function addStoreItem(item: StoreItem) {
         const updatedNote = await handleAttachedNotes(item);
         return updatedNote;
     // }
-
-
-    // !!!! PU IN HERE... test this works and get it working for both add and update
-    // const NoteTable = Notes.create(NOTE_PARTITION_NAME);
-    // const noteToUpdate = await Notes.getNoteById(item.notes[ 0 ], NOTE_PARTITION_NAME) as any;
-    // // TODO above is retured as an array, fix up your typings to make that known better and not need an any
-    // console.log('noteToUpdate', noteToUpdate)
-
-    // let storeIdsToSend: string[]|null = null;
-    // if (noteToUpdate.storeItemIds && noteToUpdate.storeItemIds.length > 0) {
-    //     storeIdsToSend = [ ...noteToUpdate.storeItemIds, item.id ];
-    // } else {
-    //     storeIdsToSend = [ item.id ];
-    // }
-    // console.log('storeIdsToSend', storeIdsToSend)
-    // const updatedNote = await NoteTable.updateNoteStoreItemIds(noteToUpdate[0].id, storeIdsToSend);
-
-    // return updatedNote;
 }
+
+// ! PU here dev.. the detail page, from edit, is not updating the notes to be checked. but it is in the db, so it's just a UI thing here to fix
 
 /** helper to update notes when attached to an item to upsert */
 async function handleAttachedNotes(item: any) {
-    const NoteTable = Notes.create(NOTE_PARTITION_NAME);
-    const noteToUpdate = await Notes.getNoteById(item.notes[ 0 ], NOTE_PARTITION_NAME) as any;
+    const NoteTable = NotesConstructor.create(NOTE_PARTITION_NAME);
+    const noteToUpdate = await NotesConstructor.getNoteById(item.notes[ 0 ], NOTE_PARTITION_NAME) as any;
     // TODO above is retured as an array, fix up your typings to make that known better and not need an any
     console.log('noteToUpdate', noteToUpdate)
 
@@ -86,7 +70,9 @@ async function handleAttachedNotes(item: any) {
 async function updateStoreItem(item: StoreItem) {
     const { data, error } = await supabase.from('store_items').upsert(item).eq('id', item.id);
     if (error) handleError(error, {});
-    return data;
+    if (!item.notes) return data;
+    const updatedNote = await handleAttachedNotes(item);
+    return updatedNote;
 }
 
 export {
