@@ -50,7 +50,7 @@ export function EditForm({ startStep = null }: EditFormProps) {
         price: { dollars: 0, cents: 0 },
         storeTitle: '',
         isDataLoading: () => false,
-        attachedNoteIds: [""],
+        attachedNoteIds: [],
         availableNotes: availableNotes,
     });
 

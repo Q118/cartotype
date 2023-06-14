@@ -52,6 +52,8 @@ async function addStoreItem(item: Partial<StoreItem>) {
 
 /** helper to update notes when attached to an item to upsert */
 async function handleAttachedNotes(item: any) {
+
+    console.log("inside handleAttachedNotes", item);
     const NoteTable = NotesConstructor.create(NOTE_PARTITION_NAME);
     const noteToUpdate = await NotesConstructor.getNoteById(item.notes[ 0 ], NOTE_PARTITION_NAME) as any;
     // TODO above is retured as an array, fix up your typings to make that known better and not need an any

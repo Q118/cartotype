@@ -38,7 +38,7 @@ export function NoteListGroupFormBit({
             <Form.Check
                 // type="switch"
                 type="checkbox"
-                checked={attachedNoteIds.includes(note.id)}
+                checked={attachedNoteIds?.includes(note.id) || false}
                 // defaultChecked={JSON.parse(selectedItem.notes).includes(note.id)}
                 // checked={isAttached(note.id)}
                 id={`switch-note-${note.id}`}

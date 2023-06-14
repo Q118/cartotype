@@ -51,6 +51,7 @@ export function DetailForm(props: DetailFormProps) {
                 price: decouplePrice(+local_selectedItem.price!) || { dollars: 0, cents: 0 },
                 storeTitle: local_selectedItem.name,
                 attachedNoteIds: local_selectedItem.notes || [],
+                // attachedNoteIds: JSON.parse(local_selectedItem.notes) || [],
             })
         }
     }, [ JSON.stringify(local_selectedItem) ]);
@@ -61,8 +62,13 @@ export function DetailForm(props: DetailFormProps) {
 
     // TODO:obvs need to dynamically show the ntoes and make them links
 
+    //  ! PU here .. everythings a mess since ive tried to make it work with the view page
+
     // !! damn price is all fucked up bc one its a number and thje other its an object with number valies... so maybe change it all up but for now just put it actual nuimbers so i can first solve this issue and then can do that
-    // okay it works from eeditForm.. now from view/.
+    // okay it works from eeditForm.. now from view/.... both work exceptfor adding new notes to an item
+    // NOTES ARE still not working... from edit or view//fdfhjkashk
+    // !!! DOOOD ... youre notes logic is messing with youy.... its an array of strings.
+
 
     return (
         <FormWrapper title="Edit Details for Store">
@@ -113,14 +119,14 @@ export function DetailForm(props: DetailFormProps) {
                     setLocal_selectedItem({
                         ...local_selectedItem,
                         // below says if the note is already attached, remove it, otherwise add it
-                        notes: local_selectedItem.notes.includes(id) ?
+                        notes: local_selectedItem.notes?.includes(id) ?
                             local_selectedItem.notes.filter((noteId: string) => noteId !== id)
-                            : [ ...local_selectedItem.notes, id ]
+                            : local_selectedItem.notes ? [ ...local_selectedItem.notes, id ] : [ id ]
                     })
                 }}
+                attachedNoteIds={local_selectedItem.notes}
                 // attachedNoteIds={local_selectedItem.notes}
-                // attachedNoteIds={local_selectedItem.notes}
-                attachedNoteIds={selected_item && selected_item.notes ? selected_item.notes : attachedNoteIds}
+                // attachedNoteIds={selected_item && selected_item.notes ? selected_item.notes : attachedNoteIds}
                 // attachedNoteIds={local_selectedItem}
                 // selectedItem={local_selectedItem}
                 selectedItem={local_selectedItem}
