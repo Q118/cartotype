@@ -3,23 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { updateStoreItem } from '../../api/lib/storeItems';
 import { RawNote, ResultItem, StorePrice } from '../../types';
-// import { useTheme } from '../../context/ThemeContext';
 import Container from 'react-bootstrap/Container';
-// import { useQuery } from '@tanstack/react-query';
 import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
 import { StepTrack } from './StepTrack';
 import { PreviewConfirm } from './PreviewConfirm';
-import { consolidateStorePrice } from '../../utilities/formatCurrency';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
-// import { useAdminLayoutContext } from '../AdminLayout';
+
 
 
 type EditFormData = {
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
     /** new price set by user */
-    // price: StorePrice;
     price: number;
     /** storeTitle aka the new title user may choose */
     storeTitle: string;
@@ -30,25 +26,18 @@ type EditFormData = {
     availableNotes: RawNote[];
 };
 
-// okay so right now just hit next and it does go bit top get to the edit it just resets it back to the first step even when we provide a startStep
-// why, bc the startStep is not being passed down to the multistepform hook
-// to pass it down, we need to pass it down to the EditForm component, and then pass it down to the multistepform hook
-
-
 
 type EditFormProps = {
     startStep?: number|null;
 };
 
 export function EditForm({ startStep = null }: EditFormProps) {
-    // const selected_item = useAdminLayoutContext(); 
     const navigate = useNavigate();
     const { globalStoreItems, refreshStoreItems, isStoreItemsLoading, availableNotes } = useShoppingCart();
 
     const [ data, setData ] = useState<EditFormData>({
         selectOptions: [],
         selectedItem: null,
-        // price: { dollars: 0, cents: 0 },
         price: 0,
         storeTitle: '',
         isDataLoading: () => false,
@@ -101,7 +90,6 @@ export function EditForm({ startStep = null }: EditFormProps) {
         updateStoreItem({
             id: data.selectedItem?.id || '',
             name: data.selectedItem?.name || data.storeTitle,
-            // price: data.selectedItem?.price || consolidateStorePrice(data.price),
             price: data.selectedItem?.price || data.price,
             imgUrl: data.selectedItem?.imgUrl || '',
             notes: data.attachedNoteIds

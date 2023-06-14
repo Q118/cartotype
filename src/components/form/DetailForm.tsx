@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-
-
 import { FormWrapper } from "../../utilities/FormWrapper";
-import { ResultItem, StorePrice, RawNote, SelectedItem } from '../../types';
+import { ResultItem, RawNote } from '../../types';
 import { StoreItem } from "../store/StoreItem";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { consolidateStorePrice } from "../../utilities/formatCurrency";
+// import { consolidateStorePrice } from "../../utilities/formatCurrency";
 import { useAdminLayoutContext } from "../AdminLayout";
 import { NoteListGroupFormBit } from "./NoteListGroupFormBit";
-import { decouplePrice } from "../../utilities/formatCurrency";
+// import { decouplePrice } from "../../utilities/formatCurrency";
 
+
+import CurrencyInput from "react-currency-input-field";
 
 type DetailFormData = {
     selectedItem: ResultItem | null;
@@ -33,19 +33,19 @@ export function DetailForm(props: DetailFormProps) {
     const { selectedItem: selectedItemProp, inputSearch, price, storeTitle, updateFields, availableNotes, attachedNoteIds } = props;
     const selected_item = useAdminLayoutContext(); //! itll be null if not from view!
 
-    const [ cameFromView, setCameFromView ] = useState(selected_item ? true : false);
+    // const [ cameFromView, setCameFromView ] = useState(selected_item ? true : false);
     const [ local_selectedItem, setLocal_selectedItem ] = useState<any>(selected_item || selectedItemProp);
 
 
     useEffect(() => {
-        console.log('change to data in effect')
+        // console.log('change to data in effect')
         if (selected_item) {
             setLocal_selectedItem(selected_item);
         }
     }, [])
 
     useEffect(() => {
-        console.log('change to local_selectedItem in effect', local_selectedItem);
+        // console.log('change to local_selectedItem in effect', local_selectedItem);
         if (local_selectedItem) {
             updateFields({
                 selectedItem: local_selectedItem,
@@ -69,7 +69,7 @@ export function DetailForm(props: DetailFormProps) {
         <FormWrapper title="Edit Details for Store">
             <label>Price: </label>
             <div className="mb-3 input-group">
-                <span className="input-group-text">$</span>
+                {/* <span className="input-group-text">$</span>
                 <input placeholder="0" type="number"
                     className="form-control" required
                     // value={price.dollars}
@@ -90,7 +90,22 @@ export function DetailForm(props: DetailFormProps) {
                     value={22}
                     onChange={e => setLocal_selectedItem({ ...local_selectedItem, price: { dollars: 3, cents: 22 } })}
                     max={99} min={0}
+                /> */}
+                <CurrencyInput
+                    id="price-input"
+                    name="price-input"
+                    // placeholder="$0.00"
+                    prefix="$"
+                    placeholder="Please enter a number"
+                    // defaultValue={1000}
+                    // defaultValue={consolidateStorePrice(price)}
+                    defaultValue={local_selectedItem.price}
+                    decimalsLimit={2}
+                    // onValueChange={(value, name) => console.log(value, name)}
+                    onValueChange={(value, name) => updateFields({ price: +value! })}
                 />
+                {/* // TODO: little drop down to the right of input to selet type of currency */}
+
             </div>
             <label>Official Title: </label>
             <input type="text" className="form-control"

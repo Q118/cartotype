@@ -3,7 +3,7 @@ import { FiRefreshCcw } from 'react-icons/fi';
 import Row from 'react-bootstrap/Row';
 import { Spinner } from 'react-bootstrap';
 import { TooltipWrapper } from '../../utilities/TooltipWrapper';
-import { ResultItem, StorePrice } from '../../types';
+import { ResultItem } from '../../types';
 import { SelectItem } from './SelectItem';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -11,7 +11,6 @@ import { useTheme } from '../../context/ThemeContext';
 type SelectFormData = {
     /** mode for edit, if false its in add mode */
     editMode?: boolean;
-    // price?: StorePrice;
     price?: number;
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
@@ -63,8 +62,6 @@ export function SelectForm({
 
     function updateWithSelection(identifier: string) {
         const selectedItem: any = findSelection(selectOptions, identifier);
-        console.log('selectedItem:', selectedItem)
-        // const itemPrice: StorePrice = parseStorePrice(selectedItem?.price);
         updateFields({
             selectedItem: selectedItem,
             ...(selectedItem.notes && selectedItem.notes.length > 0) && { attachedNoteIds: JSON.parse(selectedItem.notes) },
@@ -81,16 +78,6 @@ export function SelectForm({
         }
     }
 
-    /**
-     * 
-     * @function parseStorePrice - parses the price from the store into dollars and cents
-     * @returns {StorePrice}
-     */
-    // function parseStorePrice(price: number): StorePrice {
-    //     const dollars = Math.floor(price);
-    //     const cents = +(price - dollars).toFixed(2).split('0.')[ 1 ];
-    //     return { dollars, cents };
-    // }
 
     // TODO change this for in edit mode
     if (selectOptions?.length === 0) return (
