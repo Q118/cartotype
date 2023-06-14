@@ -1,17 +1,8 @@
 import { Outlet, useOutletContext, useParams } from "react-router-dom";
-import { Note, ResultItem, RawNote } from "../types";
+import { Note, ResultItem, RawNote, SelectedItem } from "../types";
 
 
 
-/** selected item to edit */
-type SelectedItem = {
-    created_at: string;
-    id: string;
-    imgUrl: string;
-    name: string;
-    notes: Note[] | null | RawNote[];
-    price: number;
-} & ResultItem;
 
 // type NoteLayoutProps = {
 //     availableNotes: Note[];

@@ -79,3 +79,13 @@ export type SimplifiedNote = {
     title: string;
     id: string;
 }
+
+/** selected item to edit */
+export type SelectedItem = {
+    created_at: string;
+    id: string;
+    imgUrl: string;
+    name: string;
+    notes: Note[] | null | RawNote[];
+    price: number;
+} & ResultItem;

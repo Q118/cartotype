@@ -27,3 +27,14 @@ export function formatCurrency(number: number|null) {
 export function consolidateStorePrice({ dollars, cents }: StorePrice): number {
     return +(dollars + (cents / 100));
 }
+
+
+/**
+ * @function decouplePrice
+ * Decouples a price into dollars and cents
+ */
+export const decouplePrice = (price: number): StorePrice => {
+    const dollars = Math.floor(price);
+    const cents = Math.round((price - dollars) * 100);
+    return { dollars, cents };
+}

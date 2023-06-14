@@ -66,7 +66,7 @@ export function SelectForm({
         const itemPrice: StorePrice = parseStorePrice(selectedItem?.price);
         updateFields({
             selectedItem: selectedItem,
-            ...selectedItem.notes && { attachedNoteIds: JSON.parse(selectedItem.notes) },
+            ...(selectedItem.notes && selectedItem.notes.length > 0) && { attachedNoteIds: JSON.parse(selectedItem.notes) },
             ...editMode && { price: { dollars: itemPrice?.dollars, cents: itemPrice?.cents } },
             ...editMode && { storeTitle: selectedItem?.name },
         });
