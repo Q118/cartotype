@@ -15,7 +15,8 @@ import { decouplePrice } from "../../utilities/formatCurrency";
 type DetailFormData = {
     selectedItem: ResultItem | null;
     inputSearch?: string;
-    price: StorePrice;
+    // price: StorePrice;
+    price: number;
     storeTitle: string;
     availableNotes: RawNote[];
     attachedNoteIds: string[];
@@ -48,7 +49,8 @@ export function DetailForm(props: DetailFormProps) {
         if (local_selectedItem) {
             updateFields({
                 selectedItem: local_selectedItem,
-                price: decouplePrice(+local_selectedItem.price!) || { dollars: 0, cents: 0 },
+                // price: decouplePrice(+local_selectedItem.price!) || { dollars: 0, cents: 0 },
+                price: +local_selectedItem.price,
                 storeTitle: local_selectedItem.name,
                 attachedNoteIds: local_selectedItem.notes || [],
                 // attachedNoteIds: JSON.parse(local_selectedItem.notes) || [],
@@ -58,16 +60,9 @@ export function DetailForm(props: DetailFormProps) {
 
     // console.log(props);
     // console.log("selected_item", selected_item);
-
-
     // TODO:obvs need to dynamically show the ntoes and make them links
-
     //  ! PU here .. everythings a mess since ive tried to make it work with the view page
-
     // !! damn price is all fucked up bc one its a number and thje other its an object with number valies... so maybe change it all up but for now just put it actual nuimbers so i can first solve this issue and then can do that
-    // okay it works from eeditForm.. now from view/.... both work exceptfor adding new notes to an item
-    // NOTES ARE still not working... from edit or view//fdfhjkashk
-    // !!! DOOOD ... youre notes logic is messing with youy.... its an array of strings.
 
 
     return (
@@ -111,24 +106,16 @@ export function DetailForm(props: DetailFormProps) {
             <NoteListGroupFormBit
                 availableNotes={availableNotes}
                 onAddOrRemoveNote={(id: string) => {
-                    // if (attachedNoteIds && attachedNoteIds.includes(id)) {
-                    //     updateFields({ attachedNoteIds: attachedNoteIds.filter(noteId => noteId !== id) })
-                    //     return;
-                    // } // add it if it's not there
-                    // updateFields({ attachedNoteIds: [ ...attachedNoteIds, id ] })
                     setLocal_selectedItem({
                         ...local_selectedItem,
-                        // below says if the note is already attached, remove it, otherwise add it
+                        // V if the note is already attached, remove it, 
+                        // otherwise spread and add it to the arr if its not null, or just add the id if its null.
                         notes: local_selectedItem.notes?.includes(id) ?
                             local_selectedItem.notes.filter((noteId: string) => noteId !== id)
                             : local_selectedItem.notes ? [ ...local_selectedItem.notes, id ] : [ id ]
                     })
                 }}
                 attachedNoteIds={local_selectedItem.notes}
-                // attachedNoteIds={local_selectedItem.notes}
-                // attachedNoteIds={selected_item && selected_item.notes ? selected_item.notes : attachedNoteIds}
-                // attachedNoteIds={local_selectedItem}
-                // selectedItem={local_selectedItem}
                 selectedItem={local_selectedItem}
             />
             <h6>Preview:</h6>

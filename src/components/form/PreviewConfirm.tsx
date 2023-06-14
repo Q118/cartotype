@@ -8,7 +8,8 @@ import { useAdminLayoutContext } from "../AdminLayout";
 type PreviewConfirmData = {
     selectedItem: ResultItem | null;
     storeTitle: string;
-    price: StorePrice;
+    // price: StorePrice;
+    price: number;
     editMode?: boolean;
 };
 
@@ -34,7 +35,7 @@ export function PreviewConfirm({
             <StoreItem
                 id={selected_item ? selected_item.id : selectedItemProp!.id}
                 name={selected_item ? selected_item.name : storeTitle}
-                price={selected_item ? selected_item.price : consolidateStorePrice(price)}
+                price={selected_item ? selected_item.price : price}
                 imgUrl={selected_item ? selected_item.imgUrl : selectedItemProp!.imgUrl}
                 isPreview={true}
             />

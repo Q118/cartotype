@@ -11,7 +11,8 @@ import { useTheme } from '../../context/ThemeContext';
 type SelectFormData = {
     /** mode for edit, if false its in add mode */
     editMode?: boolean;
-    price?: StorePrice;
+    // price?: StorePrice;
+    price?: number;
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
     inputSearch?: string;
@@ -63,11 +64,12 @@ export function SelectForm({
     function updateWithSelection(identifier: string) {
         const selectedItem: any = findSelection(selectOptions, identifier);
         console.log('selectedItem:', selectedItem)
-        const itemPrice: StorePrice = parseStorePrice(selectedItem?.price);
+        // const itemPrice: StorePrice = parseStorePrice(selectedItem?.price);
         updateFields({
             selectedItem: selectedItem,
             ...(selectedItem.notes && selectedItem.notes.length > 0) && { attachedNoteIds: JSON.parse(selectedItem.notes) },
-            ...editMode && { price: { dollars: itemPrice?.dollars, cents: itemPrice?.cents } },
+            // ...editMode && { price: { dollars: itemPrice?.dollars, cents: itemPrice?.cents } },
+            ...editMode && { price: selectedItem?.price },
             ...editMode && { storeTitle: selectedItem?.name },
         });
     }
@@ -84,11 +86,11 @@ export function SelectForm({
      * @function parseStorePrice - parses the price from the store into dollars and cents
      * @returns {StorePrice}
      */
-    function parseStorePrice(price: number): StorePrice {
-        const dollars = Math.floor(price);
-        const cents = +(price - dollars).toFixed(2).split('0.')[ 1 ];
-        return { dollars, cents };
-    }
+    // function parseStorePrice(price: number): StorePrice {
+    //     const dollars = Math.floor(price);
+    //     const cents = +(price - dollars).toFixed(2).split('0.')[ 1 ];
+    //     return { dollars, cents };
+    // }
 
     // TODO change this for in edit mode
     if (selectOptions?.length === 0) return (

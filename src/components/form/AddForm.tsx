@@ -19,7 +19,8 @@ type FormData = {
     inputSearch: string;
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
-    price: StorePrice;
+    // price: StorePrice;
+    price: number;
     storeTitle: string;
     isDataLoading: () => boolean;
     /** ids of notes to be attached to this store item */
@@ -37,7 +38,8 @@ export function FormApp() {
         inputSearch: '',
         selectOptions: [],
         selectedItem: null,
-        price: { dollars: 0, cents: 0 },
+        // price: { dollars: 0, cents: 0 },
+        price: 0,
         storeTitle: '',
         isDataLoading: () => false,
         attachedNoteIds: [],
@@ -79,7 +81,8 @@ export function FormApp() {
         addStoreItem({
             id: uuidv4(),
             name: data.storeTitle,
-            price: +`${data.price.dollars}.${data.price.cents}`,
+            // price: +`${data.price.dollars}.${data.price.cents}`,
+            price: data.price,
             imgUrl: data.selectedItem?.imgUrl || '',
             notes: data.attachedNoteIds,
         }).then(() => {

@@ -19,7 +19,8 @@ type EditFormData = {
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
     /** new price set by user */
-    price: StorePrice;
+    // price: StorePrice;
+    price: number;
     /** storeTitle aka the new title user may choose */
     storeTitle: string;
     isDataLoading: () => boolean;
@@ -47,7 +48,8 @@ export function EditForm({ startStep = null }: EditFormProps) {
     const [ data, setData ] = useState<EditFormData>({
         selectOptions: [],
         selectedItem: null,
-        price: { dollars: 0, cents: 0 },
+        // price: { dollars: 0, cents: 0 },
+        price: 0,
         storeTitle: '',
         isDataLoading: () => false,
         attachedNoteIds: [],
@@ -99,7 +101,8 @@ export function EditForm({ startStep = null }: EditFormProps) {
         updateStoreItem({
             id: data.selectedItem?.id || '',
             name: data.selectedItem?.name || data.storeTitle,
-            price: data.selectedItem?.price || consolidateStorePrice(data.price),
+            // price: data.selectedItem?.price || consolidateStorePrice(data.price),
+            price: data.selectedItem?.price || data.price,
             imgUrl: data.selectedItem?.imgUrl || '',
             notes: data.attachedNoteIds
         }).then(() => {
