@@ -87,8 +87,10 @@
     font-weight: bold;
     z-index: 1;
     padding: 4px 8px 4px 8px !important;
-    background-color: var(--accent);
-    color: var(--txt-for-accent);
+    background-color: var(--txt-for-accent);
+    color: var(--accent);
+    line-height: smaller;
+    border-bottom: var(--accent) 1px solid;
 }
 
 /* Scrollbar */

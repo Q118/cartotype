@@ -1,10 +1,10 @@
 import { MouseEvent, useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
-import { GiCartwheel } from 'react-icons/gi';
+// import { GiCartwheel } from 'react-icons/gi';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Overlay from 'react-bootstrap/Overlay';
-import { BsChevronDown } from 'react-icons/bs';
+// import { BsChevronDown } from 'react-icons/bs';
 import { StoreItemTag } from '../../types';
 import Stack from 'react-bootstrap/Stack';
 import { IoPricetags } from 'react-icons/io5';
