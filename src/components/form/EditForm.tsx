@@ -28,7 +28,7 @@ type EditFormData = {
 
 
 type EditFormProps = {
-    startStep?: number|null;
+    startStep?: number | null;
 };
 
 export function EditForm({ startStep = null }: EditFormProps) {
@@ -48,37 +48,18 @@ export function EditForm({ startStep = null }: EditFormProps) {
 
     useEffect(() => {
         console.log('change to data', data)
-    }, [JSON.stringify(data)])
+    }, [ JSON.stringify(data) ])
 
-    const {
-        steps,
-        currentStepIndex,
-        step,
-        isFirstStep,
-        isLastStep,
-        next,
-        back,
-        notify,
-        goTo
-    } = useMultistepForm([
-        <SelectForm
-            {...data}
-            editMode={true}
-            selectOptions={globalStoreItems}
+    const { steps, currentStepIndex, step, isFirstStep, isLastStep, next, back, notify, goTo } = useMultistepForm([
+        <SelectForm {...data} editMode={true} selectOptions={globalStoreItems}
             isDataLoading={() => isStoreItemsLoading()}
             refreshData={() => refreshStoreItems()}
             updateFields={updateFields}
         />,
         <DetailForm {...data} updateFields={updateFields} />,
-        <PreviewConfirm
-            {...data}
-            updateFields={updateFields}
-            editMode={true}
-        />,
+        <PreviewConfirm {...data} updateFields={updateFields} editMode={true} />,
     ], startStep);
 
-    console.log('currentStepIndex: ', currentStepIndex);
-    // if (startStep) goTo(startStep);
 
     function updateFields(fields: Partial<EditFormData>) {
         //* override all the old info with the new info
@@ -112,7 +93,6 @@ export function EditForm({ startStep = null }: EditFormProps) {
                 alert('select an item to continue');
                 return;
             }
-            // navigate(`/admin/${data.selectedItem.id}/edit`);
             return next();
         }
         if (!isLastStep) return next();

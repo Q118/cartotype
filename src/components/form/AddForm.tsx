@@ -19,7 +19,6 @@ type FormData = {
     inputSearch: string;
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
-    // price: StorePrice;
     price: number;
     storeTitle: string;
     isDataLoading: () => boolean;
@@ -38,7 +37,6 @@ export function FormApp() {
         inputSearch: '',
         selectOptions: [],
         selectedItem: null,
-        // price: { dollars: 0, cents: 0 },
         price: 0,
         storeTitle: '',
         isDataLoading: () => false,
@@ -52,16 +50,7 @@ export function FormApp() {
     });
 
 
-    const {
-        steps,
-        currentStepIndex,
-        step,
-        isFirstStep,
-        isLastStep,
-        next,
-        back,
-        notify
-    } = useMultistepForm([
+    const { steps, currentStepIndex, step, isFirstStep, isLastStep, next, back, notify } = useMultistepForm([
         <InputSearchForm {...data} updateFields={updateFields} />,
         <SelectForm {...data} isDataLoading={() => isLoading || isFetching}
             refreshData={() => refetch()}
@@ -81,7 +70,6 @@ export function FormApp() {
         addStoreItem({
             id: uuidv4(),
             name: data.storeTitle,
-            // price: +`${data.price.dollars}.${data.price.cents}`,
             price: data.price,
             imgUrl: data.selectedItem?.imgUrl || '',
             notes: data.attachedNoteIds,

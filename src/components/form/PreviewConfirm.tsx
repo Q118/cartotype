@@ -1,7 +1,5 @@
 import { StoreItem } from "../store/StoreItem";
-// import { FormWrapper } from "./FormWrapper";
-import { ResultItem, StorePrice } from '../../types';
-import { consolidateStorePrice } from "../../utilities/formatCurrency";
+import { ResultItem } from '../../types';
 import { useAdminLayoutContext } from "../AdminLayout";
 
 
