@@ -9,7 +9,6 @@ type CartoModalProps = {
     /** id of store Item */
     itemId: string;
     onHide: any;
-    modalHeader: string;
     show: boolean;
 }
 

@@ -5,7 +5,6 @@ import Card from 'react-bootstrap/Card';
 import styles from '../../styles/NoteList.module.css';
 import Stack from "react-bootstrap/esm/Stack";
 import Badge from "react-bootstrap/Badge";
-// import { IconContext } from "react-icons";
 import { WheelTagCog } from "./WheelTagCog";
 
 //* the tags cahn filter the notes
@@ -19,14 +18,14 @@ export function NoteCard({ id, title, tags, storeItemTags }: SimplifiedNote) {
 
     const handleCardClick = () => {
         if (modalOpen) return;
-        // console.log('card clicked')
+        // dont respond if the modals open
         return navigate(`${id}`);
     }
 
     return (
         <Card onClick={handleCardClick} className={`h-100 text-reset text-decoration-none ${styles.card} note-card`} >
             <Card.Body>
-                <WheelTagCog storeItemTags={storeItemTags} />
+                    <WheelTagCog storeItemTags={storeItemTags} />
                 <Stack gap={2} className="align-items-center justify-content-center h-100">
                     <span className="fs-5">{title}</span>
                     {tags.length > 0 && (

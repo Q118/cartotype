@@ -48,7 +48,7 @@ export function DetailForm(props: DetailFormProps) {
     }, [])
 
     useEffect(() => {
-        // console.log('change to local_selectedItem in effect', local_selectedItem);
+        console.log('change to local_selectedItem in effect', local_selectedItem);
         if (local_selectedItem) {
             updateFields({
                 selectedItem: local_selectedItem,
@@ -65,7 +65,6 @@ export function DetailForm(props: DetailFormProps) {
     // console.log("selected_item", selected_item);
     // TODO:obvs need to dynamically show the ntoes and make them links
     //  ! PU here .. everythings a mess since ive tried to make it work with the view page
-    // !! damn price is all fucked up bc one its a number and thje other its an object with number valies... so maybe change it all up but for now just put it actual nuimbers so i can first solve this issue and then can do that
 
 
     return (
@@ -75,14 +74,10 @@ export function DetailForm(props: DetailFormProps) {
                 <CurrencyInput
                     id="price-input"
                     name="price-input"
-                    // placeholder="$0.00"
                     prefix="$"
-                    placeholder="Please enter a number"
-                    // defaultValue={1000}
-                    // defaultValue={consolidateStorePrice(price)}
+                    placeholder="0.00"
                     defaultValue={local_selectedItem.price}
                     decimalsLimit={2}
-                    // onValueChange={(value, name) => console.log(value, name)}
                     onValueChange={(value, name) => updateFields({ price: +value! })}
                 />
                 {/* // TODO: little drop down to the right of input to selet type of currency */}
@@ -109,14 +104,13 @@ export function DetailForm(props: DetailFormProps) {
                     })
                 }}
                 attachedNoteIds={local_selectedItem.notes}
-                selectedItem={local_selectedItem}
             />
             <h6>Preview:</h6>
             <Row>
                 <Col style={{ maxWidth: '250px' }}>
                     <StoreItem
                         name={local_selectedItem.name || inputSearch}
-                        price={3.22}
+                        price={local_selectedItem.price}
                         imgUrl={local_selectedItem.imgUrl}
                         id={local_selectedItem.id}
                         isPreview={true}

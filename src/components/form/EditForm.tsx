@@ -71,7 +71,8 @@ export function EditForm({ startStep = null }: EditFormProps) {
         updateStoreItem({
             id: data.selectedItem?.id || '',
             name: data.selectedItem?.name || data.storeTitle,
-            price: data.selectedItem?.price || data.price,
+            // price: data.selectedItem?.price || data.price,
+            price: data.price,
             imgUrl: data.selectedItem?.imgUrl || '',
             notes: data.attachedNoteIds
         }).then(() => {
