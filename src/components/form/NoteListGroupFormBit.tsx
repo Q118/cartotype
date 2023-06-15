@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
+import { GrNewWindow } from "react-icons/gr";
 import { RawNote } from '../../types';
 // TODO display prettier with selectable wrapper
 //** oooorrrrr or maybe like a Small version of the noteList... llike query and seelct and find insidethe square
@@ -37,7 +38,10 @@ export function NoteListGroupFormBit({
                 onChange={() => onAddOrRemoveNote(note.id)}
             />
             <div className="top-right-container">
-                sdfsaf
+                <GrNewWindow 
+                // TODO figure out why i cant color this
+                style={{ color: 'pink !important' }}
+                />
             </div>
         </ListGroup.Item>
     ));

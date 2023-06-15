@@ -4,7 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Button, Container, ListGroup, Stack } from "react-bootstrap";
 import { StoreItem } from "./StoreItem";
 import { formatCurrency } from "../../utilities/formatCurrency";
-import { BsWindowDesktop } from "react-icons/bs";
+// import { BsWindowDesktop } from "react-icons/bs";
 // import { NoteListGroupFormBit } from "../form/NoteListGroupFormBit";
 
 // import { GiStabbedNote } from 'react-icons/gi'; // TODO use this icon for the attached note sin the stoer items in the stoer and in that previewm confirm
@@ -17,17 +17,24 @@ import { BsWindowDesktop } from "react-icons/bs";
 
 const isEven = (num: number) => num % 2 === 0;
 
+type StoreItemViewProps = {
+    item_id: string;
+}
 
 
 
-export function StoreItemView() {
-    const { item_id } = useParams();
-    const navigate = useNavigate();
+export function StoreItemView(props: StoreItemViewProps) {
+    const { item_id } = props;
+    // const navigate = useNavigate();
+
+
     const { getStoreItemById, availableNotes } = useShoppingCart();
+
     const item = getStoreItemById(item_id || '');
 
 
-    const handleEditClick = () => navigate(`/admin/${item.id}/edit`);
+    // const handleEditClick = () => navigate(`/admin/${item.id}/edit`);
+    const handleEditClick = () => console.log('edit clicked');
 
 
     const associatedNotes = (item.notes && item.notes.length > 0) ? item.notes.map((note: any, index: number) => {
@@ -48,7 +55,7 @@ export function StoreItemView() {
     return (
         <Container className="form-view-container">
             <Stack gap={3} direction="horizontal" className="justify-content-center">
-                <Button className="carto-btn" onClick={() => navigate('/notes')}>Back</Button>
+                {/* <Button className="carto-btn" onClick={() => navigate('/notes')}>Back</Button> */}
                 <h2 style={{ textAlign: "center", marginBottom: "2rem", marginRight: "2rem", marginLeft: "2rem" }}>
                     View Details: {item.name}
                 </h2>

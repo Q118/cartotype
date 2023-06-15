@@ -64,8 +64,7 @@ export function SelectForm({
         const selectedItem: any = findSelection(selectOptions, identifier);
         updateFields({
             selectedItem: selectedItem,
-            ...(selectedItem.notes && selectedItem.notes.length > 0) && { attachedNoteIds: JSON.parse(selectedItem.notes) },
-            // ...editMode && { price: { dollars: itemPrice?.dollars, cents: itemPrice?.cents } },
+            ...(selectedItem && selectedItem.notes && selectedItem.notes.length > 0) && { attachedNoteIds: selectedItem.notes },
             ...editMode && { price: selectedItem?.price },
             ...editMode && { storeTitle: selectedItem?.name },
         });
@@ -74,7 +73,7 @@ export function SelectForm({
     function findSelection(list: ResultItem[], id: string) {
         for (let x = 0, max = list.length; x < max; x++) {
             let selectOption = list[ x ];
-            if (selectOption.id === id) return selectOption;
+            if (selectOption && selectOption.id === id) return selectOption;
         }
     }
 

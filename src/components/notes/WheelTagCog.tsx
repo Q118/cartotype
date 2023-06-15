@@ -8,16 +8,21 @@ import Overlay from 'react-bootstrap/Overlay';
 import { StoreItemTag } from '../../types';
 import Stack from 'react-bootstrap/Stack';
 import { IoPricetags } from 'react-icons/io5';
-// a little list item popout that can scroll///
-// import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { StoreItemView } from "../store/StoreItemView";
+import { CartoModal } from '../CartoModal';
 
 
-// TODO a little opetion add at the bottom of top of list
+
+
 
 export function WheelTagCog(props: any) {
     const { storeItemTags } = props;
     const targetRef = useRef(null);
     const [ showOverlay, setShowOverlay ] = useState(false);
+
+    const [ showModal, setShowModal ] = useState(false);
+    const [ modal_storeId, setModal_storeId ] = useState<string>('');
+
 
     const handleMouseClick = (e: MouseEvent) => {
         e.stopPropagation();
@@ -47,16 +52,21 @@ export function WheelTagCog(props: any) {
                         {/* <span style={{ marginBottom: '2px' }}>+</span> */}
                     </ListGroup.Item>
                     <span className="innerGroup-storeTags-card">
-                        {storeItemTags.length > 0 && storeItemTags.map((tag: StoreItemTag, index: number) => (
+                        {storeItemTags.length > 0 && storeItemTags.map((storeTag: StoreItemTag, index: number) => (
                             // * the tag.id is === the associated storeItem.id
                             <ListGroup.Item
-                                id={tag.id}
-                                as={Link} to={`/admin/${tag.id}/view`}
-                                onClick={e => e.stopPropagation()}
+                                id={storeTag.id}
+                                // as={Link} to={`/admin/${tag.id}/view`}
+                                // onClick={e => e.stopPropagation()}
+                                onClick={(e: any) => {
+                                    e.stopPropagation();
+                                    setModal_storeId(storeTag.id);
+                                    setShowModal(true);
+                                }}
                                 className={`storeTags-listGroup-card-list-item ${isEven(+index) ? 'alt-listItem' : ''}`}
-                                key={tag.id}>
+                                key={storeTag.id}>
                                 <Badge className='text-truncate store-tag-badge' >
-                                    {tag.label}
+                                    {storeTag.label}
                                 </Badge>
                             </ListGroup.Item>
                         ))}
@@ -66,11 +76,21 @@ export function WheelTagCog(props: any) {
             <div className="cog-div-noteCard" ref={targetRef}
                 onClick={e => handleMouseClick(e)}>
                 {/* <Stack direction='horizontal'> */}
-                    {/* <HiOutlineViewList size="20" /><BsChevronDown size="10" /> */}
-                    <IoPricetags size="20" />
-                    {/* <BsChevronDown size="10" />.. redundant */}
+                {/* <HiOutlineViewList size="20" /><BsChevronDown size="10" /> */}
+                <IoPricetags size="20" />
+                {/* <BsChevronDown size="10" />.. redundant */}
                 {/* </Stack> */}
             </div>
+            <CartoModal
+                show={showModal}
+                itemId={modal_storeId}
+                onHide={(e: any) => {
+                    e.stopPropagation();
+                    setShowModal(false);
+                }}
+                modalHeader='tersdfgsjd'
+            />
+
         </>
     )
 }
