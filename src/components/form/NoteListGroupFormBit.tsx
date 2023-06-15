@@ -7,7 +7,7 @@ import { RawNote } from '../../types';
 //** oooorrrrr or maybe like a Small version of the noteList... llike query and seelct and find insidethe square
 
 
-// TODO figuuyre out why its note sending the title..
+// TODO have it just be pop outs for each ntoe modal.
 
 type NoteListGroupFormBitProps = {
     selectedItem: any;

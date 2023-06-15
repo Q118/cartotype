@@ -1,14 +1,14 @@
 import { MouseEvent, useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
 // import { GiCartwheel } from 'react-icons/gi';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Overlay from 'react-bootstrap/Overlay';
 // import { BsChevronDown } from 'react-icons/bs';
 import { StoreItemTag } from '../../types';
-import Stack from 'react-bootstrap/Stack';
+// import Stack from 'react-bootstrap/Stack';
 import { IoPricetags } from 'react-icons/io5';
-import { StoreItemView } from "../store/StoreItemView";
+// import { StoreItemView } from "../store/StoreItemView";
 import { CartoModal } from '../CartoModal';
 
 
@@ -37,8 +37,9 @@ export function WheelTagCog(props: any) {
     function handleOutsideClick(e: MouseEvent): void {
         // console.log('outside click');
         const mouseLocation = e.target;
-        // if it's not in the overlay or inside a card, then close it
+        // if it's not in the overlay or inside a card OR the modals not open, then close it
         if (mouseLocation !== targetRef.current) setShowOverlay(false);
+        return;
     }
 
     const isEven = (num: number) => num % 2 === 0;

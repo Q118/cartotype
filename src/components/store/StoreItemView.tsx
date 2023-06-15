@@ -1,19 +1,12 @@
 /** disabled version of DetailForm... could have been better by sharing the components but oh well */
 import { useShoppingCart } from "../../context/ShoppingCartContext"
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Container, ListGroup, Stack } from "react-bootstrap";
 import { StoreItem } from "./StoreItem";
 import { formatCurrency } from "../../utilities/formatCurrency";
-// import { BsWindowDesktop } from "react-icons/bs";
-// import { NoteListGroupFormBit } from "../form/NoteListGroupFormBit";
 
 // import { GiStabbedNote } from 'react-icons/gi'; // TODO use this icon for the attached note sin the stoer items in the stoer and in that previewm confirm
 
-// * and get the associated notes looking good here and in detail form
-
-
-
-// * okay lets do it in here first then maybecan have it modulated out...
 
 const isEven = (num: number) => num % 2 === 0;
 
@@ -25,8 +18,7 @@ type StoreItemViewProps = {
 
 export function StoreItemView(props: StoreItemViewProps) {
     const { item_id } = props;
-    // const navigate = useNavigate();
-
+    const navigate = useNavigate();
 
     const { getStoreItemById, availableNotes } = useShoppingCart();
 
@@ -34,17 +26,21 @@ export function StoreItemView(props: StoreItemViewProps) {
 
 
     // const handleEditClick = () => navigate(`/admin/${item.id}/edit`);
-    const handleEditClick = () => console.log('edit clicked');
-
+    const handleEditClick = (e: Event) => {
+        e.stopPropagation();
+        navigate(`/admin/${item.id}/edit`);
+    }
 
     const associatedNotes = (item.notes && item.notes.length > 0) ? item.notes.map((note: any, index: number) => {
         let noteObj = availableNotes.find((availableNote: any) => availableNote.id === note);
-        console.log('noteObj', noteObj);
+        // console.log('noteObj', noteObj);
         if (noteObj) {
             return (
                 <ListGroup.Item key={noteObj.id}
                     className={`listItem-associatedNotes${isEven(index) ? '-alt' : ''}`}>
-                    <Link to={"/notes/" + noteObj.id} relative="path">{noteObj.id}</Link>
+                    <Link to={"/notes/" + noteObj.id} relative="path">
+                        {noteObj.title}
+                    </Link>
                 </ListGroup.Item>
             )
         } else return null;
@@ -53,13 +49,15 @@ export function StoreItemView(props: StoreItemViewProps) {
     </ListGroup.Item>);
 
     return (
-        <Container className="form-view-container">
+        <Container 
+        // className="form-view-container"
+        >
             <Stack gap={3} direction="horizontal" className="justify-content-center">
                 {/* <Button className="carto-btn" onClick={() => navigate('/notes')}>Back</Button> */}
                 <h2 style={{ textAlign: "center", marginBottom: "2rem", marginRight: "2rem", marginLeft: "2rem" }}>
                     View Details: {item.name}
                 </h2>
-                <Button className="carto-btn-alt" onClick={handleEditClick}>Edit</Button>
+                <Button className="carto-btn-alt" onClick={(e) => handleEditClick(e as unknown as Event)}>Edit</Button>
             </Stack>
             <div className="div-grid-cols-admin">
                 <label>Price: </label>

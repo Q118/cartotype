@@ -53,6 +53,9 @@ type ShoppingCartContext = {
     /** available notes */
     availableNotes: RawNote[];
     // availableNoteIds: string[];
+    /** track modals display for other listemers */
+    modalOpen: boolean;
+    setModalOpen: any;
 };
 
 // TODO[future]: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
@@ -75,7 +78,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [ notificationToasts, setNotificationToasts ] = useState<NotificationToast[]>([ { show: false, message: '', id: '' } ]);
     // const [globalStoreItemTags, setGlobalStoreItemTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
     const [ globalStoreItemTags, setGlobalStoreItemTags ] = useState<StoreItemTag[]>([]);
-    
+
     const getAllNotesForStore = async () => await NoteConstructor.getAllNotes(NOTE_SUBPARTITION);
 
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
@@ -89,6 +92,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         queryFn: async () => await getAllNotesForStore(),
         enabled: true,
     });
+
+    const [ modalOpen, setModalOpen ] = useState(false);
 
     // const isStoreItemsLoading = isLoading || isFetching;
 
@@ -188,6 +193,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             getStoreItemById,
             availableNotes: notesData,
             // availableNoteIds: notesData!.map((note: RawNote) => note.id),
+            modalOpen,
+            setModalOpen
         }}>
             {children}
         </ShoppingCartContext.Provider>

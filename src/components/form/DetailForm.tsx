@@ -31,8 +31,11 @@ type DetailFormProps = DetailFormData & {
 
 export function DetailForm(props: DetailFormProps) {
     const { selectedItem: selectedItemProp, inputSearch, price, storeTitle, updateFields, availableNotes, attachedNoteIds } = props;
-    const selected_item = useAdminLayoutContext(); //! itll be null if not from view!
+    const selected_item = useAdminLayoutContext(); //! itll be null if not from view!.. it just uses params to get it..
 
+
+
+    
     // const [ cameFromView, setCameFromView ] = useState(selected_item ? true : false);
     const [ local_selectedItem, setLocal_selectedItem ] = useState<any>(selected_item || selectedItemProp);
 
@@ -86,7 +89,8 @@ export function DetailForm(props: DetailFormProps) {
             </div>
             <label>Official Title: </label>
             <input type="text" className="form-control"
-                placeholder={selected_item ? selected_item.name : storeTitle || inputSearch}
+                // placeholder={selected_item ? selected_item.name : storeTitle || inputSearch}
+                placeholder={local_selectedItem.name || storeTitle || inputSearch}
                 value={local_selectedItem.name}
                 maxLength={20} autoFocus
                 onChange={e => setLocal_selectedItem({ ...local_selectedItem, name: e.target.value })}

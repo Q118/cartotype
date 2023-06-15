@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { SimplifiedNote } from "../../types";
 import Card from 'react-bootstrap/Card';
 import styles from '../../styles/NoteList.module.css';
@@ -13,11 +14,13 @@ import { WheelTagCog } from "./WheelTagCog";
 
 
 export function NoteCard({ id, title, tags, storeItemTags }: SimplifiedNote) {
-
+    const { modalOpen } = useShoppingCart();
     const navigate = useNavigate();
 
     const handleCardClick = () => {
-        navigate(`${id}`);
+        if (modalOpen) return;
+        // console.log('card clicked')
+        return navigate(`${id}`);
     }
 
     return (

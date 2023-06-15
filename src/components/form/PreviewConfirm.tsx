@@ -3,6 +3,8 @@ import { ResultItem } from '../../types';
 import { useAdminLayoutContext } from "../AdminLayout";
 
 
+// TODO [bug] data gets reset when come from view and here from detailes
+
 type PreviewConfirmData = {
     selectedItem: ResultItem | null;
     storeTitle: string;
@@ -21,6 +23,8 @@ export function PreviewConfirm({
     price,
     editMode = false,
 }: PreviewConfirmProps) {
+
+    console.log('in previewConfirm', selectedItemProp);
 
     const selected_item = useAdminLayoutContext(); // itll be null if not from view!
 
