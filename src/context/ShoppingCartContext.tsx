@@ -70,14 +70,11 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [ isOpen, setIsOpen ] = useState(false);
-    const [ cartItems, setCartItems ] = useLocalStorage<CartItem[]>(
-        "shopping-cart",
-        []
-    );
+    const [ cartItems, setCartItems ] = useLocalStorage<CartItem[]>("shopping-cart", []);
     const [ globalStoreItems, setGlobalStoreItems ] = useState<StoreItem[]>([]);
     const [ notificationToasts, setNotificationToasts ] = useState<NotificationToast[]>([ { show: false, message: '', id: '' } ]);
-    // const [globalStoreItemTags, setGlobalStoreItemTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
     const [ globalStoreItemTags, setGlobalStoreItemTags ] = useState<StoreItemTag[]>([]);
+    const [ modalOpen, setModalOpen ] = useState(false);
 
     const getAllNotesForStore = async () => await NoteConstructor.getAllNotes(NOTE_SUBPARTITION);
 
@@ -92,11 +89,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         queryFn: async () => await getAllNotesForStore(),
         enabled: true,
     });
-
-    const [ modalOpen, setModalOpen ] = useState(false);
-
     // const isStoreItemsLoading = isLoading || isFetching;
-
     useEffect(() => {
         if (storeItems?.length > 0) {
             setGlobalStoreItems(storeItems);
@@ -106,7 +99,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         }
     }, [ JSON.stringify(storeItems) ]);
 
-    // this calculates the total quantity of items in the cart
+    /**   calculates the total quantity of items in the cart */
     const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
 
     const openCart = () => setIsOpen(true);
@@ -129,6 +122,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         // if the find, return the quantity, otherwise return 0
         return cartItems.find((item) => item.id === id)?.quantity || 0;
     }
+
     function increaseCartQuantity(id: string, firstTime: boolean = false, item: string = '') {
         if (firstTime) addNotificationToast(`Item: ${item} added to cart!`);
         setCartItems((currentItems) => {
@@ -145,8 +139,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     }
     function decreaseCartQuantity(id: string) {
         setCartItems((currentItems) => {
-            if (currentItems.find((item) => item.id === id)?.quantity === 1) {
-                // then get rid of it
+            if (currentItems.find((item) => item.id === id)?.quantity === 1) { // then get rid of it
                 return currentItems.filter((item) => item.id !== id);
             } else {
                 return currentItems.map((item) => {
@@ -192,7 +185,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             setGlobalStoreItemTags,
             getStoreItemById,
             availableNotes: notesData,
-            // availableNoteIds: notesData!.map((note: RawNote) => note.id),
             modalOpen,
             setModalOpen
         }}>

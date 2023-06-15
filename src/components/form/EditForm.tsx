@@ -1,8 +1,8 @@
-import { FormEvent, useState, useEffect } from 'react';
+import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMultistepForm } from '../../hooks/useMultistepForm';
 import { updateStoreItem } from '../../api/lib/storeItems';
-import { RawNote, ResultItem, StorePrice } from '../../types';
+import { RawNote, ResultItem } from '../../types';
 import Container from 'react-bootstrap/Container';
 import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
@@ -45,10 +45,9 @@ export function EditForm({ startStep = null }: EditFormProps) {
         availableNotes: availableNotes,
     });
 
-
-    useEffect(() => {
-        console.log('change to data', data)
-    }, [ JSON.stringify(data) ])
+    // useEffect(() => {
+    //     console.log('change to data', data)
+    // }, [ JSON.stringify(data) ])
 
     const { steps, currentStepIndex, step, isFirstStep, isLastStep, next, back, notify, goTo } = useMultistepForm([
         <SelectForm {...data} editMode={true} selectOptions={globalStoreItems}
@@ -64,14 +63,12 @@ export function EditForm({ startStep = null }: EditFormProps) {
     function updateFields(fields: Partial<EditFormData>) {
         //* override all the old info with the new info
         setData(prev => ({ ...prev, ...fields }));
-        //* for nested parts of data, still have to do the ...prev
     }
 
     function handleLastStep() {
         updateStoreItem({
             id: data.selectedItem?.id || '',
-            name: data.selectedItem?.name || data.storeTitle,
-            // price: data.selectedItem?.price || data.price,
+            name: data.storeTitle,
             price: data.price,
             imgUrl: data.selectedItem?.imgUrl || '',
             notes: data.attachedNoteIds
@@ -97,7 +94,7 @@ export function EditForm({ startStep = null }: EditFormProps) {
             return next();
         }
         if (!isLastStep) return next();
-        if (isLastStep) handleLastStep();
+        if (isLastStep) return handleLastStep();
     }
 
 

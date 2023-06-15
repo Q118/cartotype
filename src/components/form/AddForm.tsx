@@ -93,7 +93,6 @@ export function FormApp() {
         if (!isLastStep) {
             if (!isFirstStep) { // its the second step (at least in this case)
                 if (data.selectedItem === null) {
-                    // alert('select an item to continue');
                     notify('Please select an item to continue.');
                     return;
                 }

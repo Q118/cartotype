@@ -28,17 +28,14 @@ export function PreviewConfirm({
         <>
             <div style={{ padding: '10px' }}>
                 <h2>Preview Your {editMode ? "Updated" : "New"} Item</h2>
-            </div>
-            <br />
+            </div><br />
             <StoreItem
                 id={selected_item ? selected_item.id : selectedItemProp!.id}
-                name={selected_item ? selected_item.name : storeTitle}
+                name={storeTitle}
                 imgUrl={selected_item ? selected_item.imgUrl : selectedItemProp!.imgUrl}
-                price={price}
-                isPreview={true}
+                price={price} isPreview={true}
             />
-            <br />
-            <p>If you're happy with everything, hit <i>finish</i></p>
+            <br /><p>If you're happy with everything, hit <i>finish</i></p>
         </>
     )
 }

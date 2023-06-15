@@ -19,13 +19,10 @@ type StoreItemViewProps = {
 export function StoreItemView(props: StoreItemViewProps) {
     const { item_id } = props;
     const navigate = useNavigate();
-
     const { getStoreItemById, availableNotes } = useShoppingCart();
 
     const item = getStoreItemById(item_id || '');
 
-
-    // const handleEditClick = () => navigate(`/admin/${item.id}/edit`);
     const handleEditClick = (e: Event) => {
         e.stopPropagation();
         navigate(`/admin/${item.id}/edit`);
@@ -33,7 +30,6 @@ export function StoreItemView(props: StoreItemViewProps) {
 
     const associatedNotes = (item.notes && item.notes.length > 0) ? item.notes.map((note: any, index: number) => {
         let noteObj = availableNotes.find((availableNote: any) => availableNote.id === note);
-        // console.log('noteObj', noteObj);
         if (noteObj) {
             return (
                 <ListGroup.Item key={noteObj.id}
@@ -49,11 +45,8 @@ export function StoreItemView(props: StoreItemViewProps) {
     </ListGroup.Item>);
 
     return (
-        <Container 
-        // className="form-view-container"
-        >
+        <Container>
             <Stack gap={3} direction="horizontal" className="justify-content-center">
-                {/* <Button className="carto-btn" onClick={() => navigate('/notes')}>Back</Button> */}
                 <h2 style={{ textAlign: "center", marginBottom: "2rem", marginRight: "2rem", marginLeft: "2rem" }}>
                     View Details: {item.name}
                 </h2>
@@ -63,23 +56,14 @@ export function StoreItemView(props: StoreItemViewProps) {
                 <label>Price: </label>
                 <input type="text" className="form-control" value={formatCurrency(item.price)} disabled maxLength={20} />
                 <label>Official Title: </label>
-                <input type="text" className="form-control"
-                    value={item.name}
-                    maxLength={20} disabled
-                />
+                <input type="text" className="form-control" value={item.name} maxLength={20} disabled />
                 <label>Associated Notes</label>
-                <ListGroup className="listGroup-associatedNotes">
-                    {associatedNotes}
-                </ListGroup>
+                <ListGroup className="listGroup-associatedNotes">{associatedNotes}</ListGroup>
                 <h6>Preview:</h6>
                 <div style={{ maxWidth: '250px' }}>
-                    <StoreItem
-                        name={item.name}
-                        price={item.price}
-                        imgUrl={item.imgUrl}
-                        id={item.id}
-                        isPreview={true}
-                    />
+                    <StoreItem name={item.name}
+                        price={item.price} imgUrl={item.imgUrl}
+                        id={item.id} isPreview={true} />
                 </div>
             </div>
         </Container>

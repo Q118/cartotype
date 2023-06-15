@@ -2,18 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Container from 'react-bootstrap/Container';
-
-import { NoteData, RawNote, StoreItemTag, Tag, StoreItem } from '../types';
+import { NoteData, RawNote, Tag } from '../types';
 import { Note, NewNote, NoteList, NoteLayout, EditNote } from '../components/notes';
 import { Notes as NoteConstructor } from '../api/lib/notes';
-import { MdEditNote } from 'react-icons/md';
 import { Tags as TagConstructor } from '../api/lib/tags';
 import { useLibNote } from '../api/hooks/useLibNote';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 
-// TODO; displayyyy teh storeItemTagss ;; confirmed they are mapped correctly
-// dusplay them in the LIST
-// // and also make them shop up in the edit form
 
 
 // TODO[future]: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
@@ -70,7 +65,6 @@ export function Notes() {
     }
 
     function onDeleteNote(id: string) {
-        // TODO set alert to confirm delete and move this into the hooklib
         let userConfirm = window.confirm('Are you sure you want to delete this note?');
         if (!userConfirm) return;
         const noteClient = new NoteConstructor(NOTE_SUBPARTITION);
@@ -89,12 +83,6 @@ export function Notes() {
         });
     }
     function updateTag(id: string, label: string) {
-        // setUserTags(prevTags => {
-        //     return prevTags.map(tag => {
-        //         if (tag.id !== id) return tag;
-        //         return { ...tag, label }
-        //     })
-        // })
         const tagClient = new TagConstructor(TAG_SUBPARTITION);
         tagClient.updateTag({ id, label }).then((res: any) => { refetchTags(); }).catch((err: any) => {
             console.error(err);
@@ -102,6 +90,9 @@ export function Notes() {
     }
 
     function deleteTag(id: string) {
+        //  TODO window.confirm('are you sure you want to delete this tag')
+        let userConfirm = window.confirm('Are you sure you want to delete this tag?');
+        if (!userConfirm) return;
         const tagClient = new TagConstructor(TAG_SUBPARTITION);
         tagClient.deleteTag(id).then((res: any) => { refetchTags(); }).catch((err: any) => {
             console.error(err);
@@ -111,18 +102,12 @@ export function Notes() {
 
     return (
         <Container className="my-4">
-            {/* <div className='text-center'>
-                <MdEditNote size={32} />
-                <MdEditNote size={32} />
-                <MdEditNote size={32} />
-            </div> */}
             <Routes>
                 <Route path="/" element={<NoteList
                     availableTags={userTags}
                     notes={notesWithTags}
                     onUpdateTag={updateTag}
                     onDeleteTag={deleteTag}
-                    // notesLoading={isLoading || isFetching} yea we dont need an also for fetching bx the data is already there...
                     notesLoading={isLoading}
                 />} />
                 <Route path="new" element={<NewNote
@@ -141,7 +126,7 @@ export function Notes() {
                         availableStoreTags={globalStoreItemTags}
                     />} />
                 </Route>
-                {/* <Route path="*" element={<>Not Found</>} /> */}
+                <Route path="*" element={<>Not Found</>} />
             </Routes>
         </Container>
     );
