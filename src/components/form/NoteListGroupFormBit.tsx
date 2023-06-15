@@ -36,6 +36,9 @@ export function NoteListGroupFormBit({
                 label={note.title}
                 onChange={() => onAddOrRemoveNote(note.id)}
             />
+            <div className="top-right-container">
+                sdfsaf
+            </div>
         </ListGroup.Item>
     ));
 

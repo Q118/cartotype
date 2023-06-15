@@ -69,28 +69,6 @@ export function DetailForm(props: DetailFormProps) {
         <FormWrapper title="Edit Details for Store">
             <label>Price: </label>
             <div className="mb-3 input-group">
-                {/* <span className="input-group-text">$</span>
-                <input placeholder="0" type="number"
-                    className="form-control" required
-                    // value={price.dollars}
-                    // value={+local_selectedItem.price!.dollars}
-                    // onChange={e => updateFields({ price: { ...price, dollars: +e.target.value } })}
-                    // onChange={e => setLocal_selectedItem({ ...local_selectedItem, price: { dollars: +e.target.value, cents: +local_selectedItem.price!.cents } })}
-                    value={3}
-                    onChange={e => setLocal_selectedItem({ ...local_selectedItem, price: { dollars: 3, cents: 22 } })}
-                />
-                <span className="input-group-text">.</span>
-                <input placeholder="00" type="number"
-                    // value={price.cents}
-                    // value={+local_selectedItem.price!.cents}
-                    className="form-control" style={{ maxWidth: '4rem' }}
-                    // onChange={(e) => updateFields({ price: { ...price, cents: +e.target.value } })}
-                    // onChange={(e) => updateFields({ price: { ...price, cents: +e.target.value } })}
-                    // onChange={e => setLocal_selectedItem({ ...local_selectedItem, price: { dollars: +local_selectedItem.price!.dollars, cents: +e.target.value } })}
-                    value={22}
-                    onChange={e => setLocal_selectedItem({ ...local_selectedItem, price: { dollars: 3, cents: 22 } })}
-                    max={99} min={0}
-                /> */}
                 <CurrencyInput
                     id="price-input"
                     name="price-input"
@@ -105,16 +83,12 @@ export function DetailForm(props: DetailFormProps) {
                     onValueChange={(value, name) => updateFields({ price: +value! })}
                 />
                 {/* // TODO: little drop down to the right of input to selet type of currency */}
-
             </div>
             <label>Official Title: </label>
             <input type="text" className="form-control"
                 placeholder={selected_item ? selected_item.name : storeTitle || inputSearch}
-                // value={selected_item ? selected_item.name : storeTitle || inputSearch}
-                // value={selected_item ? selected_item.name : storeTitle || inputSearch}
                 value={local_selectedItem.name}
                 maxLength={20} autoFocus
-                // onChange={e => updateFields({ storeTitle: e.target.value })}
                 onChange={e => setLocal_selectedItem({ ...local_selectedItem, name: e.target.value })}
             />
             <label>Associated Notes</label>
@@ -138,12 +112,8 @@ export function DetailForm(props: DetailFormProps) {
                 <Col style={{ maxWidth: '250px' }}>
                     <StoreItem
                         name={local_selectedItem.name || inputSearch}
-                        // price={selected_item ? selected_item.price : consolidateStorePrice(price)}
-                        // price={consolidateStorePrice(local_selectedItem.price)}
                         price={3.22}
-                        // imgUrl={selected_item ? selected_item.imgUrl : selectedItemProp?.imgUrl || ''}
                         imgUrl={local_selectedItem.imgUrl}
-                        // id={selected_item ? selected_item.id : selectedItemProp?.id || ''}
                         id={local_selectedItem.id}
                         isPreview={true}
                     />

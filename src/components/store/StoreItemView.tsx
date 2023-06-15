@@ -10,7 +10,7 @@ import { BsWindowDesktop } from "react-icons/bs";
 // import { GiStabbedNote } from 'react-icons/gi'; // TODO use this icon for the attached note sin the stoer items in the stoer and in that previewm confirm
 
 // * and get the associated notes looking good here and in detail form
-// // TODO make each note thats attached be a link
+
 
 
 // * okay lets do it in here first then maybecan have it modulated out...
