@@ -125,7 +125,7 @@ export function Notes() {
                     // notesLoading={isLoading || isFetching} yea we dont need an also for fetching bx the data is already there...
                     notesLoading={isLoading}
                 />} />
-                <Route path="/new" element={<NewNote
+                <Route path="new" element={<NewNote
                     onSubmit={onCreateNote}
                     onAddTag={addTag}
                     availableTags={userTags}
@@ -141,7 +141,7 @@ export function Notes() {
                         availableStoreTags={globalStoreItemTags}
                     />} />
                 </Route>
-                <Route path="*" element={<>Not Found</>} />
+                {/* <Route path="*" element={<>Not Found</>} /> */}
             </Routes>
         </Container>
     );

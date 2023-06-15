@@ -11,11 +11,12 @@ type NoteLayoutProps = {
 export function NoteLayout({ notes }: NoteLayoutProps) {
 
     const { id } = useParams();
+
     const note = notes.find(note => note.id === id);
 
     // use replace so back button doesn't go back here
-    if (!note) return <Navigate to="/" replace />
-
+    if (!note) return <Navigate to={`/notes/${id}`} replace />
+    // TODO ^ this may be a hacky situation that needs to be flushed out later
     // else return outlet to render nested routes
     return <Outlet context={note} /> // set note in context so each child route can access it with useNote() belwow
 }

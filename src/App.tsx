@@ -48,10 +48,9 @@ function App() {
                                 </Route> */}
                                 <Route path="/admin/*" element={<Admin />} />
 
-
                                 {/* // TODO display flash toast if get redirected */}
                                 {/* <Route path="/demo/*" element={<TimeAgo />} /> */}
-                                <Route path="/notes/*" element={<Notes />} />
+                                <Route path="notes/*" element={<Notes />} />
                                 {/* //* above may be the reason for that funky thung redirecting happening */}
                                 {/* <Route path="*" element={<Navigate to="/" />} /> */}
                                 {/* <Route path="*" element={<>Not Found</>} /> */}
