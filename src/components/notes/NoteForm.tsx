@@ -35,7 +35,7 @@ export function NoteForm({
     const markdownRef = useRef<HTMLTextAreaElement>(null);
     const navigate = useNavigate();
 
-
+ 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         onSubmit({

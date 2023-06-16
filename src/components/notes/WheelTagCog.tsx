@@ -1,42 +1,53 @@
 import { MouseEvent, useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
-import { GiCartwheel } from 'react-icons/gi';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Overlay from 'react-bootstrap/Overlay';
-import { BsChevronDown } from 'react-icons/bs';
 import { StoreItemTag } from '../../types';
-import Stack from 'react-bootstrap/Stack';
 import { IoPricetags } from 'react-icons/io5';
-// a little list item popout that can scroll///
-// import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { CartoModal } from '../CartoModal';
 
 
-// TODO a little opetion add at the bottom of top of list
+
 
 export function WheelTagCog(props: any) {
     const { storeItemTags } = props;
     const targetRef = useRef(null);
     const [ showOverlay, setShowOverlay ] = useState(false);
-
-    const handleMouseClick = (e: MouseEvent) => {
-        e.stopPropagation();
-        setShowOverlay(true);
-    };
+    const [ showModal, setShowModal ] = useState(false);
+    const [ modal_storeId, setModal_storeId ] = useState<string>('');
 
     useEffect(() => {
         document.getElementById('root')!.addEventListener('mousedown', e => handleOutsideClick(e as any));
         return () => document.getElementById('root')!.removeEventListener('mousedown', e => handleOutsideClick(e as any));
     }, []);
 
+    const handleMouseClick = (e: MouseEvent) => {
+        e.stopPropagation();
+        setShowOverlay(true);
+    };
+
     function handleOutsideClick(e: MouseEvent): void {
-        // console.log('outside click');
         const mouseLocation = e.target;
         // if it's not in the overlay or inside a card, then close it
         if (mouseLocation !== targetRef.current) setShowOverlay(false);
+        return;
     }
 
     const isEven = (num: number) => num % 2 === 0;
+
+    const storeItemsSpan = storeItemTags.map((storeTag: StoreItemTag, index: number) => (
+        // * the tag.id is === the associated storeItem.id
+        <ListGroup.Item
+            id={storeTag.id} key={storeTag.id}
+            className={`storeTags-listGroup-card-list-item ${isEven(+index) ? 'alt-listItem' : ''}`}
+            onClick={(e: any) => {
+                e.stopPropagation();
+                setModal_storeId(storeTag.id);
+                setShowModal(true);
+            }}>
+            <Badge className='text-truncate store-tag-badge'>{storeTag.label}</Badge>
+        </ListGroup.Item>
+    ));
 
     return (
         <>
@@ -44,33 +55,20 @@ export function WheelTagCog(props: any) {
                 <ListGroup className="storeTags-listGroup-card">
                     <ListGroup.Item className="storeTags-listGroup-card-title">
                         Store Tags ({storeItemTags.length})
-                        {/* <span style={{ marginBottom: '2px' }}>+</span> */}
                     </ListGroup.Item>
                     <span className="innerGroup-storeTags-card">
-                        {storeItemTags.length > 0 && storeItemTags.map((tag: StoreItemTag, index: number) => (
-                            // * the tag.id is === the associated storeItem.id
-                            <ListGroup.Item
-                                id={tag.id}
-                                as={Link} to={`/admin/${tag.id}/view`}
-                                onClick={e => e.stopPropagation()}
-                                className={`storeTags-listGroup-card-list-item ${isEven(+index) ? 'alt-listItem' : ''}`}
-                                key={tag.id}>
-                                <Badge className='text-truncate store-tag-badge' >
-                                    {tag.label}
-                                </Badge>
-                            </ListGroup.Item>
-                        ))}
+                        {storeItemTags.length > 0 && storeItemsSpan}
                     </span>
                 </ListGroup>
             </Overlay>
-            <div className="cog-div-noteCard" ref={targetRef}
-                onClick={e => handleMouseClick(e)}>
-                {/* <Stack direction='horizontal'> */}
-                    {/* <HiOutlineViewList size="20" /><BsChevronDown size="10" /> */}
-                    <IoPricetags size="20" />
-                    {/* <BsChevronDown size="10" />.. redundant */}
-                {/* </Stack> */}
+            <div className="cog-div-noteCard" ref={targetRef} onClick={e => handleMouseClick(e)}>
+                <IoPricetags size="20" />
+                {/* // TODO: come back here and put the amount of tags showiner here next to icon or on top of  */}
             </div>
+            <CartoModal show={showModal} itemId={modal_storeId} onHide={(e: any) => {
+                e.stopPropagation();
+                setShowModal(false);
+            }} />
         </>
     )
 }

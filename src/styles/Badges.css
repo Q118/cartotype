@@ -1,4 +1,4 @@
-/** Badges and Tags o my! */
+/** Badges and Tags and icons o my! */
 .raw-tag-badge {
     background-color: var(--tag-background) !important;
     color: var(--badge-text) !important;
@@ -41,3 +41,9 @@
     fill: var(--storeTag-background) !important;
     margin-bottom: 15px;
 }
+
+
+/* .popoutWindow-icon {
+    color: var(--primary-text) !important;
+    fill: var(--primary-text) !important;
+} */

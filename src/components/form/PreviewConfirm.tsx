@@ -1,14 +1,12 @@
 import { StoreItem } from "../store/StoreItem";
-// import { FormWrapper } from "./FormWrapper";
-import { ResultItem, StorePrice } from '../../types';
-import { consolidateStorePrice } from "../../utilities/formatCurrency";
+import { ResultItem } from '../../types';
 import { useAdminLayoutContext } from "../AdminLayout";
 
 
 type PreviewConfirmData = {
     selectedItem: ResultItem | null;
     storeTitle: string;
-    price: StorePrice;
+    price: number;
     editMode?: boolean;
 };
 
@@ -20,6 +18,7 @@ export function PreviewConfirm({
     selectedItem: selectedItemProp,
     storeTitle,
     price,
+    // attachedNoteIds // TODO show these w the notes symbol hover thang
     editMode = false,
 }: PreviewConfirmProps) {
 
@@ -29,17 +28,14 @@ export function PreviewConfirm({
         <>
             <div style={{ padding: '10px' }}>
                 <h2>Preview Your {editMode ? "Updated" : "New"} Item</h2>
-            </div>
-            <br />
+            </div><br />
             <StoreItem
                 id={selected_item ? selected_item.id : selectedItemProp!.id}
-                name={selected_item ? selected_item.name : storeTitle}
-                price={selected_item ? selected_item.price : consolidateStorePrice(price)}
+                name={storeTitle}
                 imgUrl={selected_item ? selected_item.imgUrl : selectedItemProp!.imgUrl}
-                isPreview={true}
+                price={price} isPreview={true}
             />
-            <br />
-            <p>If you're happy with everything, hit <i>finish</i></p>
+            <br /><p>If you're happy with everything, hit <i>finish</i></p>
         </>
     )
 }

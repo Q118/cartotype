@@ -9,7 +9,7 @@ import { SelectForm } from './SelectForm';
 import { DetailForm } from './DetailForm';
 import { InputSearchForm } from './InputSearchForm';
 import { getPhotosForSelection } from "../../api/upsplash";
-import { ResultItem, StorePrice } from '../../types';
+import { RawNote, ResultItem, StorePrice } from '../../types';
 import { StepTrack } from './StepTrack';
 import { addStoreItem } from '../../api/lib/storeItems';
 import { PreviewConfirm } from './PreviewConfirm';
@@ -19,44 +19,38 @@ type FormData = {
     inputSearch: string;
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
-    price: StorePrice;
+    price: number;
     storeTitle: string;
     isDataLoading: () => boolean;
+    /** ids of notes to be attached to this store item */
+    attachedNoteIds: string[];
+    /** available global notes */
+    availableNotes: RawNote[];
 }
 
-
-const INITIAL_DATA: FormData = {
-    inputSearch: '',
-    selectOptions: [],
-    selectedItem: null,
-    price: { dollars: 0, cents: 0 },
-    storeTitle: '',
-    isDataLoading: () => false,
-}
 
 
 export function FormApp() {
-    const [ data, setData ] = useState(INITIAL_DATA);
+    const { refreshStoreItems, availableNotes } = useShoppingCart();
     const navigate = useNavigate();
-
+    const [ data, setData ] = useState<FormData>({
+        inputSearch: '',
+        selectOptions: [],
+        selectedItem: null,
+        price: 0,
+        storeTitle: '',
+        isDataLoading: () => false,
+        attachedNoteIds: [],
+        availableNotes: availableNotes,
+    });
     const { data: resultData, isLoading, error, refetch, isFetching }: UseQueryResult = useQuery({
         queryKey: [ `photo-request-${data.inputSearch}` ],
         queryFn: () => getPhotosForSelection(data.inputSearch),
         enabled: false,
     });
 
-    const { refreshStoreItems } = useShoppingCart();
 
-    const {
-        steps,
-        currentStepIndex,
-        step,
-        isFirstStep,
-        isLastStep,
-        next,
-        back,
-        notify
-    } = useMultistepForm([
+    const { steps, currentStepIndex, step, isFirstStep, isLastStep, next, back, notify } = useMultistepForm([
         <InputSearchForm {...data} updateFields={updateFields} />,
         <SelectForm {...data} isDataLoading={() => isLoading || isFetching}
             refreshData={() => refetch()}
@@ -76,8 +70,9 @@ export function FormApp() {
         addStoreItem({
             id: uuidv4(),
             name: data.storeTitle,
-            price: +`${data.price.dollars}.${data.price.cents}`,
+            price: data.price,
             imgUrl: data.selectedItem?.imgUrl || '',
+            notes: data.attachedNoteIds,
         }).then(() => {
             refreshStoreItems(); // update the global store items.. aka trigger a refetch
             navigate('/store');
@@ -98,7 +93,6 @@ export function FormApp() {
         if (!isLastStep) {
             if (!isFirstStep) { // its the second step (at least in this case)
                 if (data.selectedItem === null) {
-                    // alert('select an item to continue');
                     notify('Please select an item to continue.');
                     return;
                 }

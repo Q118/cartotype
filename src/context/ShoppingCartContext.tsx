@@ -1,10 +1,10 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { StoreItem, StoreItemTag } from '../types';
+import { RawNote, StoreItem, StoreItemTag } from '../types';
 import { QueryObserverResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 import { getStoreItems } from '../api/lib/storeItems';
-
+import { Notes as NoteConstructor } from '../api/lib/notes';
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
@@ -50,8 +50,16 @@ type ShoppingCartContext = {
     /** handle refetch after an update */
     refreshStoreItems: () => Promise<QueryObserverResult<unknown, unknown>>;
     getStoreItemById: (id: string) => StoreItem;
+    /** available notes */
+    availableNotes: RawNote[];
+    // availableNoteIds: string[];
+    /** track modals display for other listemers */
+    modalOpen: boolean;
+    setModalOpen: any;
 };
 
+// TODO[future]: change from devNotes to prodNotes or whatever end up using or potentially using loginSession info for the folder name so we seperate the notes per folder/tenant/user
+const NOTE_SUBPARTITION = 'dev';
 
 // make it contain the values of the type this way
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -62,16 +70,13 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [ isOpen, setIsOpen ] = useState(false);
-    const [ cartItems, setCartItems ] = useLocalStorage<CartItem[]>(
-        "shopping-cart",
-        []
-    );
+    const [ cartItems, setCartItems ] = useLocalStorage<CartItem[]>("shopping-cart", []);
     const [ globalStoreItems, setGlobalStoreItems ] = useState<StoreItem[]>([]);
     const [ notificationToasts, setNotificationToasts ] = useState<NotificationToast[]>([ { show: false, message: '', id: '' } ]);
-    // const [globalStoreItemTags, setGlobalStoreItemTags] = useLocalStorage<StoreItemTag[]>('STORE-TAGS', []);
     const [ globalStoreItemTags, setGlobalStoreItemTags ] = useState<StoreItemTag[]>([]);
+    const [ modalOpen, setModalOpen ] = useState(false);
 
-
+    const getAllNotesForStore = async () => await NoteConstructor.getAllNotes(NOTE_SUBPARTITION);
 
     const { data: storeItems, isLoading, error: storeItemsError, refetch: refreshStoreItems, isFetching }: any = useQuery({
         queryKey: [ `get-all-store-items` ],
@@ -79,8 +84,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         enabled: true,
     });
 
+    const { data: notesData, isLoading: notesLoading, error: notesError, refetch: refetchNotes, isFetching: notesFetching }: any = useQuery({
+        queryKey: [ `get-all-notes` ],
+        queryFn: async () => await getAllNotesForStore(),
+        enabled: true,
+    });
     // const isStoreItemsLoading = isLoading || isFetching;
-
     useEffect(() => {
         if (storeItems?.length > 0) {
             setGlobalStoreItems(storeItems);
@@ -90,7 +99,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         }
     }, [ JSON.stringify(storeItems) ]);
 
-    // this calculates the total quantity of items in the cart
+    /**   calculates the total quantity of items in the cart */
     const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
 
     const openCart = () => setIsOpen(true);
@@ -113,6 +122,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         // if the find, return the quantity, otherwise return 0
         return cartItems.find((item) => item.id === id)?.quantity || 0;
     }
+
     function increaseCartQuantity(id: string, firstTime: boolean = false, item: string = '') {
         if (firstTime) addNotificationToast(`Item: ${item} added to cart!`);
         setCartItems((currentItems) => {
@@ -129,8 +139,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     }
     function decreaseCartQuantity(id: string) {
         setCartItems((currentItems) => {
-            if (currentItems.find((item) => item.id === id)?.quantity === 1) {
-                // then get rid of it
+            if (currentItems.find((item) => item.id === id)?.quantity === 1) { // then get rid of it
                 return currentItems.filter((item) => item.id !== id);
             } else {
                 return currentItems.map((item) => {
@@ -174,7 +183,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             refreshStoreItems,
             globalStoreItemTags,
             setGlobalStoreItemTags,
-            getStoreItemById
+            getStoreItemById,
+            availableNotes: notesData,
+            modalOpen,
+            setModalOpen
         }}>
             {children}
         </ShoppingCartContext.Provider>

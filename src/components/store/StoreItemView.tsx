@@ -1,73 +1,71 @@
-// import { DetailForm } from "./form/DetailForm"
+/** disabled version of DetailForm... could have been better by sharing the components but oh well */
 import { useShoppingCart } from "../../context/ShoppingCartContext"
-import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Container, ListGroup } from "react-bootstrap";
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Container, ListGroup, Stack } from "react-bootstrap";
 import { StoreItem } from "./StoreItem";
 import { formatCurrency } from "../../utilities/formatCurrency";
 
-// * and get the associated notes looking good here and in detail form
-// TODO make each note thats attached be a link
-
-// TODO get the price to be formatted correctly
+// import { GiStabbedNote } from 'react-icons/gi'; // TODO use this icon for the attached note sin the stoer items in the stoer and in that previewm confirm
 
 
+const isEven = (num: number) => num % 2 === 0;
 
-export function StoreItemView() {
-    const { item_id } = useParams();
+type StoreItemViewProps = {
+    item_id: string;
+}
+
+
+
+export function StoreItemView(props: StoreItemViewProps) {
+    const { item_id } = props;
     const navigate = useNavigate();
-    const { getStoreItemById } = useShoppingCart();
+    const { getStoreItemById, availableNotes } = useShoppingCart();
+
     const item = getStoreItemById(item_id || '');
 
-    console.log('item', item);
-    // * disabled version of DetailForm... could have been better by sharing the components but oh well
+    const handleEditClick = (e: Event) => {
+        e.stopPropagation();
+        navigate(`/admin/${item.id}/edit`);
+    }
 
-
-    const handleEditClick = () => navigate(`/admin/${item.id}/edit`);
+    const associatedNotes = (item.notes && item.notes.length > 0) ? item.notes.map((note: any, index: number) => {
+        let noteObj = availableNotes.find((availableNote: any) => availableNote.id === note);
+        if (noteObj) {
+            return (
+                <ListGroup.Item key={noteObj.id}
+                    className={`listItem-associatedNotes${isEven(index) ? '-alt' : ''}`}>
+                    <Link to={"/notes/" + noteObj.id} relative="path">
+                        {noteObj.title}
+                    </Link>
+                </ListGroup.Item>
+            )
+        } else return null;
+    }) : (<ListGroup.Item className="listItem-associatedNotes">
+        No notes associated with this item
+    </ListGroup.Item>);
 
     return (
-        <div>
-            <Container className="form-view-container">
-                <div className="bottom-right-container">
-                    <Button className="carto-btn-alt" onClick={handleEditClick}>Edit</Button>
-                    {' '}
-                    <Button className="carto-btn" onClick={() => navigate('/notes')}>Back</Button>
-                </div>
-                <h2 style={{ textAlign: "center", margin: 0, marginBottom: "2rem" }}>
+        <Container>
+            <Stack gap={3} direction="horizontal" className="justify-content-center">
+                <h2 style={{ textAlign: "center", marginBottom: "2rem", marginRight: "2rem", marginLeft: "2rem" }}>
                     View Details: {item.name}
                 </h2>
-                <div style={{
-                    display: "grid",
-                    gap: "1rem .5rem",
-                    justifyContent: "center",
-                    gridTemplateColumns: "auto minmax(auto, 400px)",
-                }}>
-                    <label>Price: </label>
-                    <input type="text" className="form-control" value={formatCurrency(item.price)} disabled maxLength={20} />
-                    <label>Official Title: </label>
-                    <input type="text" className="form-control"
-                        value={item.name}
-                        maxLength={20} disabled
-                    />
-                    <label>Associated Notes</label>
-                    <ListGroup className="listGroup-associatedNotes">
-                        <ListGroup.Item className="listItem-associatedNotes">note 1</ListGroup.Item>
-                        <ListGroup.Item className="listItem-associatedNotes-alt">fmds,mf,.ds</ListGroup.Item>
-                        <ListGroup.Item className="listItem-associatedNotes">note 2</ListGroup.Item>
-                        <ListGroup.Item className="listItem-associatedNotes-alt">note dmsadka</ListGroup.Item>
-                        <ListGroup.Item className="listItem-associatedNotes">ghfjdhdsk</ListGroup.Item>
-                    </ListGroup>
-                    <h6>Preview:</h6>
-                    <div style={{ maxWidth: '250px' }}>
-                        <StoreItem
-                            name={item.name}
-                            price={item.price}
-                            imgUrl={item.imgUrl}
-                            id={item.id}
-                            isPreview={true}
-                        />
-                    </div>
+                <Button className="carto-btn-alt" onClick={(e) => handleEditClick(e as unknown as Event)}>Edit</Button>
+            </Stack>
+            <div className="div-grid-cols-admin">
+                <label>Price: </label>
+                <input type="text" className="form-control" value={formatCurrency(item.price)} disabled maxLength={20} />
+                <label>Official Title: </label>
+                <input type="text" className="form-control" value={item.name} maxLength={20} disabled />
+                <label>Associated Notes</label>
+                <ListGroup className="listGroup-associatedNotes">{associatedNotes}</ListGroup>
+                <h6>Preview:</h6>
+                <div style={{ maxWidth: '250px' }}>
+                    <StoreItem name={item.name}
+                        price={item.price} imgUrl={item.imgUrl}
+                        id={item.id} isPreview={true} />
                 </div>
-            </Container>
-        </div>
+            </div>
+        </Container>
     )
 }

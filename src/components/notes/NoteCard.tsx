@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { SimplifiedNote } from "../../types";
 import Card from 'react-bootstrap/Card';
 import styles from '../../styles/NoteList.module.css';
 import Stack from "react-bootstrap/esm/Stack";
 import Badge from "react-bootstrap/Badge";
-// import { IconContext } from "react-icons";
 import { WheelTagCog } from "./WheelTagCog";
 
 //* the tags cahn filter the notes
@@ -13,17 +13,19 @@ import { WheelTagCog } from "./WheelTagCog";
 
 
 export function NoteCard({ id, title, tags, storeItemTags }: SimplifiedNote) {
-
+    const { modalOpen } = useShoppingCart();
     const navigate = useNavigate();
 
     const handleCardClick = () => {
-        navigate(`${id}`);
+        if (modalOpen) return;
+        // dont respond if the modals open
+        return navigate(`${id}`);
     }
 
     return (
         <Card onClick={handleCardClick} className={`h-100 text-reset text-decoration-none ${styles.card} note-card`} >
             <Card.Body>
-                <WheelTagCog storeItemTags={storeItemTags} />
+                    <WheelTagCog storeItemTags={storeItemTags} />
                 <Stack gap={2} className="align-items-center justify-content-center h-100">
                     <span className="fs-5">{title}</span>
                     {tags.length > 0 && (

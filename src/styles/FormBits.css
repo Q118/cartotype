@@ -24,6 +24,7 @@
     max-height: 100px;
     overflow-y: scroll;
     border: 1px solid var(--accent);
+    /* resize: both !important; */
     /* border-radius: 0 !important; */
     background-color: var(--primary-bg) !important;
 }
@@ -38,6 +39,14 @@
     color: var(--primary-text) !important;
 }
 
+#price-input {
+    width: 100%;
+    border-radius: 5px !important;
+    font-size: inherit !important;
+    /* font-size: 1rem !important; */
+    /* line-height: inherit !important; */
+    padding: 0.375rem 0.75rem !important;
+}
 
 .listGroup-associatedNotes::-webkit-scrollbar {
     width: 8px;
@@ -77,6 +86,7 @@ textarea {
 }
 
 .form-control:focus,
+#price-input:focus,
 input:focus {
     border: 2px solid var(--accent) !important;
     box-shadow: 0 5px 15px var(--btn-hover-shadow) !important;

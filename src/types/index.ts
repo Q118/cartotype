@@ -14,6 +14,7 @@ export type ResultItem = {
     price?: number;
     // ! possible may need to chage price type
     storeTitle?: string;
+    notes?: string[];
 }
 
 export type StorePrice = {
@@ -26,6 +27,8 @@ export type StoreItem = {
     name: string;
     price: number;
     imgUrl: string;
+    // noteIds?: string[];
+    notes: string[];
 };
 
 export type StoreItemTag = {
@@ -59,6 +62,7 @@ export type RawNote = {
     id: string;
 } & RawNotedata;
 
+/** note data before saved in db */
 export type RawNotedata = {
     title: string;
     // markdown: string | { rawText: string };
@@ -75,3 +79,13 @@ export type SimplifiedNote = {
     title: string;
     id: string;
 }
+
+/** selected item to edit */
+export type SelectedItem = {
+    created_at: string;
+    id: string;
+    imgUrl: string;
+    name: string;
+    notes: Note[] | null | RawNote[];
+    price: number;
+} & ResultItem;

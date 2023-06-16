@@ -9,11 +9,9 @@ import { SelectableWrapper } from '../../utilities/SelectableWrapper';
 import { Tag, Note } from '../../types';
 import { EditTagsModal } from './EditTagsModal';
 import { NoteCard } from './NoteCard';
-// import Skeleton from 'react-loading-skeleton';
-// import 'react-loading-skeleton/dist/skeleton.css';
 import { LoadingDivComponent } from '../LoadingDivComponent';
 
-// TODO: okay so just listenign for isLoading BUT TODO:::: when isFetching have another little square skeltopn loading in iits next spot to signify hey we are loading a new one but keeping the rest of the already loading ones there
+// TODO (maybe) consider the skeleton laz loaders
 
 type NoteListProps = {
     availableTags: Tag[];
@@ -43,10 +41,9 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
         })
     }, [ title, selectedTags, notes ]);
 
-    // using a asthetic arbitruary amount of skeleton cards
-    // const skeletonArray = new Array(notes.length).fill(<Skeleton height={150} />);
-    // * i mean i like this the skeletons.. .but i dont love it
-
+    const renderFilteredNotes = filteredNotes?.map(note => <Col key={note.id}>
+        <NoteCard id={note.id} title={note.title} tags={note.tags} storeItemTags={note.storeItemTags} />
+    </Col>);
 
 
     return (
@@ -58,44 +55,24 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                     <Link to="new"><Button className="carto-btn">Create</Button></Link>
                     <Button className="carto-btn-alt" onClick={() => setEditTagsModalIsOpen(true)}>Edit Tags</Button>
                 </Stack></Col>
-            </Row>
-            <hr />
+            </Row><hr />
             <Form><Row className="mb-4">
-                <Col><Form.Group controlId="title">
-                    <Form.Label>Title</Form.Label>
+                <Col><Form.Group controlId="title"><Form.Label>Title</Form.Label>
                     <Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
                         onChange={e => setTitle(e.target.value)} />
                 </Form.Group></Col>
-                <Col><Form.Group controlId="tags">
-                    <Form.Label>Tags</Form.Label>
-                    <SelectableWrapper
-                        createOptionEnabled={false}
-                        placeholder='Tags to filter by'
-                        availableTags={availableTags}
-                        selectedTags={selectedTags}
-                        setSelectedTags={setSelectedTags}
-                        isRawTag={true}
+                <Col><Form.Group controlId="tags"><Form.Label>Tags</Form.Label>
+                    <SelectableWrapper createOptionEnabled={false} placeholder='Tags to filter by'
+                        availableTags={availableTags} selectedTags={selectedTags}
+                        setSelectedTags={setSelectedTags} isRawTag={true}
                     />
                 </Form.Group></Col>
             </Row></Form>
             {notesLoading && <LoadingDivComponent />}
             {!notesLoading && (<>
-                <Row xs={1} md={2} lg={3} className="g-3">
-                    {/* {notesLoading && skeletonArray} */}
-                    {filteredNotes?.map(note => {
-                        return (
-                            <Col key={note.id}>
-                                <NoteCard id={note.id} title={note.title} tags={note.tags} storeItemTags={note.storeItemTags} />
-                            </Col>
-                        )
-                    })}
-                </Row>
-                <EditTagsModal
-                    show={editTagsModalIsOpen}
-                    handleClose={() => setEditTagsModalIsOpen(false)}
-                    availableTags={availableTags}
-                    onDeleteTag={onDeleteTag}
-                    onUpdateTag={onUpdateTag}
+                <Row xs={1} md={2} lg={3} className="g-3">{renderFilteredNotes}</Row>
+                <EditTagsModal show={editTagsModalIsOpen} handleClose={() => setEditTagsModalIsOpen(false)}
+                    availableTags={availableTags} onDeleteTag={onDeleteTag} onUpdateTag={onUpdateTag}
                 />
             </>)}
         </>

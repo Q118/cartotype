@@ -3,7 +3,7 @@ import { FiRefreshCcw } from 'react-icons/fi';
 import Row from 'react-bootstrap/Row';
 import { Spinner } from 'react-bootstrap';
 import { TooltipWrapper } from '../../utilities/TooltipWrapper';
-import { ResultItem, StorePrice } from '../../types';
+import { ResultItem } from '../../types';
 import { SelectItem } from './SelectItem';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -11,7 +11,7 @@ import { useTheme } from '../../context/ThemeContext';
 type SelectFormData = {
     /** mode for edit, if false its in add mode */
     editMode?: boolean;
-    price?: StorePrice;
+    price?: number;
     selectOptions: ResultItem[];
     selectedItem: ResultItem | null;
     inputSearch?: string;
@@ -23,9 +23,6 @@ type SelectFormData = {
 type SelectFormProps = SelectFormData & {
     updateFields: (fields: Partial<SelectFormData>) => void
 }
-
-
-
 
 
 export function SelectForm({
@@ -65,12 +62,10 @@ export function SelectForm({
 
     function updateWithSelection(identifier: string) {
         const selectedItem: any = findSelection(selectOptions, identifier);
-        // console.log('selectedItem:', selectedItem)
-        const itemPrice: StorePrice = parseStorePrice(selectedItem?.price);
         updateFields({
             selectedItem: selectedItem,
-            // !! get thisg ogining.. need to parse out price or have it saved somewhere
-            ...editMode && { price: { dollars: itemPrice?.dollars, cents: itemPrice?.cents } },
+            ...(selectedItem && selectedItem.notes && selectedItem.notes.length > 0) && { attachedNoteIds: selectedItem.notes },
+            ...editMode && { price: selectedItem?.price },
             ...editMode && { storeTitle: selectedItem?.name },
         });
     }
@@ -78,20 +73,10 @@ export function SelectForm({
     function findSelection(list: ResultItem[], id: string) {
         for (let x = 0, max = list.length; x < max; x++) {
             let selectOption = list[ x ];
-            if (selectOption.id === id) return selectOption;
+            if (selectOption && selectOption.id === id) return selectOption;
         }
     }
 
-    /**
-     * 
-     * @function parseStorePrice - parses the price from the store into dollars and cents
-     * @returns {StorePrice}
-     */
-    function parseStorePrice(price: number): StorePrice {
-        const dollars = Math.floor(price);
-        const cents = +(price - dollars).toFixed(2).split('0.')[ 1 ];
-        return { dollars, cents };
-    }
 
     // TODO change this for in edit mode
     if (selectOptions?.length === 0) return (
@@ -110,7 +95,7 @@ export function SelectForm({
                 </div>
             )}
             {isDataLoading() === false && (
-                <div className="edit-select-items-wrapper">
+                <div className="admin-scroll-wrapper">
                     {!editMode && (
                         <TooltipWrapper
                             placement='right'
@@ -126,7 +111,7 @@ export function SelectForm({
                     }}>
                         Select a Card to {editMode ? "Edit" : "Display"} {inputSearch ? `"${inputSearch}"` : 'the item'}
                     </h2>
-                    <Row md={2} xs={1} lg={3} className="g-3 edit-select-items">
+                    <Row md={2} xs={1} lg={3} className="g-3 admin-inner-scroll">
                         {selectOptions?.map((item: ResultItem) => {
                             return (
                                 <SelectItem
