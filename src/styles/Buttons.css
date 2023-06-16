@@ -7,6 +7,11 @@ button:hover {
     /* background-color: initial; */
 }
 
+.popout-note-btn {
+    background: transparent !important;
+    color: var(--primary-text);
+}
+
 .nav-cart-button {
     width: 3rem;
     height: 3rem;

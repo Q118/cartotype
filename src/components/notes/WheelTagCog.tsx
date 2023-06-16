@@ -5,7 +5,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import { StoreItemTag } from '../../types';
 import { IoPricetags } from 'react-icons/io5';
 import { CartoModal } from '../CartoModal';
-
+import { StoreItemView } from '../store/StoreItemView';
 
 
 
@@ -13,7 +13,7 @@ export function WheelTagCog(props: any) {
     const { storeItemTags } = props;
     const targetRef = useRef(null);
     const [ showOverlay, setShowOverlay ] = useState(false);
-    const [ showModal, setShowModal ] = useState(false);
+    const [ showLocalModal, setShowLocalModal ] = useState(false);
     const [ modal_storeId, setModal_storeId ] = useState<string>('');
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export function WheelTagCog(props: any) {
             onClick={(e: any) => {
                 e.stopPropagation();
                 setModal_storeId(storeTag.id);
-                setShowModal(true);
+                setShowLocalModal(true);
             }}>
             <Badge className='text-truncate store-tag-badge'>{storeTag.label}</Badge>
         </ListGroup.Item>
@@ -65,10 +65,14 @@ export function WheelTagCog(props: any) {
                 <IoPricetags size="20" />
                 {/* // TODO: come back here and put the amount of tags showiner here next to icon or on top of  */}
             </div>
-            <CartoModal show={showModal} itemId={modal_storeId} onHide={(e: any) => {
-                e.stopPropagation();
-                setShowModal(false);
-            }} />
+            <CartoModal show={showLocalModal} itemId={modal_storeId}
+                onHide={(e: any) => {
+                    e.stopPropagation();
+                    setShowLocalModal(false);
+                }} // unshowOverlay once modal is opened (cleaner)
+                onShow={() => setShowOverlay(false)}
+                modalBodyComponent={<StoreItemView item_id={modal_storeId} />}
+            />
         </>
     )
 }
