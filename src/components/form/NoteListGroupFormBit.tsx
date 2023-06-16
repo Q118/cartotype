@@ -40,14 +40,14 @@ export function NoteListGroupFormBit({
             />
             <div className="top-right-container">
                 {/* // TODO figure out why i cant color this */}
-                <button title='preview note' className='popout-note-btn'>
-                    <RxOpenInNewWindow style={{ color: 'pink !important' }}
-                        onClick={(e: any) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setModal_noteId(note.id)
-                            setShowLocalModal(true)
-                        }} />
+                <button title='preview note' className='popout-note-btn'
+                    onClick={(e: any) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setModal_noteId(note.id)
+                        setShowLocalModal(true)
+                    }}>
+                    <RxOpenInNewWindow />
                 </button>
             </div>
         </ListGroup.Item>
