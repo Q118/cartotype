@@ -14,7 +14,6 @@
 }
 
 .selected-card {
-    /* color: pink; */
     border: 4px solid var(--accent-complement) !important;
 }
 
@@ -23,10 +22,8 @@
     background-color: var(--primary-bg) !important;
     color: var(--primary-text) !important;
     fill: var(--primary-bg) !important;
-    /* max-height: fit-content !important; */
     max-height: 50vh !important;
     overflow-y: scroll !important;
-    /*  having trouble accessing the scroll bar in here... */
 }
 
 /** the header that triggers the accordian */
@@ -64,6 +61,7 @@
 /* NOTE cards */
 .note-card {
     border: 1px solid var(--accent);
+    border-radius: 10%;
     background-color: var(--primary-bg);
 }
 
