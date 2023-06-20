@@ -30,26 +30,21 @@ export function TagRows() {
         </Badge>
     ));
 
+    const stackWrapper = (children: JSX.Element | JSX.Element[], type: string) => (
+        <Stack gap={1} direction="horizontal" className={`flex-wrap ${type === 'rawTag' ? 'mb-2' : ''}`}>
+            {children}
+            <OverlayInfoWrapper tagType={type} placement="right"
+                children={<BsFillInfoCircleFill className={`${type}-infoIcon`} />}
+            />
+        </Stack>
+    );
+
     return (
         <>
             <Col>
                 <h1>{note.title}</h1>
-                {note.tags.length > 0 && (
-                    <Stack gap={1} direction="horizontal" className="flex-wrap mb-2">
-                        {tagRow}
-                        <OverlayInfoWrapper tagType="rawTag" placement="right"
-                            children={<BsFillInfoCircleFill className="rawTag-infoIcon" />}
-                        />
-                    </Stack>
-                )}
-                {(note.storeItemTags && note.storeItemTags.length > 0) && (
-                    <Stack gap={1} direction="horizontal" className="flex-wrap">
-                        {storeTagRow}
-                        <OverlayInfoWrapper tagType="storeTag" placement="right"
-                            children={<BsFillInfoCircleFill className="storeTag-infoIcon" />}
-                        />
-                    </Stack>
-                )}
+                {note.tags.length > 0 && stackWrapper(tagRow, 'rawTag')}
+                {note.storeItemTags.length > 0 && stackWrapper(storeTagRow, 'storeTag')}
             </Col>
             <CartoModal show={showLocalModal}
                 onHide={(e: any = null) => {
