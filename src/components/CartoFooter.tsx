@@ -7,14 +7,13 @@
 export function CartoFooter() {
     return (
         <footer style={{
-            position: 'absolute',
+            position: 'sticky', // nothing hides at the bottom
             bottom: '0',
             width: '100%',
-            height: '2.5rem',
+            height: '2rem',
             marginTop: '1rem',
         }}>
-            <div className="d-flex justify-content-center align-items-center">
-                <span className="me-2">Cartotype</span>
+            <div className="d-flex justify-content-end">
             </div>
         </footer>
     )
