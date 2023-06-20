@@ -25,6 +25,12 @@
     max-height: 50vh !important;
     overflow-y: scroll !important;
 }
+.noteList-title {
+    background-color: var(--primary-bg) !important;
+    color: var(--primary-text) !important;
+    margin-bottom: 0 !important;
+    padding: 2px;
+}
 
 /** the header that triggers the accordian */
 .accordion-button {

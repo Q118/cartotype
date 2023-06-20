@@ -23,9 +23,8 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
 
     const getNoteFromAvailableNotes = (id: string) => availableNotes.find(note => note.id === id);
 
-    const returnNoNotes = () => <div className='storeTags-listGroup-card' style={{ padding: '5px' }}>
-        No notes for this item...<br />Go make some!
-    </div>;
+    const returnNoNotes = () => <div className='storeTags-listGroup-card' style={{ padding: '5px', fontStyle: 'italic' }}>
+        No notes for this item...<br />Go make some!</div>;
 
     const renderListItems = (id: string) => {
         const storeItem = getStoreItemById(id);
@@ -47,17 +46,18 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
         });
     }
 
+    const renderNoteListTitle = (id: string) => {
+        const storeItem = getStoreItemById(id);
+        return <h5 className="noteList-title">Notes for {storeItem.name}:</h5>
+    }
+
     return (
         <>
-            <Overlay target={targetRef.current} show={showOverlay} placement="bottom-end"
+            <Overlay target={targetRef.current} show={showOverlay} placement="bottom-end" onHide={() => setShowOverlay(false)}
                 rootClose={true}  // this specifies that the overlay will close when the user clicks outside of it
-                onHide={() => setShowOverlay(false)}
-                container={document.getElementById('store-wrapper-div')!}
-            >
+                container={document.getElementById('store-wrapper-div')!}>
                 <div className="accordian-notes-container">
-                    <Accordian>
-                        {renderListItems(storeItem_id)}
-                    </Accordian>
+                    <Accordian>{renderNoteListTitle(storeItem_id)}{renderListItems(storeItem_id)}</Accordian>
                 </div>
             </Overlay>
             {/* The trigger */}
