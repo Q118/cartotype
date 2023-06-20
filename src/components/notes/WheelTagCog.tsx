@@ -2,14 +2,13 @@ import { MouseEvent, useRef, useState, useEffect } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Overlay from 'react-bootstrap/Overlay';
-// import Popover from 'react-bootstrap/Popover';
 import { StoreItemTag } from '../../types';
 import { IoPricetags } from 'react-icons/io5';
 import { CartoModal } from '../CartoModal';
 import { StoreItemView } from '../store/StoreItemView';
-// import { Popover } from 'react-bootstrap';
 
 
+const isEven = (num: number) => num % 2 === 0;
 
 export function WheelTagCog(props: any) {
     const { storeItemTags } = props;
@@ -35,7 +34,6 @@ export function WheelTagCog(props: any) {
         return;
     }
 
-    const isEven = (num: number) => num % 2 === 0;
 
     const storeItemsSpan = storeItemTags.map((storeTag: StoreItemTag, index: number) => (
         // * the tag.id is === the associated storeItem.id
@@ -55,6 +53,7 @@ export function WheelTagCog(props: any) {
     // * https://github.com/react-bootstrap/react-overlays/issues/312
     // delete Overlay.defaultProps?.arrowProps;
 
+
     return (
         <>
             <Overlay target={targetRef.current} show={showOverlay} placement="top-start">
@@ -67,6 +66,7 @@ export function WheelTagCog(props: any) {
                     </span>
                 </ListGroup>
             </Overlay>
+            {/* The trigger */}
             <div className="cog-div-noteCard" ref={targetRef} onClick={e => handleMouseClick(e)}>
                 <IoPricetags size="20" />
                 {/* // TODO: come back here and put the amount of tags showiner here next to icon or on top of  */}

@@ -18,12 +18,12 @@ function Store() {
         <StoreItem {...item} isPreview={false} /></Col>);
 
     return (
-        <>
+        <div id="store-wrapper-div">
             <h1>The Store</h1><hr />
             {storeItemsError && <p>Error: {storeItemsError.message}</p>}
             {isStoreItemsLoading() === true && <LoadingDivComponent />}
             {isStoreItemsLoading() === false && <Row md={2} xs={1} lg={3} className="g-3">{storeItemCols}</Row>}
-        </>
+        </div>
     );
 }
 

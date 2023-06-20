@@ -37,7 +37,6 @@ export function NoteListGroupFormBit({
                 label={<div style={{ ...isAttached(note.id) && { fontWeight: 'bold' } }}>{note.title}</div>}
             />
             <div className="top-right-container">
-                {/* // TODO figure out why i cant color this */}
                 <button title='preview note' className='popout-note-btn'
                     onClick={(e: any) => {
                         e.preventDefault();
