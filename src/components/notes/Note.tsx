@@ -5,7 +5,7 @@ import { VscTrash } from "react-icons/vsc";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { TagRows } from "./TagRows";
+import { TagRows as TagRowsColumn } from "./TagRows";
 
 type NoteProps = {
     onDelete: (id: string) => void;
@@ -16,11 +16,10 @@ export function Note({ onDelete }: NoteProps) {
     const note = useNote();
     const navigate = useNavigate();
 
-
     return (
         <>
             <Row className="align-items-center mb-4">
-                <TagRows />
+                <TagRowsColumn />
                 <Col xs="auto">
                     <Stack gap={2} direction="horizontal" className="justify-content-end mb-2">
                         <Link to="edit"><Button className="carto-btn" title="edit note">

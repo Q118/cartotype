@@ -2,10 +2,12 @@ import { MouseEvent, useRef, useState, useEffect } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Overlay from 'react-bootstrap/Overlay';
+// import Popover from 'react-bootstrap/Popover';
 import { StoreItemTag } from '../../types';
 import { IoPricetags } from 'react-icons/io5';
 import { CartoModal } from '../CartoModal';
 import { StoreItemView } from '../store/StoreItemView';
+// import { Popover } from 'react-bootstrap';
 
 
 
@@ -49,6 +51,10 @@ export function WheelTagCog(props: any) {
         </ListGroup.Item>
     ));
 
+    // TODO handle the warning about arrowProps
+    // * https://github.com/react-bootstrap/react-overlays/issues/312
+    // delete Overlay.defaultProps?.arrowProps;
+
     return (
         <>
             <Overlay target={targetRef.current} show={showOverlay} placement="top-start">
@@ -65,13 +71,13 @@ export function WheelTagCog(props: any) {
                 <IoPricetags size="20" />
                 {/* // TODO: come back here and put the amount of tags showiner here next to icon or on top of  */}
             </div>
-            <CartoModal show={showLocalModal} itemId={modal_storeId}
-                onHide={(e: any) => {
-                    e.stopPropagation();
+            <CartoModal show={showLocalModal}
+                onHide={(e: any = null) => {
+                    if (e) e.stopPropagation();
                     setShowLocalModal(false);
                 }} // unshowOverlay once modal is opened (cleaner)
                 onShow={() => setShowOverlay(false)}
-                modalBodyComponent={<StoreItemView item_id={modal_storeId} />}
+                modalbodycomponent={<StoreItemView item_id={modal_storeId} />}
             />
         </>
     )

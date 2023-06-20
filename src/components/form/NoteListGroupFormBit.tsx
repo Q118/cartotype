@@ -4,10 +4,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import remarkGfm from 'remark-gfm';
 import { v4 as uuidv4 } from 'uuid';
-// import { GrNewWindow } from "react-icons/gr";
 import { RawNote } from '../../types';
 import { CartoModal } from '../CartoModal';
-// import { BsWindowPlus } from "react-icons/bs";
 import { RxOpenInNewWindow } from 'react-icons/rx';
 // TODO and adjust style of links in the storeItemView
 
@@ -76,15 +74,14 @@ export function NoteListGroupFormBit({
         <>
             <ListGroup className="listGroup-associatedNotes">{renderNoteSelection}</ListGroup>
             <CartoModal
-                itemId={''}
                 show={showLocalModal}
-                onHide={(e: any) => {
-                    e.stopPropagation();
+                onHide={(e: any = null) => {
+                    if (e) e.stopPropagation();
                     setModal_noteId('');
                     setShowLocalModal(false);
                 }} // unshowOverlay once modal is opened (cleaner)
                 onShow={() => console.log('showing modal')}
-                modalBodyComponent={modalBodyComponent(modal_noteId)}
+                modalbodycomponent={modalBodyComponent(modal_noteId)}
             />
         </>
     )

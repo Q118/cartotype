@@ -14,7 +14,8 @@ type StoreItemViewProps = {
     item_id: string;
 }
 
-
+// TODO maybe no navigating to the note item since already in the notes...
+// * maybe just a hovered preview of the note item...
 
 export function StoreItemView(props: StoreItemViewProps) {
     const { item_id } = props;
