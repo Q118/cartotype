@@ -1,27 +1,31 @@
-import { StoreItemView } from "./store/StoreItemView";
+/** 
+ * agnostic modal component for use in the app
+ */
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useShoppingCart } from "../context/ShoppingCartContext";
-// !!! PU here
+import { useEffect } from 'react';
 
 
 type CartoModalProps = {
-    /** id of store Item */
-    itemId: string;
+    /** id of store Item or Note Item, or more... expandable*/
+    // itemId: string;
     onHide: any;
+    onShow: any;
     show: boolean;
+    modalbodycomponent: JSX.Element;
 }
 
 export function CartoModal(props: CartoModalProps) {
 
     const { setModalOpen } = useShoppingCart();
 
-    function handleDisableBackdrop() {
-        setModalOpen(true);
-        console.log("fhdshfj")
-        // document.body.removeEventListener 
-        // handle disabling the rest of the body temporaryily pr at least disable the click events
-    }
+    useEffect(() => {
+        // TODO this is hacky.. come back and fix this.. right now its listening for pathname bc that means a note item was clicked to be views. but its not handling case where current pathname note is clicked
+        
+        setModalOpen(false); // close the modal SO THAT other click events can be handled properly
+        props.onHide();
+    }, [ window.location.pathname ]);
 
 
     return (
@@ -32,14 +36,13 @@ export function CartoModal(props: CartoModalProps) {
             centered
             backdrop="static" // use to force user to click close
             // onShow={() => handleDisableBackdrop()}
-            onEntered={() => handleDisableBackdrop()}
+            onShow={() => props.onShow()}
+            onEntered={() => setModalOpen(true)}
             onHide={() => setModalOpen(false)}
         >
             <Modal.Body>
                 <Button className="carto-btn top-right-container" onClick={props.onHide}>Close</Button>
-                <StoreItemView
-                    item_id={props.itemId}
-                />
+                {props.modalbodycomponent}
             </Modal.Body>
         </Modal>
     )

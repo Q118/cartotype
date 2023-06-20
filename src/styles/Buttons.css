@@ -7,6 +7,11 @@ button:hover {
     /* background-color: initial; */
 }
 
+.popout-note-btn {
+    background: transparent !important;
+    color: var(--primary-text);
+}
+
 .nav-cart-button {
     width: 3rem;
     height: 3rem;
@@ -37,6 +42,17 @@ button:hover {
     border: none !important;
 }
 
+.stabbed-note-btn {
+    color: var(--primary-text);
+    background-color: var(--primary-bg);
+    opacity: 0.7; /* full on hover */
+    border: none;
+    border-radius: 10%;
+}
+
+.stabbed-note-btn:hover {
+    opacity: 1 !important;
+}
 
 .cart-img-item {
     width: 125px;

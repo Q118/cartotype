@@ -57,11 +57,13 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                 </Stack></Col>
             </Row><hr />
             <Form><Row className="mb-4">
-                <Col><Form.Group controlId="title"><Form.Label>Title</Form.Label>
+                <Col><Form.Group controlId="title">
+                    <Form.Label>Title</Form.Label>
                     <Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
                         onChange={e => setTitle(e.target.value)} />
                 </Form.Group></Col>
-                <Col><Form.Group controlId="tags"><Form.Label>Tags</Form.Label>
+                <Col><Form.Group controlId="tags">
+                    <Form.Label>Tags</Form.Label>
                     <SelectableWrapper createOptionEnabled={false} placeholder='Tags to filter by'
                         availableTags={availableTags} selectedTags={selectedTags}
                         setSelectedTags={setSelectedTags} isRawTag={true}

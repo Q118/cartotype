@@ -11,6 +11,10 @@
     border-radius: var(--bs-border-radius-pill)!important;
 }
 
+.store-tag-badge:hover {
+    cursor: pointer;
+}
+
 .raw-tag-badge-view {
     background-color: var(--tag-background) !important;
     color: var(--badge-text) !important;
