@@ -24,7 +24,8 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
     const getNoteFromAvailableNotes = (id: string) => availableNotes.find(note => note.id === id);
 
     const returnNoNotes = () => <div className='storeTags-listGroup-card' style={{ padding: '5px', fontStyle: 'italic' }}>
-        No notes for this item...<br />Go make some!</div>;
+        No notes for this item...<br />Go make some!
+    </div>;
 
     const renderListItems = (id: string) => {
         const storeItem = getStoreItemById(id);
@@ -33,11 +34,9 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
         return noteId_list.map((note_id: string, i: number) => {
             const note = getNoteFromAvailableNotes(note_id);
             if (!note) return returnNoNotes();
-            return <div>
-                <Accordian.Item key={note_id} className="note-accordian-item" id={note_id} eventKey={i + ''}>
-                    <Accordian.Header className='note-accordian-header'>
-                        {note.title}
-                    </Accordian.Header>
+            return <div key={note_id}>
+                <Accordian.Item className="note-accordian-item" id={note_id} eventKey={i + ''}>
+                    <Accordian.Header className='note-accordian-header'>{note.title}</Accordian.Header>
                     <Accordian.Body>
                         <ReactMarkdown children={note.markdown} remarkPlugins={[ remarkGfm ]} />
                     </Accordian.Body>
@@ -61,8 +60,7 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
                 </div>
             </Overlay>
             {/* The trigger */}
-            <button onClick={() => setShowOverlay(true)} ref={targetRef}
-                className="stabbed-note-btn" title='preview notes on this item'>
+            <button onClick={() => setShowOverlay(true)} ref={targetRef} className="stabbed-note-btn" title='preview notes on this item'>
                 <GiStabbedNote size={35} />
             </button>
         </>
