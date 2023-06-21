@@ -3,7 +3,8 @@
 /* regular store card */
 .store-card_card-c {
     background-color: var(--primary-bg) !important;
-    border: var(--accent) 2px solid !important;
+    /* border: var(--accent) 2px solid !important; */
+    border: 2px solid var(--btn-secondary) !important;
     min-width: fit-content;
 }
 

@@ -15,7 +15,7 @@ export type ResultItem = {
     // ! possible may need to chage price type
     storeTitle?: string;
     notes?: string[];
-    creditorDisplayName?: string;
+    creditorDisplayName: string;
 }
 
 export type StorePrice = {

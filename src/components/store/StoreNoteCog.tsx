@@ -11,10 +11,12 @@ import Accordian from 'react-bootstrap/Accordion';
 
 type StoreNoteCogProps = {
     storeItem_id: string;
+    /** signifies if its for previewing in which some parts will be disabled */
+    isPreview?: boolean;
 }
 
 
-export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
+export function StoreNoteCog({ storeItem_id, isPreview = false }: StoreNoteCogProps) {
     const targetRef = useRef(null);
     const [ showOverlay, setShowOverlay ] = useState(false);
     const { getStoreItemById, availableNotes } = useShoppingCart();
@@ -58,13 +60,15 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
         <>
             <Overlay target={targetRef.current} show={showOverlay} placement="bottom-end" onHide={() => setShowOverlay(false)}
                 rootClose={true}  // this specifies that the overlay will close when the user clicks outside of it
-                container={document.getElementById('store-wrapper-div')!}>
+                container={document.getElementById('cartotype-navbar')!}>
                 <div className="accordian-notes-container">
                     <Accordian>{renderNoteListTitle(storeItem_id)}{renderListItems(storeItem_id)}</Accordian>
                 </div>
             </Overlay>
             {/* The trigger */}
-            <button onClick={(e) => handleIconClick(e)} ref={targetRef} className="stabbed-note-btn" title='preview notes on this item'>
+            <button disabled={isPreview} onClick={(e) => handleIconClick(e)}
+                ref={targetRef} className="stabbed-note-btn"
+                title={`${!isPreview ? 'preview notes on this item' : 'popup disabled in preview'}`}>
                 <GiStabbedNote size={35} />
             </button>
         </>

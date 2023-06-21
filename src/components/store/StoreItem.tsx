@@ -15,6 +15,7 @@ type StoreItemProps = {
     name?: string;
     price: number | null;
     imgUrl: string;
+    /** signifies if its for previewing in which some parts will be disabled */
     isPreview: boolean;
     creditorDisplayName: string;
 };
@@ -27,6 +28,8 @@ export function StoreItem({ id, name = '', price, imgUrl, isPreview = false, cre
         removeFromCart,
     } = useShoppingCart();
 
+    console.log('inside StoreItem', creditorDisplayName)
+
     const quantity: number = getItemQuantity(id);
 
     return (
@@ -36,9 +39,9 @@ export function StoreItem({ id, name = '', price, imgUrl, isPreview = false, cre
                     height="200px" style={{ objectFit: 'cover' }}
                 />
                 <div className="top-right-container">
-                    <StoreNoteCog storeItem_id={id} />
+                    <StoreNoteCog storeItem_id={id} isPreview={isPreview} />
                 </div>
-                {creditorDisplayName.length > 0 && (
+                {(creditorDisplayName && creditorDisplayName.length > 0) && (
                     <CreditBanner creditorDisplayName={creditorDisplayName} />
                 )}
                 <Card.Body className={`d-flex flex-column store-card_body-c`}>
