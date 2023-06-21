@@ -51,6 +51,12 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
         return <h5 className="noteList-title">Notes for {storeItem.name}:</h5>
     }
 
+    const handleIconClick = (e: any) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setShowOverlay(true);
+    }
+
     return (
         <>
             <Overlay target={targetRef.current} show={showOverlay} placement="bottom-end" onHide={() => setShowOverlay(false)}
@@ -61,7 +67,7 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
                 </div>
             </Overlay>
             {/* The trigger */}
-            <button onClick={() => setShowOverlay(true)} ref={targetRef} className="stabbed-note-btn" title='preview notes on this item'>
+            <button onClick={(e) => handleIconClick(e)} ref={targetRef} className="stabbed-note-btn" title='preview notes on this item'>
                 <GiStabbedNote size={35} />
             </button>
         </>

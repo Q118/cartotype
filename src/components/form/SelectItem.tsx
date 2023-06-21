@@ -1,4 +1,6 @@
-
+/**
+ * this page is for the select item component from the addForm and editForm
+ */
 import { useEffect, useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { MdLibraryAddCheck } from 'react-icons/md';
@@ -6,6 +8,8 @@ import { MdLibraryAddCheck } from 'react-icons/md';
 // import { GrSelect } from 'react-icons/gr';
 import { AiOutlineSelect } from 'react-icons/ai';
 // import { useTheme } from '../../context/ThemeContext';
+import { StoreNoteCog } from "../store/StoreNoteCog";
+
 
 
 type SelectItemProps = {
@@ -38,12 +42,10 @@ export function SelectItem({
 }: SelectItemProps) {
 
     const [ isSelected, setIsSelected ] = useState(false);
+
     useEffect(() => {
-        if (identifierSelected === identifier) {
-            setIsSelected(true);
-        } else {
-            setIsSelected(false);
-        }
+        if (identifierSelected === identifier) setIsSelected(true);
+        else setIsSelected(false);
     }, [ identifierSelected ])
 
     // const currentThemeClasses: string = currentTheme === 'dark' ? 'bg-secondary text-white' : 'bg-white text-dark';
@@ -61,6 +63,9 @@ export function SelectItem({
                         height="200px"
                         style={{ objectFit: 'cover' }}
                     />
+                    <div className="top-right-container">
+                        {editMode && <StoreNoteCog storeItem_id={identifier} />}
+                    </div>
                     {/* // TODO: persist the displayNames in to the database SO THAT we can use the crediting when in Edit Mode also! */}
                     {!editMode && (
                         <span className={`credit-text credit-text-${currentTheme}`}>
