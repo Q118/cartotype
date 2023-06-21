@@ -10,6 +10,7 @@ import { Tag, Note, StoreItemTag } from '../../types';
 import { EditTagsModal } from './EditTagsModal';
 import { NoteCard } from './NoteCard';
 import { LoadingDivComponent } from '../LoadingDivComponent';
+import { FormGroupColWrapper } from '../../utilities/FormGroupColWrapper';
 
 // TODO (maybe) consider the skeleton laz loaders
 
@@ -22,7 +23,6 @@ type NoteListProps = {
     notesLoading: boolean;
     /** store item tags */
     availableStoreItemTags: StoreItemTag[];
-
 }
 
 export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notesLoading, availableStoreItemTags }: NoteListProps) {
@@ -33,33 +33,18 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
 
     const filteredNotes = useMemo(() => {
         return notes?.filter(note => {
-            return (
-                (title === "" ||
-                    note.title.toLowerCase().includes(title.toLowerCase())) &&
-                //* check to make  sure the note has all of the tags being searched for
-                (selectedTags.length === 0 ||
-                    selectedTags.every(tag =>
-                        note.tags.some(noteTag => noteTag.id === tag.id)
-                    )) &&
-                //* check to make sure the note has all of the store item tags being searched for
-                (selectedStoreItemTags.length === 0 ||
-                    selectedStoreItemTags.every(storeItemTag =>
-                        note.storeItemTags.some(noteStoreItemTag => noteStoreItemTag.id === storeItemTag.id)
-                    ))
-            )
-        })
+            const isTitleMatch = title === "" || note.title.toLowerCase().includes(title.toLowerCase());
+            const areTagsMatched = selectedTags.length === 0 || selectedTags.every(tag =>
+                note.tags.some(noteTag => noteTag.id === tag.id));
+            const areStoreItemTagsMatched = selectedStoreItemTags.length === 0 || selectedStoreItemTags.every(storeItemTag =>
+                note.storeItemTags.some(noteStoreItemTag => noteStoreItemTag.id === storeItemTag.id));
+            return isTitleMatch && areTagsMatched && areStoreItemTagsMatched;
+        });
     }, [ title, selectedTags, notes, selectedStoreItemTags ]);
 
     const renderFilteredNotes = filteredNotes?.map(note => <Col key={note.id}>
         <NoteCard id={note.id} title={note.title} tags={note.tags} storeItemTags={note.storeItemTags} />
     </Col>);
-
-    const formGroupCol = (children: JSX.Element, label: string) => <Col>
-        <Form.Group controlId={label.toLowerCase()}>
-            <Form.Label>{label}</Form.Label>
-            {children}
-        </Form.Group>
-    </Col>;
 
 
     return (
@@ -74,18 +59,16 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                 </Stack></Col>
             </Row><hr />
             <Form><Row className="mb-4">
-                {formGroupCol(<Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
+                {FormGroupColWrapper(<Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
                     onChange={e => setTitle(e.target.value)} />, 'Title')}
-                {formGroupCol(<SelectableWrapper createOptionEnabled={false} placeholder='Tags to filter by'
+                {FormGroupColWrapper(<SelectableWrapper createOptionEnabled={false} placeholder='Tags to filter by'
                     availableTags={availableTags} selectedTags={selectedTags}
                     setSelectedTags={setSelectedTags} isRawTag={true}
                 />, 'Tags')}
-
-                {formGroupCol(<SelectableWrapper createOptionEnabled={false} placeholder='Store Items to filter by'
+                {FormGroupColWrapper(<SelectableWrapper createOptionEnabled={false} placeholder='Store Items to filter by'
                     availableTags={availableStoreItemTags} selectedTags={selectedStoreItemTags}
                     setSelectedTags={setSelectedStoreItemTags} isRawTag={false}
                 />, 'Store Item Tags')}
-
             </Row></Form>
             {notesLoading && <LoadingDivComponent />}
             {!notesLoading && (<>

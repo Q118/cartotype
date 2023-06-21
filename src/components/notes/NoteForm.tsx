@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag, StoreItem, StoreItemTag } from '../../types';
 import { SelectableWrapper } from '../../utilities/SelectableWrapper';
+import { FormGroupColWrapper } from '../../utilities/FormGroupColWrapper';
+
 
 type NoteFormProps = {
     onSubmit: (data: NoteData) => void;
@@ -43,18 +45,12 @@ export function NoteForm({
         navigate('..');
     }
 
-    const formGroupCol = (children: JSX.Element, label: string) => <Col>
-        <Form.Group controlId={label.toLowerCase()}>
-            <Form.Label>{label}</Form.Label>
-            {children}
-        </Form.Group>
-    </Col>;
 
     return (
         <Form onSubmit={handleSubmit}>
             <Stack gap={4}>
-                <Row>{formGroupCol(<Form.Control ref={titleRef} required defaultValue={title} />, 'Title')}</Row>
-                <Row>{formGroupCol(<SelectableWrapper
+                <Row>{FormGroupColWrapper(<Form.Control ref={titleRef} required defaultValue={title} />, 'Title')}</Row>
+                <Row>{FormGroupColWrapper(<SelectableWrapper
                     createOptionEnabled={true}
                     availableTags={availableTags}
                     selectedTags={selectedTags}
@@ -62,7 +58,7 @@ export function NoteForm({
                     onAddTag={onAddTag}
                     isRawTag={true}
                 />, 'Tags')}
-                    {formGroupCol(<SelectableWrapper
+                    {FormGroupColWrapper(<SelectableWrapper
                         createOptionEnabled={false}
                         availableTags={availableStoreTags}
                         selectedTags={selectedStoreItemTags}
