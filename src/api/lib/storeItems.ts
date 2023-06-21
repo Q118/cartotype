@@ -35,7 +35,7 @@ async function getStoreItem(id: string) {
 
 
 
-//TODO need to also updates the notes to hold the attached store item id
+// // TODO need to also updates the notes to hold the attached store item id
 async function addStoreItem(item: Partial<StoreItem>) {
     const hasNotes = item.notes && item.notes.length > 0 && typeof item.notes !== "string";
     if (!hasNotes) {
@@ -48,7 +48,6 @@ async function addStoreItem(item: Partial<StoreItem>) {
     return updatedNote;
 }
 
-// ! PU here dev.. the detail page, from edit, is not updating the notes to be checked. but it is in the db, so it's just a UI thing here to fix
 
 /** helper to update notes when attached to an item to upsert */
 async function handleAttachedNotes(item: any) {

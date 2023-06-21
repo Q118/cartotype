@@ -19,16 +19,6 @@
 
 
 
-.noteList-title {
-    background-color: var(--primary-bg) !important;
-    color: var(--primary-text) !important;
-    margin-bottom: 0 !important;
-    padding: 2px;
-}
-
-
-
-
 /* NOTE cards */
 .note-card {
     border: 1px solid var(--accent);

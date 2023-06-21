@@ -50,3 +50,13 @@
     background: var(--accent) !important;
     border-radius: 10px;
 }
+
+/* accordian header */
+.noteList-title {
+    background-color: var(--body-background) !important;
+    color: var(--primary-text) !important;
+    margin-bottom: 0 !important;
+    padding: 2px;
+    border-bottom: 1px solid var(--accent);
+}
+

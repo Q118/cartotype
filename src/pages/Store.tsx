@@ -13,7 +13,7 @@ function Store() {
 
     // TODO: come back and useQuery and set up lazy continuous loading.../paginationSituation or ifinitie scroll
     // * for the images while they are white and loading.. display react-skeleton.. i tried but meh... oh.. do it inside the squares..
-
+    console.log('globalStoreItems: ', globalStoreItems)
     const storeItemCols = globalStoreItems?.map((item: StoreItemType) => <Col key={item.id}>
         <StoreItem {...item} isPreview={false} /></Col>);
 

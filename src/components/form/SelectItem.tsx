@@ -9,7 +9,7 @@ import { MdLibraryAddCheck } from 'react-icons/md';
 import { AiOutlineSelect } from 'react-icons/ai';
 // import { useTheme } from '../../context/ThemeContext';
 import { StoreNoteCog } from "../store/StoreNoteCog";
-
+import { CreditBanner } from "../store/CreditBanner";
 
 
 type SelectItemProps = {
@@ -24,8 +24,6 @@ type SelectItemProps = {
     identifierSelected: string | null;
 }
 
-const UNSPLASH_URL: string = 'https://unsplash.com/?utm_source=cartotype&utm_medium=referral';
-const CREDITOR_URL = (username: string) => `https://unsplash.com/@${username}?utm_source=cartotype&utm_medium=referral`;
 
 // * NEXT TODO then put the notes part in
 
@@ -34,7 +32,6 @@ export function SelectItem({
     currentTheme,
     imgUrl,
     description,
-    // creditorName,
     creditorDisplayName,
     handleOnSelect,
     identifierSelected,
@@ -47,9 +44,6 @@ export function SelectItem({
         if (identifierSelected === identifier) setIsSelected(true);
         else setIsSelected(false);
     }, [ identifierSelected ])
-
-    // const currentThemeClasses: string = currentTheme === 'dark' ? 'bg-secondary text-white' : 'bg-white text-dark';
-
 
     return (
         <>
@@ -66,17 +60,8 @@ export function SelectItem({
                     <div className="top-right-container">
                         {editMode && <StoreNoteCog storeItem_id={identifier} />}
                     </div>
-                    {/* // TODO: persist the displayNames in to the database SO THAT we can use the crediting when in Edit Mode also! */}
-                    {!editMode && (
-                        <span className={`credit-text credit-text-${currentTheme}`}>
-                            Photo by&nbsp;
-                            <a href={CREDITOR_URL(creditorDisplayName)} target="_blank" rel="noreferrer">
-                                {creditorDisplayName}
-                            </a> on&nbsp;
-                            <a href={UNSPLASH_URL} target="_blank" rel="noreferrer">
-                                Unsplash
-                            </a>
-                        </span>
+                    {(creditorDisplayName && creditorDisplayName.length > 0) && (
+                        <CreditBanner creditorDisplayName={creditorDisplayName} />
                     )}
                     <Card.Body className={`d-flex flex-column store-card_admin-body`}>
                         <div style={{
@@ -85,11 +70,8 @@ export function SelectItem({
                             gap: ".5rem",
                             justifyContent: "flex-end",
                         }}>
-                            <Button
-                                variant={`outline-${currentTheme === 'dark' ? 'light' : 'dark'}`}
-                                onClick={handleOnSelect}
-                                id={identifier}
-                            >
+                            <Button onClick={handleOnSelect} id={identifier}
+                                variant={`outline-${currentTheme === 'dark' ? 'light' : 'dark'}`}>
                                 {!isSelected ? (<><AiOutlineSelect /> Select</>) : <MdLibraryAddCheck />}
                             </Button>
                         </div>

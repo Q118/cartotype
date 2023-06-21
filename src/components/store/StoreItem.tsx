@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
 import { formatCurrency } from '../../utilities/formatCurrency';
 import { StoreNoteCog } from './StoreNoteCog';
+import { CreditBanner } from './CreditBanner';
 
 const TITLE_CLASSES: string = 'd-flex justify-content-between align-items-baseline mb-4';
 const INNER_BTN_CLASSES: string = 'd-flex align-items-center flex-column';
@@ -15,9 +16,10 @@ type StoreItemProps = {
     price: number | null;
     imgUrl: string;
     isPreview: boolean;
+    creditorDisplayName: string;
 };
 
-export function StoreItem({ id, name = '', price, imgUrl, isPreview = false }: StoreItemProps) {
+export function StoreItem({ id, name = '', price, imgUrl, isPreview = false, creditorDisplayName }: StoreItemProps) {
     const {
         getItemQuantity,
         increaseCartQuantity,
@@ -36,6 +38,9 @@ export function StoreItem({ id, name = '', price, imgUrl, isPreview = false }: S
                 <div className="top-right-container">
                     <StoreNoteCog storeItem_id={id} />
                 </div>
+                {creditorDisplayName.length > 0 && (
+                    <CreditBanner creditorDisplayName={creditorDisplayName} />
+                )}
                 <Card.Body className={`d-flex flex-column store-card_body-c`}>
                     <Card.Title className={TITLE_CLASSES}>
                         <span className='fs-2'>{name}</span>
