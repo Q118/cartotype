@@ -23,7 +23,7 @@ export function Notes() {
     const [ userTags, setUserTags ] = useState<Tag[]>([]);
 
     const { addNotificationToast, globalStoreItems, globalStoreItemTags } = useShoppingCart();
-    const queryObject = {};
+    // const queryObject = {};
 
     const { data: notes, isLoading, error: notesError, refetch: refetchNotes, isFetching }: any = useQuery({
         queryKey: [ `get-all-notes` ],
@@ -109,6 +109,7 @@ export function Notes() {
                     onUpdateTag={updateTag}
                     onDeleteTag={deleteTag}
                     notesLoading={isLoading}
+                    availableStoreItemTags={globalStoreItemTags}
                 />} />
                 <Route path="new" element={<NewNote
                     onSubmit={onCreateNote}

@@ -6,7 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { SelectableWrapper } from '../../utilities/SelectableWrapper';
-import { Tag, Note } from '../../types';
+import { Tag, Note, StoreItemTag } from '../../types';
 import { EditTagsModal } from './EditTagsModal';
 import { NoteCard } from './NoteCard';
 import { LoadingDivComponent } from '../LoadingDivComponent';
@@ -20,10 +20,14 @@ type NoteListProps = {
     onUpdateTag: (id: string, label: string) => void;
     /** holds if the notes data is still loading */
     notesLoading: boolean;
+    /** store item tags */
+    availableStoreItemTags: StoreItemTag[];
+
 }
 
-export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notesLoading }: NoteListProps) {
+export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notesLoading, availableStoreItemTags }: NoteListProps) {
     const [ selectedTags, setSelectedTags ] = useState<Tag[]>([]);
+    const [ selectedStoreItemTags, setSelectedStoreItemTags ] = useState<StoreItemTag[]>([]);
     const [ title, setTitle ] = useState('');
     const [ editTagsModalIsOpen, setEditTagsModalIsOpen ] = useState(false);
 
@@ -36,19 +40,32 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                 (selectedTags.length === 0 ||
                     selectedTags.every(tag =>
                         note.tags.some(noteTag => noteTag.id === tag.id)
+                    )) &&
+                //* check to make sure the note has all of the store item tags being searched for
+                (selectedStoreItemTags.length === 0 ||
+                    selectedStoreItemTags.every(storeItemTag =>
+                        note.storeItemTags.some(noteStoreItemTag => noteStoreItemTag.id === storeItemTag.id)
                     ))
             )
         })
-    }, [ title, selectedTags, notes ]);
+    }, [ title, selectedTags, notes, selectedStoreItemTags ]);
 
     const renderFilteredNotes = filteredNotes?.map(note => <Col key={note.id}>
         <NoteCard id={note.id} title={note.title} tags={note.tags} storeItemTags={note.storeItemTags} />
     </Col>);
 
+    const formGroupCol = (children: JSX.Element, label: string) => <Col>
+        <Form.Group controlId={label.toLowerCase()}>
+            <Form.Label>{label}</Form.Label>
+            {children}
+        </Form.Group>
+    </Col>;
+
 
     return (
         <>
             <Row className="align-items-center mb-4">
+                {/* //TODO make this row present for all Note Routes? */}
                 <Col><h1>Notes</h1></Col>
                 {/* //* use xs = auto to forcee it smallas possible while fitting */}
                 <Col xs="auto"><Stack gap={2} direction="horizontal">
@@ -57,18 +74,18 @@ export function NoteList({ availableTags, notes, onDeleteTag, onUpdateTag, notes
                 </Stack></Col>
             </Row><hr />
             <Form><Row className="mb-4">
-                <Col><Form.Group controlId="title">
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
-                        onChange={e => setTitle(e.target.value)} />
-                </Form.Group></Col>
-                <Col><Form.Group controlId="tags">
-                    <Form.Label>Tags</Form.Label>
-                    <SelectableWrapper createOptionEnabled={false} placeholder='Tags to filter by'
-                        availableTags={availableTags} selectedTags={selectedTags}
-                        setSelectedTags={setSelectedTags} isRawTag={true}
-                    />
-                </Form.Group></Col>
+                {formGroupCol(<Form.Control className='note-input' type="text" value={title} placeholder='Search by title'
+                    onChange={e => setTitle(e.target.value)} />, 'Title')}
+                {formGroupCol(<SelectableWrapper createOptionEnabled={false} placeholder='Tags to filter by'
+                    availableTags={availableTags} selectedTags={selectedTags}
+                    setSelectedTags={setSelectedTags} isRawTag={true}
+                />, 'Tags')}
+
+                {formGroupCol(<SelectableWrapper createOptionEnabled={false} placeholder='Store Items to filter by'
+                    availableTags={availableStoreItemTags} selectedTags={selectedStoreItemTags}
+                    setSelectedTags={setSelectedStoreItemTags} isRawTag={false}
+                />, 'Store Item Tags')}
+
             </Row></Form>
             {notesLoading && <LoadingDivComponent />}
             {!notesLoading && (<>
