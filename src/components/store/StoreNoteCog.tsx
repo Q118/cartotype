@@ -12,7 +12,8 @@ import Accordian from 'react-bootstrap/Accordion';
 type StoreNoteCogProps = {
     storeItem_id: string;
 }
-
+// const isEven = (num: number) => num % 2 === 0;
+// const isLastItem = (index: number, array: any[]) => index === array.length - 1;
 
 // TODO a link to add a note maybe
 
@@ -36,7 +37,7 @@ export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
             if (!note) return returnNoNotes();
             return <div key={note_id}>
                 <Accordian.Item className="note-accordian-item" id={note_id} eventKey={i + ''}>
-                    <Accordian.Header className='note-accordian-header'>{note.title}</Accordian.Header>
+                    <Accordian.Header className="note-accordian-header">{note.title}</Accordian.Header>
                     <Accordian.Body>
                         <ReactMarkdown children={note.markdown} remarkPlugins={[ remarkGfm ]} />
                     </Accordian.Body>
