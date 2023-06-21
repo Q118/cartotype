@@ -1,4 +1,3 @@
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
@@ -69,15 +68,15 @@ export function NoteForm({
                 <Form.Group controlId="markdown">
                     <Form.Label>Body</Form.Label>
                     <Form.Control ref={markdownRef} as="textarea" rows={15} required defaultValue={markdown} />
-                    <div className="mt-1"><Form.Text className="text-muted">
-                        Markdown is supported. (Follows <a href="https://github.github.com/gfm/" target="_blank">GitHub Flavored Markdown</a>)
-                    </Form.Text></div>
+                    <div className="mt-1">
+                        <Form.Text className="text-muted">
+                            Markdown is supported. (Follows <a href="https://github.github.com/gfm/" target="_blank">GitHub Flavored Markdown</a>)
+                        </Form.Text>
+                    </div>
                 </Form.Group>
                 <Stack direction="horizontal" gap={2} className="justify-content-end">
                     <Button type="submit" className="carto-btn">Save</Button>
-                    <Link to="..">
-                        <Button type="button" className='carto-btn-alt'>Cancel</Button>
-                    </Link>
+                    <Link to=".."><Button type="button" className='carto-btn-alt'>Cancel</Button></Link>
                 </Stack>
             </Stack>
         </Form>
