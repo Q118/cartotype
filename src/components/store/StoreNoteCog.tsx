@@ -12,10 +12,7 @@ import Accordian from 'react-bootstrap/Accordion';
 type StoreNoteCogProps = {
     storeItem_id: string;
 }
-// const isEven = (num: number) => num % 2 === 0;
-// const isLastItem = (index: number, array: any[]) => index === array.length - 1;
 
-// TODO a link to add a note maybe
 
 export function StoreNoteCog({ storeItem_id }: StoreNoteCogProps) {
     const targetRef = useRef(null);
