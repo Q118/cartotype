@@ -73,6 +73,7 @@ export function FormApp() {
             price: data.price,
             imgUrl: data.selectedItem?.imgUrl || '',
             notes: data.attachedNoteIds,
+            creditorDisplayName: data.selectedItem?.displayName || '',
         }).then(() => {
             refreshStoreItems(); // update the global store items.. aka trigger a refetch
             navigate('/store');

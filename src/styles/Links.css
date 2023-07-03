@@ -19,15 +19,18 @@
 
 .credit-text {
     padding: 2px;
-    /* font-style: italic; */
+    background-color: var(--btn-primary) !important;
+    color: var(--btn-txt-primary) !important;
 }
 
-.credit-text-dark {
-    color: #ffffff !important;
-    background-color: var(--bs-dark) !important;
-}
+.credit-link-user {
+    color: var(--btn-txt-primary) !important;
+    font-weight: bolder !important;    
+}   
 
-.credit-text-light {
-    color: #000000 !important;
-    background-color: var(--bs-light) !important;
+.credit-link-unsplash {
+    color: var(--btn-secondary) !important;
+    font-weight: bolder !important;
+    font-style: italic !important;
+    font-size: large !important;
 }

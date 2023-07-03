@@ -8,6 +8,8 @@ import { CartoModal } from '../CartoModal';
 import { StoreItemView } from '../store/StoreItemView';
 
 
+// TODO add title to tag button like did in store items to tell user what it does
+
 const isEven = (num: number) => num % 2 === 0;
 
 export function WheelTagCog(props: any) {

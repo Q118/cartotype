@@ -64,7 +64,9 @@ export function StoreItemView(props: StoreItemViewProps) {
                 <div style={{ maxWidth: '250px' }}>
                     <StoreItem name={item.name}
                         price={item.price} imgUrl={item.imgUrl}
-                        id={item.id} isPreview={true} />
+                        id={item.id} isPreview={true}
+                        creditorDisplayName={item.creditorDisplayName}
+                        />
                 </div>
             </div>
         </Container>

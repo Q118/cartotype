@@ -11,7 +11,7 @@ import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { ShoppingCart } from './components/store/ShoppingCart';
 import { DisplayToast } from './components/NotificationToast';
-
+import { CartoFooter } from './components/CartoFooter';
 
 const queryClient = new QueryClient();
 
@@ -22,7 +22,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
             <ThemeProvider>
                 <ShoppingCartProvider>
-                    <Container className="mb-4">
+                    <Container className="mb-4 pb-5">
                         <Navbar /><DisplayToast />
                         <Routes>
                             <Route path="/" element={<Home />} />
@@ -36,6 +36,7 @@ function App() {
                         </Routes>
                         <ShoppingCart />
                     </Container>
+                    <CartoFooter />
                 </ShoppingCartProvider>
             </ThemeProvider>
             <ReactQueryDevtools />

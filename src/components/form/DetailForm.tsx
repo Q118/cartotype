@@ -59,7 +59,8 @@ export function DetailForm(props: DetailFormProps) {
                     id="price-input" name="price-input"
                     defaultValue={local_selectedItem.price} decimalsLimit={2}
                     onValueChange={(value, name) => updateFields({ price: +value! })} />
-            </div><label>Official Title: </label>
+            </div>
+            <label>Official Title: </label>
             <input type="text" className="form-control"
                 placeholder={local_selectedItem.name || storeTitle || inputSearch}
                 value={local_selectedItem.name} maxLength={20} autoFocus
@@ -67,11 +68,13 @@ export function DetailForm(props: DetailFormProps) {
             <label>Associated Notes</label>
             <NoteListGroupFormBit onAddOrRemoveNote={handleAddOrRemoveNote}
                 availableNotes={availableNotes} attachedNoteIds={local_selectedItem.notes} />
-            <h6>Preview:</h6>
+            <label>Preview:</label>
             <Row><Col style={{ maxWidth: '250px' }}>
                 <StoreItem name={local_selectedItem.name || inputSearch}
                     price={local_selectedItem.price} imgUrl={local_selectedItem.imgUrl}
-                    id={local_selectedItem.id} isPreview={true} />
+                    id={local_selectedItem.id} isPreview={true}
+                    creditorDisplayName={local_selectedItem.creditorDisplayName}
+                />
             </Col></Row>
         </FormWrapper>
     )

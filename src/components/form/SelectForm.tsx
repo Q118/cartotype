@@ -122,7 +122,7 @@ export function SelectForm({
                                     imgUrl={item.imgUrl}
                                     description={item.description}
                                     // creditorName={item.name}
-                                    creditorDisplayName={item.displayName}
+                                    creditorDisplayName={item.creditorDisplayName || ''}
                                     handleOnSelect={handleCardSelection}
                                     identifierSelected={selectedItem?.id || null}
                                 />

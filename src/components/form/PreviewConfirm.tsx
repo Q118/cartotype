@@ -34,6 +34,7 @@ export function PreviewConfirm({
                 name={storeTitle}
                 imgUrl={selected_item ? selected_item.imgUrl : selectedItemProp!.imgUrl}
                 price={price} isPreview={true}
+                creditorDisplayName={selected_item ? selected_item.creditorDisplayName : selectedItemProp!.creditorDisplayName || ''}
             />
             <br /><p>If you're happy with everything, hit <i>finish</i></p>
         </>
